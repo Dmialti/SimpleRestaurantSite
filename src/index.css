@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+@theme {
+  --drop-shadow-glow: 0px 0px 23px rgba(255, 255, 255, 1);
+}

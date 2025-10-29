@@ -1,5 +1,5 @@
 import React from "react";
-import StartingPage from "./pages/StartingPage";
+import StartingPage from "./pages/StartingPage/StartingPage";
 import NavBar from "./components/NavBar";
 
 const App: React.FC = () => {

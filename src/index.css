@@ -3,3 +3,10 @@
 @theme {
   --drop-shadow-glow: 0px 0px 23px rgba(255, 255, 255, 1);
 }
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

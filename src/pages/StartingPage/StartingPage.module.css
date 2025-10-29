@@ -1,0 +1,20 @@
+.mainSection {
+  display: grid;
+  grid-template-columns: 1fr 0.3fr;
+  grid-template-areas: "hero cards";
+  box-sizing: border-box;
+}
+
+.heroSection {
+  grid-area: hero;
+  overflow: hidden;
+}
+
+.cardsSection {
+  grid-area: cards;
+  flex-direction: column;
+}
+
+.cardContainer {
+  flex: 1;
+}

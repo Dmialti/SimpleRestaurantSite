@@ -192,7 +192,7 @@ const NavBar: React.FC = () => {
               iconsRef.current[1] = el;
             }}
             className="mx-auto my-[16px]"
-            src="../../public/NavBarDetailsIcon.png"
+            src="/NavBarDetailsIcon.png"
           />
         </div>
       </nav>

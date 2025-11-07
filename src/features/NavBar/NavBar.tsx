@@ -2,6 +2,7 @@ import gsap from "gsap";
 import { SplitText } from "gsap/all";
 import React, { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
+import Link from "./components/Link/Link";
 gsap.registerPlugin(SplitText);
 
 const NavBar: React.FC = () => {
@@ -81,7 +82,6 @@ const NavBar: React.FC = () => {
 
   const navBarAnimation = () => {
     if (navBarToggled) {
-      console.log("aaa");
       tl.play();
     } else {
       tl.reverse();
@@ -91,7 +91,7 @@ const NavBar: React.FC = () => {
   return (
     <header
       ref={headerRef}
-      className="bg-[#0A0B0A] rounded-xl fixed flex h-[3.625rem] left-18 top-18 text-2xl text-[#EFE7D2] font-semibold tracking-[1px]"
+      className="z-50 font-satoshi   bg-background-default rounded-xl fixed flex h-[3.625rem] left-18 top-18 text-2xl text-text-default font-semibold tracking-[1px]"
     >
       <nav className="flex flex-col">
         <div className="flex items-center  justify-between">
@@ -99,13 +99,13 @@ const NavBar: React.FC = () => {
             onMouseEnter={hamburgerMouseEnter}
             onMouseLeave={hamburgerMouseLeave}
             onClick={navBarToggle}
-            className="m-2 h-[41px] w-[41px] rounded-lg bg-[#181818] border border-[#EFE7D2]/15 relative flex flex-col justify-center items-center gap-[5px] hover:cursor-pointer"
+            className="m-2 h-[41px] w-[41px] rounded-lg bg-background-muted border border-border-default relative flex flex-col justify-center items-center gap-[5px] hover:cursor-pointer"
           >
             <div ref={line1} className="bg-[#EFE7D2] h-px w-[20px]"></div>
             <div ref={line2} className="bg-[#EFE7D2] h-px w-[20px]"></div>
             <div ref={line3} className="bg-[#EFE7D2] h-px w-[20px]"></div>
           </button>
-          <div className="mx-1 my-3">
+          <div className="mx-1 my-3 text-center">
             <a
               href="/"
               className="hover:text-white hover:drop-shadow-(--drop-shadow-glow) transition duration-150"
@@ -114,27 +114,10 @@ const NavBar: React.FC = () => {
             </a>
           </div>
 
-          <div className="text-xs m-2 flex gap-1 items-center">
-            <div className="">
-              <a
-                href="/"
-                className="p-3 border-1 border-[#EFE7D2]/0 rounded-lg hover:border hover:border-[#EFE7D2]/15 hover:bg-[#181818] transition duration-450"
-              >
-                MENU
-              </a>
-            </div>
-            <a
-              href="/"
-              className="p-3 border-1 border-[#EFE7D2]/0 rounded-lg hover:border hover:border-[#EFE7D2]/15 hover:bg-[#181818] transition duration-450"
-            >
-              ABOUT
-            </a>
-            <a
-              href="/"
-              className="bg-[#181818] border border-[#EFE7D2]/15 rounded-lg p-3 hover:border-[#EFE7D2]/50 hover:bg-[#292929] transition duration-450"
-            >
-              BOOK A TABLE
-            </a>
+          <div className="text-xs tracking-[1px] m-2 flex gap-1 items-center">
+            <Link toggleBorder={false}>MENU</Link>
+            <Link toggleBorder={false}>ABOUT</Link>
+            <Link toggleBorder={true}>BOOK A TABLE</Link>
           </div>
         </div>
         <div className="">

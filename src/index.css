@@ -1,8 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Forum&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@300&display=swap");
+
 @import "tailwindcss";
 
 @theme {
   --drop-shadow-glow: 0px 0px 23px rgba(255, 255, 255, 1);
+
+  --font-forum: "Forum", serif;
+  --font-satoshi: "Satoshi", sans-serif;
+
+  --color-text-default: rgba(239, 231, 210, 1);
+  --color-text-muted: rgba(245, 242, 234, 0.7);
+  --color-text-inverse: rgba(10, 11, 10, 1);
+
+  --color-background-default: rgba(10, 11, 10, 1);
+  --color-background-muted: rgba(24, 24, 24, 0.5);
+  --color-background-primary: rgba(239, 231, 210, 1);
+  --color-background-hover: #292929;
+
+  --color-border-default: rgba(239, 231, 210, 0.15);
+  --color-border-hover: rgba(239, 231, 210, 0.5);
+
+  --color-icon-default: rgba(239, 231, 210, 1);
+  --color-icon-inverse: rgba(10, 11, 10, 1);
 }
+
 html,
 body,
 #root {

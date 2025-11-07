@@ -1,12 +1,12 @@
 import React from "react";
-import StartingPage from "./pages/StartingPage/StartingPage";
-import NavBar from "./components/NavBar";
+import Home from "./features/Home/Home";
+import NavBar from "./features/NavBar/NavBar";
 
 const App: React.FC = () => {
   return (
-    <div className="bg-[#f4e3c1] h-screen">
+    <div className="bg-[#f4e3c1] h-screen relative">
       <NavBar />
-      <StartingPage />
+      <Home />
     </div>
   );
 };

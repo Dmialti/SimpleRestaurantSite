@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "../../../shared/components/Card/Card";
 
-interface DishItemProps {
+export interface DishItemProps {
   name: string;
   description?: string;
   price: number;

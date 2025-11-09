@@ -1,32 +1,35 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import React, { useRef, type ReactNode } from "react";
-import useHovered from "../../context/CardContext/hooks/useHovered";
 
 type BaseCardProps = {
   mediaSrc: string;
   isAnimated?: boolean;
+  isHoverContext?: boolean;
   onClick?: () => void;
   onHoverChange?: (hovered: boolean) => void;
+  isHovered: boolean;
+  setIsHovered: (hovered: boolean) => void;
   className?: string;
   children?: ReactNode;
 };
 
-export type CardProps =
+export type CardBaseProps =
   | ({ mediaType: "image" } & BaseCardProps)
   | ({ mediaType: "video" } & BaseCardProps);
 
-const Card: React.FC<CardProps> = ({
+const CardBase: React.FC<CardBaseProps> = ({
   mediaType,
   mediaSrc,
   isAnimated,
   onClick,
   onHoverChange,
+  isHovered,
+  setIsHovered,
   className,
   children,
 }) => {
   const mediaRef = useRef<HTMLImageElement | HTMLVideoElement>(null);
-  const { isHovered, setIsHovered } = useHovered();
   const tl = useRef(gsap.timeline({ paused: true })).current;
 
   useGSAP(() => {
@@ -92,4 +95,4 @@ const Card: React.FC<CardProps> = ({
   );
 };
 
-export default Card;
+export default CardBase;

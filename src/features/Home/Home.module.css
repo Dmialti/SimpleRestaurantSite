@@ -18,3 +18,96 @@
 .cardContainer {
   flex: 1;
 }
+
+.heroGradient {
+  background: linear-gradient(#0000 0%, #000 100%);
+  opacity: 0.8;
+}
+
+@media (max-width: 1280px) {
+  .mainSection {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .heroSection {
+    flex: none;
+    height: 600px;
+  }
+
+  .cardsSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: auto;
+  }
+  .heroHeader {
+    font-size: 96px;
+    translate: -50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    line-height: 90%;
+  }
+  .heroGradient {
+    background: linear-gradient(#0000 0%, #000 100%);
+  }
+}
+
+@media (max-width: 810px) {
+  .mainSection {
+    display: flex;
+    flex-direction: column;
+    height: min-content;
+  }
+  .heroSection {
+    width: 100%;
+    height: min-content;
+    aspect-ratio: 1 / 1;
+  }
+  .cardsSection {
+    display: flex;
+    flex-direction: column;
+    flex: none;
+  }
+  .cardContainer {
+    width: 100%;
+    height: min-content;
+    aspect-ratio: 1 / 1;
+  }
+  .cardContainer {
+    height: 100%;
+  }
+  .heroHeader {
+    font-size: 56px;
+  }
+  .heroCornerMenu {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .heroHeader {
+    font-size: 10vw;
+    bottom: 10vw;
+  }
+  .mainSection {
+    padding: 5vw;
+  }
+}
+@media (max-width: 260px) {
+  .cardsSection {
+    font-size: 5vw;
+  }
+  .linkIcon {
+    display: none;
+  }
+  .cornerMenu {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .cornerMenu img {
+    display: none;
+  }
+}

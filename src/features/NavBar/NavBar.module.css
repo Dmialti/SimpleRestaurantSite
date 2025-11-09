@@ -1,0 +1,46 @@
+@media (max-width: 1280px) {
+  .header {
+    translate: -50%;
+    left: 50%;
+    top: 48px;
+  }
+}
+@media (max-width: 810px) {
+  .collapseFirst {
+    display: none;
+  }
+}
+@media (max-width: 445px) {
+  .header {
+    width: 85%;
+    font-size: 5vw;
+  }
+}
+@media (max-width: 380px) {
+  .header {
+    position: absolute;
+    top: 7vw;
+    width: 85%;
+    justify-content: center;
+    height: min-content;
+    font-size: 8vw;
+  }
+  .header nav {
+    height: fit-content;
+    width: 100%;
+  }
+  .header button {
+    width: 10vw;
+    height: 10vw;
+    gap: 1vw;
+  }
+  .header button div {
+    width: 5vw;
+    height: 1px;
+  }
+  .collapseSecond {
+    display: none;
+  }
+  .dropdown {
+  }
+}

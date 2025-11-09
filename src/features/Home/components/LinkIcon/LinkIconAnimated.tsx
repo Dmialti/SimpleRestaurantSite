@@ -21,7 +21,7 @@ const LinkIconAnimated: React.FC<LinkIconAnimatedProps> = ({
     >
       <RollingAnimation
         direction="horizontal"
-        style={{ width: `${imageWidth}rem` }}
+        style={{ height: `${imageHeight}rem`, width: `${imageWidth}rem` }}
       >
         <img
           src={imageSrc}

@@ -3,6 +3,7 @@ import { SplitText } from "gsap/all";
 import React, { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import Link from "./components/Link/Link";
+import styles from "./NavBar.module.css";
 gsap.registerPlugin(SplitText);
 
 const NavBar: React.FC = () => {
@@ -10,14 +11,14 @@ const NavBar: React.FC = () => {
   const line1 = useRef<HTMLDivElement>(null);
   const line2 = useRef<HTMLDivElement>(null);
   const line3 = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
   const text = useRef<(HTMLLIElement | null)[]>([]);
   const splitTextRef = useRef<(SplitText | null)[]>([]);
   const iconsRef = useRef<(HTMLImageElement | null)[]>([]);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const tl = useRef(gsap.timeline({ paused: true })).current;
 
   useGSAP(() => {
-    if (!headerRef.current) return;
+    if (!dropdownRef.current) return;
     if (text.current.length == 5) {
       text.current.forEach((el, index) => {
         splitTextRef.current[index] = new SplitText(el, {
@@ -25,11 +26,23 @@ const NavBar: React.FC = () => {
         });
         gsap.set(splitTextRef.current[index].chars, { autoAlpha: 0, y: 20 });
       });
-      tl.to(headerRef.current, {
-        height: "auto",
-        ease: "sine.inOut",
-        duration: 0.2,
+      tl.eventCallback("onStart", () => {
+        if (dropdownRef.current)
+          gsap.set(dropdownRef.current, { display: "block" });
       });
+      tl.fromTo(
+        dropdownRef.current,
+        {
+          height: "0px",
+          ease: "sine.inOut",
+          duration: 0.2,
+        },
+        {
+          height: "auto",
+          ease: "sine.inOut",
+          duration: 0.2,
+        }
+      );
       splitTextRef.current.forEach((el) => {
         if (!el?.chars) return;
         tl.fromTo(
@@ -50,6 +63,11 @@ const NavBar: React.FC = () => {
         },
         "<0.2"
       );
+
+      tl.eventCallback("onReverseComplete", () => {
+        if (dropdownRef.current)
+          gsap.set(dropdownRef.current, { display: "none" });
+      });
     }
   }, []);
 
@@ -90,11 +108,10 @@ const NavBar: React.FC = () => {
 
   return (
     <header
-      ref={headerRef}
-      className="z-50 font-satoshi   bg-background-default rounded-xl fixed flex h-[3.625rem] left-18 top-18 text-2xl text-text-default font-semibold tracking-[1px]"
+      className={`${styles.header} z-50 font-satoshi overflow-hidden rounded-xl fixed flex w-max h-auto left-18 top-18 text-2xl text-text-default font-semibold tracking-[1px]`}
     >
-      <nav className="flex flex-col">
-        <div className="flex items-center  justify-between">
+      <nav className="flex flex-col h-fit w-full relative">
+        <div className="flex items-center justify-between  bg-background-default ">
           <button
             onMouseEnter={hamburgerMouseEnter}
             onMouseLeave={hamburgerMouseLeave}
@@ -110,17 +127,26 @@ const NavBar: React.FC = () => {
               href="/"
               className="hover:text-white hover:drop-shadow-(--drop-shadow-glow) transition duration-150"
             >
-              Restaurant
+              RESTAURANT
             </a>
           </div>
 
           <div className="text-xs tracking-[1px] m-2 flex gap-1 items-center">
-            <Link toggleBorder={false}>MENU</Link>
-            <Link toggleBorder={false}>ABOUT</Link>
-            <Link toggleBorder={true}>BOOK A TABLE</Link>
+            <Link className={styles.collapseFirst} toggleBorder={false}>
+              MENU
+            </Link>
+            <Link className={styles.collapseFirst} toggleBorder={false}>
+              ABOUT
+            </Link>
+            <Link className={styles.collapseSecond} toggleBorder={true}>
+              BOOK A TABLE
+            </Link>
           </div>
         </div>
-        <div className="">
+        <div
+          ref={dropdownRef}
+          className={`${styles.dropdown} hidden  bg-background-default`}
+        >
           <img
             ref={(el) => {
               iconsRef.current[0] = el;

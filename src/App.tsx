@@ -4,7 +4,7 @@ import NavBar from "./features/NavBar/NavBar";
 
 const App: React.FC = () => {
   return (
-    <div className="bg-[#f4e3c1] h-screen relative">
+    <div className="bg-background-default h-screen relative">
       <NavBar />
       <Home />
     </div>

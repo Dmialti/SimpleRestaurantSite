@@ -5,7 +5,7 @@ import Menu from "./features/Menu/Menu";
 
 const App: React.FC = () => {
   return (
-    <div className="bg-background-default h-screen relative p-6">
+    <div className="bg-background-default h-auto relative">
       <NavBar />
       <Menu />
     </div>

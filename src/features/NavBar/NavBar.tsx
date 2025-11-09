@@ -2,7 +2,7 @@ import gsap from "gsap";
 import { SplitText } from "gsap/all";
 import React, { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import Link from "./components/Link/Link";
+import Link from "../shared/components/Link/Link";
 import styles from "./NavBar.module.css";
 gsap.registerPlugin(SplitText);
 

@@ -2,3 +2,17 @@
   background: linear-gradient(#0000 0%, #000 100%);
   opacity: 0.8;
 }
+
+.menuSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "hero list";
+}
+
+.heroSection {
+  grid-area: hero;
+}
+
+.listSection {
+  grid-area: list;
+}

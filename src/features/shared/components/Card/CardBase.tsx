@@ -59,7 +59,7 @@ const CardBase: React.FC<CardBaseProps> = ({
 
   return (
     <div
-      className={`${className} h-full w-full overflow-hidden rounded-2xl`}
+      className={`overflow-hidden rounded-2xl ${className}`}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

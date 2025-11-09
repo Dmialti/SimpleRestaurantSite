@@ -12,10 +12,10 @@ import BottomGradient from "../shared/components/BottomGradient/BottomGradient";
 const Home: React.FC = () => {
   return (
     <div
-      className={`${styles.mainSection} font-forum w-full h-screen bg-background-default gap-4`}
+      className={`${styles.mainSection} font-forum w-full h-screen bg-background-default gap-4 p-6`}
     >
       <Card
-        className={`${styles.heroSection} relative`}
+        className={`${styles.heroSection} h-full w-full relative`}
         mediaType="video"
         mediaSrc="/StartingPageMaterials/videos/main.mp4"
       >
@@ -48,7 +48,7 @@ const Home: React.FC = () => {
       >
         <CardContextProvider>
           <CardWithContextHover
-            className={`${styles.cardContainer} flex-1 relative cursor-pointer`}
+            className={`${styles.cardContainer} h-full w-full flex-1 relative cursor-pointer`}
             mediaType="image"
             mediaSrc="/StartingPageMaterials/images/side-1.png"
             isAnimated={true}
@@ -66,7 +66,7 @@ const Home: React.FC = () => {
         </CardContextProvider>
         <CardContextProvider>
           <CardWithContextHover
-            className={`${styles.cardContainer} flex-1 relative cursor-pointer`}
+            className={`${styles.cardContainer} h-full w-full flex-1 relative cursor-pointer`}
             mediaType="image"
             mediaSrc="/StartingPageMaterials/images/side-2.png"
             isAnimated={true}
@@ -84,7 +84,7 @@ const Home: React.FC = () => {
         </CardContextProvider>
         <CardContextProvider>
           <CardWithContextHover
-            className={`${styles.cardContainer} flex-1 relative cursor-pointer`}
+            className={`${styles.cardContainer} h-full w-full flex-1 relative cursor-pointer`}
             mediaType="image"
             mediaSrc="/StartingPageMaterials/images/side-3.png"
             isAnimated={true}

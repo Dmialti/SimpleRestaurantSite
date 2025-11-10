@@ -1,11 +1,9 @@
 import React from "react";
-import Card from "../shared/components/Card/Card";
 import styles from "./Menu.module.css";
-import BottomGradient from "../shared/components/BottomGradient/BottomGradient";
 import Link from "../shared/components/Link/Link";
 import sushi from "./static/sushi/sushi";
 import DishSection from "./components/DishSection/DishSection";
-import HeroHeading from "../shared/components/HeroHeading/HeroHeading";
+import HeroCard from "../shared/components/HeroCard/HeroCard";
 
 const Menu: React.FC = () => {
   return (
@@ -13,16 +11,12 @@ const Menu: React.FC = () => {
       className={`${styles.menuSection} w-full h-full box-border gap-4 relative`}
     >
       <div className={`${styles.heroSection} top-0 h-screen py-6 pl-6`}>
-        <Card
+        <HeroCard
+          heading={["MENU"]}
           className={`relative h-full `}
           mediaType="image"
           mediaSrc="/MenuPageMaterials/menuHero.png"
-        >
-          <BottomGradient />
-          <HeroHeading className="left-16.5 bottom-14">
-            <div>MENU</div>
-          </HeroHeading>
-        </Card>
+        />
       </div>
       <div className={`${styles.listSection} py-6 pr-6 min-w-0`}>
         <div

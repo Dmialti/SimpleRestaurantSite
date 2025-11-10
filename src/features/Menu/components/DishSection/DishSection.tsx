@@ -22,6 +22,7 @@ const DishSection: React.FC<DishSectionProps> = ({ category, items }) => {
       <div className="flex flex-col gap-8 max-w-[740px]">
         {items.map((dish) => (
           <DishItem
+            key={dish.name}
             className="flex flex-row gap-6"
             name={dish.name}
             description={dish.description}

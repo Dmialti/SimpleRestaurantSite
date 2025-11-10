@@ -1,5 +1,6 @@
 import React from "react";
 import DishItem, { type DishItemProps } from "../DishItem/DishItem";
+import styles from "./DishSection.module.css";
 
 interface DishSectionProps {
   category: string;
@@ -13,7 +14,7 @@ const DishSection: React.FC<DishSectionProps> = ({ category, items }) => {
         <div>
           <img src="/MenuPageMaterials/leftSymbol.svg" />
         </div>
-        <div>{category}</div>
+        <div className={styles.categoryHeader}>{category}</div>
         <div>
           <img src="/MenuPageMaterials/rightSymbol.svg" />
         </div>

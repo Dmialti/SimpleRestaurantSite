@@ -18,7 +18,7 @@ const Link: React.FC<LinkProps> = ({
         (toggleBorder
           ? `bg-background-muted border-border-default hover:border-border-hover hover:bg-background-hover`
           : `border-[#EFE7D2]/0 hover:border hover:border-border-default hover:bg-background-muted`) +
-        ` p-3 border rounded-lg transition duration-500 box-border ${className}`
+        ` p-3 border rounded-lg transition duration-500 box-border text-center ${className}`
       }
     >
       {children}

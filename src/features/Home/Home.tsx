@@ -8,6 +8,7 @@ import LinkIconAnimated from "./components/LinkIcon/LinkIconAnimated";
 import Card from "../shared/components/Card/Card";
 import CardWithContextHover from "../shared/components/Card/CardIsHoveredContext";
 import BottomGradient from "../shared/components/BottomGradient/BottomGradient";
+import HeroHeading from "../shared/components/HeroHeading/HeroHeading";
 
 const Home: React.FC = () => {
   return (
@@ -20,12 +21,10 @@ const Home: React.FC = () => {
         mediaSrc="/StartingPageMaterials/videos/main.mp4"
       >
         <BottomGradient />
-        <div
-          className={`${styles.heroHeader} absolute left-19.25 bottom-13 text-[140px] tracking-[3px] text-text-default`}
-        >
+        <HeroHeading className="left-19.25 bottom-13">
           <div>SUSHI</div>
           <div>SENSATION</div>
-        </div>
+        </HeroHeading>
         <CornerMenu
           className={`${styles.heroCornerMenu} pr-4 pb-4 pt-6 pl-6 gap-2`}
         >

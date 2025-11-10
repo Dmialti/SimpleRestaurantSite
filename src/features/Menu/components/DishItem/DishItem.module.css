@@ -1,0 +1,21 @@
+@media (max-width: 810px) {
+  .dishContainer {
+    flex-direction: column;
+  }
+  .card {
+    width: 100%;
+    height: auto;
+  }
+}
+@media (max-width: 470px) {
+  .mainInfo {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .dishName {
+    flex: auto;
+  }
+  .border {
+    display: none;
+  }
+}

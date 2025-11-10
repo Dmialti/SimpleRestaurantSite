@@ -5,31 +5,30 @@ import BottomGradient from "../shared/components/BottomGradient/BottomGradient";
 import Link from "../shared/components/Link/Link";
 import sushi from "./static/sushi/sushi";
 import DishSection from "./components/DishSection/DishSection";
+import HeroHeading from "../shared/components/HeroHeading/HeroHeading";
 
 const Menu: React.FC = () => {
   return (
     <div
       className={`${styles.menuSection} w-full h-full box-border gap-4 relative`}
     >
-      <div className="sticky top-0 h-screen py-6 pl-6">
+      <div className={`${styles.heroSection} top-0 h-screen py-6 pl-6`}>
         <Card
-          className={`${styles.heroSection} relative h-full `}
+          className={`relative h-full `}
           mediaType="image"
           mediaSrc="/MenuPageMaterials/menuHero.png"
         >
           <BottomGradient />
-          <div
-            className={`absolute left-16.5 bottom-14 text-[112px] tracking-[2px] leading-none text-text-default font-forum`}
-          >
+          <HeroHeading className="left-16.5 bottom-14">
             <div>MENU</div>
-          </div>
+          </HeroHeading>
         </Card>
       </div>
-      <div className={`${styles.listSection} py-6 pr-6`}>
+      <div className={`${styles.listSection} py-6 pr-6 min-w-0`}>
         <div
-          className={`h-fit border-border-default border-1 rounded-2xl pt-8 pb-20 px-24 text-text-default`}
+          className={`${styles.listContainer} h-fit border-border-default border-1 rounded-2xl pt-8 pb-20 px-24 text-text-default`}
         >
-          <div className="flex gap-1 justify-center font-satoshi">
+          <div className="flex gap-1 justify-center font-satoshi flex-wrap">
             <Link
               toggleBorder={true}
               className="px-3 py-1 text-[12px] tracking-[1px] leading-[190%]"

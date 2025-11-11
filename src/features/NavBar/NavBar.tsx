@@ -2,7 +2,7 @@ import gsap from "gsap";
 import { SplitText } from "gsap/all";
 import React, { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import Link from "../shared/components/Link/Link";
+import Button from "../shared/components/Button/Button";
 import styles from "./NavBar.module.css";
 gsap.registerPlugin(SplitText);
 
@@ -132,15 +132,15 @@ const NavBar: React.FC = () => {
           </div>
 
           <div className="text-xs tracking-[1px] m-2 flex gap-1 items-center">
-            <Link className={styles.collapseFirst} toggleBorder={false}>
+            <Button className={styles.collapseFirst + ` p-3`} type="simple">
               MENU
-            </Link>
-            <Link className={styles.collapseFirst} toggleBorder={false}>
+            </Button>
+            <Button className={styles.collapseFirst + ` p-3`} type="simple">
               ABOUT
-            </Link>
-            <Link className={styles.collapseSecond} toggleBorder={true}>
+            </Button>
+            <Button className={styles.collapseSecond + ` p-3`} type="border">
               BOOK A TABLE
-            </Link>
+            </Button>
           </div>
         </div>
         <div

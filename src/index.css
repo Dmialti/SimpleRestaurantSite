@@ -17,6 +17,7 @@
   --color-background-muted: rgba(24, 24, 24, 0.5);
   --color-background-primary: rgba(239, 231, 210, 1);
   --color-background-hover: #292929;
+  --color-background-primary-hover: rgba(207, 190, 145, 1);
 
   --color-border-default: rgba(239, 231, 210, 0.15);
   --color-border-hover: rgba(239, 231, 210, 0.5);

@@ -1,0 +1,4 @@
+.input::-webkit-calendar-picker-indicator {
+  filter: brightness(0) saturate(100%) invert(77%) sepia(86%) saturate(0%)
+    hue-rotate(165deg) brightness(103%) contrast(102%);
+}

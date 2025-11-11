@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Menu.module.css";
-import Link from "../shared/components/Link/Link";
+import Button from "../shared/components/Button/Button";
 import sushi from "./static/sushi/sushi";
 import DishSection from "./components/DishSection/DishSection";
 import HeroCard from "../shared/components/HeroCard/HeroCard";
@@ -23,24 +23,24 @@ const Menu: React.FC = () => {
           className={`${styles.listContainer} h-fit border-border-default border-1 rounded-2xl pt-8 pb-20 px-24 text-text-default`}
         >
           <div className="flex gap-1 justify-center font-satoshi flex-wrap">
-            <Link
-              toggleBorder={true}
+            <Button
+              type="border"
               className="px-3 py-1 text-[12px] tracking-[1px] leading-[190%]"
             >
               MAKI
-            </Link>
-            <Link
-              toggleBorder={true}
+            </Button>
+            <Button
+              type="border"
               className="px-3 py-1 text-[12px] tracking-[1px] leading-[190%]"
             >
               URAMAKI
-            </Link>
-            <Link
-              toggleBorder={true}
+            </Button>
+            <Button
+              type="border"
               className="px-3 py-1 text-[12px] tracking-[1px] leading-[190%]"
             >
               SPECIAL ROLLS
-            </Link>
+            </Button>
           </div>
           <div>
             <DishSection category="MAKI" items={sushi.makiList} />

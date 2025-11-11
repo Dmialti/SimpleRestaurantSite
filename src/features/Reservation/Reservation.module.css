@@ -1,0 +1,13 @@
+.reservationSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "hero content";
+}
+
+.heroSection {
+  grid-area: hero;
+}
+
+.contentSection {
+  grid-area: content;
+}

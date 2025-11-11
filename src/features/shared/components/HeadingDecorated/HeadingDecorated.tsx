@@ -11,7 +11,7 @@ const HeadingDecorated: React.FC<HeadingDecoratedProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-row justify-center items-center gap-4 ${className}`}
+      className={`flex flex-row justify-center items-center text-center gap-4 ${className}`}
     >
       <div>
         <img src="/MenuPageMaterials/leftSymbol.svg" />

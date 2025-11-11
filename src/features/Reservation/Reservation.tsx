@@ -14,9 +14,9 @@ const Reservation: React.FC = () => {
         mediaSrc="/ReservationPageMaterials/reservationHero.png"
       />
       <div
-        className={`${styles.contentSection} flex flex-col items-center gap-20 border-border-default border rounded-2xl`}
+        className={`${styles.contentSection} px-24 py-20 flex flex-col items-center gap-20 border-border-default border rounded-2xl`}
       >
-        <div className="flex flex-col gap-4 px-24 py-20 text-text-default text-center">
+        <div className="flex flex-col gap-4 text-text-default text-center">
           <HeadingDecorated className="font-forum text-[40px] leading-[120%] tracking-[1px]">
             RESERVATION
           </HeadingDecorated>
@@ -29,10 +29,14 @@ const Reservation: React.FC = () => {
           <Input type="text" placeholder="Name" />
           <Input type="tel" placeholder="Phone Number" />
           <Input type="email" placeholder="Email" />
-          <div className="flex flex-row gap-4 justify-between">
-            <Input type="number" placeholder="Guests" />
-            <Input type="date" placeholder="Date" />
-            <Input type="time" placeholder="Time" />
+          <div className="flex flex-row gap-4">
+            <Input
+              className="flex-1 min-w-0"
+              type="number"
+              placeholder="Guests"
+            />
+            <Input className="flex-1 min-w-0" type="date" placeholder="Date" />
+            <Input className="flex-1 min-w-0" type="time" placeholder="Time" />
           </div>
         </form>
       </div>

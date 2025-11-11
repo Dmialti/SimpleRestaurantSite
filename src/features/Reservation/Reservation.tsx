@@ -4,8 +4,10 @@ import HeroCard from "../shared/components/HeroCard/HeroCard";
 import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
 import Input from "./components/Input/Input";
 import Button from "../shared/components/Button/Button";
+import { useForm } from "react-hook-form";
 
 const Reservation: React.FC = () => {
+  const { register } = useForm();
   return (
     <div className={`${styles.reservationSection} w-full h-screen gap-4 p-6`}>
       <HeroCard

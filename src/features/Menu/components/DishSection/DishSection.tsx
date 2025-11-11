@@ -1,6 +1,7 @@
 import React from "react";
 import DishItem, { type DishItemProps } from "../DishItem/DishItem";
 import styles from "./DishSection.module.css";
+import HeadingDecorated from "../../../shared/components/HeadingDecorated/HeadingDecorated";
 
 interface DishSectionProps {
   category: string;
@@ -10,15 +11,11 @@ interface DishSectionProps {
 const DishSection: React.FC<DishSectionProps> = ({ category, items }) => {
   return (
     <div className="flex flex-col items-center gap-12 pt-16">
-      <div className="flex flex-row justify-center items-center gap-4 font-forum text-[32px] tracking-[1px] leading-[120%]">
-        <div>
-          <img src="/MenuPageMaterials/leftSymbol.svg" />
-        </div>
-        <div className={styles.categoryHeader}>{category}</div>
-        <div>
-          <img src="/MenuPageMaterials/rightSymbol.svg" />
-        </div>
-      </div>
+      <HeadingDecorated
+        className={`font-forum text-[32px] tracking-[1px] leading-[120%] ${styles.categoryHeader}`}
+      >
+        {category}
+      </HeadingDecorated>
       <div className="flex flex-col gap-8 max-w-[740px]">
         {items.map((dish) => (
           <DishItem

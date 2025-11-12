@@ -33,7 +33,6 @@ const Reservation: React.FC = () => {
   return (
     <BasePageLayout
       isScreenHeight={true}
-      className={styles.heroSection}
       heading={["BOOK", "A TABLE"]}
       mediaType="image"
       mediaSrc="/ReservationPageMaterials/reservationHero.png"

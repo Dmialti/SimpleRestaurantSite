@@ -14,11 +14,11 @@ const HeadingDecorated: React.FC<HeadingDecoratedProps> = ({
       className={`flex flex-row justify-center items-center text-center gap-4 ${className}`}
     >
       <div>
-        <img src="/MenuPageMaterials/leftSymbol.svg" />
+        <img src="/shared/HeadingDecoratedMaterials/leftSymbol.svg" />
       </div>
       <div>{children}</div>
       <div>
-        <img src="/MenuPageMaterials/rightSymbol.svg" />
+        <img src="/shared/HeadingDecoratedMaterials/rightSymbol.svg" />
       </div>
     </div>
   );

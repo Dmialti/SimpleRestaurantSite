@@ -4,6 +4,7 @@ import HeroCard, { type HeroCardProps } from "../HeroCard/HeroCard";
 
 interface BasePageLayoutProps extends HeroCardProps {
   isScreenHeight: boolean;
+  className?: string;
   children?: ReactNode;
 }
 
@@ -13,6 +14,7 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
   mediaSrc,
   isScreenHeight,
   children,
+  className,
 }) => {
   return (
     <div
@@ -31,7 +33,9 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
           styles.contentSection + " " + (isScreenHeight && "h-screen")
         } overflow-hidden min-w-0 py-6 pr-6`}
       >
-        <div className="border border-border-default h-full rounded-2xl">
+        <div
+          className={`${className} border border-border-default h-full rounded-2xl`}
+        >
           {children}
         </div>
       </div>

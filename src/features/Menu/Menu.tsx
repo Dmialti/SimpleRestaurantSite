@@ -10,7 +10,6 @@ const Menu: React.FC = () => {
     <BasePageLayout
       isScreenHeight={false}
       heading={["MENU"]}
-      className={`relative h-full `}
       mediaType="image"
       mediaSrc="/MenuPageMaterials/menuHero.png"
     >

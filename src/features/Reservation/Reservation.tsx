@@ -4,10 +4,32 @@ import HeroCard from "../shared/components/HeroCard/HeroCard";
 import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
 import Input from "./components/Input/Input";
 import Button from "../shared/components/Button/Button";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  ReservationFormSchema,
+  type ReservationFormData,
+} from "./static/ReservationFormSchema";
 
 const Reservation: React.FC = () => {
-  const { register } = useForm();
+  const onSubmit: SubmitHandler<ReservationFormData> = (data) => {
+    console.log(data);
+  };
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(ReservationFormSchema),
+  });
+
+  const formValues = watch();
+  const allFieldsFilled = Object.values(formValues).every(
+    (value) => value !== "" && value !== undefined && value !== null
+  );
+
   return (
     <div className={`${styles.reservationSection} w-full h-screen gap-4 p-6`}>
       <HeroCard
@@ -28,22 +50,54 @@ const Reservation: React.FC = () => {
             remarkable dining experience await.
           </div>
         </div>
-        <form className="flex flex-col gap-4 px-17 w-full">
-          <Input type="text" placeholder="Name" />
-          <Input type="tel" placeholder="Phone Number" />
-          <Input type="email" placeholder="Email" />
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 px-17 w-full"
+        >
+          <Input
+            {...register("firstName")}
+            type="text"
+            placeholder="Name"
+            errorMessage={errors.firstName?.message}
+          />
+          <Input
+            {...register("phoneNumber")}
+            type="tel"
+            placeholder="Phone Number"
+            errorMessage={errors.phoneNumber?.message}
+          />
+          <Input
+            {...register("email")}
+            type="email"
+            placeholder="Email"
+            errorMessage={errors.email?.message}
+          />
           <div className="flex flex-row gap-4">
             <Input
+              {...register("guestsCount")}
               className="flex-1 min-w-0"
               type="number"
               placeholder="Guests"
+              errorMessage={errors.guestsCount?.message}
             />
-            <Input className="flex-1 min-w-0" type="date" placeholder="Date" />
-            <Input className="flex-1 min-w-0" type="time" placeholder="Time" />
+            <Input
+              {...register("date")}
+              className="flex-1 min-w-0"
+              type="date"
+              placeholder="Date"
+              errorMessage={errors.date?.message}
+            />
+            <Input
+              {...register("time")}
+              className="flex-1 min-w-0"
+              type="time"
+              placeholder="Time"
+              errorMessage={errors.time?.message}
+            />
           </div>
           <Button
             className="py-4 font-satoshi text-[12px] leading-[190%] tracking-[1px]"
-            enabled={false}
+            enabled={allFieldsFilled}
             type="submit"
           >
             RESERVE

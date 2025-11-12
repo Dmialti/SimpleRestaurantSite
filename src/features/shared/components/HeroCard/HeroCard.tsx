@@ -3,7 +3,7 @@ import BottomGradient from "../BottomGradient/BottomGradient";
 import Card from "../Card/Card";
 import HeroHeading from "../HeroHeading/HeroHeading";
 
-interface HeroCardProps {
+export interface HeroCardProps {
   heading: string[];
   mediaType: "video" | "image";
   mediaSrc: string;

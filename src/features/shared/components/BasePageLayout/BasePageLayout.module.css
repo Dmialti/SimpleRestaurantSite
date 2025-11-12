@@ -1,0 +1,33 @@
+.menuSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "hero list";
+}
+
+.heroSection {
+  position: sticky;
+  grid-area: hero;
+}
+
+.contentSection {
+  grid-area: list;
+}
+
+@media (max-width: 1280px) {
+  .menuSection {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "hero" "list";
+    padding: 24px;
+    gap: 24px;
+  }
+  .heroSection {
+    position: initial;
+    padding: 0px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+  .contentSection {
+    padding: 0px;
+  }
+}

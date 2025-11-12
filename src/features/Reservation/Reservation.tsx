@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Reservation.module.css";
-import HeroCard from "../shared/components/HeroCard/HeroCard";
 import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
 import Input from "./components/Input/Input";
 import Button from "../shared/components/Button/Button";
@@ -10,6 +9,7 @@ import {
   ReservationFormSchema,
   type ReservationFormData,
 } from "./static/ReservationFormSchema";
+import BasePageLayout from "../shared/components/BasePageLayout/BasePageLayout";
 
 const Reservation: React.FC = () => {
   const onSubmit: SubmitHandler<ReservationFormData> = (data) => {
@@ -31,15 +31,15 @@ const Reservation: React.FC = () => {
   );
 
   return (
-    <div className={`${styles.reservationSection} w-full h-screen gap-4 p-6`}>
-      <HeroCard
-        className={styles.heroSection}
-        heading={["BOOK", "A TABLE"]}
-        mediaType="image"
-        mediaSrc="/ReservationPageMaterials/reservationHero.png"
-      />
+    <BasePageLayout
+      isScreenHeight={true}
+      className={styles.heroSection}
+      heading={["BOOK", "A TABLE"]}
+      mediaType="image"
+      mediaSrc="/ReservationPageMaterials/reservationHero.png"
+    >
       <div
-        className={`${styles.contentSection}  min-w-0 px-24 py-20 flex flex-col items-center gap-20 border-border-default border rounded-2xl`}
+        className={`${styles.contentSection} h-full min-w-0 px-24 py-20 flex flex-col items-center gap-20 rounded-2xl`}
       >
         <div className="flex flex-col gap-4 text-text-default text-center">
           <HeadingDecorated className="font-forum text-[40px] leading-[120%] tracking-[1px]">
@@ -104,7 +104,7 @@ const Reservation: React.FC = () => {
           </Button>
         </form>
       </div>
-    </div>
+    </BasePageLayout>
   );
 };
 

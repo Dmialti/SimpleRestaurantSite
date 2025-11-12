@@ -1,0 +1,42 @@
+import React, { type ReactNode } from "react";
+import styles from "./BasePageLayout.module.css";
+import HeroCard, { type HeroCardProps } from "../HeroCard/HeroCard";
+
+interface BasePageLayoutProps extends HeroCardProps {
+  isScreenHeight: boolean;
+  children?: ReactNode;
+}
+
+const BasePageLayout: React.FC<BasePageLayoutProps> = ({
+  heading,
+  mediaType,
+  mediaSrc,
+  isScreenHeight,
+  children,
+}) => {
+  return (
+    <div
+      className={`${styles.menuSection} w-full h-auto box-border gap-4 relative`}
+    >
+      <div className={`${styles.heroSection} top-0 py-6 pl-6 h-screen sticky`}>
+        <HeroCard
+          heading={heading}
+          className={`relative h-full `}
+          mediaType={mediaType}
+          mediaSrc={mediaSrc}
+        />
+      </div>
+      <div
+        className={`${
+          styles.contentSection + " " + (isScreenHeight && "h-screen")
+        } overflow-hidden min-w-0 py-6 pr-6`}
+      >
+        <div className="border border-border-default h-full rounded-2xl">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BasePageLayout;

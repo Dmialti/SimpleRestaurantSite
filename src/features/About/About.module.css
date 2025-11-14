@@ -1,0 +1,32 @@
+@media (max-width: 1280px) {
+  .topLine {
+    flex: none;
+    height: 333px;
+  }
+  .bottomLine {
+    height: min-content;
+  }
+}
+
+@media (max-width: 810px) {
+  .mainContainer {
+    flex-direction: column;
+    text-align: center;
+  }
+  .topLine {
+    flex-direction: column;
+    height: min-content;
+    gap: 16px;
+  }
+  .heightMin {
+    height: min-content;
+    flex: none;
+    gap: 16px;
+  }
+  .middleLine {
+    flex-direction: column;
+  }
+  .bottomLine {
+    flex-direction: column;
+  }
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import BasePageLayout from "../shared/components/BasePageLayout/BasePageLayout";
-import Article from "./components/Article/Article";
+import Article from "./components/ArticleCard/ArticleCard";
 import CardContextProvider from "../shared/context/CardContext/CardContextProvider";
 import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
 

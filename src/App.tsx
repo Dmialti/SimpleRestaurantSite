@@ -6,6 +6,7 @@ import Reservation from "./features/Reservation/Reservation";
 import About from "./features/About/About";
 import Contact from "./features/Contact/Contact";
 import Blog from "./features/Blog/Blog";
+import Article from "./features/Article/Article";
 
 const App: React.FC = () => {
   return (
@@ -20,7 +21,7 @@ const App: React.FC = () => {
       </div>
       <div className="h-auto relative">
         <NavBar />
-        <Blog />
+        <Article />
       </div>
     </div>
   );

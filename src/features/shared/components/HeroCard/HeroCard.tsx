@@ -4,7 +4,7 @@ import Card from "../Card/Card";
 import HeroHeading from "../HeroHeading/HeroHeading";
 
 export interface HeroCardProps {
-  heading: string[];
+  heading?: string[];
   mediaType: "video" | "image";
   mediaSrc: string;
   className?: string;
@@ -26,7 +26,7 @@ const HeroCard: React.FC<HeroCardProps> = ({
     >
       <BottomGradient />
       <HeroHeading className="absolute bottom-0 left-0 self pb-14 pl-16.5">
-        {heading.map((item) => (
+        {heading?.map((item) => (
           <div key={item}>{item}</div>
         ))}
       </HeroHeading>

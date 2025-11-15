@@ -9,9 +9,19 @@ import Blog from "./features/Blog/Blog";
 
 const App: React.FC = () => {
   return (
-    <div className="bg-background-default h-auto relative">
-      <NavBar />
-      <Blog />
+    <div className="bg-background-default relative min-h-screen">
+      {/* Background image */}
+      <div className="fixed inset-0 z-0">
+        <img
+          src="/AppMaterials/background.jpg"
+          className="w-full h-full object-cover opacity-6"
+          alt="background"
+        />
+      </div>
+      <div className="h-auto relative">
+        <NavBar />
+        <Blog />
+      </div>
     </div>
   );
 };

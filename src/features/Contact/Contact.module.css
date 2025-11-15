@@ -1,0 +1,63 @@
+.contentSection {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "schedule gallery" "map contacts";
+}
+
+.scheduleSection {
+  grid-area: schedule;
+}
+.gallerySection {
+  grid-area: gallery;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "first second" "third fourth";
+}
+
+.mapSection {
+  grid-area: map;
+}
+
+.contactsSection {
+  grid-area: contacts;
+}
+
+@media (max-width: 1280px) {
+  .scheduleSection {
+    gap: 48px;
+  }
+  .contactsSection {
+    gap: 48px;
+  }
+}
+
+@media (max-width: 810px) {
+  .contentSection {
+    display: grid;
+    grid-template-rows: auto 1fr auto 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "schedule" "gallery" "contacts" "map";
+  }
+  .scheduleSection {
+    height: min-content;
+  }
+  .mapSection {
+    height: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .scheduleSection {
+    padding: 10vw;
+    text-wrap-mode: wrap;
+  }
+  .contactsSection {
+    padding: 10vw;
+    text-wrap-mode: wrap;
+  }
+  .mapSection {
+    height: 100%;
+  }
+}

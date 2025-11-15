@@ -24,15 +24,15 @@ const Home: React.FC = () => {
         >
           <LinkIcon
             className="block p-2.5"
-            imageSrc="/StartingPageMaterials/icons/instagramLogo.svg"
+            imageSrc="/shared/icons/instagramLogo.svg"
           />
           <LinkIcon
             className="block p-2.5"
-            imageSrc="/StartingPageMaterials/icons/facebookLogo.svg"
+            imageSrc="/shared/icons/facebookLogo.svg"
           />
           <LinkIcon
             className="block p-2.5"
-            imageSrc="/StartingPageMaterials/icons/xLogo.svg"
+            imageSrc="/shared/icons/xLogo.svg"
           />
         </CornerMenu>
       </HeroCard>

@@ -1,0 +1,10 @@
+@media (max-width: 810px) {
+  .articleContainer {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .card {
+    width: 100%;
+    min-width: none;
+  }
+}

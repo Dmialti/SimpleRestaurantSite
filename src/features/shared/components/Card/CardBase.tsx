@@ -10,6 +10,7 @@ type BaseCardProps = {
   onHoverChange?: (hovered: boolean) => void;
   isHovered: boolean;
   setIsHovered: (hovered: boolean) => void;
+  changeHover?: boolean;
   className?: string;
   children?: ReactNode;
 };
@@ -26,6 +27,7 @@ const CardBase: React.FC<CardBaseProps> = ({
   onHoverChange,
   isHovered,
   setIsHovered,
+  changeHover = true,
   className,
   children,
 }) => {
@@ -61,8 +63,8 @@ const CardBase: React.FC<CardBaseProps> = ({
     <div
       className={`overflow-hidden rounded-2xl ${className}`}
       onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={changeHover ? () => setIsHovered(true) : undefined}
+      onMouseLeave={changeHover ? () => setIsHovered(false) : undefined}
     >
       {mediaType == "image" && (
         <img

@@ -1,0 +1,20 @@
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  dishes    Dish[]
+
+  createdAt DateTime @default(now())
+}
+
+model Dish {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  imageSrc    String
+
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+
+  createdAt   DateTime @default(now())
+}

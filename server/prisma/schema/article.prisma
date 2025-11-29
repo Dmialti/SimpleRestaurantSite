@@ -1,17 +1,17 @@
 model Article {
-    id              Int         @id @default(autoincrement())
-    name            String
-    publicationDate DateTime
-    description     String      @db.VarChar(200)
-    paragraphs      Paragraph[]
-    imageSrc        String
+  id              Int         @id @default(autoincrement())
+  name            String
+  publicationDate DateTime
+  description     String      @db.VarChar(200)
+  imageSrc        String
+  paragraphs      Paragraph[]
 }
 
 model Paragraph {
-    id        Int     @id @default(autoincrement())
-    name      String
-    content   String
-    position  Int     @default(0)
-    article   Article @relation(fields: [articleId], references: [id])
-    articleId Int
+  id        Int     @id @default(autoincrement())
+  name      String
+  content   String
+  position  Int     @default(0)
+  articleId Int
+  article   Article @relation(fields: [articleId], references: [id])
 }

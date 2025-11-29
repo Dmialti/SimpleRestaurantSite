@@ -2,7 +2,7 @@ import React from "react";
 import CardWithContextHover from "../../../shared/components/Card/CardIsHoveredContext";
 import HeaderLeftDecor from "../HeaderLeftDecor/HeaderLeftDecor";
 import useHovered from "../../../shared/context/CardContext/hooks/useHovered";
-import styles from "./Article.module.css";
+import styles from "./ArticleCard.module.css";
 
 interface ArticleProps {
   date: string;

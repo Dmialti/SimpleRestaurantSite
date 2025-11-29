@@ -4,6 +4,7 @@ model Article {
     publicationDate DateTime
     description     String      @db.VarChar(200)
     paragraphs      Paragraph[]
+    imageSrc        String
 }
 
 model Paragraph {

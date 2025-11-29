@@ -1,20 +1,20 @@
 model Category {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  dishes    Dish[]
+    id     Int    @id @default(autoincrement())
+    name   String @unique
+    dishes Dish[]
 
-  createdAt DateTime @default(now())
+    createdAt DateTime @default(now())
 }
 
 model Dish {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  price       Float
-  imageSrc    String
+    id          Int    @id @default(autoincrement())
+    name        String
+    description String
+    price       Float
+    imageSrc    String
 
-  categoryId  Int
-  category    Category @relation(fields: [categoryId], references: [id])
+    category   Category @relation(fields: [categoryId], references: [id])
+    categoryId Int
 
-  createdAt   DateTime @default(now())
+    createdAt DateTime @default(now())
 }

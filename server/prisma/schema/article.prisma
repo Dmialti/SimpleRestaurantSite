@@ -1,0 +1,16 @@
+model Article {
+    id              Int         @id @default(autoincrement())
+    name            String
+    publicationDate DateTime
+    description     String      @db.VarChar(200)
+    paragraphs      Paragraph[]
+}
+
+model Paragraph {
+    id        Int     @id @default(autoincrement())
+    name      String
+    content   String
+    position  Int     @default(0)
+    article   Article @relation(fields: [articleId], references: [id])
+    articleId Int
+}

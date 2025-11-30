@@ -20,7 +20,6 @@ const App: React.FC = () => {
           />
         </div>
 
-        {/* Контент */}
         <div className="h-auto relative z-10">
           <NavBar />
 

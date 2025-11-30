@@ -1,16 +1,5 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
-
-@InputType()
-class CreateParagraphInput {
-  @Field()
-  name: string;
-
-  @Field()
-  content: string;
-
-  @Field(() => Int)
-  position: number;
-}
+import { Field, InputType } from '@nestjs/graphql';
+import { CreateParagraphInput } from 'src/article/dto/create-paragraph.input';
 
 @InputType()
 export class CreateArticleInput {

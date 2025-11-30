@@ -6,9 +6,10 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { Article, Paragraph } from './entities/article.entity';
+import { Article } from './entities/article.entity';
 import { ArticleService } from './article.service';
 import { CreateArticleInput } from './dto/create-article.input';
+import { Paragraph } from './entities/paragraph.enitity';
 
 @Resolver(() => Article)
 export class ArticleResolver {

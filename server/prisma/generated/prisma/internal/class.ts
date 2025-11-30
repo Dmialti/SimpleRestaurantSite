@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.0.1",
   "engineVersion": "f09f2815f091dbba658cdcd2264306d88bb5bda6",
   "activeProvider": "postgresql",
-  "inlineSchema": "model Article {\n  id              Int         @id @default(autoincrement())\n  name            String\n  publicationDate DateTime\n  description     String      @db.VarChar(200)\n  imageSrc        String\n  paragraphs      Paragraph[]\n}\n\nmodel Paragraph {\n  id        Int     @id @default(autoincrement())\n  name      String\n  content   String\n  position  Int     @default(0)\n  articleId Int\n  article   Article @relation(fields: [articleId], references: [id])\n}\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Category {\n  id        Int      @id @default(autoincrement())\n  name      String   @unique\n  createdAt DateTime @default(now())\n  dishes    Dish[]\n}\n\nmodel Dish {\n  id          Int      @id @default(autoincrement())\n  name        String\n  description String\n  price       Float\n  imageSrc    String\n  categoryId  Int\n  createdAt   DateTime @default(now())\n  category    Category @relation(fields: [categoryId], references: [id])\n}\n\nenum ReservationStatus {\n  PENDING\n  CONFIRMED\n  REJECTED\n  CANCELLED\n  COMPLETED\n}\n\nmodel Reservation {\n  id        Int               @id @default(autoincrement())\n  name      String\n  email     String\n  phone     String\n  guests    Int\n  dateTime  DateTime\n  status    ReservationStatus @default(PENDING)\n  createdAt DateTime          @default(now())\n  updatedAt DateTime          @updatedAt\n}\n",
+  "inlineSchema": "model Article {\n  id              Int         @id @default(autoincrement())\n  name            String\n  publicationDate DateTime\n  description     String      @db.VarChar(200)\n  imageSrc        String\n  paragraphs      Paragraph[]\n}\n\nmodel Paragraph {\n  id        Int     @id @default(autoincrement())\n  name      String\n  content   String\n  position  Int     @default(0)\n  articleId Int\n  article   Article @relation(fields: [articleId], references: [id])\n}\n\ngenerator client {\n  provider     = \"prisma-client\"\n  output       = \"../generated/prisma\"\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Category {\n  id        Int      @id @default(autoincrement())\n  name      String   @unique\n  createdAt DateTime @default(now())\n  dishes    Dish[]\n}\n\nmodel Dish {\n  id          Int      @id @default(autoincrement())\n  name        String\n  description String\n  price       Float\n  imageSrc    String\n  categoryId  Int\n  createdAt   DateTime @default(now())\n  category    Category @relation(fields: [categoryId], references: [id])\n}\n\nenum ReservationStatus {\n  PENDING\n  CONFIRMED\n  REJECTED\n  CANCELLED\n  COMPLETED\n}\n\nmodel Reservation {\n  id        Int               @id @default(autoincrement())\n  name      String\n  email     String\n  phone     String\n  guests    Int\n  dateTime  DateTime\n  status    ReservationStatus @default(PENDING)\n  createdAt DateTime          @default(now())\n  updatedAt DateTime          @updatedAt\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -37,10 +37,10 @@ async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Modul
 }
 
 config.compilerWasm = {
-  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_bg.postgresql.mjs"),
+  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_bg.postgresql.js"),
 
   getQueryCompilerWasmModule: async () => {
-    const { wasm } = await import("@prisma/client/runtime/query_compiler_bg.postgresql.wasm-base64.mjs")
+    const { wasm } = await import("@prisma/client/runtime/query_compiler_bg.postgresql.wasm-base64.js")
     return await decodeBase64AsWasm(wasm)
   }
 }

@@ -1,0 +1,97 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Article {
+  id: Int!
+  imageSrc: String!
+  name: String!
+  paragraphs: [Paragraph!]
+  publicationDate: DateTime!
+}
+
+type Category {
+  createdAt: DateTime!
+  dishes: [Dish!]!
+  id: Int!
+  name: String!
+}
+
+input CreateArticleInput {
+  description: String!
+  imageSrc: String!
+  name: String!
+  paragraphs: [CreateParagraphInput!]!
+  publicationDate: DateTime!
+}
+
+input CreateCategoryInput {
+  dishes: [CreateDishInput!]!
+  name: String!
+}
+
+input CreateDishInput {
+  description: String!
+  imageSrc: String!
+  name: String!
+  price: Float!
+}
+
+input CreateParagraphInput {
+  content: String!
+  name: String!
+  position: Int!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Dish {
+  createdAt: DateTime!
+  description: String!
+  id: Int!
+  imageSrc: String!
+  name: String!
+  price: Float!
+}
+
+type Mutation {
+  createArticle(createArticleInput: CreateArticleInput!): Article!
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  createDish(categoryId: Float!, createDishInput: CreateDishInput!): Dish!
+  updateReservationStatus: Reservation!
+}
+
+type Paragraph {
+  content: String!
+  id: Int!
+  name: String!
+  position: Int!
+}
+
+type Query {
+  articles: [Article!]!
+  dishes(categoryId: Float!): [Dish!]!
+  reservations: [Reservation!]!
+}
+
+type Reservation {
+  createdAt: DateTime!
+  dateAndTime: DateTime!
+  email: String!
+  id: Int!
+  name: String!
+  phone: String!
+  status: ReservationStatus!
+  updatedAt: DateTime!
+}
+
+enum ReservationStatus {
+  CANCELLED
+  COMPLETED
+  CONFIRMED
+  PENDING
+  REJECTED
+}

@@ -1,11 +1,11 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { Dish } from '../entities/dish.entity';
+import { CreateDishInput } from './create-dish.input';
 
 @InputType()
 export class CreateCategoryInput {
   @Field()
   name: string;
 
-  @Field(() => [Dish])
-  dishes: Dish[];
+  @Field(() => [CreateDishInput])
+  dishes: CreateDishInput[];
 }

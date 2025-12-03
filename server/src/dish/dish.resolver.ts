@@ -14,9 +14,16 @@ export class DishResolver {
     return this.dishService.getAll();
   }
 
-  @Query(() => [Dish], { name: 'dishes' })
-  getByCategory(@Args('categoryId') categoryId: number) {
-    return this.dishService.getByCategory(categoryId);
+  @Mutation(() => [Category])
+  getMenu() {
+    return this.dishService.getMenu();
+  }
+
+  @Mutation(() => Category)
+  createCategory(
+    @Args('createCategoryInput') createCategoryInput: CreateCategoryInput,
+  ) {
+    return this.dishService.createCategory(createCategoryInput);
   }
 
   @Mutation(() => Dish)
@@ -27,10 +34,11 @@ export class DishResolver {
     return this.dishService.createDish(categoryId, createDishInput);
   }
 
-  @Mutation(() => Category)
-  createCategory(
-    @Args('createCategoryInput') createCategoryInput: CreateCategoryInput,
+  @Mutation(() => Dish)
+  updateDishAvailability(
+    @Args('dishId') dishId: number,
+    @Args('available') available: boolean,
   ) {
-    return this.dishService.createCategory(createCategoryInput);
+    return this.dishService.updateDishAvailability(dishId, available);
   }
 }

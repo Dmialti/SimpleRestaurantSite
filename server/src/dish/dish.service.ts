@@ -40,17 +40,18 @@ export class DishService {
 
   async createCategory(data: CreateCategoryInput) {
     const { dishes, ...categoryData } = data;
-    return this.prisma.category.create({
+    const res = this.prisma.category.create({
       data: {
         ...categoryData,
         dishes: dishes ? { create: dishes } : undefined,
       },
     });
     await this.cacheManager.del(this.MENU_KEY);
+    return res;
   }
 
   async createDish(categoryId: number, data: CreateDishInput) {
-    return this.prisma.category.update({
+    const res = this.prisma.category.update({
       where: { id: categoryId },
       data: {
         dishes: {
@@ -59,13 +60,15 @@ export class DishService {
       },
     });
     await this.cacheManager.del(this.MENU_KEY);
+    return res;
   }
 
-  async changeDishAvailability(dishId: number, available: boolean) {
-    return this.prisma.dish.update({
+  async updateDishAvailability(dishId: number, available: boolean) {
+    const res = this.prisma.dish.update({
       where: { id: dishId },
       data: { available },
     });
     await this.cacheManager.del(this.MENU_KEY);
+    return res;
   }
 }

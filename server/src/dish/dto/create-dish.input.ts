@@ -13,4 +13,7 @@ export class CreateDishInput {
 
   @Field()
   imageSrc: string;
+
+  @Field()
+  available?: boolean;
 }

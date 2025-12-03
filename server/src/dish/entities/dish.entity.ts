@@ -18,5 +18,8 @@ export class Dish {
   imageSrc: string;
 
   @Field()
+  available: boolean;
+
+  @Field()
   createdAt: Date;
 }

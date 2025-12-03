@@ -112,6 +112,7 @@ export const DishScalarFieldEnum = {
   description: 'description',
   price: 'price',
   imageSrc: 'imageSrc',
+  available: 'available',
   categoryId: 'categoryId',
   createdAt: 'createdAt'
 } as const

@@ -11,6 +11,7 @@ model Dish {
   description String
   price       Float
   imageSrc    String
+  available   Boolean  @default(true)
   categoryId  Int
   createdAt   DateTime @default(now())
   category    Category @relation(fields: [categoryId], references: [id])

@@ -17,10 +17,14 @@ import type * as Prisma from "./prismaNamespace.js"
 
 const config: runtime.GetPrismaClientConfig = {
   "previewFeatures": [],
-  "clientVersion": "7.0.1",
-  "engineVersion": "f09f2815f091dbba658cdcd2264306d88bb5bda6",
+  "clientVersion": "7.1.0",
+  "engineVersion": "ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba",
   "activeProvider": "postgresql",
+<<<<<<< Updated upstream
   "inlineSchema": "model Article {\n  id              Int         @id @default(autoincrement())\n  name            String\n  publicationDate DateTime\n  description     String      @db.VarChar(200)\n  imageSrc        String\n  paragraphs      Paragraph[]\n}\n\nmodel Paragraph {\n  id        Int     @id @default(autoincrement())\n  name      String\n  content   String\n  position  Int     @default(0)\n  articleId Int\n  article   Article @relation(fields: [articleId], references: [id])\n}\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Category {\n  id        Int      @id @default(autoincrement())\n  name      String   @unique\n  createdAt DateTime @default(now())\n  dishes    Dish[]\n}\n\nmodel Dish {\n  id          Int      @id @default(autoincrement())\n  name        String\n  description String\n  price       Float\n  imageSrc    String\n  categoryId  Int\n  createdAt   DateTime @default(now())\n  category    Category @relation(fields: [categoryId], references: [id])\n}\n\nenum ReservationStatus {\n  PENDING\n  CONFIRMED\n  REJECTED\n  CANCELLED\n  COMPLETED\n}\n\nmodel Reservation {\n  id        Int               @id @default(autoincrement())\n  name      String\n  email     String\n  phone     String\n  guests    Int\n  dateTime  DateTime\n  status    ReservationStatus @default(PENDING)\n  createdAt DateTime          @default(now())\n  updatedAt DateTime          @updatedAt\n}\n",
+=======
+  "inlineSchema": "model Article {\n  id              Int         @id @default(autoincrement())\n  name            String\n  publicationDate DateTime\n  description     String      @db.VarChar(200)\n  imageSrc        String\n  paragraphs      Paragraph[]\n}\n\nmodel Paragraph {\n  id        Int     @id @default(autoincrement())\n  name      String\n  content   String\n  position  Int     @default(0)\n  articleId Int\n  article   Article @relation(fields: [articleId], references: [id])\n}\n\ngenerator client {\n  provider     = \"prisma-client\"\n  output       = \"../generated/prisma\"\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Category {\n  id        Int      @id @default(autoincrement())\n  name      String   @unique\n  createdAt DateTime @default(now())\n  dishes    Dish[]\n}\n\nmodel Dish {\n  id          Int      @id @default(autoincrement())\n  name        String\n  description String\n  price       Float\n  imageSrc    String\n  available   Boolean  @default(true)\n  categoryId  Int\n  createdAt   DateTime @default(now())\n  category    Category @relation(fields: [categoryId], references: [id])\n}\n\nenum ReservationStatus {\n  PENDING\n  CONFIRMED\n  REJECTED\n  CANCELLED\n  COMPLETED\n}\n\nmodel Reservation {\n  id        Int               @id @default(autoincrement())\n  name      String\n  email     String\n  phone     String\n  guests    Int\n  dateTime  DateTime\n  status    ReservationStatus @default(PENDING)\n  createdAt DateTime          @default(now())\n  updatedAt DateTime          @updatedAt\n}\n\nenum Role {\n  ADMIN\n  WRITER\n}\n\nmodel User {\n  id       Int    @id @default(autoincrement())\n  email    String @unique\n  password String\n  role     Role   @default(WRITER)\n\n  hashedRefreshToken String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n",
+>>>>>>> Stashed changes
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +32,11 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
+<<<<<<< Updated upstream
 config.runtimeDataModel = JSON.parse("{\"models\":{\"Article\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"publicationDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"imageSrc\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"paragraphs\",\"kind\":\"object\",\"type\":\"Paragraph\",\"relationName\":\"ArticleToParagraph\"}],\"dbName\":null},\"Paragraph\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"position\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"articleId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"article\",\"kind\":\"object\",\"type\":\"Article\",\"relationName\":\"ArticleToParagraph\"}],\"dbName\":null},\"Category\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"dishes\",\"kind\":\"object\",\"type\":\"Dish\",\"relationName\":\"CategoryToDish\"}],\"dbName\":null},\"Dish\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"imageSrc\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"categoryId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"category\",\"kind\":\"object\",\"type\":\"Category\",\"relationName\":\"CategoryToDish\"}],\"dbName\":null},\"Reservation\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"guests\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"dateTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"ReservationStatus\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+=======
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Article\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"publicationDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"imageSrc\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"paragraphs\",\"kind\":\"object\",\"type\":\"Paragraph\",\"relationName\":\"ArticleToParagraph\"}],\"dbName\":null},\"Paragraph\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"position\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"articleId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"article\",\"kind\":\"object\",\"type\":\"Article\",\"relationName\":\"ArticleToParagraph\"}],\"dbName\":null},\"Category\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"dishes\",\"kind\":\"object\",\"type\":\"Dish\",\"relationName\":\"CategoryToDish\"}],\"dbName\":null},\"Dish\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"imageSrc\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"available\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"categoryId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"category\",\"kind\":\"object\",\"type\":\"Category\",\"relationName\":\"CategoryToDish\"}],\"dbName\":null},\"Reservation\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"guests\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"dateTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"ReservationStatus\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"hashedRefreshToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+>>>>>>> Stashed changes
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -62,7 +70,7 @@ export interface PrismaClientConstructor {
    * const articles = await prisma.article.findMany()
    * ```
    * 
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+   * Read more in our [docs](https://pris.ly/d/client).
    */
 
   new <
@@ -84,7 +92,7 @@ export interface PrismaClientConstructor {
  * const articles = await prisma.article.findMany()
  * ```
  * 
- * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+ * Read more in our [docs](https://pris.ly/d/client).
  */
 
 export interface PrismaClient<
@@ -113,7 +121,7 @@ export interface PrismaClient<
    * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
 
@@ -125,7 +133,7 @@ export interface PrismaClient<
    * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
 
@@ -136,7 +144,7 @@ export interface PrismaClient<
    * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
 
@@ -148,7 +156,7 @@ export interface PrismaClient<
    * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
 

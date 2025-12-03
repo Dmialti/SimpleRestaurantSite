@@ -28,7 +28,16 @@
     "@nestjs/platform-express": "^11.0.1",
     "@prisma/adapter-pg": "^7.0.1",
     "@prisma/adapter-ppg": "^7.0.1",
+<<<<<<< Updated upstream
     "@prisma/client": "^7.0.1",
+=======
+    "@prisma/client": "^7.1.0",
+    "bcrypt": "^6.0.0",
+    "cache-manager": "^7.2.5",
+    "cache-manager-redis-store": "^3.0.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.3",
+>>>>>>> Stashed changes
     "dotenv": "^17.2.3",
     "graphql": "^16.12.0",
     "pg": "^8.16.3",
@@ -52,7 +61,7 @@
     "globals": "^16.0.0",
     "jest": "^30.0.0",
     "prettier": "^3.4.2",
-    "prisma": "^7.0.1",
+    "prisma": "^7.1.0",
     "source-map-support": "^0.5.21",
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.5",

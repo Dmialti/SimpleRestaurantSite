@@ -44,6 +44,7 @@ export type DishMinAggregateOutputType = {
   description: string | null
   price: number | null
   imageSrc: string | null
+  available: boolean | null
   categoryId: number | null
   createdAt: Date | null
 }
@@ -54,6 +55,7 @@ export type DishMaxAggregateOutputType = {
   description: string | null
   price: number | null
   imageSrc: string | null
+  available: boolean | null
   categoryId: number | null
   createdAt: Date | null
 }
@@ -64,6 +66,7 @@ export type DishCountAggregateOutputType = {
   description: number
   price: number
   imageSrc: number
+  available: number
   categoryId: number
   createdAt: number
   _all: number
@@ -88,6 +91,7 @@ export type DishMinAggregateInputType = {
   description?: true
   price?: true
   imageSrc?: true
+  available?: true
   categoryId?: true
   createdAt?: true
 }
@@ -98,6 +102,7 @@ export type DishMaxAggregateInputType = {
   description?: true
   price?: true
   imageSrc?: true
+  available?: true
   categoryId?: true
   createdAt?: true
 }
@@ -108,6 +113,7 @@ export type DishCountAggregateInputType = {
   description?: true
   price?: true
   imageSrc?: true
+  available?: true
   categoryId?: true
   createdAt?: true
   _all?: true
@@ -205,6 +211,7 @@ export type DishGroupByOutputType = {
   description: string
   price: number
   imageSrc: string
+  available: boolean
   categoryId: number
   createdAt: Date
   _count: DishCountAggregateOutputType | null
@@ -238,6 +245,7 @@ export type DishWhereInput = {
   description?: Prisma.StringFilter<"Dish"> | string
   price?: Prisma.FloatFilter<"Dish"> | number
   imageSrc?: Prisma.StringFilter<"Dish"> | string
+  available?: Prisma.BoolFilter<"Dish"> | boolean
   categoryId?: Prisma.IntFilter<"Dish"> | number
   createdAt?: Prisma.DateTimeFilter<"Dish"> | Date | string
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
@@ -249,6 +257,7 @@ export type DishOrderByWithRelationInput = {
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
   imageSrc?: Prisma.SortOrder
+  available?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   category?: Prisma.CategoryOrderByWithRelationInput
@@ -263,6 +272,7 @@ export type DishWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringFilter<"Dish"> | string
   price?: Prisma.FloatFilter<"Dish"> | number
   imageSrc?: Prisma.StringFilter<"Dish"> | string
+  available?: Prisma.BoolFilter<"Dish"> | boolean
   categoryId?: Prisma.IntFilter<"Dish"> | number
   createdAt?: Prisma.DateTimeFilter<"Dish"> | Date | string
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
@@ -274,6 +284,7 @@ export type DishOrderByWithAggregationInput = {
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
   imageSrc?: Prisma.SortOrder
+  available?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.DishCountOrderByAggregateInput
@@ -292,6 +303,7 @@ export type DishScalarWhereWithAggregatesInput = {
   description?: Prisma.StringWithAggregatesFilter<"Dish"> | string
   price?: Prisma.FloatWithAggregatesFilter<"Dish"> | number
   imageSrc?: Prisma.StringWithAggregatesFilter<"Dish"> | string
+  available?: Prisma.BoolWithAggregatesFilter<"Dish"> | boolean
   categoryId?: Prisma.IntWithAggregatesFilter<"Dish"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Dish"> | Date | string
 }
@@ -301,6 +313,7 @@ export type DishCreateInput = {
   description: string
   price: number
   imageSrc: string
+  available?: boolean
   createdAt?: Date | string
   category: Prisma.CategoryCreateNestedOneWithoutDishesInput
 }
@@ -311,6 +324,7 @@ export type DishUncheckedCreateInput = {
   description: string
   price: number
   imageSrc: string
+  available?: boolean
   categoryId: number
   createdAt?: Date | string
 }
@@ -320,6 +334,7 @@ export type DishUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
+  available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneRequiredWithoutDishesNestedInput
 }
@@ -330,6 +345,7 @@ export type DishUncheckedUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
+  available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -340,6 +356,7 @@ export type DishCreateManyInput = {
   description: string
   price: number
   imageSrc: string
+  available?: boolean
   categoryId: number
   createdAt?: Date | string
 }
@@ -349,6 +366,7 @@ export type DishUpdateManyMutationInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
+  available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -358,6 +376,7 @@ export type DishUncheckedUpdateManyInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
+  available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -378,6 +397,7 @@ export type DishCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
   imageSrc?: Prisma.SortOrder
+  available?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -394,6 +414,7 @@ export type DishMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
   imageSrc?: Prisma.SortOrder
+  available?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -404,6 +425,7 @@ export type DishMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
   imageSrc?: Prisma.SortOrder
+  available?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -464,11 +486,16 @@ export type FloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type DishCreateWithoutCategoryInput = {
   name: string
   description: string
   price: number
   imageSrc: string
+  available?: boolean
   createdAt?: Date | string
 }
 
@@ -478,6 +505,7 @@ export type DishUncheckedCreateWithoutCategoryInput = {
   description: string
   price: number
   imageSrc: string
+  available?: boolean
   createdAt?: Date | string
 }
 
@@ -516,6 +544,7 @@ export type DishScalarWhereInput = {
   description?: Prisma.StringFilter<"Dish"> | string
   price?: Prisma.FloatFilter<"Dish"> | number
   imageSrc?: Prisma.StringFilter<"Dish"> | string
+  available?: Prisma.BoolFilter<"Dish"> | boolean
   categoryId?: Prisma.IntFilter<"Dish"> | number
   createdAt?: Prisma.DateTimeFilter<"Dish"> | Date | string
 }
@@ -526,6 +555,7 @@ export type DishCreateManyCategoryInput = {
   description: string
   price: number
   imageSrc: string
+  available?: boolean
   createdAt?: Date | string
 }
 
@@ -534,6 +564,7 @@ export type DishUpdateWithoutCategoryInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
+  available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -543,6 +574,7 @@ export type DishUncheckedUpdateWithoutCategoryInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
+  available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -552,6 +584,7 @@ export type DishUncheckedUpdateManyWithoutCategoryInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   imageSrc?: Prisma.StringFieldUpdateOperationsInput | string
+  available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -563,6 +596,7 @@ export type DishSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   description?: boolean
   price?: boolean
   imageSrc?: boolean
+  available?: boolean
   categoryId?: boolean
   createdAt?: boolean
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
@@ -574,6 +608,7 @@ export type DishSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   description?: boolean
   price?: boolean
   imageSrc?: boolean
+  available?: boolean
   categoryId?: boolean
   createdAt?: boolean
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
@@ -585,6 +620,7 @@ export type DishSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   description?: boolean
   price?: boolean
   imageSrc?: boolean
+  available?: boolean
   categoryId?: boolean
   createdAt?: boolean
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
@@ -596,11 +632,12 @@ export type DishSelectScalar = {
   description?: boolean
   price?: boolean
   imageSrc?: boolean
+  available?: boolean
   categoryId?: boolean
   createdAt?: boolean
 }
 
-export type DishOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "imageSrc" | "categoryId" | "createdAt", ExtArgs["result"]["dish"]>
+export type DishOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "imageSrc" | "available" | "categoryId" | "createdAt", ExtArgs["result"]["dish"]>
 export type DishInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }
@@ -622,6 +659,7 @@ export type $DishPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     description: string
     price: number
     imageSrc: string
+    available: boolean
     categoryId: number
     createdAt: Date
   }, ExtArgs["result"]["dish"]>
@@ -1053,6 +1091,7 @@ export interface DishFieldRefs {
   readonly description: Prisma.FieldRef<"Dish", 'String'>
   readonly price: Prisma.FieldRef<"Dish", 'Float'>
   readonly imageSrc: Prisma.FieldRef<"Dish", 'String'>
+  readonly available: Prisma.FieldRef<"Dish", 'Boolean'>
   readonly categoryId: Prisma.FieldRef<"Dish", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Dish", 'DateTime'>
 }

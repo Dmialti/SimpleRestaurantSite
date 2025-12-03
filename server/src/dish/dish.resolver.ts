@@ -13,8 +13,8 @@ export class DishResolver {
   getAll() {
     return this.dishService.getAll();
   }
-
-  @Mutation(() => [Category])
+  y;
+  @Query(() => [Category], { name: 'getMenu' })
   getMenu() {
     return this.dishService.getMenu();
   }

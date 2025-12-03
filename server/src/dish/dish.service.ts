@@ -21,7 +21,6 @@ export class DishService {
 
   async getMenu() {
     const cached = await this.cacheManager.get<Category[]>(this.MENU_KEY);
-
     if (cached) return cached;
 
     const menu = await this.prisma.category.findMany({
@@ -34,40 +33,43 @@ export class DishService {
     });
 
     await this.cacheManager.set(this.MENU_KEY, menu, 86400 * 1000);
-
     return menu;
   }
 
   async createCategory(data: CreateCategoryInput) {
     const { dishes, ...categoryData } = data;
-    const res = this.prisma.category.create({
+
+    const res = await this.prisma.category.create({
       data: {
         ...categoryData,
         dishes: dishes ? { create: dishes } : undefined,
       },
     });
+
     await this.cacheManager.del(this.MENU_KEY);
     return res;
   }
 
   async createDish(categoryId: number, data: CreateDishInput) {
-    const res = this.prisma.category.update({
-      where: { id: categoryId },
+    const res = await this.prisma.dish.create({
       data: {
-        dishes: {
-          create: data,
+        ...data,
+        category: {
+          connect: { id: categoryId },
         },
       },
     });
+
     await this.cacheManager.del(this.MENU_KEY);
     return res;
   }
 
   async updateDishAvailability(dishId: number, available: boolean) {
-    const res = this.prisma.dish.update({
+    const res = await this.prisma.dish.update({
       where: { id: dishId },
       data: { available },
     });
+
     await this.cacheManager.del(this.MENU_KEY);
     return res;
   }

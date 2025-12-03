@@ -62,3 +62,8 @@ export type Dish = Prisma.DishModel
  * 
  */
 export type Reservation = Prisma.ReservationModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel

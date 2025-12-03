@@ -31,6 +31,7 @@ input CreateCategoryInput {
 }
 
 input CreateDishInput {
+  available: Boolean!
   description: String!
   imageSrc: String!
   name: String!
@@ -49,6 +50,7 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Dish {
+  available: Boolean!
   createdAt: DateTime!
   description: String!
   id: Int!
@@ -61,6 +63,7 @@ type Mutation {
   createArticle(createArticleInput: CreateArticleInput!): Article!
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   createDish(categoryId: Float!, createDishInput: CreateDishInput!): Dish!
+  updateDishAvailability(available: Boolean!, dishId: Float!): Dish!
   updateReservationStatus: Reservation!
 }
 
@@ -73,7 +76,8 @@ type Paragraph {
 
 type Query {
   articles: [Article!]!
-  dishes(categoryId: Float!): [Dish!]!
+  dishes: [Dish!]!
+  getMenu: [Category!]!
   reservations: [Reservation!]!
 }
 

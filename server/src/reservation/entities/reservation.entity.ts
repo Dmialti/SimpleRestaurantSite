@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { ReservationStatus } from 'prisma/generated/prisma/client';
+import { ReservationStatus } from '../../../prisma/generated/prisma/enums';
 
 @ObjectType()
 export class Reservation {

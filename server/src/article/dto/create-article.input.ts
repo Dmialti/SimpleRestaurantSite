@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { CreateParagraphInput } from 'src/article/dto/create-paragraph.input';
+import { CreateParagraphInput } from './create-paragraph.input';
 
 @InputType()
 export class CreateArticleInput {

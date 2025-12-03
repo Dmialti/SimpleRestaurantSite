@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { CreateDishInput } from './dto/create-dish.input';
 import type { Cache } from 'cache-manager';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Category } from './entities/category.entity';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class DishService {

@@ -7,11 +7,11 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthInput } from './dto/auth.input';
-import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtPayload } from './types/jwtPayload.type';
 import { CreateUserInput } from './dto/createUser.input';
-import { PrismaClientKnownRequestError } from 'prisma/generated/prisma/internal/prismaNamespace';
+import { PrismaService } from '../prisma/prisma.service';
+import { PrismaClientKnownRequestError } from '../../prisma/generated/prisma/internal/prismaNamespace';
 
 @Injectable()
 export class AuthService {

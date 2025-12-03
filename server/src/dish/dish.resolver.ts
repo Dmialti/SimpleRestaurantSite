@@ -4,6 +4,8 @@ import { Dish } from './entities/dish.entity';
 import { DishService } from './dish.service';
 import { CreateDishInput } from './dto/create-dish.input';
 import { CreateCategoryInput } from './dto/create-category.input';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Resolver(() => Category)
 export class DishResolver {
@@ -20,6 +22,7 @@ export class DishResolver {
   }
 
   @Mutation(() => Category)
+  @UseGuards(AuthGuard)
   createCategory(
     @Args('createCategoryInput') createCategoryInput: CreateCategoryInput,
   ) {
@@ -27,6 +30,7 @@ export class DishResolver {
   }
 
   @Mutation(() => Dish)
+  @UseGuards(AuthGuard)
   createDish(
     @Args('categoryId') categoryId: number,
     @Args('createDishInput') createDishInput: CreateDishInput,
@@ -35,6 +39,7 @@ export class DishResolver {
   }
 
   @Mutation(() => Dish)
+  @UseGuards(AuthGuard)
   updateDishAvailability(
     @Args('dishId') dishId: number,
     @Args('available') available: boolean,

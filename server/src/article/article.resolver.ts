@@ -10,6 +10,8 @@ import { Article } from './entities/article.entity';
 import { ArticleService } from './article.service';
 import { CreateArticleInput } from './dto/create-article.input';
 import { Paragraph } from './entities/paragraph.enitity';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Resolver(() => Article)
 export class ArticleResolver {
@@ -21,6 +23,7 @@ export class ArticleResolver {
   }
 
   @Mutation(() => Article)
+  @UseGuards(AuthGuard)
   createArticle(
     @Args('createArticleInput') createArticleInput: CreateArticleInput,
   ) {

@@ -8,10 +8,12 @@ import { ReservationModule } from './reservation/reservation.module';
 import { MercuriusDriver, MercuriusDriverConfig } from '@nestjs/mercurius';
 import { CacheModule } from '@nestjs/cache-manager';
 import * as redisStore from 'cache-manager-redis-store';
+import { S3Module } from './s3/s3.module';
 
 @Module({
   imports: [
     PrismaModule,
+    S3Module,
     ArticleModule,
     DishModule,
     ReservationModule,

@@ -7,13 +7,17 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "codegen": "graphql-codegen --config ./src/graphql/codegen/codegen.ts",
+    "watch": "graphql-codegen -w --config ./src/graphql/codegen/codegen.ts"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.2.2",
     "@react-google-maps/api": "^2.20.7",
     "@tailwindcss/vite": "^4.1.13",
+    "@urql/exchange-graphcache": "^8.1.0",
+    "@urql/exchange-persisted": "^5.0.1",
     "gsap": "^3.13.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -25,6 +29,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
+    "@graphql-codegen/cli": "^6.1.0",
+    "@graphql-codegen/client-preset": "^5.2.1",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react-swc": "^4.1.0",

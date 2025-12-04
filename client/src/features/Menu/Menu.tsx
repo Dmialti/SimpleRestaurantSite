@@ -1,11 +1,16 @@
 import React from "react";
 import styles from "./Menu.module.css";
 import Button from "../shared/components/Button/Button";
-import sushi from "./static/sushi/sushi";
 import DishSection from "./components/DishSection/DishSection";
 import BasePageLayout from "../shared/components/BasePageLayout/BasePageLayout";
+import { useQuery } from "urql";
+import { GET_MENU_QUERY } from "../../graphql/menu/queries/getMenu.query";
 
 const Menu: React.FC = () => {
+  const [{ data }] = useQuery({ query: GET_MENU_QUERY });
+
+  const categories = data?.getMenu || [];
+
   return (
     <BasePageLayout
       isScreenHeight={false}
@@ -17,32 +22,24 @@ const Menu: React.FC = () => {
         className={`${styles.listContainer} h-fit rounded-2xl pt-8 pb-20 px-24 text-text-default`}
       >
         <div className="flex gap-1 justify-center font-satoshi flex-wrap">
-          <Button
-            type="border"
-            className="px-3 py-1 text-[12px] tracking-[1px] leading-[190%]"
-          >
-            MAKI
-          </Button>
-          <Button
-            type="border"
-            className="px-3 py-1 text-[12px] tracking-[1px] leading-[190%]"
-          >
-            URAMAKI
-          </Button>
-          <Button
-            type="border"
-            className="px-3 py-1 text-[12px] tracking-[1px] leading-[190%]"
-          >
-            SPECIAL ROLLS
-          </Button>
+          {categories.map((item) => (
+            <Button
+              key={item.id}
+              type="border"
+              className="px-3 py-1 text-[12px] tracking-[1px] leading-[190%]"
+            >
+              {item.name.toUpperCase()}
+            </Button>
+          ))}
         </div>
         <div>
-          <DishSection category="MAKI" items={sushi.makiList} />
-          <DishSection category="URAMAKI" items={sushi.uraMakiList} />
-          <DishSection
-            category="SPECIAL ROLLS"
-            items={sushi.specialRollsList}
-          />
+          {categories.map((item) => (
+            <DishSection
+              key={item.id}
+              category={item.name}
+              dishes={item.dishes}
+            />
+          ))}
         </div>
       </div>
     </BasePageLayout>

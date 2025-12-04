@@ -1,17 +1,13 @@
-import { gql } from "urql";
+import { gql } from "../../codegen/generated/gql";
 
-export const GET_MENU_QUERY = gql`
+export const GET_MENU_QUERY = gql(`
   query GetMenu {
     getMenu {
       id
       name
       dishes {
-        id
-        name
-        description
-        price
-        image
+        ...DishItemFields
       }
     }
   }
-`;
+`);

@@ -1,14 +1,23 @@
 import React from "react";
-import DishItem, { type DishItemProps } from "../DishItem/DishItem";
+import DishItem from "../DishItem/DishItem";
 import styles from "./DishSection.module.css";
 import HeadingDecorated from "../../../shared/components/HeadingDecorated/HeadingDecorated";
+import {
+  useFragment,
+  type FragmentType,
+} from "../../../../graphql/codegen/generated";
+import { DISH_FRAGMENT } from "../../../../graphql/menu/fragments/dish.fragment";
 
 interface DishSectionProps {
   category: string;
-  items: DishItemProps[];
+  dishes: readonly FragmentType<typeof DISH_FRAGMENT>[];
 }
 
-const DishSection: React.FC<DishSectionProps> = ({ category, items }) => {
+const DishSection: React.FC<DishSectionProps> = ({
+  category,
+  dishes: dishesRef,
+}) => {
+  const dishes = useFragment(DISH_FRAGMENT, dishesRef);
   return (
     <div className="flex flex-col items-center gap-12 pt-16">
       <HeadingDecorated
@@ -17,15 +26,8 @@ const DishSection: React.FC<DishSectionProps> = ({ category, items }) => {
         {category}
       </HeadingDecorated>
       <div className="flex flex-col gap-8 max-w-[740px]">
-        {items.map((dish) => (
-          <DishItem
-            key={dish.name}
-            className="flex flex-row gap-6"
-            name={dish.name}
-            description={dish.description}
-            price={dish.price}
-            imageSrc={dish.imageSrc}
-          />
+        {dishes.map((dish) => (
+          <DishItem key={dish.id} {...dish} className="flex flex-row gap-6" />
         ))}
       </div>
     </div>

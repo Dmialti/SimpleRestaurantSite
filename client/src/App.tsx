@@ -7,6 +7,8 @@ import Home from "./features/Home/Home";
 import Menu from "./features/Menu/Menu";
 import NavBar from "./features/NavBar/NavBar";
 import Reservation from "./features/Reservation/Reservation";
+import { Provider as UrqlProvider } from "urql";
+import { client } from "./api/urqlClient";
 
 const App: React.FC = () => {
   return (
@@ -24,14 +26,16 @@ const App: React.FC = () => {
           <NavBar />
 
           <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/reservation" element={<Reservation />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/blog" element={<Blog />} />
-            </Routes>
+            <UrqlProvider value={client}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/menu" element={<Menu />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/reservation" element={<Reservation />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/blog" element={<Blog />} />
+              </Routes>
+            </UrqlProvider>
           </main>
         </div>
       </div>

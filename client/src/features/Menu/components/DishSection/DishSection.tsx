@@ -23,7 +23,7 @@ const DishSection: React.FC<DishSectionProps> = ({
       <HeadingDecorated
         className={`font-forum text-[32px] tracking-[1px] leading-[120%] ${styles.categoryHeader}`}
       >
-        {category}
+        {category.toUpperCase()}
       </HeadingDecorated>
       <div className="flex flex-col gap-8 max-w-[740px]">
         {dishes.map((dish) => (

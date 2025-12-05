@@ -18,9 +18,9 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
 }) => {
   return (
     <div
-      className={`${styles.menuSection} w-full h-auto box-border gap-4 relative`}
+      className={`${styles.menuSection} w-full h-auto box-border gap-4 relative px-6`}
     >
-      <div className={`${styles.heroSection} top-0 py-6 pl-6 h-screen sticky`}>
+      <div className={`${styles.heroSection} top-0 py-6 h-screen sticky`}>
         <HeroCard
           heading={heading}
           className={`relative h-full `}
@@ -31,7 +31,7 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
       <div
         className={`${
           styles.contentSection + " " + (isScreenHeight && "h-screen")
-        } overflow-hidden min-w-0 py-6 pr-6`}
+        } overflow-hidden min-w-0 py-6`}
       >
         <div
           className={`${className} border border-border-default h-full rounded-2xl`}

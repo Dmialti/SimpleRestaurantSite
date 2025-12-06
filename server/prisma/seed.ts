@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { PrismaClient } from './generated/prisma/client.js';
 import { PrismaPg } from '@prisma/adapter-pg';
+import { migrateImages } from './migrate-images.js';
 
 // Initialize the adapter with the connection string from env
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
@@ -275,6 +276,7 @@ async function main() {
   console.log('Seeded Articles with Paragraphs.');
 
   console.log('Seeding finished.');
+  await migrateImages();
 }
 
 main()

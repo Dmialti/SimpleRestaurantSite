@@ -74,7 +74,7 @@ type Mutation {
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   createDish(categoryId: Float!, createDishInput: CreateDishInput!): Dish!
   logIn(input: AuthInput!): AuthResponse!
-  logout: Boolean!
+  logOut: Boolean!
   refresh: AuthResponse!
   signUp(input: AuthInput!): AuthResponse!
   updateDishAvailability(available: Boolean!, dishId: Float!): Dish!

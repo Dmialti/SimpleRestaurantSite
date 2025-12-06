@@ -25,7 +25,7 @@ export class AuthResolver {
 
   @Mutation(() => Boolean)
   @UseGuards(AuthGuard)
-  async logout(@Context() context: GqlContext) {
+  async logOut(@Context() context: GqlContext) {
     const userId = context.req.user?.sub;
 
     if (!userId) {

@@ -15,6 +15,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
     "\n  query GetArticle($id: Int!) {\n    article(id: $id) {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n": typeof types.GetArticleDocument,
+    "\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) { accessToken }\n  }\n": typeof types.LoginDocument,
+    "mutation Logout { logOut }": typeof types.LogoutDocument,
+    "mutation Refresh { refresh { accessToken } }": typeof types.RefreshDocument,
     "\n  fragment ParagraphItemFields on Paragraph {\n    id,\n    name,\n    content,\n    position\n  }\n": typeof types.ParagraphItemFieldsFragmentDoc,
     "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n": typeof types.GetArticlesDocument,
     "\n  fragment DishItemFields on Dish {\n    id\n    name\n    description\n    price\n    imageSrc\n  }\n": typeof types.DishItemFieldsFragmentDoc,
@@ -22,6 +25,9 @@ type Documents = {
 };
 const documents: Documents = {
     "\n  query GetArticle($id: Int!) {\n    article(id: $id) {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n": types.GetArticleDocument,
+    "\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) { accessToken }\n  }\n": types.LoginDocument,
+    "mutation Logout { logOut }": types.LogoutDocument,
+    "mutation Refresh { refresh { accessToken } }": types.RefreshDocument,
     "\n  fragment ParagraphItemFields on Paragraph {\n    id,\n    name,\n    content,\n    position\n  }\n": types.ParagraphItemFieldsFragmentDoc,
     "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n": types.GetArticlesDocument,
     "\n  fragment DishItemFields on Dish {\n    id\n    name\n    description\n    price\n    imageSrc\n  }\n": types.DishItemFieldsFragmentDoc,
@@ -46,6 +52,18 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetArticle($id: Int!) {\n    article(id: $id) {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetArticle($id: Int!) {\n    article(id: $id) {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) { accessToken }\n  }\n"): (typeof documents)["\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) { accessToken }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "mutation Logout { logOut }"): (typeof documents)["mutation Logout { logOut }"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "mutation Refresh { refresh { accessToken } }"): (typeof documents)["mutation Refresh { refresh { accessToken } }"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

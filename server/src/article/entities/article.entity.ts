@@ -10,6 +10,9 @@ export class Article {
   name: string;
 
   @Field()
+  description: string;
+
+  @Field()
   publicationDate: Date;
 
   @Field()

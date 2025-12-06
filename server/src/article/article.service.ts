@@ -6,8 +6,26 @@ import { PrismaService } from '../prisma/prisma.service';
 export class ArticleService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll() {
-    return this.prisma.article.findMany();
+  async getArticles() {
+    return this.prisma.article.findMany({
+      include: {
+        paragraphs: true,
+      },
+      orderBy: {
+        publicationDate: 'desc',
+      },
+    });
+  }
+
+  async getArticleById(id: number) {
+    return this.prisma.article.findUnique({
+      where: { id },
+      include: {
+        paragraphs: {
+          orderBy: { position: 'asc' },
+        },
+      },
+    });
   }
 
   async create(data: CreateArticleInput) {

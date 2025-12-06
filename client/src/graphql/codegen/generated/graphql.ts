@@ -20,6 +20,7 @@ export type Scalars = {
 
 export type Article = {
   __typename?: 'Article';
+  description: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   imageSrc: Scalars['String']['output'];
   name: Scalars['String']['output'];
@@ -138,10 +139,16 @@ export type Paragraph = {
 
 export type Query = {
   __typename?: 'Query';
+  article: Article;
   articles: Array<Article>;
   dishes: Array<Dish>;
   getMenu: Array<Category>;
   reservations: Array<Reservation>;
+};
+
+
+export type QueryArticleArgs = {
+  id: Scalars['Int']['input'];
 };
 
 export type Reservation = {
@@ -164,6 +171,26 @@ export enum ReservationStatus {
   Rejected = 'REJECTED'
 }
 
+export type GetArticleQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type GetArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: number, name: string, description: string, publicationDate: any, imageSrc: string, paragraphs?: Array<(
+      { __typename?: 'Paragraph' }
+      & { ' $fragmentRefs'?: { 'ParagraphItemFieldsFragment': ParagraphItemFieldsFragment } }
+    )> | null } };
+
+export type ParagraphItemFieldsFragment = { __typename?: 'Paragraph', id: number, name: string, content: string, position: number } & { ' $fragmentName'?: 'ParagraphItemFieldsFragment' };
+
+export type GetArticlesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetArticlesQuery = { __typename?: 'Query', articles: Array<{ __typename?: 'Article', id: number, name: string, description: string, publicationDate: any, imageSrc: string, paragraphs?: Array<(
+      { __typename?: 'Paragraph' }
+      & { ' $fragmentRefs'?: { 'ParagraphItemFieldsFragment': ParagraphItemFieldsFragment } }
+    )> | null }> };
+
 export type DishItemFieldsFragment = { __typename?: 'Dish', id: number, name: string, description: string, price: number, imageSrc: string } & { ' $fragmentName'?: 'DishItemFieldsFragment' };
 
 export type GetMenuQueryVariables = Exact<{ [key: string]: never; }>;
@@ -174,5 +201,8 @@ export type GetMenuQuery = { __typename?: 'Query', getMenu: Array<{ __typename?:
       & { ' $fragmentRefs'?: { 'DishItemFieldsFragment': DishItemFieldsFragment } }
     )> }> };
 
+export const ParagraphItemFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ParagraphItemFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Paragraph"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"position"}}]}}]} as unknown as DocumentNode<ParagraphItemFieldsFragment, unknown>;
 export const DishItemFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DishItemFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Dish"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"imageSrc"}}]}}]} as unknown as DocumentNode<DishItemFieldsFragment, unknown>;
+export const GetArticleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetArticle"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"article"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"publicationDate"}},{"kind":"Field","name":{"kind":"Name","value":"imageSrc"}},{"kind":"Field","name":{"kind":"Name","value":"paragraphs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ParagraphItemFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ParagraphItemFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Paragraph"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"position"}}]}}]} as unknown as DocumentNode<GetArticleQuery, GetArticleQueryVariables>;
+export const GetArticlesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetArticles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"articles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"publicationDate"}},{"kind":"Field","name":{"kind":"Name","value":"imageSrc"}},{"kind":"Field","name":{"kind":"Name","value":"paragraphs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ParagraphItemFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ParagraphItemFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Paragraph"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"position"}}]}}]} as unknown as DocumentNode<GetArticlesQuery, GetArticlesQueryVariables>;
 export const GetMenuDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetMenu"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getMenu"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"dishes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DishItemFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DishItemFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Dish"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"imageSrc"}}]}}]} as unknown as DocumentNode<GetMenuQuery, GetMenuQueryVariables>;

@@ -3,8 +3,10 @@ import CardWithContextHover from "../../../shared/components/Card/CardIsHoveredC
 import HeaderLeftDecor from "../HeaderLeftDecor/HeaderLeftDecor";
 import useHovered from "../../../shared/context/CardContext/hooks/useHovered";
 import styles from "./ArticleCard.module.css";
+import { useNavigate } from "react-router-dom";
 
-interface ArticleProps {
+interface ArticleCardProps {
+  id: number;
   date: string;
   header: string;
   description: string;
@@ -12,13 +14,20 @@ interface ArticleProps {
   className?: string;
 }
 
-const Article: React.FC<ArticleProps> = (props) => {
+const ArticleCard: React.FC<ArticleCardProps> = (props) => {
   const { setIsHovered } = useHovered();
+  const navigate = useNavigate();
+
+  const openArticle = () => {
+    navigate(`/article/${props.id}`);
+  };
+
   return (
     <div
-      className={`flex flex-row gap-12 items-center select-none ${styles.articleContainer}`}
+      className={`flex flex-row gap-12 items-center select-none ${styles.articleContainer} cursor-pointer`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={openArticle}
     >
       <CardWithContextHover
         className={`aspect-[1.33333/1] w-[40%] min-w-[200px] ${styles.card}`}
@@ -42,4 +51,4 @@ const Article: React.FC<ArticleProps> = (props) => {
   );
 };
 
-export default Article;
+export default ArticleCard;

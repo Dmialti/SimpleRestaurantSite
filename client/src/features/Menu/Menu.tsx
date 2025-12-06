@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./Menu.module.css";
 import Button from "../shared/components/Button/Button";
 import DishSection from "./components/DishSection/DishSection";
@@ -8,14 +8,10 @@ import { GET_MENU_QUERY } from "../../graphql/menu/queries/getMenu.query";
 import LoadingSpinner from "../shared/components/LoadingSpinner/LoadingSpinner";
 
 const Menu: React.FC = () => {
-  const [{ data }] = useQuery({ query: GET_MENU_QUERY });
-  const [fetching, setFetching] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setFetching(false);
-    }, 5000);
-  }, []);
+  const [{ data, fetching }] = useQuery({
+    query: GET_MENU_QUERY,
+    requestPolicy: "cache-and-network",
+  });
 
   const categories = data?.getMenu || [];
 

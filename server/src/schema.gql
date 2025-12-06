@@ -3,6 +3,7 @@
 # ------------------------------------------------------
 
 type Article {
+  description: String!
   id: Int!
   imageSrc: String!
   name: String!
@@ -88,6 +89,7 @@ type Paragraph {
 }
 
 type Query {
+  article(id: Int!): Article!
   articles: [Article!]!
   dishes: [Dish!]!
   getMenu: [Category!]!

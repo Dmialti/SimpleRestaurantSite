@@ -10,6 +10,7 @@ import Reservation from "./features/Reservation/Reservation";
 import { Provider as UrqlProvider } from "urql";
 import { client } from "./api/urqlClient";
 import Article from "./features/Article/Article";
+import backgroundImg from "./assets/AppMaterials/background.jpg";
 
 const App: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ const App: React.FC = () => {
       <div className="bg-background-default relative min-h-screen">
         <div className="fixed inset-0 z-0">
           <img
-            src="/AppMaterials/background.jpg"
+            src={backgroundImg}
             className="w-full h-full object-cover opacity-6"
             alt="background"
           />

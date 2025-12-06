@@ -182,7 +182,7 @@ const NavBar: React.FC = () => {
               iconsRef.current[0] = el;
             }}
             className="mx-auto my-[16px]"
-            src="/NavBarDetailsIcon.png"
+            src="/NavBarMaterials/NavBarDetailsIcon.png"
             alt="decoration"
           />
           <ul className="flex flex-col items-center gap-3 cursor-pointer">
@@ -237,7 +237,7 @@ const NavBar: React.FC = () => {
               iconsRef.current[1] = el;
             }}
             className="mx-auto my-[16px]"
-            src="/NavBarDetailsIcon.png"
+            src="/NavBarMaterials/NavBarDetailsIcon.png"
             alt="decoration"
           />
         </div>

@@ -11,6 +11,8 @@ import {
 } from "./static/ReservationFormSchema";
 import BasePageLayout from "../shared/components/BasePageLayout/BasePageLayout";
 
+import reservationHeroImg from "../../assets/ReservationPageMaterials/reservationHero.png";
+
 const Reservation: React.FC = () => {
   const onSubmit: SubmitHandler<ReservationFormData> = (data) => {
     console.log(data);
@@ -35,7 +37,7 @@ const Reservation: React.FC = () => {
       isScreenHeight={true}
       heading={["BOOK", "A TABLE"]}
       mediaType="image"
-      mediaSrc="/ReservationPageMaterials/reservationHero.png"
+      mediaSrc={reservationHeroImg}
     >
       <div
         className={`${styles.contentSection} h-full min-w-0 px-24 py-20 flex flex-col items-center gap-20 rounded-2xl`}

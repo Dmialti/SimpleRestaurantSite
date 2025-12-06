@@ -10,6 +10,9 @@ import Button from "../shared/components/Button/Button";
 import { STORAGE_KEYS } from "../shared/constants/storage.constants";
 import { usePersistentQuery } from "../shared/hooks/useData.hook";
 import type { GetArticlesQuery } from "../../graphql/codegen/generated/graphql";
+
+import blogHeroImg from "../../assets/BlogPageMaterials/blogHero.png";
+
 const Blog: React.FC = () => {
   const {
     data: articles,
@@ -32,7 +35,7 @@ const Blog: React.FC = () => {
       className="py-20 px-24 flex flex-col gap-20 items-center"
       heading={["BLOG"]}
       mediaType="image"
-      mediaSrc="/BlogPageMaterials/blogHero.png"
+      mediaSrc={blogHeroImg}
       isScreenHeight={false}
     >
       {isFirstLoad ? (

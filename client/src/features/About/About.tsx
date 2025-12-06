@@ -5,13 +5,21 @@ import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecor
 import ImageSlider from "../shared/components/ImageSlider/ImageSlider";
 import styles from "./About.module.css";
 
+import aboutHero from "../../assets/AboutPageMaterials/aboutHero.png";
+import topImage1 from "../../assets/AboutPageMaterials/imageScrollers/top/image1.webp";
+import topImage2 from "../../assets/AboutPageMaterials/imageScrollers/top/image2.webp";
+import topImage3 from "../../assets/AboutPageMaterials/imageScrollers/top/image3.webp";
+import bottomImage1 from "../../assets/AboutPageMaterials/imageScrollers/bottom/image1.webp";
+import bottomImage2 from "../../assets/AboutPageMaterials/imageScrollers/bottom/image2.webp";
+import bottomImage3 from "../../assets/AboutPageMaterials/imageScrollers/bottom/image3.webp";
+
 const About: React.FC = () => {
   return (
     <BasePageLayout
       isScreenHeight={true}
       heading={["ABOUT"]}
       mediaType="image"
-      mediaSrc="/AboutPageMaterials/aboutHero.png"
+      mediaSrc={aboutHero}
       className="border-none"
     >
       <div
@@ -33,11 +41,7 @@ const About: React.FC = () => {
           </div>
           <ImageSlider
             className="flex-1 aspect-square"
-            imagesSrc={[
-              "/AboutPageMaterials/imageScrollers/top/image1.webp",
-              "/AboutPageMaterials/imageScrollers/top/image2.webp",
-              "/AboutPageMaterials/imageScrollers/top/image3.webp",
-            ]}
+            imagesSrc={[topImage1, topImage2, topImage3]}
           />
         </div>
         <div className={`h-min flex flex-row gap-4 ${styles.middleLine}`}>
@@ -60,11 +64,7 @@ const About: React.FC = () => {
         >
           <ImageSlider
             className="flex-1 aspect-square"
-            imagesSrc={[
-              "/AboutPageMaterials/imageScrollers/bottom/image1.webp",
-              "/AboutPageMaterials/imageScrollers/bottom/image2.webp",
-              "/AboutPageMaterials/imageScrollers/bottom/image3.webp",
-            ]}
+            imagesSrc={[bottomImage1, bottomImage2, bottomImage3]}
           />
           <div
             className={`flex-1 h-full p-12 flex flex-col justify-between border border-border-default rounded-2xl ${styles.heightMin}`}

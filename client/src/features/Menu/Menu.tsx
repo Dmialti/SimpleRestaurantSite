@@ -9,6 +9,7 @@ import { usePersistentQuery } from "../shared/hooks/useData.hook";
 import { STORAGE_KEYS } from "../shared/constants/storage.constants";
 import type { GetMenuQuery } from "../../graphql/codegen/generated/graphql";
 import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
+import menuHero from "../../assets/MenuPageMaterials/menuHero.png";
 
 const Menu: React.FC = () => {
   const {
@@ -29,7 +30,7 @@ const Menu: React.FC = () => {
       isScreenHeight={false}
       heading={["MENU"]}
       mediaType="image"
-      mediaSrc="/MenuPageMaterials/menuHero.png"
+      mediaSrc={menuHero}
       className={fetching ? styles.disableBorder : ""}
     >
       {isFirstLoad ? (

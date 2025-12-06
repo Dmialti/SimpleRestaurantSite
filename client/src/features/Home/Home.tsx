@@ -7,6 +7,10 @@ import CardContextProvider from "../shared/context/CardContext/CardContextProvid
 import LinkIconAnimated from "./components/LinkIcon/LinkIconAnimated";
 import CardWithContextHover from "../shared/components/Card/CardIsHoveredContext";
 import HeroCard from "../shared/components/HeroCard/HeroCard";
+import heroVideo from "../../assets/StartingPageMaterials/videos/main.mp4";
+import menuImg from "../../assets/StartingPageMaterials/images/side-1.png";
+import reservationImg from "../../assets/StartingPageMaterials/images/side-2.png";
+import aboutImg from "../../assets/StartingPageMaterials/images/side-3.png";
 
 const Home: React.FC = () => {
   return (
@@ -17,7 +21,7 @@ const Home: React.FC = () => {
         className={`${styles.heroSection} h-full w-full flex relative`}
         heading={["SUSHI", "SENSATION"]}
         mediaType="video"
-        mediaSrc="/StartingPageMaterials/videos/main.mp4"
+        mediaSrc={heroVideo}
       >
         <CornerMenu
           className={`${styles.heroCornerMenu} pr-4 pb-4 pt-6 pl-6 gap-2`}
@@ -43,7 +47,7 @@ const Home: React.FC = () => {
           <CardWithContextHover
             className={`${styles.cardContainer} h-full w-full flex-1 relative cursor-pointer`}
             mediaType="image"
-            mediaSrc="/StartingPageMaterials/images/side-1.png"
+            mediaSrc={menuImg}
             isAnimated={true}
           >
             <CornerMenu
@@ -61,7 +65,7 @@ const Home: React.FC = () => {
           <CardWithContextHover
             className={`${styles.cardContainer} h-full w-full flex-1 relative cursor-pointer`}
             mediaType="image"
-            mediaSrc="/StartingPageMaterials/images/side-2.png"
+            mediaSrc={reservationImg}
             isAnimated={true}
           >
             <CornerMenu
@@ -79,7 +83,7 @@ const Home: React.FC = () => {
           <CardWithContextHover
             className={`${styles.cardContainer} h-full w-full flex-1 relative cursor-pointer`}
             mediaType="image"
-            mediaSrc="/StartingPageMaterials/images/side-3.png"
+            mediaSrc={aboutImg}
             isAnimated={true}
           >
             <CornerMenu

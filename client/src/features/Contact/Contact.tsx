@@ -7,13 +7,19 @@ import CardWithContextHover from "../shared/components/Card/CardIsHoveredContext
 import CardContextProvider from "../shared/context/CardContext/CardContextProvider";
 import IconCardFill from "./components/IconCardFill/IconCardFill";
 
+import contactHero from "../../assets/ContactPageMaterials/contactHero.png";
+import galleryImage1 from "../../assets/ContactPageMaterials/content/Image1.png";
+import galleryImage2 from "../../assets/ContactPageMaterials/content/Image2.png";
+import galleryImage3 from "../../assets/ContactPageMaterials/content/Image3.png";
+import galleryImage4 from "../../assets/ContactPageMaterials/content/Image4.png";
+
 const Contact: React.FC = () => {
   return (
     <BasePageLayout
       isScreenHeight={true}
       heading={["CONTACT"]}
       mediaType="image"
-      mediaSrc="/ContactPageMaterials/contactHero.png"
+      mediaSrc={contactHero}
       className="border-none"
     >
       <div
@@ -42,6 +48,7 @@ const Contact: React.FC = () => {
               <div>16:00 - 22:30</div>
             </li>
             <li className="flex flex-row gap-4 justify-between">
+              {" "}
               <div>Thu</div>
               <div className="w-full border-border-default border-dotted border-b-2 mb-[6px]"></div>
               <div>16:00 - 22:30</div>
@@ -63,7 +70,7 @@ const Contact: React.FC = () => {
             <CardWithContextHover
               className="relative"
               mediaType={"image"}
-              mediaSrc={"/ContactPageMaterials/content/Image1.png"}
+              mediaSrc={galleryImage1}
               isAnimated={true}
             >
               <IconCardFill iconSrc="shared/icons/instagramLogo.svg" />
@@ -73,7 +80,7 @@ const Contact: React.FC = () => {
             <CardWithContextHover
               className="relative"
               mediaType={"image"}
-              mediaSrc={"/ContactPageMaterials/content/Image2.png"}
+              mediaSrc={galleryImage2}
               isAnimated={true}
             >
               <IconCardFill iconSrc="shared/icons/instagramLogo.svg" />
@@ -83,7 +90,7 @@ const Contact: React.FC = () => {
             <CardWithContextHover
               className="relative"
               mediaType={"image"}
-              mediaSrc={"/ContactPageMaterials/content/Image3.png"}
+              mediaSrc={galleryImage3}
               isAnimated={true}
             >
               <IconCardFill iconSrc="shared/icons/instagramLogo.svg" />
@@ -93,7 +100,7 @@ const Contact: React.FC = () => {
             <CardWithContextHover
               className="relative"
               mediaType={"image"}
-              mediaSrc={"/ContactPageMaterials/content/Image4.png"}
+              mediaSrc={galleryImage4}
               isAnimated={true}
             >
               <IconCardFill iconSrc="shared/icons/instagramLogo.svg" />

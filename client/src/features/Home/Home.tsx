@@ -11,8 +11,11 @@ import heroVideo from "../../assets/StartingPageMaterials/videos/main.mp4";
 import menuImg from "../../assets/StartingPageMaterials/images/side-1.png";
 import reservationImg from "../../assets/StartingPageMaterials/images/side-2.png";
 import aboutImg from "../../assets/StartingPageMaterials/images/side-3.png";
+import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div
       className={`${styles.mainSection} font-forum w-full h-screen bg-background-default gap-4 p-6`}
@@ -49,6 +52,7 @@ const Home: React.FC = () => {
             mediaType="image"
             mediaSrc={menuImg}
             isAnimated={true}
+            onClick={() => navigate("/Menu")}
           >
             <CornerMenu
               className={`${styles.cornerMenu} text-white pt-3 pl-6 gap-3`}
@@ -67,6 +71,7 @@ const Home: React.FC = () => {
             mediaType="image"
             mediaSrc={reservationImg}
             isAnimated={true}
+            onClick={() => navigate("/Reservation")}
           >
             <CornerMenu
               className={`${styles.cornerMenu} text-white pt-3 pl-6 gap-3`}
@@ -85,6 +90,7 @@ const Home: React.FC = () => {
             mediaType="image"
             mediaSrc={aboutImg}
             isAnimated={true}
+            onClick={() => navigate("/About")}
           >
             <CornerMenu
               className={`${styles.cornerMenu} text-white pt-3 pl-6 gap-3`}

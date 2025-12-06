@@ -16,14 +16,14 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 type Documents = {
     "\n  query GetArticle($id: Int!) {\n    article(id: $id) {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n": typeof types.GetArticleDocument,
     "\n  fragment ParagraphItemFields on Paragraph {\n    id,\n    name,\n    content,\n    position\n  }\n": typeof types.ParagraphItemFieldsFragmentDoc,
-    "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n": typeof types.GetArticlesDocument,
+    "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n": typeof types.GetArticlesDocument,
     "\n  fragment DishItemFields on Dish {\n    id\n    name\n    description\n    price\n    imageSrc\n  }\n": typeof types.DishItemFieldsFragmentDoc,
     "\n  query GetMenu {\n    getMenu {\n      id\n      name\n      dishes {\n        ...DishItemFields\n      }\n    }\n  }\n": typeof types.GetMenuDocument,
 };
 const documents: Documents = {
     "\n  query GetArticle($id: Int!) {\n    article(id: $id) {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n": types.GetArticleDocument,
     "\n  fragment ParagraphItemFields on Paragraph {\n    id,\n    name,\n    content,\n    position\n  }\n": types.ParagraphItemFieldsFragmentDoc,
-    "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n": types.GetArticlesDocument,
+    "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n": types.GetArticlesDocument,
     "\n  fragment DishItemFields on Dish {\n    id\n    name\n    description\n    price\n    imageSrc\n  }\n": types.DishItemFieldsFragmentDoc,
     "\n  query GetMenu {\n    getMenu {\n      id\n      name\n      dishes {\n        ...DishItemFields\n      }\n    }\n  }\n": types.GetMenuDocument,
 };
@@ -53,7 +53,7 @@ export function gql(source: "\n  fragment ParagraphItemFields on Paragraph {\n  
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n"): (typeof documents)["\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

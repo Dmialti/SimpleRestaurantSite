@@ -3,17 +3,26 @@ import styles from "./Menu.module.css";
 import Button from "../shared/components/Button/Button";
 import DishSection from "./components/DishSection/DishSection";
 import BasePageLayout from "../shared/components/BasePageLayout/BasePageLayout";
-import { useQuery } from "urql";
 import { GET_MENU_QUERY } from "../../graphql/menu/queries/getMenu.query";
 import LoadingSpinner from "../shared/components/LoadingSpinner/LoadingSpinner";
+import { usePersistentQuery } from "../shared/hooks/useData.hook";
+import { STORAGE_KEYS } from "../shared/constants/storage.constants";
+import type { GetMenuQuery } from "../../graphql/codegen/generated/graphql";
+import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
 
 const Menu: React.FC = () => {
-  const [{ data, fetching }] = useQuery({
-    query: GET_MENU_QUERY,
-    requestPolicy: "cache-and-network",
-  });
-
-  const categories = data?.getMenu || [];
+  const {
+    data: categories,
+    error,
+    fetching,
+    isFirstLoad,
+    reexecuteQuery,
+  } = usePersistentQuery<GetMenuQuery, object, GetMenuQuery["getMenu"]>(
+    { query: GET_MENU_QUERY },
+    STORAGE_KEYS.MENU_DATA,
+    (data) => data.getMenu,
+    []
+  );
 
   return (
     <BasePageLayout
@@ -23,8 +32,26 @@ const Menu: React.FC = () => {
       mediaSrc="/MenuPageMaterials/menuHero.png"
       className={fetching ? styles.disableBorder : ""}
     >
-      {fetching ? (
+      {isFirstLoad ? (
         <LoadingSpinner />
+      ) : error && (!categories || categories.length === 0) ? (
+        <div className="flex flex-col items-center justify-center gap-6 py-20 h-full text-center">
+          <HeadingDecorated className="text-red-500 font-forum text-2xl tracking-widest">
+            OOPS! SOMETHING WENT WRONG
+          </HeadingDecorated>
+
+          <p className="text-text-muted font-satoshi text-lg max-w-md">
+            {error.message}
+          </p>
+
+          <Button
+            type="border"
+            className="px-6 py-2 uppercase tracking-widest text-sm text-text-default"
+            onClick={() => reexecuteQuery({ requestPolicy: "network-only" })}
+          >
+            Try Again
+          </Button>
+        </div>
       ) : (
         <div
           className={`${styles.listContainer} h-fit rounded-2xl pt-8 pb-20 px-24 text-text-default`}

@@ -4,18 +4,28 @@ import ArticleCard from "./components/ArticleCard/ArticleCard";
 import CardContextProvider from "../shared/context/CardContext/CardContextProvider";
 import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
 import { GET_ARTICLES_QUERY } from "../../graphql/blog/queries/getArticles.query";
-import { useQuery } from "urql";
 import { formatDate } from "../shared/utils/formateDate.utils";
 import LoadingSpinner from "../shared/components/LoadingSpinner/LoadingSpinner";
 import Button from "../shared/components/Button/Button";
-
+import { STORAGE_KEYS } from "../shared/constants/storage.constants";
+import { usePersistentQuery } from "../shared/hooks/useData.hook";
+import type { GetArticlesQuery } from "../../graphql/codegen/generated/graphql";
 const Blog: React.FC = () => {
-  const [{ data, fetching, error }, reexecuteQuery] = useQuery({
-    query: GET_ARTICLES_QUERY,
-    requestPolicy: "cache-and-network",
-  });
-
-  const articles = data?.articles || [];
+  const {
+    data: articles,
+    isFirstLoad,
+    error,
+    reexecuteQuery,
+  } = usePersistentQuery<
+    GetArticlesQuery,
+    object,
+    GetArticlesQuery["articles"]
+  >(
+    { query: GET_ARTICLES_QUERY },
+    STORAGE_KEYS.ARTICLES_DATA,
+    (data) => data.articles,
+    []
+  );
 
   return (
     <BasePageLayout
@@ -25,9 +35,9 @@ const Blog: React.FC = () => {
       mediaSrc="/BlogPageMaterials/blogHero.png"
       isScreenHeight={false}
     >
-      {fetching ? (
+      {isFirstLoad ? (
         <LoadingSpinner />
-      ) : error ? (
+      ) : error && (!articles || articles.length === 0) ? (
         <div className="flex flex-col items-center justify-center gap-6 py-20 h-full text-center">
           <HeadingDecorated className="text-red-500 font-forum text-2xl tracking-widest">
             OOPS! SOMETHING WENT WRONG

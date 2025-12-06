@@ -3,27 +3,46 @@ import BasePageLayout from "../shared/components/BasePageLayout/BasePageLayout";
 import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
 import Paragraph from "./components/Paragraph";
 import { useParams } from "react-router-dom";
-import { useQuery } from "urql";
 import { GET_ARTICLE_QUERY } from "../../graphql/article/queries/getArticle.query";
 import { formatDate } from "../shared/utils/formateDate.utils";
 import LoadingSpinner from "../shared/components/LoadingSpinner/LoadingSpinner";
 import { useFragment } from "../../graphql/codegen/generated";
 import { PARAGRAPH_FRAGMENT } from "../../graphql/blog/fragments/paragraph.fragment";
 import Button from "../shared/components/Button/Button";
+import { usePersistentQuery } from "../shared/hooks/useData.hook";
+import type {
+  GetArticleQuery,
+  GetArticleQueryVariables,
+} from "../../graphql/codegen/generated/graphql";
+import { STORAGE_KEYS } from "../shared/constants/storage.constants";
 
 const Article: React.FC = () => {
   const { id } = useParams();
+  const numericId = Number(id);
 
-  const [{ data, fetching, error }, reexecuteQuery] = useQuery({
-    query: GET_ARTICLE_QUERY,
-    variables: { id: Number(id) },
-    pause: !id,
-  });
-  const article = data?.article;
+  const {
+    data: article,
+    error,
+    isFirstLoad,
+    reexecuteQuery,
+  } = usePersistentQuery<
+    GetArticleQuery,
+    GetArticleQueryVariables,
+    GetArticleQuery["article"] | null
+  >(
+    {
+      query: GET_ARTICLE_QUERY,
+      variables: { id: numericId },
+      pause: !numericId,
+    },
+    STORAGE_KEYS.ARTICLE_PREFIX + id,
+    (data) => data.article,
+    null
+  );
 
   const paragraphs = useFragment(PARAGRAPH_FRAGMENT, article?.paragraphs);
 
-  if (fetching && !data) {
+  if (isFirstLoad) {
     return <LoadingSpinner className="h-screen" />;
   }
   if (error) {
@@ -74,7 +93,7 @@ const Article: React.FC = () => {
       </div>
       <div className="w-full h-full flex flex-col gap-12">
         {paragraphs
-          ?.sort((item) => item.position)
+          ?.sort((a, b) => a.position - b.position)
           .map((item) => (
             <Paragraph key={item.id} header={item.name}>
               {item.content}

@@ -41,6 +41,7 @@ async function uploadToS3(localPath: string, s3Key: string): Promise<string> {
       Key: cleanKey,
       Body: fileContent,
       ContentType: contentType,
+      CacheControl: 'public, max-age=31536000, immutable',
     }),
   );
 

@@ -8,9 +8,6 @@ export const GET_ARTICLES_QUERY = gql(`
       description
       publicationDate
       imageSrc
-      paragraphs {
-        ...ParagraphItemFields
-      }
     }
   }
 `);

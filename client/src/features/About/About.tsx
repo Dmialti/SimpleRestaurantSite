@@ -1,8 +1,5 @@
 import React from "react";
-import BasePageLayout from "../shared/components/BasePageLayout/BasePageLayout";
 import TileWithStars from "./components/TileWithStars/TileWithStars";
-import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
-import ImageSlider from "../shared/components/ImageSlider/ImageSlider";
 import styles from "./About.module.css";
 
 import aboutHero from "../../assets/AboutPageMaterials/aboutHero.png";
@@ -12,6 +9,9 @@ import topImage3 from "../../assets/AboutPageMaterials/imageScrollers/top/image3
 import bottomImage1 from "../../assets/AboutPageMaterials/imageScrollers/bottom/image1.webp";
 import bottomImage2 from "../../assets/AboutPageMaterials/imageScrollers/bottom/image2.webp";
 import bottomImage3 from "../../assets/AboutPageMaterials/imageScrollers/bottom/image3.webp";
+import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
+import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDecorated";
+import ImageSlider from "../../shared/components/ImageSlider/ImageSlider";
 
 const About: React.FC = () => {
   return (

@@ -1,11 +1,11 @@
 import React from "react";
-import BasePageLayout from "../shared/components/BasePageLayout/BasePageLayout";
 import styles from "./Contact.module.css";
-import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
 import MapComponent from "./components/MapComponent/MapComponent";
-import CardWithContextHover from "../shared/components/Card/CardIsHoveredContext";
-import CardContextProvider from "../shared/context/CardContext/CardContextProvider";
 import IconCardFill from "./components/IconCardFill/IconCardFill";
+import CardContextProvider from "../../context/CardContext/CardContextProvider";
+import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
+import CardWithContextHover from "../../shared/components/Card/CardIsHoveredContext";
+import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDecorated";
 
 import contactHero from "../../assets/ContactPageMaterials/contactHero.png";
 import galleryImage1 from "../../assets/ContactPageMaterials/content/Image1.png";

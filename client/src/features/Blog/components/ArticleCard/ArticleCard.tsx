@@ -1,9 +1,9 @@
 import React from "react";
-import CardWithContextHover from "../../../shared/components/Card/CardIsHoveredContext";
 import HeaderLeftDecor from "../HeaderLeftDecor/HeaderLeftDecor";
-import useHovered from "../../../shared/context/CardContext/hooks/useHovered";
 import styles from "./ArticleCard.module.css";
 import { useNavigate } from "react-router-dom";
+import useHovered from "../../../../context/CardContext/hooks/useHovered";
+import CardWithContextHover from "../../../../shared/components/Card/CardIsHoveredContext";
 
 interface ArticleCardProps {
   id: number;

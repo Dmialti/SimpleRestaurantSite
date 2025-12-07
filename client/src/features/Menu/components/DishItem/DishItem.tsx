@@ -1,7 +1,7 @@
 import React from "react";
-import Card from "../../../shared/components/Card/Card";
 import styles from "./DishItem.module.css";
 import type { DishItemFieldsFragment } from "../../../../graphql/codegen/generated/graphql";
+import Card from "../../../../shared/components/Card/Card";
 
 export interface DishItemProps extends DishItemFieldsFragment {
   className?: string;

@@ -1,17 +1,16 @@
 import React from "react";
-import BasePageLayout from "../shared/components/BasePageLayout/BasePageLayout";
 import ArticleCard from "./components/ArticleCard/ArticleCard";
-import CardContextProvider from "../shared/context/CardContext/CardContextProvider";
-import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
 import { GET_ARTICLES_QUERY } from "../../graphql/blog/queries/getArticles.query";
-import { formatDate } from "../shared/utils/formateDate.utils";
-import LoadingSpinner from "../shared/components/LoadingSpinner/LoadingSpinner";
-import Button from "../shared/components/Button/Button";
-import { STORAGE_KEYS } from "../shared/constants/storage.constants";
-import { usePersistentQuery } from "../shared/hooks/useData.hook";
 import type { GetArticlesQuery } from "../../graphql/codegen/generated/graphql";
-
 import blogHeroImg from "../../assets/BlogPageMaterials/blogHero.png";
+import CardContextProvider from "../../context/CardContext/CardContextProvider";
+import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
+import Button from "../../shared/components/Button/Button";
+import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDecorated";
+import LoadingSpinner from "../../shared/components/LoadingSpinner/LoadingSpinner";
+import { STORAGE_KEYS } from "../../shared/constants/storage.constants";
+import { usePersistentQuery } from "../../shared/hooks/useData.hook";
+import { formatDate } from "../../shared/utils/formatters/formateDate.utils";
 
 const Blog: React.FC = () => {
   const {

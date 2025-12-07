@@ -1,17 +1,17 @@
 import React from "react";
 import styles from "./Reservation.module.css";
-import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
 import Input from "./components/Input/Input";
-import Button from "../shared/components/Button/Button";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ReservationFormSchema,
   type ReservationFormData,
-} from "./static/ReservationFormSchema";
-import BasePageLayout from "../shared/components/BasePageLayout/BasePageLayout";
+} from "../../shared/utils/validation/ReservationFormSchema";
 
 import reservationHeroImg from "../../assets/ReservationPageMaterials/reservationHero.png";
+import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
+import Button from "../../shared/components/Button/Button";
+import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDecorated";
 
 const Reservation: React.FC = () => {
   const onSubmit: SubmitHandler<ReservationFormData> = (data) => {

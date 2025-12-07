@@ -3,15 +3,15 @@ import styles from "./Home.module.css";
 import LinkIcon from "./components/LinkIcon/LinkIcon";
 import CornerMenu from "./components/CornerMenu/CornerMenu";
 import RollingAnimation from "./components/RollingText/RollingText";
-import CardContextProvider from "../shared/context/CardContext/CardContextProvider";
 import LinkIconAnimated from "./components/LinkIcon/LinkIconAnimated";
-import CardWithContextHover from "../shared/components/Card/CardIsHoveredContext";
-import HeroCard from "../shared/components/HeroCard/HeroCard";
 import heroVideo from "../../assets/StartingPageMaterials/videos/main.mp4";
 import menuImg from "../../assets/StartingPageMaterials/images/side-1.png";
 import reservationImg from "../../assets/StartingPageMaterials/images/side-2.png";
 import aboutImg from "../../assets/StartingPageMaterials/images/side-3.png";
 import { useNavigate } from "react-router-dom";
+import CardContextProvider from "../../context/CardContext/CardContextProvider";
+import CardWithContextHover from "../../shared/components/Card/CardIsHoveredContext";
+import HeroCard from "../../shared/components/HeroCard/HeroCard";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ const Home: React.FC = () => {
             mediaType="image"
             mediaSrc={menuImg}
             isAnimated={true}
-            onClick={() => navigate("/Menu")}
+            onClick={() => navigate("/menu")}
           >
             <CornerMenu
               className={`${styles.cornerMenu} text-white pt-3 pl-6 gap-3`}
@@ -71,7 +71,7 @@ const Home: React.FC = () => {
             mediaType="image"
             mediaSrc={reservationImg}
             isAnimated={true}
-            onClick={() => navigate("/Reservation")}
+            onClick={() => navigate("/reservation")}
           >
             <CornerMenu
               className={`${styles.cornerMenu} text-white pt-3 pl-6 gap-3`}
@@ -90,7 +90,7 @@ const Home: React.FC = () => {
             mediaType="image"
             mediaSrc={aboutImg}
             isAnimated={true}
-            onClick={() => navigate("/About")}
+            onClick={() => navigate("/about")}
           >
             <CornerMenu
               className={`${styles.cornerMenu} text-white pt-3 pl-6 gap-3`}

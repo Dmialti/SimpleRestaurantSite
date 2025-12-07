@@ -3,8 +3,8 @@ import { SplitText } from "gsap/all";
 import React, { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../shared/components/Button/Button";
 import styles from "./NavBar.module.css";
+import Button from "../../shared/components/Button/Button";
 
 gsap.registerPlugin(SplitText);
 

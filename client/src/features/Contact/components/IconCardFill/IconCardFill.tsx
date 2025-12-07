@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
-import useHovered from "../../../shared/context/CardContext/hooks/useHovered";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import useHovered from "../../../../context/CardContext/hooks/useHovered";
 
 interface IconCardFillProps {
   iconSrc: string;

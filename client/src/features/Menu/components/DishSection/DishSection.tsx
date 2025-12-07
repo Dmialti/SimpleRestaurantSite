@@ -1,12 +1,12 @@
 import React from "react";
 import DishItem from "../DishItem/DishItem";
 import styles from "./DishSection.module.css";
-import HeadingDecorated from "../../../shared/components/HeadingDecorated/HeadingDecorated";
 import {
   useFragment,
   type FragmentType,
 } from "../../../../graphql/codegen/generated";
 import { DISH_FRAGMENT } from "../../../../graphql/menu/fragments/dish.fragment";
+import HeadingDecorated from "../../../../shared/components/HeadingDecorated/HeadingDecorated";
 
 interface DishSectionProps {
   category: string;

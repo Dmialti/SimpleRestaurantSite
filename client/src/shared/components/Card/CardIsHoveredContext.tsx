@@ -1,6 +1,6 @@
 import React from "react";
-import useHovered from "../../context/CardContext/hooks/useHovered";
 import CardBase from "./CardBase";
+import useHovered from "../../../context/CardContext/hooks/useHovered";
 
 type CardWithContextHoverProps = Omit<
   React.ComponentProps<typeof CardBase>,

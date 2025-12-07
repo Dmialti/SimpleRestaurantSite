@@ -1,15 +1,15 @@
 import React from "react";
 import styles from "./Menu.module.css";
-import Button from "../shared/components/Button/Button";
 import DishSection from "./components/DishSection/DishSection";
-import BasePageLayout from "../shared/components/BasePageLayout/BasePageLayout";
 import { GET_MENU_QUERY } from "../../graphql/menu/queries/getMenu.query";
-import LoadingSpinner from "../shared/components/LoadingSpinner/LoadingSpinner";
-import { usePersistentQuery } from "../shared/hooks/useData.hook";
-import { STORAGE_KEYS } from "../shared/constants/storage.constants";
 import type { GetMenuQuery } from "../../graphql/codegen/generated/graphql";
-import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
 import menuHero from "../../assets/MenuPageMaterials/menuHero.png";
+import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
+import Button from "../../shared/components/Button/Button";
+import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDecorated";
+import LoadingSpinner from "../../shared/components/LoadingSpinner/LoadingSpinner";
+import { STORAGE_KEYS } from "../../shared/constants/storage.constants";
+import { usePersistentQuery } from "../../shared/hooks/useData.hook";
 
 const Menu: React.FC = () => {
   const {

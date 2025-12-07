@@ -1,20 +1,20 @@
 import React from "react";
-import BasePageLayout from "../shared/components/BasePageLayout/BasePageLayout";
-import HeadingDecorated from "../shared/components/HeadingDecorated/HeadingDecorated";
 import Paragraph from "./components/Paragraph";
 import { useParams } from "react-router-dom";
 import { GET_ARTICLE_QUERY } from "../../graphql/article/queries/getArticle.query";
-import { formatDate } from "../shared/utils/formateDate.utils";
-import LoadingSpinner from "../shared/components/LoadingSpinner/LoadingSpinner";
 import { useFragment } from "../../graphql/codegen/generated";
 import { PARAGRAPH_FRAGMENT } from "../../graphql/blog/fragments/paragraph.fragment";
-import Button from "../shared/components/Button/Button";
-import { usePersistentQuery } from "../shared/hooks/useData.hook";
 import type {
   GetArticleQuery,
   GetArticleQueryVariables,
 } from "../../graphql/codegen/generated/graphql";
-import { STORAGE_KEYS } from "../shared/constants/storage.constants";
+import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
+import Button from "../../shared/components/Button/Button";
+import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDecorated";
+import LoadingSpinner from "../../shared/components/LoadingSpinner/LoadingSpinner";
+import { STORAGE_KEYS } from "../../shared/constants/storage.constants";
+import { usePersistentQuery } from "../../shared/hooks/useData.hook";
+import { formatDate } from "../../shared/utils/formatters/formateDate.utils";
 
 const Article: React.FC = () => {
   const { id } = useParams();

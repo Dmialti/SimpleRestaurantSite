@@ -5,6 +5,7 @@ import type { Cache } from 'cache-manager';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Category } from './entities/category.entity';
 import { PrismaService } from '../prisma/prisma.service';
+import { UpdateDishInput } from './dto/update-dish.input';
 
 @Injectable()
 export class DishService {
@@ -64,12 +65,35 @@ export class DishService {
     return res;
   }
 
+  async updateDish(data: UpdateDishInput) {
+    const res = await this.prisma.dish.update({
+      where: { id: data.id },
+      data: data,
+    });
+    await this.cacheManager.del(this.MENU_KEY);
+    return res;
+  }
+
   async updateDishAvailability(dishId: number, available: boolean) {
     const res = await this.prisma.dish.update({
       where: { id: dishId },
       data: { available },
     });
 
+    await this.cacheManager.del(this.MENU_KEY);
+    return res;
+  }
+
+  async deleteDishById(id: number) {
+    const res = await this.prisma.dish.deleteMany({ where: { id } });
+    await this.cacheManager.del(this.MENU_KEY);
+    return res;
+  }
+
+  async deleteDishes(ids: number[]) {
+    const res = await this.prisma.dish.deleteMany({
+      where: { id: { in: ids } },
+    });
     await this.cacheManager.del(this.MENU_KEY);
     return res;
   }

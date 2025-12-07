@@ -6,6 +6,7 @@ import { CreateDishInput } from './dto/create-dish.input';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
+import { UpdateDishInput } from './dto/update-dish.input';
 
 @Resolver(() => Category)
 export class DishResolver {
@@ -40,10 +41,28 @@ export class DishResolver {
 
   @Mutation(() => Dish)
   @UseGuards(AuthGuard)
+  updateDish(@Args('updateDishInput') updateDishInput: UpdateDishInput) {
+    return this.dishService.updateDish(updateDishInput);
+  }
+
+  @Mutation(() => Dish)
+  @UseGuards(AuthGuard)
   updateDishAvailability(
     @Args('dishId') dishId: number,
     @Args('available') available: boolean,
   ) {
     return this.dishService.updateDishAvailability(dishId, available);
+  }
+
+  @Mutation(() => Dish)
+  @UseGuards(AuthGuard)
+  deleteDishById(@Args('id') id: number) {
+    return this.dishService.deleteDishById(id);
+  }
+
+  @Mutation(() => Dish)
+  @UseGuards(AuthGuard)
+  deleteDishes(@Args('ids') ids: number[]) {
+    return this.dishService.deleteDishes(ids);
   }
 }

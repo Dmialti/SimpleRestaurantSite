@@ -4,6 +4,7 @@ import { ArticleService } from './article.service';
 import { CreateArticleInput } from './dto/create-article.input';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
+import { UpdateArticleInput } from './dto/update-article.input';
 
 @Resolver(() => Article)
 export class ArticleResolver {
@@ -15,7 +16,7 @@ export class ArticleResolver {
   }
 
   @Query(() => Article, { name: 'article' })
-  getArticle(@Args('id', { type: () => Int }) id: number) {
+  getArticleById(@Args('id', { type: () => Int }) id: number) {
     return this.articlesService.getArticleById(id);
   }
 
@@ -24,6 +25,26 @@ export class ArticleResolver {
   createArticle(
     @Args('createArticleInput') createArticleInput: CreateArticleInput,
   ) {
-    return this.articlesService.create(createArticleInput);
+    return this.articlesService.createArticle(createArticleInput);
+  }
+
+  @Mutation(() => Article)
+  @UseGuards(AuthGuard)
+  updateArticle(
+    @Args('updateArticleInput') createArticleInput: UpdateArticleInput,
+  ) {
+    return this.articlesService.updateArticle(createArticleInput);
+  }
+
+  @Mutation(() => Article)
+  @UseGuards(AuthGuard)
+  deleteArticleById(@Args('id') id: number) {
+    return this.articlesService.deleteArticleById(id);
+  }
+
+  @Mutation(() => Article)
+  @UseGuards(AuthGuard)
+  deleteArticles(@Args('ids') ids: number[]) {
+    return this.articlesService.deleteArticles(ids);
   }
 }

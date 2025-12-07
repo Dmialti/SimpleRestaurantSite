@@ -2,7 +2,7 @@ import React from "react";
 import HeaderLeftDecor from "../HeaderLeftDecor/HeaderLeftDecor";
 import styles from "./ArticleCard.module.css";
 import { useNavigate } from "react-router-dom";
-import useHovered from "../../../../context/CardContext/hooks/useHovered";
+import useHovered from "../../../../shared/hooks/useHovered.hook";
 import CardWithContextHover from "../../../../shared/components/Card/CardIsHoveredContext";
 
 interface ArticleCardProps {

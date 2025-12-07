@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import CardContext from "../CardContext";
+import CardContext from "../../context/CardContext/CardContext";
 
 const useHovered = () => {
   const context = useContext(CardContext);

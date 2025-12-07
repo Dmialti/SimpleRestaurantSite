@@ -1,7 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import React, { useEffect, useRef, type ReactNode } from "react";
 import gsap from "gsap";
-import useHovered from "../../../../context/CardContext/hooks/useHovered";
+import useHovered from "../../../../shared/hooks/useHovered.hook";
 
 interface RollingAnimationProps {
   direction?: "horizontal" | "vertical";

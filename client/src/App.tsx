@@ -11,6 +11,8 @@ import { Provider as UrqlProvider } from "urql";
 import { client } from "./api/urqlClient";
 import Article from "./features/Article/Article";
 import backgroundImg from "./assets/AppMaterials/background.jpg";
+import LogIn from "./features/Admin/LogIn/LogIn";
+import AuthContextProvider from "./context/AuthContext/AuthContextProvider";
 
 const App: React.FC = () => {
   return (
@@ -29,15 +31,18 @@ const App: React.FC = () => {
 
           <main>
             <UrqlProvider value={client}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/menu" element={<Menu />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/reservation" element={<Reservation />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/article/:id" element={<Article />} />
-              </Routes>
+              <AuthContextProvider>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/menu" element={<Menu />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/reservation" element={<Reservation />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/article/:id" element={<Article />} />
+                  <Route path="/admin/login" element={<LogIn />} />
+                </Routes>
+              </AuthContextProvider>
             </UrqlProvider>
           </main>
         </div>

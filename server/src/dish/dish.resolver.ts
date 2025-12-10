@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Category } from './entities/category.entity';
 import { Dish } from './entities/dish.entity';
 import { DishService } from './dish.service';
@@ -7,6 +7,7 @@ import { CreateCategoryInput } from './dto/create-category.input';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { UpdateDishInput } from './dto/update-dish.input';
+import { DishPayload } from './entities/dish-payload.entity';
 
 @Resolver(() => Category)
 export class DishResolver {
@@ -60,9 +61,9 @@ export class DishResolver {
     return this.dishService.deleteDishById(id);
   }
 
-  @Mutation(() => Dish)
+  @Mutation(() => DishPayload)
   @UseGuards(AuthGuard)
-  deleteDishes(@Args('ids') ids: number[]) {
+  deleteDishes(@Args('ids', { type: () => [Int] }) ids: number[]) {
     return this.dishService.deleteDishes(ids);
   }
 }

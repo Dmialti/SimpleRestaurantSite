@@ -14,6 +14,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+    "\n  mutation CreateArticle($input: CreateArticleInput!) {\n    createArticle(createArticleInput: $input) {\n      id\n    }\n  }\n": typeof types.CreateArticleDocument,
+    "\n  mutation DeleteArticle($id: Float!) {\n    deleteArticleById(id: $id) {\n      id\n    }\n  }\n": typeof types.DeleteArticleDocument,
+    "\n  mutation DeleteArticles($ids: [Int!]!) {\n    deleteArticles(ids: $ids) {\n      count\n    }\n  }\n": typeof types.DeleteArticlesDocument,
+    "\n  mutation UpdateArticle($input: UpdateArticleInput!) {\n    updateArticle(updateArticleInput: $input) {\n      id\n    }\n  }\n": typeof types.UpdateArticleDocument,
     "\n  query GetArticle($id: Int!) {\n    article(id: $id) {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n": typeof types.GetArticleDocument,
     "\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) { accessToken }\n  }\n": typeof types.LoginDocument,
     "mutation Logout { logOut }": typeof types.LogoutDocument,
@@ -24,6 +28,10 @@ type Documents = {
     "\n  query GetMenu {\n    getMenu {\n      id\n      name\n      dishes {\n        ...DishItemFields\n      }\n    }\n  }\n": typeof types.GetMenuDocument,
 };
 const documents: Documents = {
+    "\n  mutation CreateArticle($input: CreateArticleInput!) {\n    createArticle(createArticleInput: $input) {\n      id\n    }\n  }\n": types.CreateArticleDocument,
+    "\n  mutation DeleteArticle($id: Float!) {\n    deleteArticleById(id: $id) {\n      id\n    }\n  }\n": types.DeleteArticleDocument,
+    "\n  mutation DeleteArticles($ids: [Int!]!) {\n    deleteArticles(ids: $ids) {\n      count\n    }\n  }\n": types.DeleteArticlesDocument,
+    "\n  mutation UpdateArticle($input: UpdateArticleInput!) {\n    updateArticle(updateArticleInput: $input) {\n      id\n    }\n  }\n": types.UpdateArticleDocument,
     "\n  query GetArticle($id: Int!) {\n    article(id: $id) {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n": types.GetArticleDocument,
     "\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) { accessToken }\n  }\n": types.LoginDocument,
     "mutation Logout { logOut }": types.LogoutDocument,
@@ -48,6 +56,22 @@ const documents: Documents = {
  */
 export function gql(source: string): unknown;
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation CreateArticle($input: CreateArticleInput!) {\n    createArticle(createArticleInput: $input) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation CreateArticle($input: CreateArticleInput!) {\n    createArticle(createArticleInput: $input) {\n      id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation DeleteArticle($id: Float!) {\n    deleteArticleById(id: $id) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteArticle($id: Float!) {\n    deleteArticleById(id: $id) {\n      id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation DeleteArticles($ids: [Int!]!) {\n    deleteArticles(ids: $ids) {\n      count\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteArticles($ids: [Int!]!) {\n    deleteArticles(ids: $ids) {\n      count\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation UpdateArticle($input: UpdateArticleInput!) {\n    updateArticle(updateArticleInput: $input) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateArticle($input: UpdateArticleInput!) {\n    updateArticle(updateArticleInput: $input) {\n      id\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

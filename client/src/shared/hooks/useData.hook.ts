@@ -36,7 +36,7 @@ export function usePersistentQuery<
       const localStr = JSON.stringify(cachedData);
 
       if (serverStr !== localStr) {
-        console.log(`♻️ Updating Cache for: ${storageKey}`);
+        console.log(`Updating Cache for: ${storageKey}`);
         setCachedData(freshData);
         localStorage.setItem(storageKey, serverStr);
       }

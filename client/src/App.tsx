@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
 import About from "./features/About/About";
 import Blog from "./features/Blog/Blog";
 import Contact from "./features/Contact/Contact";
@@ -11,8 +16,11 @@ import { Provider as UrqlProvider } from "urql";
 import { client } from "./api/urqlClient";
 import Article from "./features/Article/Article";
 import backgroundImg from "./assets/AppMaterials/background.jpg";
-import LogIn from "./features/Admin/LogIn/LogIn";
 import AuthContextProvider from "./context/AuthContext/AuthContextProvider";
+import BlogManager from "./features/BlogManager/BlogManager";
+import ProtectedRoute from "./shared/components/ProtectedRoute/ProtectedRoute";
+import AdminPanel from "./features/Admin/AdminPanel";
+import LogIn from "./features/LogIn/LogIn";
 
 const App: React.FC = () => {
   return (
@@ -31,18 +39,29 @@ const App: React.FC = () => {
 
           <main>
             <UrqlProvider value={client}>
-              <AuthContextProvider>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/menu" element={<Menu />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/reservation" element={<Reservation />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/article/:id" element={<Article />} />
-                  <Route path="/admin/login" element={<LogIn />} />
-                </Routes>
-              </AuthContextProvider>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/menu" element={<Menu />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/reservation" element={<Reservation />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/article/:id" element={<Article />} />
+                <Route
+                  element={
+                    <AuthContextProvider>
+                      <Outlet />
+                    </AuthContextProvider>
+                  }
+                >
+                  <Route path="/admin" element={<AdminPanel />}>
+                    <Route path="/admin/login" element={<LogIn />} />
+                    <Route element={<ProtectedRoute />}>
+                      <Route path="/admin/blog" element={<BlogManager />} />
+                    </Route>
+                  </Route>
+                </Route>
+              </Routes>
             </UrqlProvider>
           </main>
         </div>

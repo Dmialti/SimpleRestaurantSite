@@ -1,12 +1,21 @@
 import 'dotenv/config';
 import { PrismaClient } from './generated/prisma/client.js';
 import { PrismaPg } from '@prisma/adapter-pg';
-import { migrateImages } from './migrate-images.js';
+import * as bcrypt from 'bcrypt';
+import * as path from 'path';
 
-// Initialize the adapter with the connection string from env
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
-// Pass the adapter to the PrismaClient
+
 const prisma = new PrismaClient({ adapter });
+
+const BUCKET = process.env.AWS_BUCKET_NAME;
+const REGION = process.env.AWS_REGION;
+const S3_BASE_URL = `https://${BUCKET}.s3.${REGION}.amazonaws.com`;
+
+function getS3Url(localPath: string, folder: 'menu' | 'blog'): string {
+  const filename = path.basename(localPath);
+  return `${S3_BASE_URL}/${folder}/${filename}`;
+}
 
 const makiList = [
   {
@@ -189,7 +198,7 @@ const commonParagraphs = [
 ];
 
 async function main() {
-  console.log('Starting seeding...');
+  console.log('🔄 Starting seeding with S3 links...');
 
   await prisma.paragraph.deleteMany();
   await prisma.article.deleteMany();
@@ -197,64 +206,65 @@ async function main() {
   await prisma.category.deleteMany();
   await prisma.reservation.deleteMany();
 
-  console.log('Cleaned database.');
+  console.log('🧹 Cleaned database.');
 
-  const makiCategory = await prisma.category.create({
-    data: {
-      name: 'Maki',
-    },
+  const adminEmail = 'admin@qitchen.com';
+  const adminPassword = 'adminPassword123_';
+  const hashedPassword = await bcrypt.hash(adminPassword, 10);
+
+  const admin = await prisma.user.upsert({
+    where: { email: adminEmail },
+    update: { password: hashedPassword, role: 'ADMIN' },
+    create: { email: adminEmail, password: hashedPassword, role: 'ADMIN' },
   });
+  console.log(`👤 Admin user ready: ${admin.email}`);
 
+  const makiCategory = await prisma.category.create({ data: { name: 'Maki' } });
   for (const dish of makiList) {
     await prisma.dish.create({
       data: {
         name: dish.name,
         description: dish.description,
         price: dish.price,
-        imageSrc: dish.imageSrc,
+        imageSrc: getS3Url(dish.imageSrc, 'menu'),
         categoryId: makiCategory.id,
       },
     });
   }
-  console.log('Seeded Maki dishes.');
+  console.log('✅ Seeded Maki dishes (S3 linked).');
 
   const uraMakiCategory = await prisma.category.create({
-    data: {
-      name: 'Uramaki',
-    },
+    data: { name: 'Uramaki' },
   });
-
   for (const dish of uraMakiList) {
     await prisma.dish.create({
       data: {
         name: dish.name,
         description: dish.description,
         price: dish.price,
-        imageSrc: dish.imageSrc,
+        imageSrc: getS3Url(dish.imageSrc, 'menu'),
         categoryId: uraMakiCategory.id,
       },
     });
   }
-  console.log('Seeded Uramaki dishes.');
+  console.log('✅ Seeded Uramaki dishes (S3 linked).');
 
+  // 4. Special Rolls
   const specialCategory = await prisma.category.create({
-    data: {
-      name: 'Special Rolls',
-    },
+    data: { name: 'Special Rolls' },
   });
-
   for (const dish of specialRollsList) {
     await prisma.dish.create({
       data: {
         name: dish.name,
         description: dish.description,
         price: dish.price,
-        imageSrc: dish.imageSrc,
+        imageSrc: getS3Url(dish.imageSrc, 'menu'),
         categoryId: specialCategory.id,
       },
     });
   }
-  console.log('Seeded Special Rolls.');
+  console.log('✅ Seeded Special Rolls (S3 linked).');
 
   for (const articleData of articlesData) {
     await prisma.article.create({
@@ -262,7 +272,7 @@ async function main() {
         name: articleData.header,
         publicationDate: articleData.date,
         description: articleData.description,
-        imageSrc: articleData.imageSrc,
+        imageSrc: getS3Url(articleData.imageSrc, 'blog'),
         paragraphs: {
           create: commonParagraphs.map((para) => ({
             name: para.header,
@@ -273,10 +283,9 @@ async function main() {
       },
     });
   }
-  console.log('Seeded Articles with Paragraphs.');
+  console.log('✅ Seeded Articles (S3 linked).');
 
-  console.log('Seeding finished.');
-  await migrateImages();
+  console.log('🎉 Seeding finished successfully.');
 }
 
 main()

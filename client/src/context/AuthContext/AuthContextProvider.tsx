@@ -1,4 +1,4 @@
-import React, { useEffect, useState, type ReactNode } from "react";
+import React, { useEffect, useRef, useState, type ReactNode } from "react";
 import type { User } from "./interfaces/User.interface";
 import { useClient } from "urql";
 import { jwtDecode } from "jwt-decode";
@@ -16,6 +16,7 @@ interface AuthContextProviderProps {
 const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   children,
 }) => {
+  const isInitialized = useRef(false);
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const client = useClient();
@@ -27,6 +28,9 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   };
 
   useEffect(() => {
+    if (isInitialized.current) return;
+    isInitialized.current = true;
+
     const initAuth = async () => {
       try {
         const result = await client.mutation(REFRESH_MUTATION, {}).toPromise();

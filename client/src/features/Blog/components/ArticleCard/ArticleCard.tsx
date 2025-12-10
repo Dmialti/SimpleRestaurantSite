@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderLeftDecor from "../HeaderLeftDecor/HeaderLeftDecor";
+import HeaderLeftDecor from "../../../../shared/components/HeaderLeftDecor/HeaderLeftDecor";
 import styles from "./ArticleCard.module.css";
 import { useNavigate } from "react-router-dom";
 import useHovered from "../../../../shared/hooks/useHovered.hook";

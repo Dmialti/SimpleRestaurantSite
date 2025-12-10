@@ -5,6 +5,7 @@ import { CreateArticleInput } from './dto/create-article.input';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { UpdateArticleInput } from './dto/update-article.input';
+import { ArticlePayload } from './entities/batch-payload.entity';
 
 @Resolver(() => Article)
 export class ArticleResolver {
@@ -42,9 +43,9 @@ export class ArticleResolver {
     return this.articlesService.deleteArticleById(id);
   }
 
-  @Mutation(() => Article)
+  @Mutation(() => ArticlePayload)
   @UseGuards(AuthGuard)
-  deleteArticles(@Args('ids') ids: number[]) {
+  deleteArticles(@Args('ids', { type: () => [Int] }) ids: number[]) {
     return this.articlesService.deleteArticles(ids);
   }
 }

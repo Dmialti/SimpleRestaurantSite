@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import adminIcon from "../../assets/AdminPageMaterials/adminIcon.png";
 import { useNavigate } from "react-router-dom";
-import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
-import Button from "../../shared/components/Button/Button";
-import BaseFormLayout from "../../shared/components/FormBaseLayout/FormBaseLayout";
-import Input from "../../shared/components/Input/Input";
-import LoadingSpinner from "../../shared/components/LoadingSpinner/LoadingSpinner";
-import { useAuth } from "../../shared/hooks/useAuth.hook";
+import Button from "../../../shared/components/Button/Button";
+import BaseFormLayout from "../../../shared/components/FormBaseLayout/FormBaseLayout";
+import Input from "../../../shared/components/Input/Input";
+import LoadingSpinner from "../../../shared/components/LoadingSpinner/LoadingSpinner";
+import { useAuth } from "../../../shared/hooks/useAuth.hook";
 import {
   type LogInFormData,
   LogInFormSchema,
-} from "../../shared/utils/validation/LogInFormSchema";
+} from "../../../shared/utils/validation/LogInFormSchema";
 
 const LogIn: React.FC = () => {
   const { logIn } = useAuth();
@@ -82,8 +80,8 @@ const LogIn: React.FC = () => {
           />
           <Button
             className="py-4 font-satoshi text-[12px] leading-[190%] tracking-[1px]"
-            enabled={allFieldsFilled}
-            type="submit"
+            disabled={!allFieldsFilled}
+            variant="submit"
           >
             RESERVE
           </Button>

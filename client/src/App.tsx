@@ -13,14 +13,15 @@ import Menu from "./features/Menu/Menu";
 import NavBar from "./features/NavBar/NavBar";
 import Reservation from "./features/Reservation/Reservation";
 import { Provider as UrqlProvider } from "urql";
-import { client } from "./api/urqlClient";
+import { client } from "./urql/urqlClient";
 import Article from "./features/Article/Article";
 import backgroundImg from "./assets/AppMaterials/background.jpg";
 import AuthContextProvider from "./context/AuthContext/AuthContextProvider";
-import BlogManager from "./features/BlogManager/BlogManager";
+import BlogManager from "./features/Admin/BlogManager/BlogManager";
 import ProtectedRoute from "./shared/components/ProtectedRoute/ProtectedRoute";
-import AdminPanel from "./features/Admin/AdminPanel";
-import LogIn from "./features/LogIn/LogIn";
+import AdminPanel from "./features/Admin/AdminPanel/AdminPanel";
+import LogIn from "./features/Admin/LogIn/LogIn";
+import ArticleManager from "./features/Admin/ArticleManager/ArticleManager";
 
 const App: React.FC = () => {
   return (
@@ -58,6 +59,14 @@ const App: React.FC = () => {
                     <Route path="/admin/login" element={<LogIn />} />
                     <Route element={<ProtectedRoute />}>
                       <Route path="/admin/blog" element={<BlogManager />} />
+                      <Route
+                        path="/admin/blog/edit/:id"
+                        element={<ArticleManager />}
+                      />
+                      <Route
+                        path="/admin/blog/create"
+                        element={<ArticleManager />}
+                      />
                     </Route>
                   </Route>
                 </Route>

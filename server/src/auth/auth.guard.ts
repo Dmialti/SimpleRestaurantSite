@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { JwtService } from '@nestjs/jwt';
-import GqlContext from './interfaces/MercuriusContext.interface';
+import { FastifyRequest } from 'fastify';
 import { JwtPayload } from './types/jwtPayload.type';
 
 @Injectable()
@@ -14,9 +14,16 @@ export class AuthGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const ctx = GqlExecutionContext.create(context);
-    const gqlContext = ctx.getContext<GqlContext>();
-    const token = this.extractToken(gqlContext);
+    let request: FastifyRequest;
+
+    if (context.getType() === 'http') {
+      request = context.switchToHttp().getRequest<FastifyRequest>();
+    } else {
+      const ctx = GqlExecutionContext.create(context);
+      request = ctx.getContext<{ req: FastifyRequest }>().req;
+    }
+
+    const token = this.extractToken(request);
 
     if (!token) {
       throw new UnauthorizedException('Token not found');
@@ -26,15 +33,17 @@ export class AuthGuard implements CanActivate {
       const payload = await this.jwtService.verifyAsync<JwtPayload>(token, {
         secret: process.env.JWT_ACCESS_SECRET,
       });
-      gqlContext.req.user = payload;
+
+      request.user = payload;
     } catch {
       throw new UnauthorizedException('Token is incorrect or expired');
     }
+
     return true;
   }
 
-  private extractToken(context: GqlContext) {
-    const [type, token] = context.req.headers.authorization?.split(' ') ?? [];
+  private extractToken(request: FastifyRequest): string | undefined {
+    const [type, token] = request.headers.authorization?.split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
   }
 }

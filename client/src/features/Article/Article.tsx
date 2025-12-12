@@ -3,7 +3,7 @@ import Paragraph from "./components/Paragraph";
 import { useParams } from "react-router-dom";
 import { GET_ARTICLE_QUERY } from "../../graphql/article/queries/getArticle.query";
 import { useFragment } from "../../graphql/codegen/generated";
-import { PARAGRAPH_FRAGMENT } from "../../graphql/blog/fragments/paragraph.fragment";
+import { PARAGRAPH_FRAGMENT } from "../../graphql/article/fragments/paragraph.fragment";
 import type {
   GetArticleQuery,
   GetArticleQueryVariables,
@@ -57,7 +57,7 @@ const Article: React.FC = () => {
         </p>
 
         <Button
-          type="border"
+          variant="border"
           className="px-6 py-2 uppercase tracking-widest text-sm text-text-default"
           onClick={() => reexecuteQuery({ requestPolicy: "network-only" })}
         >

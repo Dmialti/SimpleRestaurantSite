@@ -18,7 +18,7 @@ export const ReservationFormSchema = z.object({
     .min(1, { error: "At least 1 guest is required" })
     .max(10, { error: "Maximum 10 guests allowed" }),
 
-  date: z.coerce.date({ error: "Please select a valid date" }),
+  date: z.iso.date({ error: "Invalid date provided" }),
 
   time: z
     .string({ error: "Time is required" })

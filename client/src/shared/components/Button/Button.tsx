@@ -1,47 +1,52 @@
-import React, { type ReactNode } from "react";
+import React from "react";
 
-interface ButtonProps {
-  type: "simple" | "border" | "submit";
-  enabled?: boolean;
-  onClick?: () => void;
-  className?: string;
-  children: ReactNode;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "simple" | "border" | "submit";
 }
 
 const Button: React.FC<ButtonProps> = ({
-  type,
-  enabled = true,
-  onClick,
-  className,
+  variant,
   children,
+  className = "",
+  disabled,
+  ...rest
 }) => {
-  let typeClass: string;
+  let variantClass = "";
 
-  switch (type) {
+  switch (variant) {
     case "simple":
-      typeClass = `border-[#EFE7D2]/0 hover:border hover:border-border-default hover:bg-background-muted`;
+      variantClass =
+        "border-[#EFE7D2]/0 hover:border hover:border-border-default hover:bg-background-muted";
       break;
     case "border":
-      typeClass = `bg-background-muted border-border-default hover:border-border-hover hover:bg-background-hover`;
+      variantClass =
+        "bg-background-muted border-border-default hover:border-border-hover hover:bg-background-hover";
       break;
-
     case "submit":
-      typeClass = `bg-background-primary border-border-default hover:border-border-hover hover:bg-background-primary-hover`;
+      variantClass =
+        "bg-background-primary border-border-default hover:border-border-hover hover:bg-background-primary-hover";
       break;
     default:
-      throw new Error(`${type}`);
+      variantClass = "bg-background-muted border-border-default";
       break;
   }
+
+  const baseStyles =
+    "border transition duration-500 box-border text-center rounded-lg";
+
+  const activeStyles = `${variantClass} cursor-pointer`;
+  const disabledStyles =
+    "border-border-default bg-background-muted text-text-muted cursor-not-allowed opacity-50";
+
   return (
     <button
-      disabled={!enabled}
-      onClick={enabled && onClick ? () => onClick() : undefined}
-      className={
-        (enabled
-          ? `${typeClass} border transition duration-500 box-border text-center cursor-pointer`
-          : `border-border-default bg-background-muted border text-text-muted`) +
-        ` rounded-lg ${className}`
-      }
+      disabled={disabled}
+      className={`
+        ${baseStyles} 
+        ${disabled ? disabledStyles : activeStyles} 
+        ${className}
+      `}
+      {...rest}
     >
       {children}
     </button>

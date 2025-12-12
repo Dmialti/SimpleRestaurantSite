@@ -235,6 +235,8 @@ export type UpdateDishInput = {
   price: Scalars['Float']['input'];
 };
 
+export type ParagraphItemFieldsFragment = { __typename?: 'Paragraph', id: number, name: string, content: string, position: number } & { ' $fragmentName'?: 'ParagraphItemFieldsFragment' };
+
 export type CreateArticleMutationVariables = Exact<{
   input: CreateArticleInput;
 }>;
@@ -289,8 +291,6 @@ export type RefreshMutationVariables = Exact<{ [key: string]: never; }>;
 
 
 export type RefreshMutation = { __typename?: 'Mutation', refresh: { __typename?: 'AuthResponse', accessToken: string } };
-
-export type ParagraphItemFieldsFragment = { __typename?: 'Paragraph', id: number, name: string, content: string, position: number } & { ' $fragmentName'?: 'ParagraphItemFieldsFragment' };
 
 export type GetArticlesQueryVariables = Exact<{ [key: string]: never; }>;
 

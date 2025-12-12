@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { ConfigService } from '@nestjs/config';
+import { MultipartFile } from '@fastify/multipart';
 
 @Injectable()
 export class S3Service {
@@ -20,14 +21,16 @@ export class S3Service {
     });
   }
 
-  async uploadFile(file: Express.Multer.File, path: string) {
-    const uniqueKey = `${path}/${Date.now()}-${file.originalname.replace(/\s/g, '-')}`;
+  async uploadFile(file: MultipartFile, path: string) {
+    const uniqueKey = `${path}/${Date.now()}-${file.filename.replace(/\s/g, '-')}`;
+
+    const buffer = await file.toBuffer();
 
     await this.s3Client.send(
       new PutObjectCommand({
         Bucket: this.bucketName,
         Key: uniqueKey,
-        Body: file.buffer,
+        Body: buffer,
         ContentType: file.mimetype,
         CacheControl: 'public, max-age=31536000, immutable',
       }),

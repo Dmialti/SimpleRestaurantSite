@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { useMutation } from "urql";
 import { useNavigate } from "react-router-dom";
-import { GET_ARTICLES_QUERY } from "../../graphql/blog/queries/getArticles.query";
-import Button from "../../shared/components/Button/Button";
-import LoadingSpinner from "../../shared/components/LoadingSpinner/LoadingSpinner";
-import { formatDate } from "../../shared/utils/formatters/formateDate.utils";
-import { DELETE_ARTICLE_MUTATION } from "../../graphql/article/mutations/deleteArticle.mutation";
-import { DELETE_ARTICLES_MUTATION } from "../../graphql/article/mutations/deleteArticles.mutation";
-import HeaderLeftDecor from "../../shared/components/HeaderLeftDecor/HeaderLeftDecor";
-import { usePersistentQuery } from "../../shared/hooks/useData.hook";
-import type { GetArticlesQuery } from "../../graphql/codegen/generated/graphql";
-import { STORAGE_KEYS } from "../../shared/constants/storage.constants";
-import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDecorated";
+import { GET_ARTICLES_QUERY } from "../../../graphql/blog/queries/getArticles.query";
+import Button from "../../../shared/components/Button/Button";
+import LoadingSpinner from "../../../shared/components/LoadingSpinner/LoadingSpinner";
+import { formatDate } from "../../../shared/utils/formatters/formateDate.utils";
+import { DELETE_ARTICLE_MUTATION } from "../../../graphql/article/mutations/deleteArticle.mutation";
+import { DELETE_ARTICLES_MUTATION } from "../../../graphql/article/mutations/deleteArticles.mutation";
+import HeaderLeftDecor from "../../../shared/components/HeaderLeftDecor/HeaderLeftDecor";
+import { usePersistentQuery } from "../../../shared/hooks/useData.hook";
+import type { GetArticlesQuery } from "../../../graphql/codegen/generated/graphql";
+import { STORAGE_KEYS } from "../../../shared/constants/storage.constants";
+import HeadingDecorated from "../../../shared/components/HeadingDecorated/HeadingDecorated";
 
 const BlogManager: React.FC = () => {
   const navigate = useNavigate();
@@ -97,7 +97,7 @@ const BlogManager: React.FC = () => {
         </p>
 
         <Button
-          type="border"
+          variant="border"
           className="px-6 py-2 uppercase tracking-widest text-sm text-text-default"
           onClick={() => reexecuteQuery({ requestPolicy: "network-only" })}
         >
@@ -107,7 +107,7 @@ const BlogManager: React.FC = () => {
     );
   }
   return (
-    <div className="p-12 flex flex-col gap-8 w-full h-full text-text-default">
+    <div className="flex flex-col gap-8 w-full h-full text-text-default">
       <div className="flex justify-between items-center border-b border-border-default pb-6">
         <div className="flex items-center gap-4">
           <HeaderLeftDecor className="text-2xl font-forum">
@@ -117,7 +117,7 @@ const BlogManager: React.FC = () => {
 
         {selectedIds.length > 0 && (
           <Button
-            type="border"
+            variant="border"
             className="px-4 py-1 text-xs text-red-500 border-red-500 hover:bg-red-500/10"
             onClick={handleDeleteSelected}
           >
@@ -125,7 +125,7 @@ const BlogManager: React.FC = () => {
           </Button>
         )}
         <Button
-          type="border"
+          variant="border"
           className="px-6 py-2"
           onClick={() => navigate("/admin/blog/create")}
         >
@@ -175,14 +175,14 @@ const BlogManager: React.FC = () => {
 
             <div className="flex gap-3">
               <Button
-                type="border"
+                variant="border"
                 className="px-4 py-1 text-xs"
                 onClick={() => navigate(`/admin/blog/edit/${article.id}`)}
               >
                 EDIT
               </Button>
               <Button
-                type="border"
+                variant="border"
                 className="px-4 py-1 text-xs text-red-500 border-red-500 hover:bg-red-500/10"
                 onClick={() => handleDeleteSingle(article.id)}
               >

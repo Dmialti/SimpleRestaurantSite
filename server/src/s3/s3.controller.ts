@@ -1,13 +1,12 @@
 import {
   Controller,
   Post,
-  UploadedFile,
-  UseInterceptors,
   UseGuards,
   Query,
   BadRequestException,
+  Req,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import type { FastifyRequest } from 'fastify';
 import { S3Service } from './s3.service';
 import { AuthGuard } from '../auth/auth.guard';
 
@@ -17,19 +16,17 @@ export class S3Controller {
 
   @Post()
   @UseGuards(AuthGuard)
-  @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
-    @UploadedFile() file: Express.Multer.File,
+    @Req() req: FastifyRequest,
     @Query('folder') folder: string = 'misc',
   ) {
-    if (!file) throw new BadRequestException('File have not been provided');
+    const data = await req.file();
 
-    const allowedFolders = ['menu', 'posts', 'layout'];
-    if (!allowedFolders.includes(folder)) {
-      throw new BadRequestException('Incorrect folder');
+    if (!data) {
+      throw new BadRequestException('File not provided');
     }
 
-    const url = await this.s3Service.uploadFile(file, folder);
+    const url = await this.s3Service.uploadFile(data, folder);
 
     return { url };
   }

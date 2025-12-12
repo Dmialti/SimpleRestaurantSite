@@ -151,21 +151,21 @@ const NavBar: React.FC = () => {
           <div className="text-xs tracking-[1px] m-2 flex gap-1 items-center">
             <Button
               className={styles.collapseFirst + ` p-3`}
-              type="simple"
+              variant="simple"
               onClick={() => handleNavigation("/menu")}
             >
               MENU
             </Button>
             <Button
               className={styles.collapseFirst + ` p-3`}
-              type="simple"
+              variant="simple"
               onClick={() => handleNavigation("/about")}
             >
               ABOUT
             </Button>
             <Button
               className={styles.collapseSecond + ` p-3`}
-              type="border"
+              variant="border"
               onClick={() => handleNavigation("/reservation")}
             >
               BOOK A TABLE

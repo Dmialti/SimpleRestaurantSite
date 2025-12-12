@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
-import Button from "../../shared/components/Button/Button";
-import { useAuth } from "../../shared/hooks/useAuth.hook";
+import BasePageLayout from "../../../shared/components/BasePageLayout/BasePageLayout";
+import Button from "../../../shared/components/Button/Button";
+import { useAuth } from "../../../shared/hooks/useAuth.hook";
 import { NAV_LINKS } from "./static/NAV_LINKS";
-import adminImg from "../../assets/AdminPageMaterials/adminIcon.png";
+import adminImg from "../../../assets/AdminPageMaterials/adminIcon.png";
 
 const AdminPanel: React.FC = () => {
   const { user, logOut } = useAuth();
@@ -55,7 +55,7 @@ const AdminPanel: React.FC = () => {
           <div className="flex flex-col gap-4">
             <div className="h-px w-full bg-border-default/30" />
             <Button
-              type="border"
+              variant="border"
               className="w-full py-3 text-xs text-red-400 border-red-900/50 hover:bg-red-900/20"
               onClick={handleLogout}
             >

@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+    "\n  fragment ParagraphItemFields on Paragraph {\n    id,\n    name,\n    content,\n    position\n  }\n": typeof types.ParagraphItemFieldsFragmentDoc,
     "\n  mutation CreateArticle($input: CreateArticleInput!) {\n    createArticle(createArticleInput: $input) {\n      id\n    }\n  }\n": typeof types.CreateArticleDocument,
     "\n  mutation DeleteArticle($id: Float!) {\n    deleteArticleById(id: $id) {\n      id\n    }\n  }\n": typeof types.DeleteArticleDocument,
     "\n  mutation DeleteArticles($ids: [Int!]!) {\n    deleteArticles(ids: $ids) {\n      count\n    }\n  }\n": typeof types.DeleteArticlesDocument,
@@ -22,12 +23,12 @@ type Documents = {
     "\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) { accessToken }\n  }\n": typeof types.LoginDocument,
     "mutation Logout { logOut }": typeof types.LogoutDocument,
     "mutation Refresh { refresh { accessToken } }": typeof types.RefreshDocument,
-    "\n  fragment ParagraphItemFields on Paragraph {\n    id,\n    name,\n    content,\n    position\n  }\n": typeof types.ParagraphItemFieldsFragmentDoc,
     "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n": typeof types.GetArticlesDocument,
     "\n  fragment DishItemFields on Dish {\n    id\n    name\n    description\n    price\n    imageSrc\n  }\n": typeof types.DishItemFieldsFragmentDoc,
     "\n  query GetMenu {\n    getMenu {\n      id\n      name\n      dishes {\n        ...DishItemFields\n      }\n    }\n  }\n": typeof types.GetMenuDocument,
 };
 const documents: Documents = {
+    "\n  fragment ParagraphItemFields on Paragraph {\n    id,\n    name,\n    content,\n    position\n  }\n": types.ParagraphItemFieldsFragmentDoc,
     "\n  mutation CreateArticle($input: CreateArticleInput!) {\n    createArticle(createArticleInput: $input) {\n      id\n    }\n  }\n": types.CreateArticleDocument,
     "\n  mutation DeleteArticle($id: Float!) {\n    deleteArticleById(id: $id) {\n      id\n    }\n  }\n": types.DeleteArticleDocument,
     "\n  mutation DeleteArticles($ids: [Int!]!) {\n    deleteArticles(ids: $ids) {\n      count\n    }\n  }\n": types.DeleteArticlesDocument,
@@ -36,7 +37,6 @@ const documents: Documents = {
     "\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) { accessToken }\n  }\n": types.LoginDocument,
     "mutation Logout { logOut }": types.LogoutDocument,
     "mutation Refresh { refresh { accessToken } }": types.RefreshDocument,
-    "\n  fragment ParagraphItemFields on Paragraph {\n    id,\n    name,\n    content,\n    position\n  }\n": types.ParagraphItemFieldsFragmentDoc,
     "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n": types.GetArticlesDocument,
     "\n  fragment DishItemFields on Dish {\n    id\n    name\n    description\n    price\n    imageSrc\n  }\n": types.DishItemFieldsFragmentDoc,
     "\n  query GetMenu {\n    getMenu {\n      id\n      name\n      dishes {\n        ...DishItemFields\n      }\n    }\n  }\n": types.GetMenuDocument,
@@ -56,6 +56,10 @@ const documents: Documents = {
  */
 export function gql(source: string): unknown;
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  fragment ParagraphItemFields on Paragraph {\n    id,\n    name,\n    content,\n    position\n  }\n"): (typeof documents)["\n  fragment ParagraphItemFields on Paragraph {\n    id,\n    name,\n    content,\n    position\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -88,10 +92,6 @@ export function gql(source: "mutation Logout { logOut }"): (typeof documents)["m
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "mutation Refresh { refresh { accessToken } }"): (typeof documents)["mutation Refresh { refresh { accessToken } }"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  fragment ParagraphItemFields on Paragraph {\n    id,\n    name,\n    content,\n    position\n  }\n"): (typeof documents)["\n  fragment ParagraphItemFields on Paragraph {\n    id,\n    name,\n    content,\n    position\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

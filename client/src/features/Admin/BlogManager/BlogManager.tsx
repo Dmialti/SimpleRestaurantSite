@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { GET_ARTICLES_QUERY } from "../../../graphql/blog/queries/getArticles.query";
 import Button from "../../../shared/components/Button/Button";
 import LoadingSpinner from "../../../shared/components/LoadingSpinner/LoadingSpinner";
-import { formatDate } from "../../../shared/utils/formatters/formateDate.utils";
 import { DELETE_ARTICLE_MUTATION } from "../../../graphql/article/mutations/deleteArticle.mutation";
 import { DELETE_ARTICLES_MUTATION } from "../../../graphql/article/mutations/deleteArticles.mutation";
 import HeaderLeftDecor from "../../../shared/components/HeaderLeftDecor/HeaderLeftDecor";
@@ -107,7 +106,7 @@ const BlogManager: React.FC = () => {
     );
   }
   return (
-    <div className="p-4 flex flex-col gap-4 w-full h-full text-text-default">
+    <div className="p-4 max-w-6xl mx-auto flex flex-col gap-4 text-text-default">
       <div className="flex flex-row text-nowrap gap-4 justify-between items-center border-b border-border-default pb-6">
         <div className="flex  items-center gap-4 w-full">
           <HeaderLeftDecor className="text-2xl font-forum">
@@ -151,44 +150,59 @@ const BlogManager: React.FC = () => {
         {articles.map((article) => (
           <div
             key={article.id}
-            className={`flex flex-row items-center justify-between p-4 border rounded-xl transition-all ${
+            className={`flex flex-col border border-border-default/50 rounded-lg p-4 transition-all ${
               selectedIds.includes(article.id)
-                ? "border-primary-default bg-primary-default/10"
-                : "border-border-default bg-black/20 hover:bg-black/40"
+                ? "border-primary-default ring-1 ring-primary-default bg-background-default"
+                : ""
             }`}
           >
-            <div className="flex items-center gap-4 flex-1">
-              <input
-                type="checkbox"
-                className="w-5 h-5 cursor-pointer accent-primary-default"
-                checked={selectedIds.includes(article.id)}
-                onChange={() => handleSelectOne(article.id)}
-              />
+            <div
+              className={`
+                relative flex flex-row overflow-hidden bg-background-default/50 
+              `}
+            >
+              <div className="aspect-video w-[150px] h-[100px] rounded-2xl overflow-hidden bg-black/20 relative shrink-0">
+                <img
+                  src={article.imageSrc}
+                  alt={article.name}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
 
-              <div className="flex flex-col gap-1">
-                <span className="text-xl font-forum text-text-default">
-                  {article.name}
-                </span>
-                <span className="text-xs text-text-muted font-satoshi">
-                  {formatDate(article.publicationDate)}
-                </span>
+              <div className="p-5 flex flex-col flex-1 gap-4">
+                <div className="flex justify-between items-start gap-2">
+                  <HeaderLeftDecor className="text-xl font-forum leading-tight">
+                    {article.name}
+                  </HeaderLeftDecor>
+                </div>
+
+                <p className="text-sm text-text-muted line-clamp-2">
+                  {article.description}
+                </p>
               </div>
             </div>
-
-            <div className="flex gap-3">
+            <div className="mt-auto pt-4 flex gap-3 border-t border-border-default/30 items-center">
               <Button
                 variant="border"
-                className="px-4 py-1 text-xs"
+                className="flex-1 py-2 text-sm"
                 onClick={() => navigate(`/admin/blog/edit/${article.id}`)}
               >
                 EDIT
               </Button>
+
+              <input
+                type="checkbox"
+                className="w-6 h-6 accent-primary-default cursor-pointer bg-transparent border-border-default rounded focus:ring-primary-default shrink-0"
+                checked={selectedIds.includes(article.id)}
+                onChange={() => handleSelectOne(article.id)}
+              />
+
               <Button
                 variant="border"
-                className="px-4 py-1 text-xs text-red-500 border-red-500 hover:bg-red-500/10"
+                className="py-2 px-4 text-sm text-red-400 border-red-900/30 hover:bg-red-900/10 hover:border-red-500/50"
                 onClick={() => handleDeleteSingle(article.id)}
               >
-                DELETE
+                🗑️
               </Button>
             </div>
           </div>

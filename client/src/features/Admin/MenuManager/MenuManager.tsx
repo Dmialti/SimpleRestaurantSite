@@ -82,7 +82,7 @@ const MenuManager: React.FC = () => {
 
   return (
     <div className="h-full w-full overflow-y-auto text-text-default">
-      <div className="p-4 max-w-6xl mx-auto flex flex-col gap-4 pb-20">
+      <div className="p-4 max-w-6xl mx-auto flex flex-col gap-4">
         <div className="flex flex-row text-nowrap gap-4 justify-between items-center border-b border-border-default pb-6">
           <div className="flex  items-center gap-4 w-full">
             <HeaderLeftDecor className="text-2xl font-forum">

@@ -26,6 +26,7 @@ import MenuManager from "./features/Admin/MenuManager/MenuManager";
 import DishManager from "./features/Admin/DishManager/DishManager";
 import UserManager from "./features/Admin/UserManager/UserManager";
 import UserEditor from "./features/Admin/UserEditor/UserEditor";
+import GuestRoute from "./shared/components/GuestRoute/GuestRoute";
 
 const App: React.FC = () => {
   return (
@@ -60,7 +61,9 @@ const App: React.FC = () => {
                   }
                 >
                   <Route element={<AdminPanel />}>
-                    <Route path="/admin/login" element={<LogIn />} />
+                    <Route element={<GuestRoute />}>
+                      <Route path="/admin/login" element={<LogIn />} />
+                    </Route>
                     <Route element={<ProtectedRoute />}>
                       <Route path="/admin/blog" element={<BlogManager />} />
                       <Route

@@ -30,13 +30,13 @@ const ArticleCard: React.FC<ArticleCardProps> = (props) => {
       onClick={openArticle}
     >
       <CardWithContextHover
-        className={`aspect-[1.33333/1] w-[40%] min-w-[200px] ${styles.card}`}
+        className={`aspect-[1.33333/1] shrink-0 w-[40%] min-w-[200px] ${styles.card}`}
         mediaType="image"
         mediaSrc={props.imageSrc}
         isAnimated={true}
         changeHover={false}
       />
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 flex-1 min-w-0">
         <HeaderLeftDecor className="font-satoshi text-text-default text-[12px] leading-[190%] tracking-[1px]">
           {props.date}
         </HeaderLeftDecor>

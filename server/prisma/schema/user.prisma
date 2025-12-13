@@ -1,13 +1,14 @@
 enum Role {
+    SUPER_ADMIN
     ADMIN
-    WRITER
+    MANAGER
 }
 
 model User {
     id       Int    @id @default(autoincrement())
     email    String @unique
     password String
-    role     Role   @default(WRITER)
+    role     Role   @default(MANAGER)
 
     hashedRefreshToken String?
 

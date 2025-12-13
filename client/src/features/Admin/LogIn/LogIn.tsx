@@ -23,7 +23,7 @@ const LogIn: React.FC = () => {
       setLogInError(null);
       setIsTryingToLogin(true);
       await logIn(data.email, data.password);
-      navigate("/admin");
+      navigate("/admin/menu");
     } catch (error) {
       if (error instanceof Error) {
         setLogInError(error.message);

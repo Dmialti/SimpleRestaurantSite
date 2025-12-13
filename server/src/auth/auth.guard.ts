@@ -8,10 +8,14 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { JwtService } from '@nestjs/jwt';
 import { FastifyRequest } from 'fastify';
 import { JwtPayload } from './types/jwtPayload.type';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    private jwtService: JwtService,
+    private prisma: PrismaService,
+  ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     let request: FastifyRequest;
@@ -34,6 +38,13 @@ export class AuthGuard implements CanActivate {
         secret: process.env.JWT_ACCESS_SECRET,
       });
 
+      const user = await this.prisma.user.findUnique({
+        where: { id: payload.sub },
+      });
+
+      if (!user) {
+        throw new UnauthorizedException('User no longer exists');
+      }
       request.user = payload;
     } catch {
       throw new UnauthorizedException('Token is incorrect or expired');

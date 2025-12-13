@@ -3,4 +3,5 @@ export const STORAGE_KEYS = {
   MENU_DATA: "MENU_DATA",
   MENU_PREFIX: "MENU_",
   ARTICLE_PREFIX: "ARTICLE_",
+  USERS_PREFIX: "USERS_",
 } as const;

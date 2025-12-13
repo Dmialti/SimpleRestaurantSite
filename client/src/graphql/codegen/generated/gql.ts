@@ -33,6 +33,12 @@ type Documents = {
     "\n  query GetDishes {\n    dishes {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      category {\n        id\n        name\n      }\n    }\n  }\n": typeof types.GetDishesDocument,
     "\n  fragment DishItemFields on Dish {\n    id\n    name\n    description\n    price\n    imageSrc\n  }\n": typeof types.DishItemFieldsFragmentDoc,
     "\n  query GetMenu {\n    getMenu {\n      id\n      name\n      dishes {\n        ...DishItemFields\n      }\n    }\n  }\n": typeof types.GetMenuDocument,
+    "\n  mutation CreateUser($input: CreateUserInput!) {\n    createUser(createUserInput: $input) {\n      id\n      email\n      role\n    }\n  }\n": typeof types.CreateUserDocument,
+    "\n  mutation DeleteUser($id: Int!) {\n    deleteUserById(id: $id) {\n      id\n      email\n    }\n  }\n": typeof types.DeleteUserDocument,
+    "\n  mutation DeleteUsers($ids: [Int!]!) {\n    deleteUsers(ids: $ids) {\n      count\n    }\n  }\n": typeof types.DeleteUsersDocument,
+    "\n  mutation UpdateUser($input: UpdateUserInput!) {\n    updateUser(updateUserInput: $input) {\n      id\n      email\n      role\n    }\n  }\n": typeof types.UpdateUserDocument,
+    "\n  query GetUserById($id: Int!) {\n    user(id: $id) {\n      id\n      email\n      role\n    }\n  }\n": typeof types.GetUserByIdDocument,
+    "\n  query GetUsers {\n    users {\n      id\n      email\n      role\n    }\n  }\n": typeof types.GetUsersDocument,
 };
 const documents: Documents = {
     "\n  fragment ParagraphItemFields on Paragraph {\n    id,\n    name,\n    content,\n    position\n  }\n": types.ParagraphItemFieldsFragmentDoc,
@@ -54,6 +60,12 @@ const documents: Documents = {
     "\n  query GetDishes {\n    dishes {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      category {\n        id\n        name\n      }\n    }\n  }\n": types.GetDishesDocument,
     "\n  fragment DishItemFields on Dish {\n    id\n    name\n    description\n    price\n    imageSrc\n  }\n": types.DishItemFieldsFragmentDoc,
     "\n  query GetMenu {\n    getMenu {\n      id\n      name\n      dishes {\n        ...DishItemFields\n      }\n    }\n  }\n": types.GetMenuDocument,
+    "\n  mutation CreateUser($input: CreateUserInput!) {\n    createUser(createUserInput: $input) {\n      id\n      email\n      role\n    }\n  }\n": types.CreateUserDocument,
+    "\n  mutation DeleteUser($id: Int!) {\n    deleteUserById(id: $id) {\n      id\n      email\n    }\n  }\n": types.DeleteUserDocument,
+    "\n  mutation DeleteUsers($ids: [Int!]!) {\n    deleteUsers(ids: $ids) {\n      count\n    }\n  }\n": types.DeleteUsersDocument,
+    "\n  mutation UpdateUser($input: UpdateUserInput!) {\n    updateUser(updateUserInput: $input) {\n      id\n      email\n      role\n    }\n  }\n": types.UpdateUserDocument,
+    "\n  query GetUserById($id: Int!) {\n    user(id: $id) {\n      id\n      email\n      role\n    }\n  }\n": types.GetUserByIdDocument,
+    "\n  query GetUsers {\n    users {\n      id\n      email\n      role\n    }\n  }\n": types.GetUsersDocument,
 };
 
 /**
@@ -146,6 +158,30 @@ export function gql(source: "\n  fragment DishItemFields on Dish {\n    id\n    
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetMenu {\n    getMenu {\n      id\n      name\n      dishes {\n        ...DishItemFields\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetMenu {\n    getMenu {\n      id\n      name\n      dishes {\n        ...DishItemFields\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation CreateUser($input: CreateUserInput!) {\n    createUser(createUserInput: $input) {\n      id\n      email\n      role\n    }\n  }\n"): (typeof documents)["\n  mutation CreateUser($input: CreateUserInput!) {\n    createUser(createUserInput: $input) {\n      id\n      email\n      role\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation DeleteUser($id: Int!) {\n    deleteUserById(id: $id) {\n      id\n      email\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteUser($id: Int!) {\n    deleteUserById(id: $id) {\n      id\n      email\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation DeleteUsers($ids: [Int!]!) {\n    deleteUsers(ids: $ids) {\n      count\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteUsers($ids: [Int!]!) {\n    deleteUsers(ids: $ids) {\n      count\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation UpdateUser($input: UpdateUserInput!) {\n    updateUser(updateUserInput: $input) {\n      id\n      email\n      role\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateUser($input: UpdateUserInput!) {\n    updateUser(updateUserInput: $input) {\n      id\n      email\n      role\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetUserById($id: Int!) {\n    user(id: $id) {\n      id\n      email\n      role\n    }\n  }\n"): (typeof documents)["\n  query GetUserById($id: Int!) {\n    user(id: $id) {\n      id\n      email\n      role\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetUsers {\n    users {\n      id\n      email\n      role\n    }\n  }\n"): (typeof documents)["\n  query GetUsers {\n    users {\n      id\n      email\n      role\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

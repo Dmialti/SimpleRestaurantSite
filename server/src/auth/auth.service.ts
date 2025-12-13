@@ -9,7 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AuthInput } from './dto/auth.input';
 import * as bcrypt from 'bcrypt';
 import { JwtPayload } from './types/jwtPayload.type';
-import { CreateUserInput } from './dto/createUser.input';
+import { CreateUserInput } from '../user/dto/createUser.input';
 import { PrismaService } from '../prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '../../prisma/generated/prisma/internal/prismaNamespace';
 

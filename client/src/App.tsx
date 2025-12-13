@@ -24,6 +24,8 @@ import LogIn from "./features/Admin/LogIn/LogIn";
 import ArticleManager from "./features/Admin/ArticleManager/ArticleManager";
 import MenuManager from "./features/Admin/MenuManager/MenuManager";
 import DishManager from "./features/Admin/DishManager/DishManager";
+import UserManager from "./features/Admin/UserManager/UserManager";
+import UserEditor from "./features/Admin/UserEditor/UserEditor";
 
 const App: React.FC = () => {
   return (
@@ -57,7 +59,7 @@ const App: React.FC = () => {
                     </AuthContextProvider>
                   }
                 >
-                  <Route path="/admin" element={<AdminPanel />}>
+                  <Route element={<AdminPanel />}>
                     <Route path="/admin/login" element={<LogIn />} />
                     <Route element={<ProtectedRoute />}>
                       <Route path="/admin/blog" element={<BlogManager />} />
@@ -77,6 +79,15 @@ const App: React.FC = () => {
                       <Route
                         path="/admin/dish/create"
                         element={<DishManager />}
+                      />
+                      <Route path="/admin/users" element={<UserManager />} />
+                      <Route
+                        path="/admin/users/create"
+                        element={<UserEditor />}
+                      />
+                      <Route
+                        path="/admin/users/edit/:id"
+                        element={<UserEditor />}
                       />
                     </Route>
                   </Route>

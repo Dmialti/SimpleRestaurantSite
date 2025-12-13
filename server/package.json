@@ -32,6 +32,7 @@
     "@nestjs/graphql": "^13.2.0",
     "@nestjs/jwt": "^11.0.1",
     "@nestjs/mercurius": "^13.2.0",
+    "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.1.9",
     "@nestjs/platform-fastify": "^11.1.9",
     "@prisma/adapter-pg": "^7.0.1",
@@ -47,6 +48,7 @@
     "graphql": "^16.12.0",
     "mercurius": "^16.6.0",
     "mime-types": "^3.0.2",
+    "passport-jwt": "^4.0.1",
     "pg": "^8.16.3",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
@@ -64,6 +66,7 @@
     "@types/mime-types": "^3.0.1",
     "@types/multer": "^2.0.0",
     "@types/node": "^22.19.1",
+    "@types/passport-jwt": "^4.0.1",
     "@types/pg": "^8.15.6",
     "@types/supertest": "^6.0.2",
     "eslint": "^9.18.0",

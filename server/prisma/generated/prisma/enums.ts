@@ -21,8 +21,9 @@ export type ReservationStatus = (typeof ReservationStatus)[keyof typeof Reservat
 
 
 export const Role = {
+  SUPER_ADMIN: 'SUPER_ADMIN',
   ADMIN: 'ADMIN',
-  WRITER: 'WRITER'
+  MANAGER: 'MANAGER'
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]

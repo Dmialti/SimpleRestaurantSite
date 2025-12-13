@@ -17,7 +17,14 @@ export class DishService {
   private readonly MENU_KEY = 'GROUPED_MENU';
 
   async getAll() {
-    return this.prisma.dish.findMany();
+    return this.prisma.dish.findMany({
+      include: {
+        category: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
   }
 
   async getMenu() {
@@ -37,6 +44,17 @@ export class DishService {
     return menu;
   }
 
+  async getDishById(id: number) {
+    return this.prisma.dish.findUnique({
+      where: { id },
+      include: { category: true },
+    });
+  }
+
+  async getCategories() {
+    return this.prisma.category.findMany();
+  }
+
   async createCategory(data: CreateCategoryInput) {
     const { dishes, ...categoryData } = data;
 
@@ -51,20 +69,19 @@ export class DishService {
     return res;
   }
 
-  async createDish(categoryId: number, data: CreateDishInput) {
-    const res = await this.prisma.dish.create({
+  async createDish(input: CreateDishInput) {
+    const { categoryId, ...dishData } = input;
+
+    return this.prisma.dish.create({
       data: {
-        ...data,
+        ...dishData,
         category: {
           connect: { id: categoryId },
         },
       },
+      include: { category: true },
     });
-
-    await this.cacheManager.del(this.MENU_KEY);
-    return res;
   }
-
   async updateDish(data: UpdateDishInput) {
     const res = await this.prisma.dish.update({
       where: { id: data.id },
@@ -85,7 +102,7 @@ export class DishService {
   }
 
   async deleteDishById(id: number) {
-    const res = await this.prisma.dish.deleteMany({ where: { id } });
+    const res = await this.prisma.dish.delete({ where: { id } });
     await this.cacheManager.del(this.MENU_KEY);
     return res;
   }

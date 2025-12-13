@@ -22,8 +22,8 @@ import type {
 import { UPDATE_ARTICLE_MUTATION } from "../../../graphql/article/mutations/updateArticle.mutation";
 import { CREATE_ARTICLE_MUTATION } from "../../../graphql/article/mutations/createArticle.mutation";
 import {
-  type UpdateArticleFormData,
-  UpdateArticleFormSchema,
+  type ArticleFormData,
+  ArticleFormSchema,
 } from "../../../shared/utils/validation/UpdateArticleFormSchema";
 import { uploadFile } from "../../../shared/api/uploadFile.api";
 import { PARAGRAPH_FRAGMENT } from "../../../graphql/article/fragments/paragraph.fragment";
@@ -31,7 +31,6 @@ import { useFragment } from "../../../graphql/codegen/generated/fragment-masking
 import CardContextProvider from "../../../context/CardContext/CardContextProvider";
 import CardWithContextHover from "../../../shared/components/Card/CardIsHoveredContext";
 import IconCardFill from "../../Contact/components/IconCardFill/IconCardFill";
-import changeFileIcon from "../../../../public/shared/icons/changeFile.svg";
 
 const ArticleManager: React.FC = () => {
   const { id } = useParams();
@@ -50,8 +49,8 @@ const ArticleManager: React.FC = () => {
     watch,
     setValue,
     formState: { errors, isSubmitting },
-  } = useForm<UpdateArticleFormData>({
-    resolver: zodResolver(UpdateArticleFormSchema),
+  } = useForm<ArticleFormData>({
+    resolver: zodResolver(ArticleFormSchema),
     defaultValues: {
       name: "",
       description: "",
@@ -126,7 +125,7 @@ const ArticleManager: React.FC = () => {
     }
   }, [imageFileList, setValue]);
 
-  const onSubmit: SubmitHandler<UpdateArticleFormData> = async (data) => {
+  const onSubmit: SubmitHandler<ArticleFormData> = async (data) => {
     try {
       setIsUploading(true);
       let finalImageSrc = data.imageSrc;
@@ -255,7 +254,7 @@ const ArticleManager: React.FC = () => {
                             fileInputRef.current?.click();
                           }}
                         >
-                          <IconCardFill iconSrc={changeFileIcon} />
+                          <IconCardFill iconSrc="../../../../public/shared/icons/changeFile.svg" />
                         </CardWithContextHover>
                       </CardContextProvider>
                     ) : (

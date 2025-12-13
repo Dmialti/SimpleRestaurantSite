@@ -11,7 +11,10 @@ const HeaderLeftDecor: React.FC<HeaderLeftDecorProps> = ({
 }) => {
   return (
     <div className={`flex flex-row justify-start gap-4 ${className}`}>
-      <img src="/BlogPageMaterials/date/decor.png" />
+      <img
+        className="shrink-0 h-auto w-auto object-contain"
+        src="/BlogPageMaterials/date/decor.png"
+      />
       <div>{children}</div>
     </div>
   );

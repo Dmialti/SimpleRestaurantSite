@@ -7,15 +7,15 @@ import type {
 } from "react-hook-form";
 import Button from "../../../../shared/components/Button/Button";
 import Input from "../../../../shared/components/Input/Input";
-import type { UpdateArticleFormData } from "../../../../shared/utils/validation/UpdateArticleFormSchema";
+import type { ArticleFormData } from "../../../../shared/utils/validation/UpdateArticleFormSchema";
 
 interface ParagraphFieldProps {
   index: number;
-  register: UseFormRegister<UpdateArticleFormData>;
+  register: UseFormRegister<ArticleFormData>;
   remove: UseFieldArrayRemove;
   move: UseFieldArrayMove;
   total: number;
-  errors: FieldErrors<UpdateArticleFormData>;
+  errors: FieldErrors<ArticleFormData>;
 }
 
 const ParagraphField: React.FC<ParagraphFieldProps> = ({

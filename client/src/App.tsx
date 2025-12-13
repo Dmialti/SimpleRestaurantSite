@@ -22,6 +22,8 @@ import ProtectedRoute from "./shared/components/ProtectedRoute/ProtectedRoute";
 import AdminPanel from "./features/Admin/AdminPanel/AdminPanel";
 import LogIn from "./features/Admin/LogIn/LogIn";
 import ArticleManager from "./features/Admin/ArticleManager/ArticleManager";
+import MenuManager from "./features/Admin/MenuManager/MenuManager";
+import DishManager from "./features/Admin/DishManager/DishManager";
 
 const App: React.FC = () => {
   return (
@@ -66,6 +68,15 @@ const App: React.FC = () => {
                       <Route
                         path="/admin/blog/create"
                         element={<ArticleManager />}
+                      />
+                      <Route path="/admin/menu" element={<MenuManager />} />
+                      <Route
+                        path="/admin/dish/edit/:id"
+                        element={<DishManager />}
+                      />
+                      <Route
+                        path="/admin/dish/create"
+                        element={<DishManager />}
                       />
                     </Route>
                   </Route>

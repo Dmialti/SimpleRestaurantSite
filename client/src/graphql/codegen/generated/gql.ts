@@ -24,6 +24,13 @@ type Documents = {
     "mutation Logout { logOut }": typeof types.LogoutDocument,
     "mutation Refresh { refresh { accessToken } }": typeof types.RefreshDocument,
     "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n": typeof types.GetArticlesDocument,
+    "\n  query GetCategories {\n    categories {\n      id\n      name\n    }\n  }\n": typeof types.GetCategoriesDocument,
+    "\n  mutation CreateDish($input: CreateDishInput!) {\n    createDish(createDishInput: $input) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n": typeof types.CreateDishDocument,
+    "\n  mutation DeleteDish($id: Int!) {\n    deleteDishById(id: $id) {\n      id\n      name\n    }\n  }\n": typeof types.DeleteDishDocument,
+    "\n  mutation DeleteDishes($ids: [Int!]!) {\n    deleteDishes(ids: $ids) {\n      count\n    }\n  }\n": typeof types.DeleteDishesDocument,
+    "\n  mutation UpdateDish($input: UpdateDishInput!) {\n    updateDish(updateDishInput: $input) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n": typeof types.UpdateDishDocument,
+    "\n  query GetDish($id: Int!) {\n    dish(id: $id) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n": typeof types.GetDishDocument,
+    "\n  query GetDishes {\n    dishes {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      category {\n        id\n        name\n      }\n    }\n  }\n": typeof types.GetDishesDocument,
     "\n  fragment DishItemFields on Dish {\n    id\n    name\n    description\n    price\n    imageSrc\n  }\n": typeof types.DishItemFieldsFragmentDoc,
     "\n  query GetMenu {\n    getMenu {\n      id\n      name\n      dishes {\n        ...DishItemFields\n      }\n    }\n  }\n": typeof types.GetMenuDocument,
 };
@@ -38,6 +45,13 @@ const documents: Documents = {
     "mutation Logout { logOut }": types.LogoutDocument,
     "mutation Refresh { refresh { accessToken } }": types.RefreshDocument,
     "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n": types.GetArticlesDocument,
+    "\n  query GetCategories {\n    categories {\n      id\n      name\n    }\n  }\n": types.GetCategoriesDocument,
+    "\n  mutation CreateDish($input: CreateDishInput!) {\n    createDish(createDishInput: $input) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n": types.CreateDishDocument,
+    "\n  mutation DeleteDish($id: Int!) {\n    deleteDishById(id: $id) {\n      id\n      name\n    }\n  }\n": types.DeleteDishDocument,
+    "\n  mutation DeleteDishes($ids: [Int!]!) {\n    deleteDishes(ids: $ids) {\n      count\n    }\n  }\n": types.DeleteDishesDocument,
+    "\n  mutation UpdateDish($input: UpdateDishInput!) {\n    updateDish(updateDishInput: $input) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n": types.UpdateDishDocument,
+    "\n  query GetDish($id: Int!) {\n    dish(id: $id) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n": types.GetDishDocument,
+    "\n  query GetDishes {\n    dishes {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      category {\n        id\n        name\n      }\n    }\n  }\n": types.GetDishesDocument,
     "\n  fragment DishItemFields on Dish {\n    id\n    name\n    description\n    price\n    imageSrc\n  }\n": types.DishItemFieldsFragmentDoc,
     "\n  query GetMenu {\n    getMenu {\n      id\n      name\n      dishes {\n        ...DishItemFields\n      }\n    }\n  }\n": types.GetMenuDocument,
 };
@@ -96,6 +110,34 @@ export function gql(source: "mutation Refresh { refresh { accessToken } }"): (ty
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n"): (typeof documents)["\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetCategories {\n    categories {\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  query GetCategories {\n    categories {\n      id\n      name\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation CreateDish($input: CreateDishInput!) {\n    createDish(createDishInput: $input) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n"): (typeof documents)["\n  mutation CreateDish($input: CreateDishInput!) {\n    createDish(createDishInput: $input) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation DeleteDish($id: Int!) {\n    deleteDishById(id: $id) {\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteDish($id: Int!) {\n    deleteDishById(id: $id) {\n      id\n      name\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation DeleteDishes($ids: [Int!]!) {\n    deleteDishes(ids: $ids) {\n      count\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteDishes($ids: [Int!]!) {\n    deleteDishes(ids: $ids) {\n      count\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation UpdateDish($input: UpdateDishInput!) {\n    updateDish(updateDishInput: $input) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateDish($input: UpdateDishInput!) {\n    updateDish(updateDishInput: $input) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetDish($id: Int!) {\n    dish(id: $id) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n"): (typeof documents)["\n  query GetDish($id: Int!) {\n    dish(id: $id) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetDishes {\n    dishes {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      category {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetDishes {\n    dishes {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      category {\n        id\n        name\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

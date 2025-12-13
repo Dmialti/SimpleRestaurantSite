@@ -46,6 +46,7 @@ input CreateCategoryInput {
 
 input CreateDishInput {
   available: Boolean!
+  categoryId: Int!
   description: String!
   imageSrc: String!
   name: String!
@@ -65,6 +66,8 @@ scalar DateTime
 
 type Dish {
   available: Boolean!
+  category: Category!
+  categoryId: Int!
   createdAt: DateTime!
   description: String!
   id: Int!
@@ -80,10 +83,10 @@ type DishPayload {
 type Mutation {
   createArticle(createArticleInput: CreateArticleInput!): Article!
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
-  createDish(categoryId: Float!, createDishInput: CreateDishInput!): Dish!
+  createDish(createDishInput: CreateDishInput!): Dish!
   deleteArticleById(id: Float!): Article!
   deleteArticles(ids: [Int!]!): ArticlePayload!
-  deleteDishById(id: Float!): Dish!
+  deleteDishById(id: Int!): Dish!
   deleteDishes(ids: [Int!]!): DishPayload!
   logIn(input: AuthInput!): AuthResponse!
   logOut: Boolean!
@@ -105,6 +108,8 @@ type Paragraph {
 type Query {
   article(id: Int!): Article!
   articles: [Article!]!
+  categories: [Category!]!
+  dish(id: Int!): Dish!
   dishes: [Dish!]!
   getMenu: [Category!]!
   reservations: [Reservation!]!
@@ -139,10 +144,11 @@ input UpdateArticleInput {
 }
 
 input UpdateDishInput {
-  available: Boolean!
-  description: String!
+  available: Boolean
+  categoryId: Int
+  description: String
   id: Int!
-  imageSrc: String!
-  name: String!
-  price: Float!
+  imageSrc: String
+  name: String
+  price: Float
 }

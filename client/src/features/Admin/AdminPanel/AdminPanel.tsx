@@ -37,7 +37,6 @@ const AdminPanel: React.FC = () => {
                 <NavLink
                   key={link.path}
                   to={link.path}
-                  end={link.end}
                   className={({ isActive }) =>
                     `text-lg font-forum tracking-wide transition-all duration-300 hover:pl-2 ${
                       isActive

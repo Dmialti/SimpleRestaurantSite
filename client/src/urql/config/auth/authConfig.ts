@@ -54,8 +54,6 @@ export const authConfig = async (utils: AuthUtilities): Promise<AuthConfig> => {
           const newToken = result.data.refresh.accessToken;
           setAccessToken(newToken);
         }
-
-        setAccessToken(null);
       } catch {
         setAccessToken(null);
       }

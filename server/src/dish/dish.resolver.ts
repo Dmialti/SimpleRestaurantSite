@@ -23,6 +23,16 @@ export class DishResolver {
     return this.dishService.getMenu();
   }
 
+  @Query(() => Dish, { name: 'dish' })
+  getDishById(@Args('id', { type: () => Int }) id: number) {
+    return this.dishService.getDishById(id);
+  }
+
+  @Query(() => [Category], { name: 'categories' })
+  getCategories() {
+    return this.dishService.getCategories();
+  }
+
   @Mutation(() => Category)
   @UseGuards(AuthGuard)
   createCategory(
@@ -33,11 +43,8 @@ export class DishResolver {
 
   @Mutation(() => Dish)
   @UseGuards(AuthGuard)
-  createDish(
-    @Args('categoryId') categoryId: number,
-    @Args('createDishInput') createDishInput: CreateDishInput,
-  ) {
-    return this.dishService.createDish(categoryId, createDishInput);
+  createDish(@Args('createDishInput') createDishInput: CreateDishInput) {
+    return this.dishService.createDish(createDishInput);
   }
 
   @Mutation(() => Dish)
@@ -57,7 +64,7 @@ export class DishResolver {
 
   @Mutation(() => Dish)
   @UseGuards(AuthGuard)
-  deleteDishById(@Args('id') id: number) {
+  deleteDishById(@Args('id', { type: () => Int }) id: number) {
     return this.dishService.deleteDishById(id);
   }
 

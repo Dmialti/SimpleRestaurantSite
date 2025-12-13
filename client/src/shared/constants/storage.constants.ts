@@ -1,5 +1,6 @@
 export const STORAGE_KEYS = {
   ARTICLES_DATA: "ARTICLES_DATA",
   MENU_DATA: "MENU_DATA",
+  MENU_PREFIX: "MENU_",
   ARTICLE_PREFIX: "ARTICLE_",
 } as const;

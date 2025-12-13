@@ -7,7 +7,7 @@ const ParagraphSchema = z.object({
   position: z.number(),
 });
 
-export const UpdateArticleFormSchema = z.object({
+export const ArticleFormSchema = z.object({
   name: z.string().min(1, { message: "Article name is required" }),
   description: z.string().min(1, { message: "Description is required" }),
   imageSrc: z.string().min(1, { message: "Image URL is required" }),
@@ -16,4 +16,4 @@ export const UpdateArticleFormSchema = z.object({
   paragraphs: z.array(ParagraphSchema),
 });
 
-export type UpdateArticleFormData = z.infer<typeof UpdateArticleFormSchema>;
+export type ArticleFormData = z.infer<typeof ArticleFormSchema>;

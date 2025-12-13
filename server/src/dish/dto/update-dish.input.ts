@@ -1,22 +1,8 @@
-import { Field, Float, InputType, Int } from '@nestjs/graphql';
+import { InputType, PartialType, Field, Int } from '@nestjs/graphql';
+import { CreateDishInput } from './create-dish.input';
 
 @InputType()
-export class UpdateDishInput {
+export class UpdateDishInput extends PartialType(CreateDishInput) {
   @Field(() => Int)
   id: number;
-
-  @Field()
-  name?: string;
-
-  @Field()
-  description?: string;
-
-  @Field(() => Float)
-  price?: number;
-
-  @Field()
-  imageSrc?: string;
-
-  @Field()
-  available?: boolean;
 }

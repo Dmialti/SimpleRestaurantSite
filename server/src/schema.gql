@@ -22,6 +22,7 @@ input AuthInput {
 
 type AuthResponse {
   accessToken: String!
+  id: ID!
 }
 
 type BatchPayload {
@@ -104,7 +105,6 @@ type Mutation {
   logIn(input: AuthInput!): AuthResponse!
   logOut: Boolean!
   refresh: AuthResponse!
-  signUp(input: AuthInput!): AuthResponse!
   updateArticle(updateArticleInput: UpdateArticleInput!): Article!
   updateDish(updateDishInput: UpdateDishInput!): Dish!
   updateDishAvailability(available: Boolean!, dishId: Float!): Dish!

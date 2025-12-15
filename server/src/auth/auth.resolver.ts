@@ -45,11 +45,6 @@ export class AuthResolver {
   }
 
   @Mutation(() => AuthResponse)
-  async signUp(@Args('input') input: AuthInput) {
-    await this.authService.signUp(input);
-  }
-
-  @Mutation(() => AuthResponse)
   async refresh(@Context() context: GqlContext) {
     const refreshToken = context.req.cookies['refresh_token'];
 

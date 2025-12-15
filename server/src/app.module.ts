@@ -10,14 +10,15 @@ import { CacheModule } from '@nestjs/cache-manager';
 import * as redisStore from 'cache-manager-redis-store';
 import { S3Module } from './s3/s3.module';
 import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     PrismaModule,
     S3Module,
+    ReservationModule,
     ArticleModule,
     DishModule,
-    ReservationModule,
     UserModule,
     GraphQLModule.forRoot<MercuriusDriverConfig>({
       driver: MercuriusDriver,
@@ -28,8 +29,13 @@ import { UserModule } from './user/user.module';
       isGlobal: true,
       store: redisStore,
       host: 'redis',
-      port: 6379,
+      port: process.env.REDIS_PORT,
       ttl: 600,
+    }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
+      ignoreEnvFile: process.env.NODE_ENV === 'production',
     }),
   ],
 })

@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Int, HideField } from '@nestjs/graphql';
 import { Role } from '../../../prisma/generated/prisma/enums';
 
 @ObjectType()
@@ -9,6 +9,7 @@ export class User {
   @Field()
   email: string;
 
+  @HideField()
   password: string;
 
   @Field(() => Role)

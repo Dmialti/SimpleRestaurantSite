@@ -17,7 +17,7 @@ export class DishResolver {
   getAll() {
     return this.dishService.getAll();
   }
-  y;
+
   @Query(() => [Category], { name: 'getMenu' })
   getMenu() {
     return this.dishService.getMenu();

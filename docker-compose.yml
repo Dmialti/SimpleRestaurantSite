@@ -11,10 +11,28 @@ services:
       - POSTGRES_DB=restaurant_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  postgreSQLTests:
+    image: postgres:17
+    container_name: restaurant_db_test
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=restaurant_db_test
+    volumes:
+      - postgres_test_data:/var/lib/postgresql/data
   redis:
     image: redis:8.4.0
     ports:
       - "6379:6379"
     restart: always
+  redis_test:
+    image: redis:8.4.0
+    ports:
+      - "6370:6379"
+    restart: always
 volumes:
   postgres_data:
+  postgres_test_data:

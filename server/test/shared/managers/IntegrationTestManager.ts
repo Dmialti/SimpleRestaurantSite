@@ -9,9 +9,10 @@ import fastifyCookie from '@fastify/cookie';
 import { AppModule } from '../../../src/app.module';
 import { PrismaService } from '../../../src/prisma/prisma.service';
 import { adminData } from '../adminUser';
+import { Server } from 'http';
 
 export class IntegrationTestManager {
-  public httpServer: any;
+  public httpServer: Server;
 
   private app: NestFastifyApplication;
   private prisma: PrismaService;

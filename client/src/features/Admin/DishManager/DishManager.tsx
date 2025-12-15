@@ -15,7 +15,7 @@ import IconCardFill from "../../Contact/components/IconCardFill/IconCardFill";
 
 import changeFileIcon from "../../../../public/shared/icons/changeFile.svg";
 
-import { usePersistentQuery } from "../../../shared/hooks/useData.hook";
+import { usePersistentQuery } from "../../../shared/hooks/usePersistentQuery.hook";
 import { STORAGE_KEYS } from "../../../shared/constants/storage.constants";
 import { uploadFile } from "../../../shared/api/uploadFile.api";
 import {

@@ -11,7 +11,7 @@ import HeadingDecorated from "../../../shared/components/HeadingDecorated/Headin
 import LoadingSpinner from "../../../shared/components/LoadingSpinner/LoadingSpinner";
 import ParagraphField from "./components/ParagraphField";
 
-import { usePersistentQuery } from "../../../shared/hooks/useData.hook";
+import { usePersistentQuery } from "../../../shared/hooks/usePersistentQuery.hook";
 import { GET_ARTICLE_QUERY } from "../../../graphql/article/queries/getArticle.query";
 import { STORAGE_KEYS } from "../../../shared/constants/storage.constants";
 import type {

@@ -13,7 +13,7 @@ import Button from "../../shared/components/Button/Button";
 import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDecorated";
 import LoadingSpinner from "../../shared/components/LoadingSpinner/LoadingSpinner";
 import { STORAGE_KEYS } from "../../shared/constants/storage.constants";
-import { usePersistentQuery } from "../../shared/hooks/useData.hook";
+import { usePersistentQuery } from "../../shared/hooks/usePersistentQuery.hook";
 import { formatDate } from "../../shared/utils/formatters/formateDate.utils";
 
 const Article: React.FC = () => {

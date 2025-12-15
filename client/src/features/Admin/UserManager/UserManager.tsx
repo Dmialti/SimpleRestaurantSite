@@ -6,7 +6,7 @@ import Button from "../../../shared/components/Button/Button";
 import LoadingSpinner from "../../../shared/components/LoadingSpinner/LoadingSpinner";
 import HeaderLeftDecor from "../../../shared/components/HeaderLeftDecor/HeaderLeftDecor";
 
-import { usePersistentQuery } from "../../../shared/hooks/useData.hook";
+import { usePersistentQuery } from "../../../shared/hooks/usePersistentQuery.hook";
 import { STORAGE_KEYS } from "../../../shared/constants/storage.constants";
 
 import { DELETE_USER_MUTATION } from "../../../graphql/user/mutations/deleteUserById.mutation";

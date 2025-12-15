@@ -7,7 +7,7 @@ import LoadingSpinner from "../../../shared/components/LoadingSpinner/LoadingSpi
 import { DELETE_ARTICLE_MUTATION } from "../../../graphql/article/mutations/deleteArticle.mutation";
 import { DELETE_ARTICLES_MUTATION } from "../../../graphql/article/mutations/deleteArticles.mutation";
 import HeaderLeftDecor from "../../../shared/components/HeaderLeftDecor/HeaderLeftDecor";
-import { usePersistentQuery } from "../../../shared/hooks/useData.hook";
+import { usePersistentQuery } from "../../../shared/hooks/usePersistentQuery.hook";
 import type { GetArticlesQuery } from "../../../graphql/codegen/generated/graphql";
 import { STORAGE_KEYS } from "../../../shared/constants/storage.constants";
 import HeadingDecorated from "../../../shared/components/HeadingDecorated/HeadingDecorated";

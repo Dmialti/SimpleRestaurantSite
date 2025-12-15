@@ -2,13 +2,13 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { PrismaService } from '../../src/prisma/prisma.service';
 import { TestingModule, Test } from '@nestjs/testing';
 import { ExecutionResult } from 'graphql';
-import { AppModule } from '../../src/app.module';
 import request from 'supertest';
-import { adminData } from '../shared/adminUser';
 import fastifyCookie from '@fastify/cookie';
+import { AppModule } from '../../../src/app.module';
+import { PrismaService } from '../../../src/prisma/prisma.service';
+import { adminData } from '../adminUser';
 
 export class IntegrationTestManager {
   public httpServer: any;

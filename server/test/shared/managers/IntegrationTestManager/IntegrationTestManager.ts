@@ -2,14 +2,15 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { TestingModule, Test } from '@nestjs/testing';
+import { TestingModule, Test, TestingModuleBuilder } from '@nestjs/testing';
 import { ExecutionResult } from 'graphql';
 import request from 'supertest';
 import fastifyCookie from '@fastify/cookie';
-import { AppModule } from '../../../src/app.module';
-import { PrismaService } from '../../../src/prisma/prisma.service';
-import { adminData } from '../adminUser';
+import { AppModule } from '../../../../src/app.module';
+import { PrismaService } from '../../../../src/prisma/prisma.service';
+import { adminData } from '../../adminUser';
 import { Server } from 'http';
+import { ProviderMock } from './interfaces/ProviderMock.interface';
 
 export class IntegrationTestManager {
   public httpServer: Server;
@@ -18,10 +19,20 @@ export class IntegrationTestManager {
   private prisma: PrismaService;
   private accessToken?: string;
 
+  constructor(private readonly mocks: ProviderMock[] = []) {}
+
   async beforeAll(): Promise<void> {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
+    let moduleBuilder: TestingModuleBuilder = Test.createTestingModule({
       imports: [AppModule],
-    }).compile();
+    });
+
+    this.mocks.forEach((mock) => {
+      moduleBuilder = moduleBuilder
+        .overrideProvider(mock.token)
+        .useValue(mock.useValue);
+    });
+
+    const moduleFixture: TestingModule = await moduleBuilder.compile();
 
     const fastifyAdapter = new FastifyAdapter();
     fastifyAdapter.register(fastifyCookie);

@@ -4,10 +4,20 @@ import { CreateUserInput } from '../src/user/dto/createUser.input';
 import gql from 'graphql-tag';
 import { adminData } from './shared/adminUser';
 import { User } from '../src/user/entities/user.entity';
-import { IntegrationTestManager } from './shared/managers/IntegrationTestManager';
+import { IntegrationTestManager } from './shared/managers/IntegrationTestManager/IntegrationTestManager';
+import { S3Service } from '../src/s3/s3.service';
 
 describe('Auth and User System (e2e)', () => {
-  const integrationTestManager = new IntegrationTestManager();
+  const mockS3Service = {
+    uploadFile: jest
+      .fn()
+      .mockResolvedValue('https://fake-s3-url.com/avatar.jpg'),
+    deleteFile: jest.fn().mockResolvedValue(true),
+  };
+
+  const integrationTestManager = new IntegrationTestManager([
+    { token: S3Service, useValue: mockS3Service },
+  ]);
 
   beforeAll(async () => {
     await integrationTestManager.beforeAll();

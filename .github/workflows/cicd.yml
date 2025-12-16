@@ -100,6 +100,8 @@ jobs:
             cd app
             docker compose pull api
             docker rm -f restaurant_api || true
+            docker compose create api
+            docker compose exec api npx prisma migrate deploy --config prisma.config.ts
             docker compose up -d --no-deps api
             docker compose restart nginx
             docker image prune -f

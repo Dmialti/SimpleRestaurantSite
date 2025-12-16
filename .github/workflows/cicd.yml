@@ -101,4 +101,6 @@ jobs:
             docker compose pull api
             docker rm -f restaurant_api || true
             docker compose up -d --no-deps api
+            docker compose run --rm certbot renew
+            docker compose restart nginx
             docker image prune -f

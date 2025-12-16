@@ -26,7 +26,7 @@ async function uploadToS3(localPath: string, s3Key: string): Promise<string> {
   const fullPath = path.join(CLIENT_PUBLIC_DIR, localPath);
 
   if (!fs.existsSync(fullPath)) {
-    console.error(`❌ File not found: ${fullPath}`);
+    console.error(`File not found: ${fullPath}`);
     return localPath;
   }
 
@@ -48,7 +48,7 @@ async function uploadToS3(localPath: string, s3Key: string): Promise<string> {
   const region = process.env.AWS_REGION;
   const url = `https://${BUCKET_NAME}.s3.${region}.amazonaws.com/${cleanKey}`;
 
-  console.log(`✅ Loaded: ${localPath} -> ${url}`);
+  console.log(`Loaded: ${localPath} -> ${url}`);
   return url;
 }
 

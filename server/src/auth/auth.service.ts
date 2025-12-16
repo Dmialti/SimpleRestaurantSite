@@ -8,12 +8,14 @@ import { AuthInput } from './dto/auth.input';
 import * as bcrypt from 'bcrypt';
 import { JwtPayload } from './types/jwtPayload.type';
 import { PrismaService } from '../prisma/prisma.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
+    private configService: ConfigService,
   ) {}
 
   async logIn(dto: AuthInput) {
@@ -51,11 +53,11 @@ export class AuthService {
 
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload, {
-        secret: process.env.JWT_ACCESS_SECRET,
+        secret: this.configService.getOrThrow('JWT_ACCESS_SECRET'),
         expiresIn: '15m',
       }),
       this.jwtService.signAsync(payload, {
-        secret: process.env.JWT_REFRESH_SECRET,
+        secret: this.configService.getOrThrow('JWT_REFRESH_SECRET'),
         expiresIn: '7d',
       }),
     ]);
@@ -70,7 +72,7 @@ export class AuthService {
     let payload: JwtPayload;
     try {
       payload = await this.jwtService.verifyAsync<JwtPayload>(refreshToken, {
-        secret: process.env.JWT_REFRESH_SECRET,
+        secret: this.configService.getOrThrow('JWT_REFRESH_SECRET'),
       });
     } catch {
       throw new ForbiddenException('Refresh token invalid or expired');

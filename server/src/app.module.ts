@@ -10,10 +10,15 @@ import { CacheModule } from '@nestjs/cache-manager';
 import * as redisStore from 'cache-manager-redis-store';
 import { S3Module } from './s3/s3.module';
 import { UserModule } from './user/user.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
+      ignoreEnvFile: process.env.NODE_ENV === 'production',
+    }),
     PrismaModule,
     S3Module,
     ReservationModule,
@@ -27,15 +32,14 @@ import { ConfigModule } from '@nestjs/config';
     }),
     CacheModule.register({
       isGlobal: true,
-      store: redisStore,
-      host: 'redis',
-      port: process.env.REDIS_PORT,
-      ttl: 600,
-    }),
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
-      ignoreEnvFile: process.env.NODE_ENV === 'production',
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        store: redisStore,
+        host: configService.getOrThrow<string>('REDIS_HOST'),
+        port: +configService.getOrThrow<string>('REDIS_PORT'),
+        ttl: 600,
+      }),
     }),
   ],
 })

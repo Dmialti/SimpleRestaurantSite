@@ -51,7 +51,8 @@ jobs:
         run: |
           echo "DATABASE_URL=postgresql://postgres:password@localhost:5432/restaurant_db_test?schema=public" >> .env.test
           echo "NODE_ENV=test" >> .env.test
-          echo "JWT_SECRET=super_secret_test_key" >> .env.test
+          echo "JWT_ACCESS_SECRET=test_access_secret_123" >> .env.test
+          echo "JWT_REFRESH_SECRET=test_refresh_secret_456" >> .env.test
           echo "PORT=3000" >> .env.test
           echo "REDIS_HOST=localhost" >> .env.test
           echo "REDIS_PORT=6379" >> .env.test

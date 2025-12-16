@@ -9,8 +9,6 @@ COPY nest-cli.json ./
 COPY prisma ./prisma/
 
 COPY src ./src
-COPY test ./test
-COPY shared ./shared
 
 RUN npm ci
 

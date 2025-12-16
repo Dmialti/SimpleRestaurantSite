@@ -5,7 +5,7 @@ import { cacheConfig } from "./config/cache/cacheConfig";
 import { authConfig } from "./config/auth/authConfig";
 
 export const client = createClient({
-  url: "http://localhost:3000/graphql",
+  url: import.meta.env.VITE_API_URL,
   fetchOptions: {
     credentials: "include",
   },

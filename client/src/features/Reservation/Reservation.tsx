@@ -87,7 +87,7 @@ const Reservation: React.FC = () => {
         <Button
           className="py-4 font-satoshi text-[12px] leading-[190%] tracking-[1px]"
           disabled={!allFieldsFilled}
-          styleType="submit"
+          variant="submit"
         >
           RESERVE
         </Button>

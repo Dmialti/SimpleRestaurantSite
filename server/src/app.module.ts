@@ -19,6 +19,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       envFilePath: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
       ignoreEnvFile: process.env.NODE_ENV === 'production',
     }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
+      ignoreEnvFile: process.env.NODE_ENV === 'production',
+    }),
     PrismaModule,
     S3Module,
     ReservationModule,

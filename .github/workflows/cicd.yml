@@ -99,5 +99,6 @@ jobs:
           script: |
             cd app
             docker compose pull api
+            docker rm -f restaurant_api || true
             docker compose up -d --no-deps api
             docker image prune -f

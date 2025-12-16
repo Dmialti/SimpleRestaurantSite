@@ -6,6 +6,7 @@ COPY package*.json ./
 COPY tsconfig*.json ./
 COPY nest-cli.json ./
 
+COPY prisma.config.ts ./
 COPY prisma ./prisma/
 
 COPY src ./src

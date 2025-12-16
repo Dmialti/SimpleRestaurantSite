@@ -49,7 +49,6 @@ describe('Auth and User System (e2e)', () => {
       `)
       .variables({ input: userData })
       .expectNoErrors();
-    console.log(response);
     expect(response.data?.createUser.email).toBe(userData.email);
     expect(response.data?.createUser.role).toBe(userData.role);
   });

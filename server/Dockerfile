@@ -31,6 +31,7 @@ COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/dist ./dist
 
 COPY --from=builder /app/prisma/migrations ./prisma/migrations
+COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
 COPY --from=builder /app/prisma ./prisma
 
 CMD ["node", "dist/src/main.js"]

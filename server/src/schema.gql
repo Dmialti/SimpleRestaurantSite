@@ -22,7 +22,6 @@ input AuthInput {
 
 type AuthResponse {
   accessToken: String!
-  id: ID!
 }
 
 type BatchPayload {

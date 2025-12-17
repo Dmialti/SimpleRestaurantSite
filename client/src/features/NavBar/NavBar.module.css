@@ -12,15 +12,23 @@
 }
 @media (max-width: 445px) {
   .header {
-    width: 85%;
+    width: 100%;
+    top: 0;
+    position: sticky;
+    translate: none;
+  }
+
+  .navLinks {
+    width: 100%;
     font-size: 5vw;
+    position: relative;
+  }
+  .dropdown {
+    position: absolute;
   }
 }
 @media (max-width: 380px) {
   .header {
-    position: absolute;
-    top: 7vw;
-    width: 85%;
     justify-content: center;
     height: min-content;
     font-size: 8vw;
@@ -40,7 +48,5 @@
   }
   .collapseSecond {
     display: none;
-  }
-  .dropdown {
   }
 }

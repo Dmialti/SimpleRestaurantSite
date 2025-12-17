@@ -125,10 +125,12 @@ const NavBar: React.FC = () => {
 
   return (
     <header
-      className={`${styles.header} z-50 font-satoshi overflow-hidden rounded-xl fixed flex w-max h-auto left-18 top-18 text-2xl text-text-default font-semibold tracking-[1px]`}
+      className={`${styles.header} z-50 font-satoshi rounded-xl bg-background-default fixed flex w-max h-auto left-18 top-18 text-2xl text-text-default font-semibold tracking-[1px]`}
     >
       <nav className="flex flex-col h-fit w-full relative">
-        <div className="flex items-center justify-between bg-background-default ">
+        <div
+          className={`${styles.navLinks} rounded-xl flex items-center justify-between bg-background-default `}
+        >
           <button
             onMouseEnter={hamburgerMouseEnter}
             onMouseLeave={hamburgerMouseLeave}
@@ -175,7 +177,7 @@ const NavBar: React.FC = () => {
 
         <div
           ref={dropdownRef}
-          className={`${styles.dropdown} hidden bg-background-default`}
+          className={`${styles.dropdown} hidden bg-background-default top-full left-0 w-full rounded-b-xl shadow-lg z-10`}
         >
           <img
             ref={(el) => {

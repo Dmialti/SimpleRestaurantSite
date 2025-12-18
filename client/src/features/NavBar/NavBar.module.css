@@ -16,13 +16,19 @@
     top: 0;
     position: sticky;
     translate: none;
+    border-radius: 0%;
   }
 
   .navLinks {
     width: 100%;
     font-size: 5vw;
     position: relative;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 0%;
+    border-bottom: 1px solid var(--color-border-default);
   }
+
   .dropdown {
     position: absolute;
   }
@@ -45,6 +51,10 @@
   .header button div {
     width: 5vw;
     height: 1px;
+  }
+  .navLinks {
+    padding-left: 5vw;
+    padding-right: 5vw;
   }
   .collapseSecond {
     display: none;

@@ -1,0 +1,9 @@
+@media (max-width: 920px) {
+  .flexibleInputs {
+    flex-direction: column;
+  }
+  .mainSection {
+    padding: 24px;
+    padding-top: 40px;
+  }
+}

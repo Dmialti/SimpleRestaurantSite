@@ -11,6 +11,7 @@ import reservationHeroImg from "../../assets/ReservationPageMaterials/reservatio
 import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
 import Button from "../../shared/components/Button/Button";
 import BaseFormLayout from "../../shared/components/FormBaseLayout/FormBaseLayout";
+import styles from "./Reservation.module.css";
 
 const Reservation: React.FC = () => {
   const onSubmit: SubmitHandler<ReservationFormData> = (data) => {
@@ -42,6 +43,7 @@ const Reservation: React.FC = () => {
         header="RESERVATION"
         description="Secure your spot at Qitchen, where exceptional sushi and a remarkable dining experience await."
         onSubmit={handleSubmit(onSubmit)}
+        className={styles.mainSection}
       >
         <Input
           {...register("firstName")}
@@ -61,7 +63,7 @@ const Reservation: React.FC = () => {
           placeholder="Email"
           errorMessage={errors.email?.message}
         />
-        <div className="flex flex-row gap-4">
+        <div className={`${styles.flexibleInputs} flex flex-row gap-4`}>
           <Input
             {...register("guestsCount")}
             className="flex-1 min-w-0"

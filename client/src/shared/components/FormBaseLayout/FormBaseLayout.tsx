@@ -18,11 +18,11 @@ const BaseFormLayout: React.FC<FormBaseLayoutProps> = ({
 }) => {
   return (
     <div
-      className={`h-full min-w-0 px-24 py-20 flex flex-col items-center gap-20 rounded-2xl`}
+      className={`h-full min-w-0 px-24 py-20 flex flex-col items-center gap-20 rounded-2xl ${className}`}
     >
       <div className="flex flex-col gap-4 text-text-default text-center">
         {header && (
-          <HeadingDecorated className="font-forum text-[40px] leading-[120%] tracking-[1px]">
+          <HeadingDecorated className="wrap-normal font-forum text-[40px] leading-[120%] tracking-[1px]">
             {header}
           </HeadingDecorated>
         )}
@@ -32,10 +32,7 @@ const BaseFormLayout: React.FC<FormBaseLayoutProps> = ({
           </div>
         )}
       </div>
-      <form
-        onSubmit={onSubmit}
-        className={`flex flex-col gap-4 px-17 w-full ${className}`}
-      >
+      <form onSubmit={onSubmit} className={`flex flex-col gap-4 w-full`}>
         {children}
       </form>
     </div>

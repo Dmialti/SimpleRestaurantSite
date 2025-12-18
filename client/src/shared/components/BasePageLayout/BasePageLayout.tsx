@@ -23,7 +23,7 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
       <div className={`${styles.heroSection} top-0 py-6 h-screen sticky`}>
         <HeroCard
           heading={heading}
-          className={`relative h-full `}
+          className={`relative h-full`}
           mediaType={mediaType}
           mediaSrc={mediaSrc}
         />

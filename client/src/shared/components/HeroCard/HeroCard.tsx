@@ -25,7 +25,7 @@ const HeroCard: React.FC<HeroCardProps> = ({
       mediaSrc={mediaSrc}
     >
       <BottomGradient />
-      <HeroHeading className="absolute bottom-0 left-0 self pb-14 pl-16.5">
+      <HeroHeading className="text-nowrap absolute bottom-0 left-0 self pb-14 pl-16.5">
         {heading?.map((item) => (
           <div key={item}>{item}</div>
         ))}

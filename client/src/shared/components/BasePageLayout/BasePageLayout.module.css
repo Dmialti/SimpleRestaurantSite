@@ -33,3 +33,9 @@
     height: auto;
   }
 }
+
+@media (max-width: 380px) {
+  .menuSection {
+    padding: 5vw;
+  }
+}

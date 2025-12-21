@@ -1,38 +1,69 @@
 services:
-  postgreSQL:
-    image: postgres:17
+  api:
+    image: dmialti/restaurant-server:latest
+    container_name: restaurant_api
+    restart: always
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - app_net
+  db:
+    image: postgres:15-alpine
     container_name: restaurant_db
     restart: always
-    ports:
-      - "5432:5432"
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=restaurant_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: restaurant_db
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-  postgreSQLTests:
-    image: postgres:17
-    container_name: restaurant_db_test
-    restart: always
-    ports:
-      - "5433:5432"
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=restaurant_db_test
-    volumes:
-      - postgres_test_data:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - app_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   redis:
-    image: redis:8.4.0
-    ports:
-      - "6379:6379"
+    image: redis:alpine
+    container_name: restaurant_redis
     restart: always
-  redis_test:
-    image: redis:8.4.0
-    ports:
-      - "6370:6379"
+    networks:
+      - app_net
+
+  nginx:
+    image: nginx:alpine
+    container_name: restaurant_nginx
     restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    depends_on:
+      - api
+    networks:
+      - app_net
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    networks:
+      - app_net
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot; sleep 12h; done;'"
 volumes:
-  postgres_data:
-  postgres_test_data:
+  pg_data:
+
+networks:
+  app_net:
+    driver: bridge

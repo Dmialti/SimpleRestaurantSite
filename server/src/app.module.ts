@@ -35,9 +35,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
     }),
-    CacheModule.register({
+    CacheModule.registerAsync({
       isGlobal: true,
-      imports: [ConfigModule], // Вказуємо залежність
+      imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         store: redisStore,

@@ -100,7 +100,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: "nginx.conf,docker-compose.yml"
+          source: "nginx/nginx.conf,docker-compose.yml"
           target: "app"
 
       - name: Deploy via SSH

@@ -6,6 +6,7 @@ import {
 } from '@nestjs/platform-fastify';
 import fastifyCookie from '@fastify/cookie';
 import multipart from '@fastify/multipart';
+import cors from '@fastify/cors';
 
 async function bootstrap() {
   const whitelist = [
@@ -26,8 +27,7 @@ async function bootstrap() {
       fileSize: 5 * 1024 * 1024,
     },
   });
-
-  app.enableCors({
+  await app.register(cors, {
     origin: (origin, callback) => {
       if (!origin) {
         return callback(null, true);
@@ -38,7 +38,7 @@ async function bootstrap() {
       return callback(new Error('Not allowed by CORS'), false);
     },
     credentials: true,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
   });
 
   await app.listen(process.env.PORT || 3000, '0.0.0.0');

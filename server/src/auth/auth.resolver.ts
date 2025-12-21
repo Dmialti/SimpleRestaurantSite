@@ -64,7 +64,7 @@ export class AuthResolver {
       httpOnly: true,
       path: '/',
       secure: true,
-      sameSite: 'lax',
+      sameSite: 'none',
     });
   }
 }

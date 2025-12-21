@@ -8,9 +8,13 @@ import fastifyCookie from '@fastify/cookie';
 import multipart from '@fastify/multipart';
 
 async function bootstrap() {
+  const whitelist = [
+    'http://localhost:5000', // local dev
+    process.env.CLIENT_URL, // prod
+  ];
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter({ trustProxy: true }),
   );
 
   await app.register(fastifyCookie, {
@@ -21,6 +25,20 @@ async function bootstrap() {
     limits: {
       fileSize: 5 * 1024 * 1024,
     },
+  });
+
+  app.enableCors({
+    origin: (origin, callback) => {
+      if (!origin) {
+        return callback(null, true);
+      }
+      if (whitelist.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error('Not allowed by CORS'), false);
+    },
+    credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
   });
 
   await app.listen(process.env.PORT || 3000, '0.0.0.0');

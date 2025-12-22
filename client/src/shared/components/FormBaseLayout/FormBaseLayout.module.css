@@ -1,0 +1,16 @@
+@media (max-width: 920px) {
+  .headerSection {
+    font-size: 30px;
+  }
+}
+@media (max-width: 430px) {
+  .headerSection {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 310px) {
+  .headerSection {
+    font-size: 20px;
+  }
+}

@@ -1,5 +1,6 @@
 import React, { type ReactNode } from "react";
 import HeadingDecorated from "../HeadingDecorated/HeadingDecorated";
+import styles from "./FormBaseLayout.module.css";
 
 interface FormBaseLayoutProps {
   header?: string;
@@ -22,7 +23,9 @@ const BaseFormLayout: React.FC<FormBaseLayoutProps> = ({
     >
       <div className="flex flex-col gap-4 text-text-default text-center">
         {header && (
-          <HeadingDecorated className="wrap-normal font-forum text-[40px] leading-[120%] tracking-[1px]">
+          <HeadingDecorated
+            className={`font-forum text-[40px] leading-[120%] tracking-[1px] ${styles.headerSection}`}
+          >
             {header}
           </HeadingDecorated>
         )}

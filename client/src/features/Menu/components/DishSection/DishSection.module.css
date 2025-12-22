@@ -1,3 +1,12 @@
+@media (max-width: 810px) {
+  .categoryHeader {
+    font-size: 24px;
+  }
+  .dishSectionContainer {
+    padding-top: 32px;
+    gap: 32px;
+  }
+}
 @media (max-width: 280px) {
   .categoryHeader {
     font-size: 10vw;

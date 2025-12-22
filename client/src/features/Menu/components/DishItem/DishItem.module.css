@@ -1,19 +1,21 @@
+.dishContainer {
+  --card-radius: 1rem;
+}
+
 @media (max-width: 810px) {
   .dishContainer {
     flex-direction: column;
+    --card-radius: 8px;
   }
   .card {
     width: 100%;
     height: auto;
   }
 }
-@media (max-width: 470px) {
+@media (max-width: 335px) {
   .mainInfo {
     flex-wrap: wrap;
-    justify-content: center;
-  }
-  .dishName {
-    flex: auto;
+    justify-content: space-between;
   }
   .border {
     display: none;

@@ -4,6 +4,7 @@ import React, { useRef, type ReactNode } from "react";
 
 type BaseCardProps = {
   mediaSrc: string;
+  borderRadius?: string;
   isAnimated?: boolean;
   isHoverContext?: boolean;
   onClick?: () => void;
@@ -22,6 +23,7 @@ export type CardBaseProps =
 const CardBase: React.FC<CardBaseProps> = ({
   mediaType,
   mediaSrc,
+  borderRadius = "1rem",
   isAnimated,
   onClick,
   onHoverChange,
@@ -61,7 +63,8 @@ const CardBase: React.FC<CardBaseProps> = ({
 
   return (
     <div
-      className={`overflow-hidden rounded-2xl ${className}`}
+      className={`overflow-hidden ${className}`}
+      style={{ borderRadius: borderRadius }}
       onClick={onClick}
       onMouseEnter={changeHover ? () => setIsHovered(true) : undefined}
       onMouseLeave={changeHover ? () => setIsHovered(false) : undefined}
@@ -71,7 +74,7 @@ const CardBase: React.FC<CardBaseProps> = ({
           className="h-full w-full object-cover block"
           style={{
             willChange: "transform, filter",
-            clipPath: "inset(0 round 1rem)",
+            clipPath: `inset(0 round ${borderRadius})`,
           }}
           src={mediaSrc}
           alt=""

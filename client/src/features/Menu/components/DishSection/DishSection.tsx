@@ -19,7 +19,9 @@ const DishSection: React.FC<DishSectionProps> = ({
 }) => {
   const dishes = useFragment(DISH_FRAGMENT, dishesRef);
   return (
-    <div className="flex flex-col items-center gap-12 pt-16">
+    <div
+      className={`flex flex-col items-center gap-12 pt-16 ${styles.dishSectionContainer}`}
+    >
       <HeadingDecorated
         className={`font-forum text-[32px] tracking-[1px] leading-[120%] ${styles.categoryHeader}`}
       >

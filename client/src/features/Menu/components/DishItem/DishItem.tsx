@@ -14,6 +14,7 @@ const DishItem: React.FC<DishItemProps> = (props) => {
         className={`${styles.card} w-[150px] h-[100px] flex-none`}
         mediaType="image"
         mediaSrc={props.imageSrc}
+        borderRadius="var(--card-radius)"
       />
       <div className=" flex flex-col justify-center gap-1">
         <div

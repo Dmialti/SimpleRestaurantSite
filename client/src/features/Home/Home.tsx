@@ -44,7 +44,7 @@ const Home: React.FC = () => {
         </CornerMenu>
       </HeroCard>
       <div
-        className={`${styles.cardsSection} h-full overflow-hidden flex gap-4`}
+        className={`h-full overflow-hidden flex gap-4 ${styles.cardsSection}`}
       >
         <CardContextProvider>
           <CardWithContextHover

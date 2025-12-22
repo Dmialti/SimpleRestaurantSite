@@ -84,7 +84,13 @@ jobs:
           file: ./server/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/restaurant-server:latest
-
+      - name: Build and push Nginx image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./nginx
+          file: ./nginx/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/restaurant-nginx:latest
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
@@ -100,7 +106,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: "nginx/nginx.conf,docker-compose.yml"
+          source: "docker-compose.yml"
           target: "app"
 
       - name: Deploy via SSH
@@ -111,10 +117,10 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             cd app
-            docker compose pull api
+            docker compose pull
             docker rm -f restaurant_api || true
             docker compose create api
             docker compose exec api npx prisma migrate deploy --config prisma.config.ts
-            docker compose up -d --no-deps api
+            docker compose up -d --no-deps
             docker compose restart nginx
             docker image prune -f

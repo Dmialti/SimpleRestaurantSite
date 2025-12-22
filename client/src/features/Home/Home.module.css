@@ -89,6 +89,7 @@
   }
   .mainSection {
     padding: 5vw;
+    gap: 5vw;
   }
 }
 @media (max-width: 260px) {

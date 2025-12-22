@@ -1,4 +1,4 @@
-.menuSection {
+.mainSection {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "hero list";
@@ -15,7 +15,7 @@
 }
 
 @media (max-width: 1280px) {
-  .menuSection {
+  .mainSection {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas: "hero" "list";
@@ -34,8 +34,9 @@
   }
 }
 
-@media (max-width: 380px) {
-  .menuSection {
-    padding: 5vw;
+@media (max-width: 810px) {
+  .mainSection {
+    padding: 12px;
+    gap: 12px;
   }
 }

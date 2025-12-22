@@ -12,12 +12,18 @@
     height: auto;
   }
 }
-@media (max-width: 335px) {
+@media (max-width: 360px) {
   .mainInfo {
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
   }
   .border {
     display: none;
+  }
+  .dishName {
+    flex: auto;
+  }
+  .price {
+    flex: auto;
   }
 }

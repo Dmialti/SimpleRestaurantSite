@@ -18,7 +18,7 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
 }) => {
   return (
     <div
-      className={`${styles.menuSection} w-full h-auto box-border gap-4 relative px-6`}
+      className={`${styles.mainSection} w-full h-auto box-border gap-4 relative px-6`}
     >
       <div className={`${styles.heroSection} top-0 py-6 h-screen sticky`}>
         <HeroCard

@@ -20,7 +20,9 @@ const DishItem: React.FC<DishItemProps> = (props) => {
         <div
           className={`${styles.mainInfo} flex flex-row gap-4 justify-between font-forum text-[22px] text-text-default tracking-[1px] leading-[120%]`}
         >
-          <div className={`${styles.dishName} text-center flex-none`}>
+          <div
+            className={`${styles.dishName} text-center flex-none wrap-anywhere`}
+          >
             {props.name}
           </div>
           <div

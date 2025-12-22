@@ -78,7 +78,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ imagesSrc, className }) => {
       <img
         ref={leftArrowRef}
         src="/shared/ImageSlider/arrowLeft.svg"
-        className="absolute opacity-0 pointer-events-none -translate-y-1/2 top-1/2 left-3 aspect-square bg-background-muted rounded-full"
+        className="absolute opacity-0 pointer-events-none -translate-y-1/2 top-1/2 left-3 aspect-square bg-background-muted rounded-full h-9"
         onClick={prevSlide}
         draggable={false}
         onMouseDown={() => onMouseDownShrink(leftArrowRef.current)}
@@ -88,7 +88,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ imagesSrc, className }) => {
       <img
         ref={rightArrowRef}
         src="/shared/ImageSlider/arrowRight.svg"
-        className="absolute -translate-y-1/2 top-1/2 right-3 aspect-square bg-background-muted rounded-full"
+        className="absolute -translate-y-1/2 top-1/2 right-3 aspect-square bg-background-muted rounded-full h-9"
         onClick={nextSlide}
         draggable={false}
         onMouseDown={() => onMouseDownShrink(rightArrowRef.current)}

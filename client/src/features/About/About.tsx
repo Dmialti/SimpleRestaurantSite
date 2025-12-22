@@ -23,7 +23,7 @@ const About: React.FC = () => {
       className="border-none"
     >
       <div
-        className={`h-full flex flex-col gap-4 text-text-default ${styles.mainContainer}`}
+        className={`h-full flex flex-col wrap-anywhere gap-4 text-text-default ${styles.mainContainer}`}
       >
         <div className={`h-full min-h-0 flex flex-row gap-4 ${styles.topLine}`}>
           <div

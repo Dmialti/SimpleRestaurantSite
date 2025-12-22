@@ -31,36 +31,50 @@ const Contact: React.FC = () => {
           <HeadingDecorated className="text-[24px] leading-[120%] tracking-[1px] font-forum">
             OPENING HOURS
           </HeadingDecorated>
-          <ul className="text-nowrap flex flex-col gap-4 text-[16px] leading-[180%] tracking-[0px] font-satoshi">
+          <ul
+            className={`text-nowrap flex flex-col gap-4 text-[16px] leading-[180%] tracking-[0px] font-satoshi ${styles.scheduleList}`}
+          >
             <li className="flex flex-row gap-4 justify-between">
               <div>Mon</div>
-              <div className="w-full border-border-default border-dotted border-b-2 mb-[6px]"></div>
+              <div
+                className={`w-full border-border-default border-dotted border-b-2 mb-[6px] ${styles.scheduleDecor}`}
+              ></div>
               <div>16:00 - 22:30</div>
             </li>
             <li className="flex flex-row gap-4 justify-between">
               <div>Tue</div>
-              <div className="w-full border-border-default border-dotted border-b-2 mb-[6px]"></div>
+              <div
+                className={`w-full border-border-default border-dotted border-b-2 mb-[6px] ${styles.scheduleDecor}`}
+              ></div>
               <div>16:00 - 22:30</div>
             </li>
             <li className="flex flex-row gap-4 justify-between">
               <div>Wed</div>
-              <div className="w-full border-border-default border-dotted border-b-2 mb-[6px]"></div>
+              <div
+                className={`w-full border-border-default border-dotted border-b-2 mb-[6px] ${styles.scheduleDecor}`}
+              ></div>
               <div>16:00 - 22:30</div>
             </li>
             <li className="flex flex-row gap-4 justify-between">
               {" "}
               <div>Thu</div>
-              <div className="w-full border-border-default border-dotted border-b-2 mb-[6px]"></div>
+              <div
+                className={`w-full border-border-default border-dotted border-b-2 mb-[6px] ${styles.scheduleDecor}`}
+              ></div>
               <div>16:00 - 22:30</div>
             </li>
             <li className="flex flex-row gap-4 justify-between">
               <div>Fri</div>
-              <div className="w-full border-border-default border-dotted border-b-2 mb-[6px]"></div>
+              <div
+                className={`w-full border-border-default border-dotted border-b-2 mb-[6px] ${styles.scheduleDecor}`}
+              ></div>
               <div>16:00 - 22:30</div>
             </li>
             <li className="flex flex-row gap-4 justify-between">
               <div>Sat & Sun</div>
-              <div className="w-full border-border-default border-dotted border-b-2 mb-[6px]"></div>
+              <div
+                className={`w-full border-border-default border-dotted border-b-2 mb-[6px] ${styles.scheduleDecor}`}
+              ></div>
               <div>16:00 - 22:30</div>
             </li>
           </ul>
@@ -113,10 +127,12 @@ const Contact: React.FC = () => {
         <div
           className={`min-w-0 border border-border-default rounded-2xl py-[54px] px-12 flex flex-col justify-between ${styles.contactsSection}`}
         >
-          <HeadingDecorated className="text-[24px] leading-[120%] tracking-[1px] font-forum text-nowrap">
+          <HeadingDecorated className="text-[24px] leading-[120%] tracking-[1px] font-forum">
             GET IN TOUCH
           </HeadingDecorated>
-          <ul className=" flex flex-col gap-4 text-[16px] leading-[180%] tracking-[0px] font-satoshi">
+          <ul
+            className={`flex flex-col gap-4 text-[16px] leading-[180%] tracking-[0px] font-satoshi ${styles.contactsList}`}
+          >
             <li className="flex flex-row gap-4 justify-between">
               <div>ADDRESS</div>
               <div className="text-end">
@@ -133,7 +149,7 @@ const Contact: React.FC = () => {
             </li>
             <li className="flex flex-row gap-4 justify-between">
               <div>FOLLOW</div>
-              <div className="flex flex-row justify-end gap-3">
+              <div className="flex flex-row flex-wrap justify-end gap-3">
                 <img
                   className="w-[18px] h-[18px]"
                   src="/shared/icons/facebookLogo.svg"

@@ -42,6 +42,7 @@
   }
   .scheduleSection {
     height: min-content;
+    gap: 32px;
   }
   .mapSection {
     height: 100%;
@@ -51,11 +52,34 @@
 @media (max-width: 380px) {
   .scheduleSection {
     padding: 10vw;
+  }
+  .contactsSection {
+    padding: 10vw;
+  }
+  .mapSection {
+    height: 100%;
+  }
+}
+
+@media (max-width: 300px) {
+  .scheduleDecor {
+    display: none;
+  }
+  .scheduleSection {
+    padding: 10vw;
+  }
+  .scheduleList {
     text-wrap-mode: wrap;
+    word-break: break-all;
   }
   .contactsSection {
     padding: 10vw;
     text-wrap-mode: wrap;
+    word-break: normal;
+  }
+  .contactsList {
+    text-wrap-mode: wrap;
+    word-break: break-all;
   }
   .mapSection {
     height: 100%;

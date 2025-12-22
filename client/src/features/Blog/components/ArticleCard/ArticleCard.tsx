@@ -36,7 +36,7 @@ const ArticleCard: React.FC<ArticleCardProps> = (props) => {
         isAnimated={true}
         changeHover={false}
       />
-      <div className="flex flex-col gap-2 flex-1 min-w-0">
+      <div className="flex flex-col gap-2 flex-1 min-w-0 wrap-anywhere">
         <HeaderLeftDecor className="font-satoshi text-text-default text-[12px] leading-[190%] tracking-[1px]">
           {props.date}
         </HeaderLeftDecor>

@@ -1,4 +1,5 @@
 import React, { type ReactNode } from "react";
+import styles from "./HeaderLeftDecor.module.css";
 
 interface HeaderLeftDecorProps {
   className?: string;
@@ -10,12 +11,14 @@ const HeaderLeftDecor: React.FC<HeaderLeftDecorProps> = ({
   children,
 }) => {
   return (
-    <div className={`flex flex-row justify-start gap-4 ${className}`}>
+    <div
+      className={`flex flex-row justify-start gap-4 ${className} ${styles.flexBox}`}
+    >
       <img
-        className="shrink-0 h-auto w-auto object-contain"
+        className="shrink-[100] min-w-0 whitespace-nowrap h-auto w-auto object-contain"
         src="/BlogPageMaterials/date/decor.png"
       />
-      <div>{children}</div>
+      <div className="shrink-1">{children}</div>
     </div>
   );
 };

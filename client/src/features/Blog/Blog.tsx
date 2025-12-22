@@ -11,6 +11,7 @@ import LoadingSpinner from "../../shared/components/LoadingSpinner/LoadingSpinne
 import { STORAGE_KEYS } from "../../shared/constants/storage.constants";
 import { usePersistentQuery } from "../../shared/hooks/usePersistentQuery.hook";
 import { formatDate } from "../../shared/utils/formatters/formateDate.utils";
+import styles from "./Blog.module.css";
 
 const Blog: React.FC = () => {
   const {
@@ -31,7 +32,7 @@ const Blog: React.FC = () => {
 
   return (
     <BasePageLayout
-      className="py-20 px-24 flex flex-col gap-20 items-center"
+      className={`py-20 px-24 flex flex-col gap-20 items-center ${styles.mainSection}`}
       heading={["BLOG"]}
       mediaType="image"
       mediaSrc={blogHeroImg}
@@ -41,7 +42,9 @@ const Blog: React.FC = () => {
         <LoadingSpinner />
       ) : error && (!articles || articles.length === 0) ? (
         <div className="flex flex-col items-center justify-center gap-6 py-20 h-full text-center">
-          <HeadingDecorated className="text-red-500 font-forum text-2xl tracking-widest">
+          <HeadingDecorated
+            className={`text-red-500 font-forum text-2xl tracking-widest ${styles.heading}`}
+          >
             OOPS! SOMETHING WENT WRONG
           </HeadingDecorated>
 
@@ -59,11 +62,13 @@ const Blog: React.FC = () => {
         </div>
       ) : (
         <>
-          <HeadingDecorated className="font-forum text-text-default text-[40px] leading-[120%] tracking-[1px]">
+          <HeadingDecorated
+            className={`font-forum text-text-default text-[40px] leading-[120%] tracking-[1px] ${styles.heading}`}
+          >
             BEHIND THE SCENE
             <br />& LATEST NEWS
           </HeadingDecorated>
-          <div className="flex flex-col gap-12">
+          <div className={`flex flex-col gap-12 ${styles.postsSection}`}>
             {articles.map((item) => (
               <CardContextProvider key={item.id}>
                 <ArticleCard

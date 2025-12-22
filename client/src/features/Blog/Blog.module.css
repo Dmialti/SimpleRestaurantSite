@@ -1,0 +1,13 @@
+@media (max-width: 810px) {
+  .mainSection {
+    padding: 40px;
+  }
+  .postsSection {
+    gap: 40px;
+  }
+}
+@media (max-width: 600px) {
+  .heading {
+    font-size: 32px;
+  }
+}

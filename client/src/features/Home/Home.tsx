@@ -44,7 +44,7 @@ const Home: React.FC = () => {
   return (
     <div
       ref={staggeredLeftContainerRef}
-      className={`${styles.mainSection} font-forum w-full h-screen bg-background-default gap-4 p-6`}
+      className={`${styles.mainSection} font-forum w-full h-screen overflow-hidden bg-background-default gap-4 p-6`}
     >
       <HeroCard
         ref={staggeredLeftAddToRefs}
@@ -73,7 +73,7 @@ const Home: React.FC = () => {
       </HeroCard>
       <div
         ref={staggeredRightContainerRef}
-        className={`h-full overflow-hidden flex gap-4 ${styles.cardsSection}`}
+        className={`h-full overflow-visible flex gap-4 ${styles.cardsSection}`}
       >
         <CardContextProvider>
           <CardWithContextHover

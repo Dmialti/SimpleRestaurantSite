@@ -30,6 +30,12 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
       setIsHeroAnimationDone(true);
     },
     progressThreshold: 0.4,
+    responsive: {
+      "(max-width: 1280px)": {
+        y: -50,
+        x: 0,
+      },
+    },
   });
 
   const {
@@ -38,6 +44,12 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
   } = useStaggeredReveal({
     y: -50,
     duration: 1,
+    responsive: {
+      "(max-width: 1280px)": {
+        y: 0,
+        x: 50,
+      },
+    },
   });
 
   return (

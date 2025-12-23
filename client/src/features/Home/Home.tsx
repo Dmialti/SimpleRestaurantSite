@@ -39,6 +39,10 @@ const Home: React.FC = () => {
     stagger: 0.2,
     x: 50,
     duration: 1,
+    triggerByElement: true,
+    start: "top 95%",
+    toggleActions: "play reverse play reverse",
+    end: "bottom 5%",
   });
 
   return (

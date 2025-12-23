@@ -188,7 +188,6 @@ export const useStaggeredReveal = ({
       return () => mm.revert();
     },
     {
-      scope: containerRef,
       dependencies: [
         enable,
         responsiveKey,

@@ -65,8 +65,8 @@
     aspect-ratio: 1 / 1;
   }
   .cardsSection {
-    display: flex;
-    flex-direction: column;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: none;
     flex: none;
   }
   .cardContainer {

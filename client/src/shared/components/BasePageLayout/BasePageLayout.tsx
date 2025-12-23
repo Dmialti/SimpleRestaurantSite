@@ -3,6 +3,7 @@ import styles from "./BasePageLayout.module.css";
 import HeroCard, { type HeroCardProps } from "../HeroCard/HeroCard";
 import { useStaggeredReveal } from "../../hooks/useStaggeredReveal.hook";
 import { mergeRefs } from "../../utils/helpers/mergeRefs.helper";
+import { BasePageLayoutAnimationContext } from "../../../context/BasePageLayoutAnimationContext/BasePageLayoutAnimationContext";
 
 interface BasePageLayoutProps extends HeroCardProps {
   isScreenHeight: boolean;
@@ -19,6 +20,7 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
   className,
 }) => {
   const [isHeroAnimationDone, setIsHeroAnimationDone] = useState(false);
+  const [isContentAnimationDone, setIsContentAnimationDone] = useState(false);
 
   const {
     containerRef: staggeredHeroContainerRef,
@@ -50,38 +52,45 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
         x: 50,
       },
     },
+    onComplete: () => {
+      setIsContentAnimationDone(true);
+    },
   });
 
   return (
-    <div
-      ref={mergeRefs(staggeredHeroContainerRef, staggeredContentContainerRef)}
-      className={`${styles.mainSection} w-full h-auto box-border gap-4 relative px-6`}
+    <BasePageLayoutAnimationContext.Provider
+      value={{ isHeroAnimationDone, isContentAnimationDone }}
     >
       <div
-        ref={staggeredHeroAddToRefs}
-        className={`${styles.heroSection} top-0 py-6 h-screen sticky`}
-      >
-        <HeroCard
-          enableHeadingAnimation={isHeroAnimationDone}
-          heading={heading}
-          className={`relative h-full`}
-          mediaType={mediaType}
-          mediaSrc={mediaSrc}
-        />
-      </div>
-      <div
-        ref={staggeredContentAddToRefs}
-        className={`${
-          styles.contentSection + " " + (isScreenHeight && "h-screen")
-        } overflow-hidden min-w-0 py-6`}
+        ref={mergeRefs(staggeredHeroContainerRef, staggeredContentContainerRef)}
+        className={`${styles.mainSection} w-full h-auto box-border gap-4 relative px-6`}
       >
         <div
-          className={`${className} border border-border-default h-full rounded-2xl`}
+          ref={staggeredHeroAddToRefs}
+          className={`${styles.heroSection} top-0 py-6 h-screen sticky`}
         >
-          {children}
+          <HeroCard
+            enableHeadingAnimation={isHeroAnimationDone}
+            heading={heading}
+            className={`relative h-full`}
+            mediaType={mediaType}
+            mediaSrc={mediaSrc}
+          />
+        </div>
+        <div
+          ref={staggeredContentAddToRefs}
+          className={`${
+            styles.contentSection + " " + (isScreenHeight && "h-screen")
+          } overflow-hidden min-w-0 py-6`}
+        >
+          <div
+            className={`${className} border border-border-default h-full rounded-2xl`}
+          >
+            {children}
+          </div>
         </div>
       </div>
-    </div>
+    </BasePageLayoutAnimationContext.Provider>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import styles from "./DishItem.module.css";
 import type { DishItemFieldsFragment } from "../../../../graphql/codegen/generated/graphql";
 import Card from "../../../../shared/components/Card/Card";
@@ -7,9 +7,9 @@ export interface DishItemProps extends DishItemFieldsFragment {
   className?: string;
 }
 
-const DishItem: React.FC<DishItemProps> = (props) => {
+const DishItem = forwardRef<HTMLDivElement, DishItemProps>((props, ref) => {
   return (
-    <div className={`${styles.dishContainer} ${props.className}`}>
+    <div ref={ref} className={`${styles.dishContainer} ${props.className}`}>
       <Card
         className={`${styles.card} w-[150px] h-[100px] flex-none`}
         mediaType="image"
@@ -36,6 +36,6 @@ const DishItem: React.FC<DishItemProps> = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default DishItem;

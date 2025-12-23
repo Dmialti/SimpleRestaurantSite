@@ -12,15 +12,19 @@ interface AnimationSettings {
   stagger?: number;
   duration?: number;
   start?: string;
+
+  end?: string;
+  toggleActions?: string;
+  ease?: gsap.EaseFunction;
 }
 
 interface StaggerConfig extends AnimationSettings {
   responsive?: Record<string, AnimationSettings>;
-
   onComplete?: () => void;
   onProgress?: () => void;
   progressThreshold?: number;
   enable?: boolean;
+  triggerByElement?: boolean;
 }
 
 export const useStaggeredReveal = ({
@@ -31,12 +35,15 @@ export const useStaggeredReveal = ({
   duration = 1,
   start = "top 100%",
 
+  end = "bottom top",
+  toggleActions = "play none none reverse",
   responsive = {},
-
   onComplete,
   onProgress,
   progressThreshold = 0,
   enable = true,
+  triggerByElement = false,
+  ease = gsap.parseEase("circ"),
 }: StaggerConfig = {}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLElement[]>([]);
@@ -62,13 +69,11 @@ export const useStaggeredReveal = ({
       gsap.set(itemsRef.current, { autoAlpha: 0 });
 
       const queries = Object.keys(responsive);
-
       const conditionsMap: Record<string, string> = {};
 
       queries.forEach((query, index) => {
         conditionsMap[`media_${index}`] = query;
       });
-
       conditionsMap["all"] = "(min-width: 0px)";
 
       mm.add(conditionsMap, (context) => {
@@ -81,11 +86,12 @@ export const useStaggeredReveal = ({
           stagger,
           duration,
           start,
+          end,
+          toggleActions,
         };
 
         queries.forEach((query, index) => {
           const safeKey = `media_${index}`;
-
           const isMatching =
             gsConditions?.[safeKey] ?? window.matchMedia(query).matches;
 
@@ -95,56 +101,103 @@ export const useStaggeredReveal = ({
         });
 
         ScrollTrigger.refresh();
-        let hasTriggeredProgress = false;
 
-        gsap.fromTo(
-          itemsRef.current,
-          {
-            autoAlpha: 0,
-            x: (_, el) =>
-              el.dataset.x ? Number(el.dataset.x) : current.x ?? 0,
-            y: (_, el) =>
-              el.dataset.y ? Number(el.dataset.y) : current.y ?? 0,
-            scale: (_, el) =>
-              el.dataset.scale ? Number(el.dataset.scale) : current.scale ?? 1,
-          },
-          {
-            autoAlpha: 1,
-            x: 0,
-            y: 0,
-            scale: 1,
-            duration: current.duration ?? 1,
-            ease: "power3.out",
-            stagger: current.stagger ?? 0,
-            onComplete: onComplete,
-            onStart: () => {
-              hasTriggeredProgress = false;
-            },
-            onUpdate: function () {
-              if (
-                onProgress &&
-                !hasTriggeredProgress &&
-                this.progress() >= progressThreshold
-              ) {
-                hasTriggeredProgress = true;
-                onProgress();
+        if (triggerByElement) {
+          itemsRef.current.forEach((el, index) => {
+            gsap.fromTo(
+              el,
+              {
+                autoAlpha: 0,
+                x: el.dataset.x ? Number(el.dataset.x) : current.x ?? 0,
+                y: el.dataset.y ? Number(el.dataset.y) : current.y ?? 0,
+                scale: el.dataset.scale
+                  ? Number(el.dataset.scale)
+                  : current.scale ?? 1,
+              },
+              {
+                autoAlpha: 1,
+                x: 0,
+                y: 0,
+                scale: 1,
+                duration: current.duration ?? 1,
+                ease: current.ease ?? ease,
+                delay: index * (current.stagger ?? 0),
+                scrollTrigger: {
+                  trigger: el,
+                  start: current.start ?? "top 85%",
+
+                  end: current.end,
+                  toggleActions: current.toggleActions,
+                },
               }
+            );
+          });
+        } else {
+          let hasTriggeredProgress = false;
+
+          gsap.fromTo(
+            itemsRef.current,
+            {
+              autoAlpha: 0,
+              x: (_, el) =>
+                el.dataset.x ? Number(el.dataset.x) : current.x ?? 0,
+              y: (_, el) =>
+                el.dataset.y ? Number(el.dataset.y) : current.y ?? 0,
+              scale: (_, el) =>
+                el.dataset.scale
+                  ? Number(el.dataset.scale)
+                  : current.scale ?? 1,
             },
-            onReverseComplete: () => {
-              hasTriggeredProgress = false;
-            },
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: current.start ?? "top 100%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
+            {
+              autoAlpha: 1,
+              x: 0,
+              y: 0,
+              scale: 1,
+              duration: current.duration ?? 1,
+              ease: current.ease ?? ease,
+              stagger: current.stagger ?? 0,
+              onComplete: onComplete,
+              onStart: () => {
+                hasTriggeredProgress = false;
+              },
+              onUpdate: function () {
+                if (
+                  onProgress &&
+                  !hasTriggeredProgress &&
+                  this.progress() >= progressThreshold
+                ) {
+                  hasTriggeredProgress = true;
+                  onProgress();
+                }
+              },
+              onReverseComplete: () => {
+                hasTriggeredProgress = false;
+              },
+              scrollTrigger: {
+                trigger: containerRef.current,
+                start: current.start ?? "top 100%",
+
+                end: current.end,
+                toggleActions: current.toggleActions,
+              },
+            }
+          );
+        }
       });
 
       return () => mm.revert();
     },
-    { scope: containerRef, dependencies: [enable, responsiveKey] }
+    {
+      scope: containerRef,
+      dependencies: [
+        enable,
+        responsiveKey,
+        triggerByElement,
+        toggleActions,
+        start,
+        end,
+      ],
+    }
   );
 
   return { containerRef, addToRefs };

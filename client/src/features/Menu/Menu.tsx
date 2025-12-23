@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Menu.module.css";
-import DishSection from "./components/DishSection/DishSection";
 import { GET_MENU_QUERY } from "../../graphql/menu/queries/getMenu.query";
 import type { GetMenuQuery } from "../../graphql/codegen/generated/graphql";
 import menuHero from "../../assets/MenuPageMaterials/menuHero.png";
@@ -10,6 +9,7 @@ import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDe
 import LoadingSpinner from "../../shared/components/LoadingSpinner/LoadingSpinner";
 import { STORAGE_KEYS } from "../../shared/constants/storage.constants";
 import { usePersistentQuery } from "../../shared/hooks/usePersistentQuery.hook";
+import MenuList from "./components/MenuList/MenuList";
 
 const Menu: React.FC = () => {
   const {
@@ -57,26 +57,7 @@ const Menu: React.FC = () => {
         <div
           className={`${styles.listContainer} h-fit rounded-2xl pt-8 pb-20 px-24 text-text-default`}
         >
-          <div className="flex gap-1 justify-center font-satoshi flex-wrap">
-            {categories.map((item) => (
-              <Button
-                key={item.id}
-                variant="border"
-                className="px-3 py-1 text-[12px] tracking-[1px] leading-[190%]"
-              >
-                {item.name.toUpperCase()}
-              </Button>
-            ))}
-          </div>
-          <div>
-            {categories.map((item) => (
-              <DishSection
-                key={item.id}
-                category={item.name}
-                dishes={item.dishes}
-              />
-            ))}
-          </div>
+          <MenuList categories={categories!} />
         </div>
       )}
     </BasePageLayout>

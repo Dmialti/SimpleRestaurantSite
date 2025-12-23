@@ -1,27 +1,27 @@
-import React, { type ReactNode } from "react";
+import { forwardRef, type ReactNode } from "react";
 
 interface HeadingDecoratedProps {
   className?: string;
   children?: ReactNode;
 }
 
-const HeadingDecorated: React.FC<HeadingDecoratedProps> = ({
-  className,
-  children,
-}) => {
-  return (
-    <div
-      className={`flex flex-row justify-center items-center text-center gap-4 ${className}`}
-    >
-      <div>
-        <img src="/shared/HeadingDecoratedMaterials/leftSymbol.svg" />
+const HeadingDecorated = forwardRef<HTMLDivElement, HeadingDecoratedProps>(
+  ({ className, children }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={`flex flex-row justify-center items-center text-center gap-4 ${className}`}
+      >
+        <div>
+          <img src="/shared/HeadingDecoratedMaterials/leftSymbol.svg" />
+        </div>
+        <div>{children}</div>
+        <div>
+          <img src="/shared/HeadingDecoratedMaterials/rightSymbol.svg" />
+        </div>
       </div>
-      <div>{children}</div>
-      <div>
-        <img src="/shared/HeadingDecoratedMaterials/rightSymbol.svg" />
-      </div>
-    </div>
-  );
-};
+    );
+  }
+);
 
 export default HeadingDecorated;

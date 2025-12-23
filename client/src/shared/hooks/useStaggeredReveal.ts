@@ -12,6 +12,10 @@ interface StaggerConfig {
   baseX?: number;
   baseY?: number;
   baseScale?: number;
+  onComplete?: () => void;
+  onProgress?: () => void;
+  progressThreshold?: number;
+  enable?: boolean;
 }
 
 export const useStaggeredReveal = ({
@@ -21,6 +25,10 @@ export const useStaggeredReveal = ({
   baseX = 0,
   baseY = 0,
   baseScale = 1,
+  onComplete,
+  onProgress,
+  progressThreshold = 0,
+  enable = true,
 }: StaggerConfig = {}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLElement[]>([]);
@@ -33,7 +41,7 @@ export const useStaggeredReveal = ({
 
   useGSAP(
     () => {
-      if (itemsRef.current.length === 0) return;
+      if (!enable || itemsRef.current.length === 0) return;
 
       itemsRef.current.sort((a, b) =>
         a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1
@@ -43,6 +51,8 @@ export const useStaggeredReveal = ({
 
       const initAnimation = () => {
         ScrollTrigger.refresh();
+
+        let hasTriggeredProgress = false;
 
         gsap.fromTo(
           itemsRef.current,
@@ -61,6 +71,23 @@ export const useStaggeredReveal = ({
             duration: duration,
             ease: "power3.out",
             stagger: stagger,
+            onComplete: onComplete,
+            onStart: () => {
+              hasTriggeredProgress = false;
+            },
+            onUpdate: function () {
+              if (
+                onProgress &&
+                !hasTriggeredProgress &&
+                this.progress() >= progressThreshold
+              ) {
+                hasTriggeredProgress = true;
+                onProgress();
+              }
+            },
+            onReverseComplete: () => {
+              hasTriggeredProgress = false;
+            },
             scrollTrigger: {
               trigger: containerRef.current,
               start: start,
@@ -80,7 +107,7 @@ export const useStaggeredReveal = ({
         }, 50);
       });
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [enable] }
   );
 
   return { containerRef, addToRefs };

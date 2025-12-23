@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import CardContextProvider from "../../context/CardContext/CardContextProvider";
 import CardWithContextHover from "../../shared/components/Card/CardIsHoveredContext";
 import HeroCard from "../../shared/components/HeroCard/HeroCard";
-import { useStaggeredReveal } from "../../shared/hooks/useStaggeredReveal";
+import { useStaggeredReveal } from "../../shared/hooks/useStaggeredReveal.hook";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Home: React.FC = () => {
     addToRefs: staggeredLeftAddToRefs,
   } = useStaggeredReveal({
     stagger: 0.2,
-    baseY: -50,
+    y: -50,
     duration: 1,
     onProgress: () => {
       setIsHeroAnimationDone(true);
@@ -37,7 +37,7 @@ const Home: React.FC = () => {
     addToRefs: staggeredRightAddToRefs,
   } = useStaggeredReveal({
     stagger: 0.2,
-    baseX: 50,
+    x: 50,
     duration: 1,
   });
 

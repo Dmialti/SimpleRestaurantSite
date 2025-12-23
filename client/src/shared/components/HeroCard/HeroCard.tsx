@@ -2,7 +2,7 @@ import React from "react";
 import BottomGradient from "../BottomGradient/BottomGradient";
 import Card from "../Card/Card";
 import HeroHeading from "../HeroHeading/HeroHeading";
-import { useSplitTextReveal } from "../../hooks/useSplitTextReveal";
+import { useSplitTextReveal } from "../../hooks/useSplitTextReveal.hook";
 import gsap from "gsap";
 import { mergeRefs } from "../../utils/helpers/mergeRefs.helper";
 

@@ -9,6 +9,7 @@ import Button from "../../shared/components/Button/Button";
 gsap.registerPlugin(SplitText);
 
 const NavBar: React.FC = () => {
+  const containerRef = useRef<HTMLElement>(null);
   const [navBarToggled, setNavBarToggled] = useState<boolean>(false);
   const line1 = useRef<HTMLDivElement>(null);
   const line2 = useRef<HTMLDivElement>(null);
@@ -21,65 +22,82 @@ const NavBar: React.FC = () => {
 
   const navigate = useNavigate();
 
-  useGSAP(() => {
-    if (!dropdownRef.current) return;
-    if (text.current.length >= 5) {
-      text.current.forEach((el, index) => {
-        if (el) {
-          splitTextRef.current[index] = new SplitText(el, {
-            type: "chars",
-          });
-          gsap.set(splitTextRef.current[index].chars, { autoAlpha: 0, y: 20 });
-        }
-      });
+  useGSAP(
+    () => {
+      document.fonts.ready.then(() => {
+        if (!dropdownRef.current) return;
+        if (text.current.length < 5) return;
+        tl.clear();
+        text.current.forEach((el, index) => {
+          if (el) {
+            if (splitTextRef.current[index]) {
+              splitTextRef.current[index]?.revert();
+            }
 
-      tl.eventCallback("onStart", () => {
-        if (dropdownRef.current)
-          gsap.set(dropdownRef.current, { display: "block" });
-      });
+            const split = new SplitText(el, {
+              type: "chars",
+            });
+            splitTextRef.current[index] = split;
 
-      tl.fromTo(
-        dropdownRef.current,
-        {
-          height: "0px",
-          ease: "sine.inOut",
-          duration: 0.2,
-        },
-        {
-          height: "auto",
-          ease: "sine.inOut",
-          duration: 0.2,
-        }
-      );
+            gsap.set(split.chars, {
+              autoAlpha: 0,
+              y: 20,
+            });
+          }
+        });
 
-      splitTextRef.current.forEach((el) => {
-        if (!el?.chars) return;
+        tl.eventCallback("onStart", () => {
+          if (dropdownRef.current)
+            gsap.set(dropdownRef.current, { display: "block" });
+        });
+
         tl.fromTo(
-          el.chars,
-          { autoAlpha: 0, y: 50 },
-          { autoAlpha: 1, y: 0, ease: "circ", duration: 0.2, stagger: 0.05 },
-          "<0.1"
+          dropdownRef.current,
+          {
+            height: "0px",
+          },
+          {
+            height: "auto",
+            ease: "sine.inOut",
+            duration: 0.2,
+          }
         );
+
+        splitTextRef.current.forEach((el) => {
+          if (!el?.chars) return;
+          tl.fromTo(
+            el.chars,
+            { autoAlpha: 0, y: 50 },
+            { autoAlpha: 1, y: 0, ease: "circ", duration: 0.2, stagger: 0.05 },
+            "<0.1"
+          );
+        });
+
+        tl.fromTo(
+          iconsRef.current,
+          {
+            autoAlpha: 0,
+          },
+          {
+            autoAlpha: 1,
+            duration: 0.2,
+          },
+          "<0.2"
+        );
+
+        tl.eventCallback("onReverseComplete", () => {
+          if (dropdownRef.current)
+            gsap.set(dropdownRef.current, { display: "none" });
+        });
       });
 
-      tl.fromTo(
-        iconsRef.current,
-        {
-          autoAlpha: 0,
-        },
-        {
-          autoAlpha: 1,
-          duration: 0.2,
-        },
-        "<0.2"
-      );
-
-      tl.eventCallback("onReverseComplete", () => {
-        if (dropdownRef.current)
-          gsap.set(dropdownRef.current, { display: "none" });
-      });
-    }
-  }, []);
+      return () => {
+        splitTextRef.current.forEach((split) => split?.revert());
+        tl.clear();
+      };
+    },
+    { scope: containerRef }
+  );
 
   useGSAP(
     () => {
@@ -125,6 +143,7 @@ const NavBar: React.FC = () => {
 
   return (
     <header
+      ref={containerRef}
       className={`${styles.header} z-50 font-satoshi rounded-xl bg-background-default fixed flex w-max h-auto left-18 top-18 text-2xl text-text-default font-semibold tracking-[1px]`}
     >
       <nav className="flex flex-col h-fit w-full relative">

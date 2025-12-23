@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Home.module.css";
 import LinkIcon from "./components/LinkIcon/LinkIcon";
 import CornerMenu from "./components/CornerMenu/CornerMenu";
@@ -12,17 +12,45 @@ import { useNavigate } from "react-router-dom";
 import CardContextProvider from "../../context/CardContext/CardContextProvider";
 import CardWithContextHover from "../../shared/components/Card/CardIsHoveredContext";
 import HeroCard from "../../shared/components/HeroCard/HeroCard";
+import { useStaggeredReveal } from "../../shared/hooks/useStaggeredReveal";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
+  const [isHeroAnimationDone, setIsHeroAnimationDone] = useState(false);
+
+  const {
+    containerRef: staggeredLeftContainerRef,
+    addToRefs: staggeredLeftAddToRefs,
+  } = useStaggeredReveal({
+    stagger: 0.2,
+    baseY: -50,
+    duration: 1,
+    onProgress: () => {
+      setIsHeroAnimationDone(true);
+    },
+    progressThreshold: 0.3,
+  });
+
+  const {
+    containerRef: staggeredRightContainerRef,
+    addToRefs: staggeredRightAddToRefs,
+  } = useStaggeredReveal({
+    stagger: 0.2,
+    baseX: 50,
+    duration: 1,
+  });
+
   return (
     <div
+      ref={staggeredLeftContainerRef}
       className={`${styles.mainSection} font-forum w-full h-screen bg-background-default gap-4 p-6`}
     >
       <HeroCard
+        ref={staggeredLeftAddToRefs}
         className={`${styles.heroSection} h-full w-full flex relative`}
         heading={["SUSHI", "SENSATION"]}
+        enableHeadingAnimation={isHeroAnimationDone}
         mediaType="video"
         mediaSrc={heroVideo}
       >
@@ -44,15 +72,17 @@ const Home: React.FC = () => {
         </CornerMenu>
       </HeroCard>
       <div
+        ref={staggeredRightContainerRef}
         className={`h-full overflow-hidden flex gap-4 ${styles.cardsSection}`}
       >
         <CardContextProvider>
           <CardWithContextHover
-            className={`${styles.cardContainer} h-full w-full flex-1 relative cursor-pointer`}
+            className={`${styles.cardContainer} h-full w-full flex-1 relative cursor-pointer invisible`}
             mediaType="image"
             mediaSrc={menuImg}
             isAnimated={true}
             onClick={() => navigate("/menu")}
+            ref={staggeredRightAddToRefs}
           >
             <CornerMenu
               className={`${styles.cornerMenu} text-white pt-3 pl-6 gap-3`}
@@ -67,11 +97,12 @@ const Home: React.FC = () => {
         </CardContextProvider>
         <CardContextProvider>
           <CardWithContextHover
-            className={`${styles.cardContainer} h-full w-full flex-1 relative cursor-pointer`}
+            className={`${styles.cardContainer}h-full w-full flex-1 relative cursor-pointer invisible`}
             mediaType="image"
             mediaSrc={reservationImg}
             isAnimated={true}
             onClick={() => navigate("/reservation")}
+            ref={staggeredRightAddToRefs}
           >
             <CornerMenu
               className={`${styles.cornerMenu} text-white pt-3 pl-6 gap-3`}
@@ -86,11 +117,12 @@ const Home: React.FC = () => {
         </CardContextProvider>
         <CardContextProvider>
           <CardWithContextHover
-            className={`${styles.cardContainer} h-full w-full flex-1 relative cursor-pointer`}
+            className={`${styles.cardContainer} h-full w-full flex-1 relative cursor-pointer invisible`}
             mediaType="image"
             mediaSrc={aboutImg}
             isAnimated={true}
             onClick={() => navigate("/about")}
+            ref={staggeredRightAddToRefs}
           >
             <CornerMenu
               className={`${styles.cornerMenu} text-white pt-3 pl-6 gap-3`}

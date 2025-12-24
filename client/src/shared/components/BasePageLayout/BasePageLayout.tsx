@@ -7,6 +7,8 @@ import { BasePageLayoutAnimationContext } from "../../../context/BasePageLayoutA
 
 interface BasePageLayoutProps extends HeroCardProps {
   isScreenHeight: boolean;
+  enableHeroAnimation?: boolean;
+  enableContentAnimation?: boolean;
   className?: string;
   children?: ReactNode;
 }
@@ -16,6 +18,8 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
   mediaType,
   mediaSrc,
   isScreenHeight,
+  enableHeroAnimation = true,
+  enableContentAnimation = true,
   children,
   className,
 }) => {
@@ -38,6 +42,7 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
         x: 0,
       },
     },
+    enable: enableHeroAnimation,
   });
 
   const {
@@ -55,6 +60,7 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
     onComplete: () => {
       setIsContentAnimationDone(true);
     },
+    enable: enableContentAnimation,
   });
 
   return (
@@ -81,7 +87,7 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
           ref={staggeredContentAddToRefs}
           className={`${
             styles.contentSection + " " + (isScreenHeight && "h-screen")
-          } overflow-hidden min-w-0 py-6`}
+          } min-w-0 py-6`}
         >
           <div
             className={`${className} border border-border-default h-full rounded-2xl`}

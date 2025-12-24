@@ -40,7 +40,7 @@ const App: React.FC = () => {
           />
         </div>
 
-        <div className="h-auto relative z-10 overflow-hidden">
+        <div className="h-auto relative z-10">
           <NavBar />
 
           <main>

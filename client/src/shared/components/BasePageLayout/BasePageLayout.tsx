@@ -69,7 +69,11 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
     >
       <div
         ref={mergeRefs(staggeredHeroContainerRef, staggeredContentContainerRef)}
-        className={`${styles.mainSection} w-full h-auto box-border gap-4 relative px-6`}
+        className={`${
+          styles.mainSection
+        } w-full h-auto box-border gap-4 relative px-6 ${
+          isScreenHeight && "overflow-hidden"
+        }`}
       >
         <div
           ref={staggeredHeroAddToRefs}

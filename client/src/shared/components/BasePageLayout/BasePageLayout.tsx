@@ -73,7 +73,7 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
       >
         <div
           ref={staggeredHeroAddToRefs}
-          className={`${styles.heroSection} top-0 py-6 h-screen sticky`}
+          className={`${styles.heroSection} top-0 py-6 h-screen sticky invisible`}
         >
           <HeroCard
             enableHeadingAnimation={isHeroAnimationDone}

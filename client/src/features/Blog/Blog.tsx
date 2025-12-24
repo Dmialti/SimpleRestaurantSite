@@ -1,17 +1,15 @@
 import React from "react";
-import ArticleCard from "./components/ArticleCard/ArticleCard";
 import { GET_ARTICLES_QUERY } from "../../graphql/blog/queries/getArticles.query";
 import type { GetArticlesQuery } from "../../graphql/codegen/generated/graphql";
 import blogHeroImg from "../../assets/BlogPageMaterials/blogHero.png";
-import CardContextProvider from "../../context/CardContext/CardContextProvider";
 import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
 import Button from "../../shared/components/Button/Button";
 import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDecorated";
 import LoadingSpinner from "../../shared/components/LoadingSpinner/LoadingSpinner";
 import { STORAGE_KEYS } from "../../shared/constants/storage.constants";
 import { usePersistentQuery } from "../../shared/hooks/usePersistentQuery.hook";
-import { formatDate } from "../../shared/utils/formatters/formateDate.utils";
 import styles from "./Blog.module.css";
+import BlogContent from "./components/BlogContent/BlogContent";
 
 const Blog: React.FC = () => {
   const {
@@ -61,27 +59,7 @@ const Blog: React.FC = () => {
           </Button>
         </div>
       ) : (
-        <>
-          <HeadingDecorated
-            className={`font-forum text-text-default text-[40px] leading-[120%] tracking-[1px] ${styles.heading}`}
-          >
-            BEHIND THE SCENE
-            <br />& LATEST NEWS
-          </HeadingDecorated>
-          <div className={`flex flex-col gap-12 ${styles.postsSection}`}>
-            {articles.map((item) => (
-              <CardContextProvider key={item.id}>
-                <ArticleCard
-                  id={item.id}
-                  date={formatDate(item.publicationDate)}
-                  header={item.name}
-                  description={item.description}
-                  imageSrc={item.imageSrc}
-                />
-              </CardContextProvider>
-            ))}
-          </div>
-        </>
+        <BlogContent articles={articles} />
       )}
     </BasePageLayout>
   );

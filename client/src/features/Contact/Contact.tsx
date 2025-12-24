@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Contact.module.css";
 import MapComponent from "./components/MapComponent/MapComponent";
 import IconCardFill from "./components/IconCardFill/IconCardFill";
@@ -12,8 +12,79 @@ import galleryImage1 from "../../assets/ContactPageMaterials/content/Image1.png"
 import galleryImage2 from "../../assets/ContactPageMaterials/content/Image2.png";
 import galleryImage3 from "../../assets/ContactPageMaterials/content/Image3.png";
 import galleryImage4 from "../../assets/ContactPageMaterials/content/Image4.png";
+import { useStaggeredReveal } from "../../shared/hooks/useStaggeredReveal.hook";
+import { mergeRefs } from "../../shared/utils/helpers/mergeRefs.helper";
 
 const Contact: React.FC = () => {
+  const [enableTextTopAnimation, setEnableTextTopAnimation] =
+    useState<boolean>(false);
+  const [enableTextBottomAnimation, setEnableTextBottomAnimation] =
+    useState<boolean>(false);
+
+  const {
+    containerRef: staggeredTopContainerRef,
+    addToRefs: staggeredTopAddToRefs,
+  } = useStaggeredReveal({
+    stagger: 0,
+    y: -50,
+    duration: 1,
+    toggleActions: "play reverse play reverse",
+    start: "top 95%",
+    end: "bottom 5%",
+    responsive: {
+      "(max-width: 1280px)": {
+        y: 0,
+        x: 50,
+      },
+    },
+    triggerByElement: true,
+    onComplete: () => {
+      setEnableTextTopAnimation(true);
+    },
+  });
+
+  const {
+    containerRef: staggeredBottomContainerRef,
+    addToRefs: staggeredBottomAddToRefs,
+  } = useStaggeredReveal({
+    stagger: 0,
+    y: 50,
+    duration: 1,
+    toggleActions: "play reverse play reverse",
+    start: "top 95%",
+    end: "bottom 5%",
+    responsive: {
+      "(max-width: 1280px)": {
+        y: 0,
+        x: 50,
+      },
+    },
+    triggerByElement: true,
+    onComplete: () => {
+      setEnableTextBottomAnimation(true);
+    },
+  });
+
+  const {
+    containerRef: staggeredTextTopContainerRef,
+    addToRefs: staggeredTextTopAddToRefs,
+  } = useStaggeredReveal({
+    stagger: 0,
+    y: -50,
+    duration: 0.5,
+    enable: enableTextTopAnimation,
+  });
+
+  const {
+    containerRef: staggeredTextBottomContainerRef,
+    addToRefs: staggeredTextBottomAddToRefs,
+  } = useStaggeredReveal({
+    stagger: 0,
+    y: -50,
+    duration: 0.5,
+    enable: enableTextBottomAnimation,
+  });
+
   return (
     <BasePageLayout
       isScreenHeight={true}
@@ -21,18 +92,30 @@ const Contact: React.FC = () => {
       mediaType="image"
       mediaSrc={contactHero}
       className="border-none"
+      enableContentAnimation={false}
     >
       <div
+        ref={mergeRefs(
+          staggeredTopContainerRef,
+          staggeredBottomContainerRef,
+          staggeredTextTopContainerRef,
+          staggeredTextBottomContainerRef
+        )}
         className={`h-full w-full gap-4 text-text-default ${styles.contentSection}`}
       >
         <div
-          className={`min-w-0 border border-border-default rounded-2xl py-[54px] px-12 flex flex-col justify-between ${styles.scheduleSection}`}
+          ref={staggeredTopAddToRefs}
+          className={`min-w-0 border border-border-default rounded-2xl py-[54px] px-12 flex flex-col justify-between ${styles.scheduleSection} invisible`}
         >
-          <HeadingDecorated className="text-[24px] leading-[120%] tracking-[1px] font-forum">
+          <HeadingDecorated
+            ref={staggeredTextTopAddToRefs}
+            className="text-[24px] leading-[120%] tracking-[1px] font-forum invisible"
+          >
             OPENING HOURS
           </HeadingDecorated>
           <ul
-            className={`text-nowrap flex flex-col gap-4 text-[16px] leading-[180%] tracking-[0px] font-satoshi ${styles.scheduleList}`}
+            ref={staggeredTextTopAddToRefs}
+            className={`text-nowrap flex flex-col gap-4 text-[16px] leading-[180%] tracking-[0px] font-satoshi ${styles.scheduleList} invisible`}
           >
             <li className="flex flex-row gap-4 justify-between">
               <div>Mon</div>
@@ -79,7 +162,10 @@ const Contact: React.FC = () => {
             </li>
           </ul>
         </div>
-        <div className={`gap-4 ${styles.gallerySection}`}>
+        <div
+          ref={staggeredTopAddToRefs}
+          className={`gap-4 ${styles.gallerySection} invisible`}
+        >
           <CardContextProvider>
             <CardWithContextHover
               className="relative"
@@ -121,17 +207,25 @@ const Contact: React.FC = () => {
             </CardWithContextHover>
           </CardContextProvider>
         </div>
-        <div className={` ${styles.mapSection}`}>
+        <div
+          ref={staggeredBottomAddToRefs}
+          className={` ${styles.mapSection} invisible`}
+        >
           <MapComponent />
         </div>
         <div
-          className={`min-w-0 border border-border-default rounded-2xl py-[54px] px-12 flex flex-col justify-between ${styles.contactsSection}`}
+          ref={staggeredBottomAddToRefs}
+          className={`min-w-0 border border-border-default rounded-2xl py-[54px] px-12 flex flex-col justify-between ${styles.contactsSection} invisible`}
         >
-          <HeadingDecorated className="text-[24px] leading-[120%] tracking-[1px] font-forum">
+          <HeadingDecorated
+            ref={staggeredTextBottomAddToRefs}
+            className="text-[24px] leading-[120%] tracking-[1px] font-forum invisible"
+          >
             GET IN TOUCH
           </HeadingDecorated>
           <ul
-            className={`flex flex-col gap-4 text-[16px] leading-[180%] tracking-[0px] font-satoshi ${styles.contactsList}`}
+            ref={staggeredTextBottomAddToRefs}
+            className={`flex flex-col gap-4 text-[16px] leading-[180%] tracking-[0px] font-satoshi ${styles.contactsList} invisible`}
           >
             <li className="flex flex-row gap-4 justify-between">
               <div>ADDRESS</div>

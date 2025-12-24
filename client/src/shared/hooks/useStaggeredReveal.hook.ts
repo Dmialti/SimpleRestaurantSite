@@ -21,6 +21,7 @@ interface AnimationSettings {
 interface StaggerConfig extends AnimationSettings {
   responsive?: Record<string, AnimationSettings>;
   onComplete?: () => void;
+  onReverseComplete?: () => void;
   onProgress?: () => void;
   progressThreshold?: number;
   enable?: boolean;
@@ -39,6 +40,7 @@ export const useStaggeredReveal = ({
   toggleActions = "play none none reverse",
   responsive = {},
   onComplete,
+  onReverseComplete,
   onProgress,
   progressThreshold = 0,
   enable = true,
@@ -129,6 +131,12 @@ export const useStaggeredReveal = ({
                   end: current.end,
                   toggleActions: current.toggleActions,
                 },
+                onComplete: onComplete,
+                onReverseComplete: () => {
+                  if (onReverseComplete) {
+                    onReverseComplete();
+                  }
+                },
               }
             );
           });
@@ -171,6 +179,9 @@ export const useStaggeredReveal = ({
                 }
               },
               onReverseComplete: () => {
+                if (onReverseComplete) {
+                  onReverseComplete();
+                }
                 hasTriggeredProgress = false;
               },
               scrollTrigger: {

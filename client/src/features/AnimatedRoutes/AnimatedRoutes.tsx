@@ -18,15 +18,26 @@ const AnimatedRoutes: React.FC<Props> = ({ children }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const setInteractions = (active: boolean) => {
+    if (active) {
+      document.body.style.pointerEvents = "";
+      document.body.style.cursor = "";
+    } else {
+      document.body.style.pointerEvents = "none";
+      document.body.style.cursor = "wait";
+    }
+  };
+
   useGSAP(() => {
     if (location.pathname !== displayLocation.pathname) {
       isTransitioning.current = true;
-
+      setInteractions(false);
       gsap.to(overlayRef.current, {
         scaleY: 1,
         duration: 0.7,
         ease: "expo.inOut",
         transformOrigin: "bottom",
+        overwrite: true,
         onComplete: () => {
           setDisplayLocation(location);
           window.scrollTo(0, 0);
@@ -45,6 +56,7 @@ const AnimatedRoutes: React.FC<Props> = ({ children }) => {
       if (!container) return;
 
       if (isFirstMount.current) {
+        setInteractions(false);
         gsap.set(overlayRef.current, {
           scaleY: 1,
           transformOrigin: "top",
@@ -63,9 +75,11 @@ const AnimatedRoutes: React.FC<Props> = ({ children }) => {
             ease: "expo.inOut",
             delay: 0.1,
             transformOrigin: "top",
+            overwrite: true,
             onComplete: () => {
               isFirstMount.current = false;
               isTransitioning.current = false;
+              setInteractions(true);
             },
           });
         });

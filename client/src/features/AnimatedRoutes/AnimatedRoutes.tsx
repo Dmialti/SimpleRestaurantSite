@@ -12,6 +12,7 @@ const AnimatedRoutes: React.FC<Props> = ({ children }) => {
   const location = useLocation();
   const [displayLocation, setDisplayLocation] = useState(location);
 
+  const isFirstMount = useRef(true);
   const isTransitioning = useRef(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -36,11 +37,19 @@ const AnimatedRoutes: React.FC<Props> = ({ children }) => {
 
   useLayoutEffect(() => {
     if (
-      isTransitioning.current &&
-      displayLocation.pathname === location.pathname
+      (isTransitioning.current &&
+        displayLocation.pathname === location.pathname) ||
+      isFirstMount.current
     ) {
       const container = containerRef.current;
       if (!container) return;
+
+      if (isFirstMount.current) {
+        gsap.set(overlayRef.current, {
+          scaleY: 1,
+          transformOrigin: "top",
+        });
+      }
 
       const imageLoadPromise = waitForAssets(container);
 
@@ -55,6 +64,7 @@ const AnimatedRoutes: React.FC<Props> = ({ children }) => {
             delay: 0.1,
             transformOrigin: "top",
             onComplete: () => {
+              isFirstMount.current = false;
               isTransitioning.current = false;
             },
           });

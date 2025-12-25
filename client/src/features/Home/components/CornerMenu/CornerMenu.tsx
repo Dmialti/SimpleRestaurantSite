@@ -1,13 +1,18 @@
 import React, { type ReactNode } from "react";
 
-interface CornerMenuProps {
+type CornerMenuProps = React.HTMLAttributes<HTMLDivElement> & {
   className?: string;
   children?: ReactNode;
-}
+};
 
-const CornerMenu: React.FC<CornerMenuProps> = ({ className, children }) => {
+const CornerMenu: React.FC<CornerMenuProps> = ({
+  className,
+  children,
+  ...rest
+}) => {
   return (
     <div
+      {...rest}
       className={`${className} absolute bg-background-default bottom-0 right-0 rounded-tl-3xl flex flex-row justify-center align-middle items-center`}
     >
       <img

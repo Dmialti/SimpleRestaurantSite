@@ -95,7 +95,7 @@ const Home: React.FC = () => {
               ref={staggeredRightAddToRefs}
             >
               <CornerMenu
-                className={`${styles.cornerMenu} text-white pt-3 pl-6 gap-3`}
+                className={`${styles.cornerMenu} pointer-events-none text-white pt-3 pl-6 gap-3`}
               >
                 <RollingAnimation>MENU</RollingAnimation>
                 <LinkIconAnimated
@@ -118,7 +118,7 @@ const Home: React.FC = () => {
               ref={staggeredRightAddToRefs}
             >
               <CornerMenu
-                className={`${styles.cornerMenu} text-white pt-3 pl-6 gap-3`}
+                className={`${styles.cornerMenu} pointer-events-none text-white pt-3 pl-6 gap-3`}
               >
                 <RollingAnimation>RESERVATION</RollingAnimation>
                 <LinkIconAnimated
@@ -141,7 +141,7 @@ const Home: React.FC = () => {
               ref={staggeredRightAddToRefs}
             >
               <CornerMenu
-                className={`${styles.cornerMenu} text-white pt-3 pl-6 gap-3`}
+                className={`${styles.cornerMenu} pointer-events-none text-white pt-3 pl-6 gap-3`}
               >
                 <RollingAnimation>OUR RESTAURANT</RollingAnimation>
                 <LinkIconAnimated

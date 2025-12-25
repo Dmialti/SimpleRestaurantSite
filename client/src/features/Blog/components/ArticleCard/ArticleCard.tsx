@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import HeaderLeftDecor from "../../../../shared/components/HeaderLeftDecor/HeaderLeftDecor";
 import styles from "./ArticleCard.module.css";
 import { useNavigate } from "react-router-dom";

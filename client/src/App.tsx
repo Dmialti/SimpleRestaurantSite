@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Outlet,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Outlet } from "react-router-dom";
 import About from "./features/About/About";
 import Blog from "./features/Blog/Blog";
 import Contact from "./features/Contact/Contact";
@@ -27,80 +22,85 @@ import DishManager from "./features/Admin/DishManager/DishManager";
 import UserManager from "./features/Admin/UserManager/UserManager";
 import UserEditor from "./features/Admin/UserEditor/UserEditor";
 import GuestRoute from "./shared/components/GuestRoute/GuestRoute";
+import ReactLenis from "lenis/react";
+import { CustomScrollbar } from "./features/CustomScrollbar/CustomScrollbar";
+import AnimatedRoutes from "./features/AnimatedRoutes/AnimatedRoutes";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <div className="bg-background-default relative min-h-screen">
-        <div className="fixed inset-0 z-0">
-          <img
-            src={backgroundImg}
-            className="w-full h-full object-cover opacity-6"
-            alt="background"
-          />
-        </div>
+    <ReactLenis root>
+      <Router>
+        <div className="bg-background-default relative min-h-screen">
+          <div className="fixed inset-0 z-0">
+            <img
+              src={backgroundImg}
+              className="w-full h-full object-cover opacity-6"
+              alt="background"
+            />
+          </div>
+          <div className="h-auto relative z-10">
+            <CustomScrollbar />
+            <NavBar />
 
-        <div className="h-auto relative z-10">
-          <NavBar />
-
-          <main>
-            <UrqlProvider value={client}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/menu" element={<Menu />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/reservation" element={<Reservation />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/article/:id" element={<Article />} />
-                <Route
-                  element={
-                    <AuthContextProvider>
-                      <Outlet />
-                    </AuthContextProvider>
-                  }
-                >
-                  <Route element={<AdminPanel />}>
-                    <Route element={<GuestRoute />}>
-                      <Route path="/admin/login" element={<LogIn />} />
-                    </Route>
-                    <Route element={<ProtectedRoute />}>
-                      <Route path="/admin/blog" element={<BlogManager />} />
-                      <Route
-                        path="/admin/blog/edit/:id"
-                        element={<ArticleManager />}
-                      />
-                      <Route
-                        path="/admin/blog/create"
-                        element={<ArticleManager />}
-                      />
-                      <Route path="/admin/menu" element={<MenuManager />} />
-                      <Route
-                        path="/admin/dish/edit/:id"
-                        element={<DishManager />}
-                      />
-                      <Route
-                        path="/admin/dish/create"
-                        element={<DishManager />}
-                      />
-                      <Route path="/admin/users" element={<UserManager />} />
-                      <Route
-                        path="/admin/users/create"
-                        element={<UserEditor />}
-                      />
-                      <Route
-                        path="/admin/users/edit/:id"
-                        element={<UserEditor />}
-                      />
+            <main>
+              <UrqlProvider value={client}>
+                <AnimatedRoutes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/menu" element={<Menu />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/reservation" element={<Reservation />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/article/:id" element={<Article />} />
+                  <Route
+                    element={
+                      <AuthContextProvider>
+                        <Outlet />
+                      </AuthContextProvider>
+                    }
+                  >
+                    <Route element={<AdminPanel />}>
+                      <Route element={<GuestRoute />}>
+                        <Route path="/admin/login" element={<LogIn />} />
+                      </Route>
+                      <Route element={<ProtectedRoute />}>
+                        <Route path="/admin/blog" element={<BlogManager />} />
+                        <Route
+                          path="/admin/blog/edit/:id"
+                          element={<ArticleManager />}
+                        />
+                        <Route
+                          path="/admin/blog/create"
+                          element={<ArticleManager />}
+                        />
+                        <Route path="/admin/menu" element={<MenuManager />} />
+                        <Route
+                          path="/admin/dish/edit/:id"
+                          element={<DishManager />}
+                        />
+                        <Route
+                          path="/admin/dish/create"
+                          element={<DishManager />}
+                        />
+                        <Route path="/admin/users" element={<UserManager />} />
+                        <Route
+                          path="/admin/users/create"
+                          element={<UserEditor />}
+                        />
+                        <Route
+                          path="/admin/users/edit/:id"
+                          element={<UserEditor />}
+                        />
+                      </Route>
                     </Route>
                   </Route>
-                </Route>
-              </Routes>
-            </UrqlProvider>
-          </main>
+                </AnimatedRoutes>
+              </UrqlProvider>
+            </main>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </ReactLenis>
   );
 };
 

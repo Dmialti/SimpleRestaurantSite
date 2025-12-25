@@ -43,7 +43,7 @@ const DishSection: React.FC<DishSectionProps> = ({
   return (
     <div
       ref={staggeredHeaderContainerRef}
-      className={`flex flex-col items-center gap-12 pt-16 ${styles.dishSectionContainer}`}
+      className={`flex flex-col items-center gap-12 pt-10 ${styles.dishSectionContainer}`}
     >
       <HeadingDecorated
         ref={staggeredHeaderAddToRefs}

@@ -94,6 +94,7 @@ const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
             src={mediaSrc}
             alt=""
             ref={mediaRef as React.RefObject<HTMLImageElement>}
+            data-preload="true"
           />
         )}
         {mediaType == "video" && (
@@ -108,6 +109,7 @@ const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
             muted
             src={mediaSrc}
             ref={mediaRef as React.RefObject<HTMLVideoElement>}
+            data-preload="true"
           />
         )}
         {children}

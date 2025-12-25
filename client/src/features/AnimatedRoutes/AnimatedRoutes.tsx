@@ -2,6 +2,7 @@ import React, { useState, useRef, useLayoutEffect } from "react";
 import { Routes, useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { waitForAssets } from "../../shared/utils/helpers/waitForAssets.helper";
 
 interface Props {
   children: React.ReactNode;
@@ -38,22 +39,27 @@ const AnimatedRoutes: React.FC<Props> = ({ children }) => {
       isTransitioning.current &&
       displayLocation.pathname === location.pathname
     ) {
-      const rafId = requestAnimationFrame(() => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      const imageLoadPromise = waitForAssets(container);
+
+      Promise.resolve(imageLoadPromise).then(() => {
         requestAnimationFrame(() => {
+          window.dispatchEvent(new Event("page-ready"));
+
           gsap.to(overlayRef.current, {
             scaleY: 0,
-            duration: 0.7,
+            duration: 0.8,
             ease: "expo.inOut",
+            delay: 0.1,
             transformOrigin: "top",
             onComplete: () => {
               isTransitioning.current = false;
-              window.dispatchEvent(new Event("page-ready"));
             },
           });
         });
       });
-
-      return () => cancelAnimationFrame(rafId);
     }
   }, [displayLocation, location.pathname]);
 

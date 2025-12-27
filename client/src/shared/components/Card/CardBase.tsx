@@ -1,9 +1,13 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import React, { useRef } from "react";
+import { AdaptiveMap } from "../../hooks/useAdaptiveSrc.hook";
+import { AdaptiveImage } from "../Adaptive/AdaptiveImage/AdaptiveImage";
+import { AdaptiveVideo } from "../Adaptive/AdaptiveVideo/AdaptiveVideo";
 
 type BaseCardProps = React.HTMLAttributes<HTMLDivElement> & {
   mediaSrc: string;
+  adaptiveSrc?: AdaptiveMap;
   borderRadius?: string;
   isAnimated?: boolean;
   isHoverContext?: boolean;
@@ -22,6 +26,7 @@ const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
     {
       mediaType,
       mediaSrc,
+      adaptiveSrc,
       borderRadius = "1rem",
       isAnimated,
       onHoverChange,
@@ -84,21 +89,22 @@ const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
         onMouseLeave={handleMouseLeave}
         {...rest}
       >
-        {mediaType == "image" && (
-          <img
+        {mediaType === "image" ? (
+          <AdaptiveImage
+            ref={mediaRef as React.RefObject<HTMLImageElement>}
+            mediaSrc={mediaSrc}
+            adaptiveSrc={adaptiveSrc}
             className="h-full w-full object-cover block"
             style={{
               willChange: "transform, filter",
               clipPath: `inset(0 round ${borderRadius})`,
             }}
-            src={mediaSrc}
-            alt=""
-            ref={mediaRef as React.RefObject<HTMLImageElement>}
-            data-preload="true"
           />
-        )}
-        {mediaType == "video" && (
-          <video
+        ) : (
+          <AdaptiveVideo
+            ref={mediaRef as React.RefObject<HTMLVideoElement>}
+            mediaSrc={mediaSrc}
+            adaptiveSrc={adaptiveSrc}
             className="h-full w-full object-cover block"
             style={{
               willChange: "transform, filter",
@@ -107,9 +113,7 @@ const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
             autoPlay
             loop
             muted
-            src={mediaSrc}
-            ref={mediaRef as React.RefObject<HTMLVideoElement>}
-            data-preload="true"
+            playsInline
           />
         )}
         {children}

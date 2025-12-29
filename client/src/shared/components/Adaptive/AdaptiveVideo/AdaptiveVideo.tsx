@@ -1,6 +1,7 @@
 import React from "react";
 import {
   AdaptiveMap,
+  SupportedVideoFormat,
   useAdaptiveSources,
 } from "../../../hooks/useAdaptiveSrc.hook";
 
@@ -8,21 +9,34 @@ interface AdaptiveVideoProps
   extends React.VideoHTMLAttributes<HTMLVideoElement> {
   mediaSrc: string;
   adaptiveSrc?: AdaptiveMap;
+  formats?: SupportedVideoFormat[];
 }
 
 export const AdaptiveVideo = React.forwardRef<
   HTMLVideoElement,
   AdaptiveVideoProps
->(({ mediaSrc, adaptiveSrc, children, ...props }, ref) => {
-  const sources = useAdaptiveSources(mediaSrc, adaptiveSrc);
+>(
+  (
+    { mediaSrc, adaptiveSrc, children, formats = ["webm", "mp4"], ...props },
+    ref
+  ) => {
+    const sources = useAdaptiveSources(mediaSrc, "video", adaptiveSrc, formats);
 
-  return (
-    <video ref={ref} {...props}>
-      {sources.map((s) => (
-        <source key={s.query} src={s.src} media={s.query} />
-      ))}
-      <source src={mediaSrc} />
-      {children}
-    </video>
-  );
-});
+    return (
+      <video ref={ref} playsInline {...props}>
+        {sources.map((s, index) => (
+          <source
+            key={`${s.src}-${index}`}
+            src={s.src}
+            type={s.type}
+            media={s.query || undefined}
+          />
+        ))}
+
+        <source src={mediaSrc} />
+
+        {children}
+      </video>
+    );
+  }
+);

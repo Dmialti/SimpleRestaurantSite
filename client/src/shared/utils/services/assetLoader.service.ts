@@ -1,13 +1,14 @@
-const images = import.meta.glob<{ default: string }>(
-  "/src/assets/**/*.{png,jpg,jpeg,webp,avif,svg}",
+const media = import.meta.glob<{ default: string }>(
+  "/src/assets/**/*.{png,jpg,jpeg,webp,avif,svg,mp4,webm,ogg}",
   { eager: true }
 );
 
-export const imageRegistry: Record<string, string> = {};
+export const mediaRegistry: Record<string, string> = {};
 
-Object.entries(images).forEach(([path, module]) => {
+Object.entries(media).forEach(([path, module]) => {
   const fileName = path.split("/").pop() || "";
-  if (!imageRegistry[fileName]) {
-    imageRegistry[fileName] = module.default;
+
+  if (!mediaRegistry[fileName]) {
+    mediaRegistry[fileName] = module.default;
   }
 });

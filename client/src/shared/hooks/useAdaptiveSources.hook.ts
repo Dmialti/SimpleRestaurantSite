@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { imageRegistry } from "../utils/services/assetLoader.service";
+import { mediaRegistry } from "../utils/services/assetLoader.service";
 
 export type AdaptiveMap = {
   [max_width_px: string]: string;
@@ -42,8 +42,8 @@ export function useAdaptiveSources(
 
     const findHashedSrc = (currentBase: string, ext: string) => {
       const targetName = `${currentBase}.${ext}`;
-      console.log(imageRegistry);
-      return imageRegistry[targetName] || null;
+      console.log(mediaRegistry);
+      return mediaRegistry[targetName] || null;
     };
 
     const generateSources = (currentBase: string, query: string = "") => {

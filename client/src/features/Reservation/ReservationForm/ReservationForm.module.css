@@ -9,3 +9,12 @@
     gap: 40px;
   }
 }
+
+input[type="date"],
+input[type="time"] {
+  width: 100%;
+  min-width: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+}

@@ -60,6 +60,8 @@
     height: min-content;
     overflow: visible;
     max-height: none;
+    padding: 12px;
+    gap: 12px;
   }
   .heroSectionWrapper {
     width: 100%;

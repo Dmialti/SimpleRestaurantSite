@@ -84,7 +84,9 @@ const ReservationForm: React.FC = () => {
         errorMessage={errors.email?.message}
       />
 
-      <div className={`${styles.flexibleInputs} flex flex-row gap-4`}>
+      <div
+        className={`${styles.flexibleInputs} flex flex-row gap-4 w-full overflow-hidden`}
+      >
         <Input
           {...registerWithAnimation("guestsCount")}
           className="flex-1 min-w-0 invisible"

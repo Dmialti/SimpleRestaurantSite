@@ -121,7 +121,7 @@ jobs:
             fi
 
             if [ "${{ needs.changes.outputs.nginx }}" = "true" ]; then
-              docker compose up -d nginx
+              docker compose up -d --force-recreate nginx
             fi
 
             docker image prune -f

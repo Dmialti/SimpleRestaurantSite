@@ -120,5 +120,8 @@ jobs:
               docker compose exec -T api npx prisma migrate deploy
             fi
 
-            docker compose up -d --no-deps
+            if [ "${{ needs.changes.outputs.nginx }}" = "true" ]; then
+              docker compose up -d nginx
+            fi
+
             docker image prune -f

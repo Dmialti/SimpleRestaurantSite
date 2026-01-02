@@ -42,6 +42,7 @@ const HeroCard = React.forwardRef<HTMLDivElement, HeroCardProps>(
         className={`h-full w-full relative ${className}`}
         mediaType={mediaType}
         mediaSrc={mediaSrc}
+        fetchPriority="high"
       >
         <BottomGradient />
         <HeroHeading className="text-nowrap absolute bottom-0 left-0 self pb-14 pl-16.5">

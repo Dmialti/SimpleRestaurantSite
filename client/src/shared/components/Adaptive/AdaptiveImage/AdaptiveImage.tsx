@@ -18,7 +18,7 @@ export const AdaptiveImage = React.forwardRef<
   const sources = useAdaptiveSources(mediaSrc, "image", adaptiveSrc, formats);
 
   return (
-    <picture>
+    <picture style={{ display: "contents" }}>
       {sources.map((s, index) => (
         <source
           key={`${s.query}-${s.type}-${index}`}

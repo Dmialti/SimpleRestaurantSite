@@ -10,7 +10,6 @@ import Reservation from "./features/Reservation/Reservation";
 import { Provider as UrqlProvider } from "urql";
 import { client } from "./urql/urqlClient";
 import Article from "./features/Article/Article";
-import backgroundImg from "./assets/AppMaterials/background.jpg";
 import AuthContextProvider from "./context/AuthContext/AuthContextProvider";
 import BlogManager from "./features/Admin/BlogManager/BlogManager";
 import ProtectedRoute from "./shared/components/ProtectedRoute/ProtectedRoute";
@@ -25,6 +24,7 @@ import GuestRoute from "./shared/components/GuestRoute/GuestRoute";
 import ReactLenis from "lenis/react";
 import { CustomScrollbar } from "./features/CustomScrollbar/CustomScrollbar";
 import AnimatedRoutes from "./features/AnimatedRoutes/AnimatedRoutes";
+import { AdaptiveImage } from "./shared/components/Adaptive/AdaptiveImage/AdaptiveImage";
 
 const App: React.FC = () => {
   return (
@@ -32,10 +32,11 @@ const App: React.FC = () => {
       <Router>
         <div className="bg-background-default relative min-h-screen">
           <div className="fixed inset-0 z-0">
-            <img
-              src={backgroundImg}
+            <AdaptiveImage
               className="w-full h-full object-cover opacity-6"
               alt="background"
+              mediaSrc="background.jpeg"
+              formats={["avif", "jpg"]}
             />
           </div>
           <div className="h-auto relative z-10">

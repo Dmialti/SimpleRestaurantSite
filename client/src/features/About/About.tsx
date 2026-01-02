@@ -1,14 +1,6 @@
 import React from "react";
 import TileWithStars from "./components/TileWithStars/TileWithStars";
 import styles from "./About.module.css";
-
-import aboutHero from "../../assets/AboutPageMaterials/aboutHero.png";
-import topImage1 from "../../assets/AboutPageMaterials/imageScrollers/top/image1.webp";
-import topImage2 from "../../assets/AboutPageMaterials/imageScrollers/top/image2.webp";
-import topImage3 from "../../assets/AboutPageMaterials/imageScrollers/top/image3.webp";
-import bottomImage1 from "../../assets/AboutPageMaterials/imageScrollers/bottom/image1.webp";
-import bottomImage2 from "../../assets/AboutPageMaterials/imageScrollers/bottom/image2.webp";
-import bottomImage3 from "../../assets/AboutPageMaterials/imageScrollers/bottom/image3.webp";
 import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
 import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDecorated";
 import ImageSlider from "../../shared/components/ImageSlider/ImageSlider";
@@ -50,7 +42,7 @@ const About: React.FC = () => {
       isScreenHeight={true}
       heading={["ABOUT"]}
       mediaType="image"
-      mediaSrc={aboutHero}
+      mediaSrc="aboutHero.png"
       className="border-none"
       enableContentAnimation={false}
     >
@@ -76,7 +68,7 @@ const About: React.FC = () => {
           <ImageSlider
             ref={staggeredRightAddToRefs}
             className="flex-1 aspect-square"
-            imagesSrc={[topImage1, topImage2, topImage3]}
+            imagesSrc={["topImage1.webp", "topImage2.webp", "topImage3.webp"]}
           />
         </div>
         <div
@@ -106,7 +98,11 @@ const About: React.FC = () => {
           <ImageSlider
             ref={staggeredLeftAddToRefs}
             className="flex-1 aspect-square"
-            imagesSrc={[bottomImage1, bottomImage2, bottomImage3]}
+            imagesSrc={[
+              "bottomImage1.webp",
+              "bottomImage2.webp",
+              "bottomImage3.webp",
+            ]}
           />
           <div
             ref={staggeredRightAddToRefs}

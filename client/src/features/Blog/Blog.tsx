@@ -1,7 +1,6 @@
 import React from "react";
 import { GET_ARTICLES_QUERY } from "../../graphql/blog/queries/getArticles.query";
 import type { GetArticlesQuery } from "../../graphql/codegen/generated/graphql";
-import blogHeroImg from "../../assets/BlogPageMaterials/blogHero.png";
 import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
 import Button from "../../shared/components/Button/Button";
 import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDecorated";
@@ -33,7 +32,7 @@ const Blog: React.FC = () => {
       className={`py-20 px-24 flex flex-col gap-20 items-center ${styles.mainSection}`}
       heading={["BLOG"]}
       mediaType="image"
-      mediaSrc={blogHeroImg}
+      mediaSrc="blogHero.png"
       isScreenHeight={false}
     >
       {isFirstLoad ? (

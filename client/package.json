@@ -15,7 +15,6 @@
     "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.2.2",
     "@react-google-maps/api": "^2.20.7",
-    "@studio-freight/lenis": "^1.0.42",
     "@tailwindcss/vite": "^4.1.13",
     "@urql/exchange-auth": "^3.0.0",
     "@urql/exchange-graphcache": "^8.1.0",

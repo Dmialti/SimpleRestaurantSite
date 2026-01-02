@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./Menu.module.css";
 import { GET_MENU_QUERY } from "../../graphql/menu/queries/getMenu.query";
 import type { GetMenuQuery } from "../../graphql/codegen/generated/graphql";
-import menuHero from "../../assets/MenuPageMaterials/menuHero.png";
 import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
 import Button from "../../shared/components/Button/Button";
 import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDecorated";
@@ -30,7 +29,7 @@ const Menu: React.FC = () => {
       isScreenHeight={false}
       heading={["MENU"]}
       mediaType="image"
-      mediaSrc={menuHero}
+      mediaSrc="menuHero.png"
       className={fetching ? styles.disableBorder : ""}
     >
       {isFirstLoad ? (

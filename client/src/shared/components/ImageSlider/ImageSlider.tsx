@@ -1,6 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { forwardRef, useEffect, useRef, useState } from "react";
+import { AdaptiveImage } from "../Adaptive/AdaptiveImage/AdaptiveImage";
 
 interface ImageSliderProps {
   imagesSrc: string[];
@@ -70,11 +71,11 @@ const ImageSlider = forwardRef<HTMLDivElement, ImageSliderProps>(
         ref={ref}
         className={`rounded-xl overflow-hidden relative ${className}`}
       >
-        <div ref={scrollContainerRef} className="flex flex-row w-full h-full">
+        <div ref={scrollContainerRef} className="flex flex-row w-full h-full ">
           {imagesSrc.map((item, index) => (
-            <img
+            <AdaptiveImage
               key={index}
-              src={item}
+              mediaSrc={item}
               className="w-full h-full object-cover flex-shrink-0"
               data-preload={index === 0 && "true"}
             />

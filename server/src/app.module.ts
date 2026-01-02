@@ -34,6 +34,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       driver: MercuriusDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
+      jit: 1,
     }),
     CacheModule.registerAsync({
       isGlobal: true,

@@ -5,9 +5,6 @@ import CornerMenu from "./components/CornerMenu/CornerMenu";
 import RollingAnimation from "./components/RollingText/RollingText";
 import LinkIconAnimated from "./components/LinkIcon/LinkIconAnimated";
 import heroVideo from "../../assets/StartingPageMaterials/videos/main.mp4";
-import menuImg from "../../assets/StartingPageMaterials/images/side-1.png";
-import reservationImg from "../../assets/StartingPageMaterials/images/side-2.png";
-import aboutImg from "../../assets/StartingPageMaterials/images/side-3.png";
 import { useNavigate } from "react-router-dom";
 import CardContextProvider from "../../context/CardContext/CardContextProvider";
 import CardWithContextHover from "../../shared/components/Card/CardIsHoveredContext";
@@ -89,7 +86,8 @@ const Home: React.FC = () => {
             <CardWithContextHover
               className={`${styles.cardContainer} w-full h-full cursor-pointer invisible rounded-2xl`}
               mediaType="image"
-              mediaSrc={menuImg}
+              mediaSrc="side-1.png"
+              formats={["avif", "webp", "png"]}
               isAnimated={true}
               onClick={() => navigate("/menu")}
               ref={staggeredRightAddToRefs}
@@ -112,7 +110,8 @@ const Home: React.FC = () => {
             <CardWithContextHover
               className={`${styles.cardContainer} w-full h-full cursor-pointer invisible rounded-2xl`}
               mediaType="image"
-              mediaSrc={reservationImg}
+              mediaSrc="side-2.png"
+              formats={["avif", "webp", "png"]}
               isAnimated={true}
               onClick={() => navigate("/reservation")}
               ref={staggeredRightAddToRefs}
@@ -135,7 +134,8 @@ const Home: React.FC = () => {
             <CardWithContextHover
               className={`${styles.cardContainer} w-full h-full cursor-pointer invisible rounded-2xl`}
               mediaType="image"
-              mediaSrc={aboutImg}
+              mediaSrc="side-3.png"
+              formats={["avif", "webp", "png"]}
               isAnimated={true}
               onClick={() => navigate("/about")}
               ref={staggeredRightAddToRefs}

@@ -1,5 +1,4 @@
 import React from "react";
-import reservationHeroImg from "../../assets/ReservationPageMaterials/reservationHero.png";
 import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
 import ReservationForm from "./ReservationForm/ReservationForm";
 
@@ -9,7 +8,7 @@ const Reservation: React.FC = () => {
       isScreenHeight={true}
       heading={["BOOK", "A TABLE"]}
       mediaType="image"
-      mediaSrc={reservationHeroImg}
+      mediaSrc="reservationHero.png"
     >
       <ReservationForm />
     </BasePageLayout>

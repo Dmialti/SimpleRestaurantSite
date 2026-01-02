@@ -20,6 +20,12 @@ const IMAGE_MIME_TYPES: Record<string, string> = {
   png: "image/png",
 };
 
+export interface MediaSource {
+  query: string;
+  type: string;
+  src: string;
+}
+
 export type SupportedVideoFormat = "av1" | "hevc" | "webm" | "mp4";
 
 export type SupportedImageFormat = "avif" | "webp" | "jpg" | "png";
@@ -29,8 +35,11 @@ export function useAdaptiveSources(
   mediaType: "image" | "video",
   adaptiveSrc?: AdaptiveMap,
   formats?: string[]
-) {
+): MediaSource[] {
   return useMemo(() => {
+    if (!fileName) return [];
+
+    const isRemote = fileName.startsWith("http");
     const lastDot = fileName.lastIndexOf(".");
     const base = fileName.substring(0, lastDot);
     const originalExt = fileName.substring(lastDot + 1);
@@ -40,46 +49,52 @@ export function useAdaptiveSources(
     const activeFormats =
       formats || (mediaType === "video" ? ["av1", "webm"] : ["avif", "webp"]);
 
-    const findHashedSrc = (currentBase: string, ext: string) => {
+    const getSrc = (currentBase: string, ext: string): string | null => {
+      if (isRemote) {
+        return `${currentBase}.${ext}`;
+      }
       const targetName = `${currentBase}.${ext}`;
-      console.log(mediaRegistry);
       return mediaRegistry[targetName] || null;
     };
 
-    const generateSources = (currentBase: string, query: string = "") => {
-      const res = activeFormats
-        .map((f) => {
-          const hashedSrc = findHashedSrc(currentBase, f);
-          if (!hashedSrc) return null;
+    const generateSources = (
+      currentBase: string,
+      query: string = ""
+    ): MediaSource[] => {
+      const sources: MediaSource[] = [];
 
-          return {
-            query,
-            type: typesMap[f],
-            src: hashedSrc,
-          };
-        })
-        .filter(Boolean) as { query: string; type: string; src: string }[];
+      activeFormats.forEach((f) => {
+        const src = getSrc(currentBase, f);
+        if (src) {
+          sources.push({ query, type: typesMap[f], src });
+        }
+      });
 
-      const originalHashed = findHashedSrc(currentBase, originalExt);
-      if (originalHashed) {
-        res.push({
+      const originalSrc = getSrc(currentBase, originalExt);
+      if (originalSrc) {
+        sources.push({
           query,
           type: typesMap[originalExt] || `${mediaType}/${originalExt}`,
-          src: originalHashed,
+          src: originalSrc,
         });
       }
-      return res;
+
+      return sources;
     };
 
-    const baseSources = generateSources(base);
-    if (!adaptiveSrc) return baseSources;
+    let adaptiveSources: MediaSource[] = [];
+    if (adaptiveSrc) {
+      const sortedBreakpoints = Object.entries(adaptiveSrc).sort(
+        ([a], [b]) => parseInt(a) - parseInt(b)
+      );
 
-    const sortedBreakpoints = Object.entries(adaptiveSrc).sort(
-      ([a], [b]) => parseInt(a) - parseInt(b)
-    );
-    const adaptiveSources = sortedBreakpoints.flatMap(([px, suffix]) =>
-      generateSources(`${base}-${suffix}`, `(max-width: ${px}px)`)
-    );
+      adaptiveSources = sortedBreakpoints.flatMap(([px, suffix]) =>
+        generateSources(`${base}-${suffix}`, `(max-width: ${px}px)`)
+      );
+    }
+
+    const baseSources = generateSources(base);
+
     return [...adaptiveSources, ...baseSources];
   }, [fileName, adaptiveSrc, formats, mediaType]);
 }

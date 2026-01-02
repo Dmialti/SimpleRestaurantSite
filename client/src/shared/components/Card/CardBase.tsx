@@ -1,7 +1,11 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import React, { useRef } from "react";
-import { AdaptiveMap } from "../../hooks/useAdaptiveSrc.hook";
+import {
+  AdaptiveMap,
+  SupportedImageFormat,
+  SupportedVideoFormat,
+} from "../../hooks/useAdaptiveSources.hook";
 import { AdaptiveImage } from "../Adaptive/AdaptiveImage/AdaptiveImage";
 import { AdaptiveVideo } from "../Adaptive/AdaptiveVideo/AdaptiveVideo";
 
@@ -18,14 +22,21 @@ type BaseCardProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 export type CardBaseProps =
-  | ({ mediaType: "image" } & BaseCardProps)
-  | ({ mediaType: "video" } & BaseCardProps);
+  | ({
+      mediaType: "image";
+      formats?: SupportedImageFormat[];
+    } & BaseCardProps)
+  | ({
+      mediaType: "video";
+      formats?: SupportedVideoFormat[];
+    } & BaseCardProps);
 
 const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
   (
     {
       mediaType,
       mediaSrc,
+      formats,
       adaptiveSrc,
       borderRadius = "1rem",
       isAnimated,
@@ -92,6 +103,7 @@ const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
         {mediaType === "image" ? (
           <AdaptiveImage
             ref={mediaRef as React.RefObject<HTMLImageElement>}
+            formats={formats}
             mediaSrc={mediaSrc}
             adaptiveSrc={adaptiveSrc}
             className="h-full w-full object-cover block"
@@ -103,6 +115,7 @@ const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
         ) : (
           <AdaptiveVideo
             ref={mediaRef as React.RefObject<HTMLVideoElement>}
+            formats={formats}
             mediaSrc={mediaSrc}
             adaptiveSrc={adaptiveSrc}
             className="h-full w-full object-cover block"

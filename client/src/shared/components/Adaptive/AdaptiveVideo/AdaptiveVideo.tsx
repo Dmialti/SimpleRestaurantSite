@@ -3,7 +3,7 @@ import {
   AdaptiveMap,
   SupportedVideoFormat,
   useAdaptiveSources,
-} from "../../../hooks/useAdaptiveSrc.hook";
+} from "../../../hooks/useAdaptiveSources.hook";
 
 interface AdaptiveVideoProps
   extends React.VideoHTMLAttributes<HTMLVideoElement> {

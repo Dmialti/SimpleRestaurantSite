@@ -3,7 +3,7 @@ import {
   AdaptiveMap,
   SupportedImageFormat,
   useAdaptiveSources,
-} from "../../../hooks/useAdaptiveSrc.hook";
+} from "../../../hooks/useAdaptiveSources.hook";
 
 interface AdaptiveImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   mediaSrc: string;
@@ -27,8 +27,6 @@ export const AdaptiveImage = React.forwardRef<
           srcSet={s.src}
         />
       ))}
-
-      {/* Фінальний фоллбек — базове зображення (найбільш сумісне, напр. JPG) */}
       <img ref={ref} src={mediaSrc} {...props} />
     </picture>
   );

@@ -1,16 +1,23 @@
-import React, { useState } from "react";
-import CardBase from "./CardBase";
+import { useState, forwardRef } from "react";
+import CardBase, { CardBaseProps } from "./CardBase";
 
-type CardProps = Omit<
-  React.ComponentProps<typeof CardBase>,
-  "isHovered" | "setIsHovered"
->;
+type DistributiveOmit<T, K extends keyof T | string> = T extends T
+  ? Omit<T, K>
+  : never;
 
-const Card: React.FC<CardProps> = (props) => {
+type CardProps = DistributiveOmit<CardBaseProps, "isHovered" | "setIsHovered">;
+
+const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
+
   return (
-    <CardBase {...props} isHovered={isHovered} setIsHovered={setIsHovered} />
+    <CardBase
+      {...props}
+      ref={ref}
+      isHovered={isHovered}
+      setIsHovered={setIsHovered}
+    />
   );
-};
+});
 
 export default Card;

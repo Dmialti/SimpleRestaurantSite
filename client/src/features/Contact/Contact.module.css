@@ -24,12 +24,28 @@
   grid-area: contacts;
 }
 
+@media (max-width: 1650px) {
+  .contactsList {
+    font-size: 1.2vw;
+  }
+}
+@media (max-width: 1500px) {
+  .scheduleList {
+    font-size: 18px;
+  }
+}
 @media (max-width: 1280px) {
   .scheduleSection {
     gap: 48px;
   }
   .contactsSection {
     gap: 48px;
+  }
+  .scheduleList {
+    font-size: 24px;
+  }
+  .contactsList {
+    font-size: 24px;
   }
 }
 
@@ -49,6 +65,14 @@
   }
 }
 
+@media (max-width: 415px) {
+  .scheduleList {
+    font-size: 6vw;
+  }
+  .contactsList {
+    font-size: 6vw;
+  }
+}
 @media (max-width: 380px) {
   .scheduleSection {
     padding: 10vw;

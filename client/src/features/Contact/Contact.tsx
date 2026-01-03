@@ -103,13 +103,13 @@ const Contact: React.FC = () => {
         >
           <HeadingDecorated
             ref={staggeredTextTopAddToRefs}
-            className="text-[24px] leading-[120%] tracking-[1px] font-forum invisible"
+            className="text-[30px] leading-[120%] tracking-[1px] font-forum invisible"
           >
             OPENING HOURS
           </HeadingDecorated>
           <ul
             ref={staggeredTextTopAddToRefs}
-            className={`text-nowrap flex flex-col gap-4 text-[16px] leading-[180%] tracking-[0px] font-satoshi ${styles.scheduleList} invisible`}
+            className={`text-nowrap flex flex-col gap-4 text-[24px] leading-[200%] tracking-[0px] font-forum ${styles.scheduleList} invisible`}
           >
             <li className="flex flex-row gap-4 justify-between">
               <div>Mon</div>
@@ -213,13 +213,13 @@ const Contact: React.FC = () => {
         >
           <HeadingDecorated
             ref={staggeredTextBottomAddToRefs}
-            className="text-[24px] leading-[120%] tracking-[1px] font-forum invisible"
+            className="text-[30px] leading-[120%] tracking-[1px] font-forum invisible"
           >
             GET IN TOUCH
           </HeadingDecorated>
           <ul
             ref={staggeredTextBottomAddToRefs}
-            className={`flex flex-col gap-4 text-[16px] leading-[180%] tracking-[0px] font-satoshi ${styles.contactsList} invisible`}
+            className={`flex flex-col gap-4 text-[24px] leading-[200%] tracking-[0px] font-satoshi ${styles.contactsList} invisible`}
           >
             <li className="flex flex-row gap-4 justify-between">
               <div>ADDRESS</div>

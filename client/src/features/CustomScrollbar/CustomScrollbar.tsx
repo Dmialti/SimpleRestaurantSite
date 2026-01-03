@@ -105,7 +105,7 @@ export const CustomScrollbar: React.FC = () => {
   return (
     <div
       className={`fixed top-0 right-0 w-[10px] h-full z-[100] pr-[2px] py-1 transition-opacity duration-300 ${
-        isVisible ? "opacity-100" : "opacity-0 cursor-none"
+        isVisible ? "opacity-100" : "opacity-0"
       }`}
       style={{ pointerEvents: isVisible ? "auto" : "none" }}
     >

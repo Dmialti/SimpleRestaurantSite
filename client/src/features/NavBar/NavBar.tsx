@@ -148,7 +148,7 @@ const NavBar: React.FC = () => {
     >
       <nav className="flex flex-col h-fit w-full relative">
         <div
-          className={`${styles.navLinks} rounded-xl flex items-center justify-between bg-background-default `}
+          className={`${styles.navLinks} rounded-xl flex items-center justify-between bg-background-default z-20 `}
         >
           <button
             onMouseEnter={hamburgerMouseEnter}

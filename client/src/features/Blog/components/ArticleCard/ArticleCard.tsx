@@ -26,7 +26,7 @@ const ArticleCard = forwardRef<HTMLDivElement, ArticleCardProps>(
     return (
       <div
         ref={ref}
-        className={`flex flex-row gap-12 items-center select-none ${styles.articleContainer} cursor-pointer ${props.className}`}
+        className={`flex flex-row gap-12 items-center select-none cursor-pointer min-w-0 ${styles.articleContainer} ${props.className}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={openArticle}
@@ -42,7 +42,9 @@ const ArticleCard = forwardRef<HTMLDivElement, ArticleCardProps>(
           <HeaderLeftDecor className="font-satoshi text-text-default text-[12px] leading-[190%] tracking-[1px]">
             {props.date}
           </HeaderLeftDecor>
-          <div className="font-forum text-text-default text-[24px] leading-[120%] tracking-[1px] uppercase">
+          <div
+            className={`font-forum text-text-default text-[24px] leading-[120%] tracking-[1px] uppercase ${styles.header}`}
+          >
             {props.header}
           </div>
           <div className="font-satoshi text-text-muted text-[16px] leading-[180%] tracking-[0px] ">

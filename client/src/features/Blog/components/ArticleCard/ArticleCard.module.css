@@ -8,3 +8,8 @@
     min-width: 0px;
   }
 }
+@media (max-width: 200px) {
+  .header {
+    font-size: 20px;
+  }
+}

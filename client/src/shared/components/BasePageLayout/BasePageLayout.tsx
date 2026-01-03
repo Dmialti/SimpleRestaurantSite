@@ -94,7 +94,7 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
           } min-w-0 py-6`}
         >
           <div
-            className={`${className} border border-border-default h-full rounded-2xl`}
+            className={`border border-border-default h-full rounded-2xl ${className}`}
           >
             {children}
           </div>

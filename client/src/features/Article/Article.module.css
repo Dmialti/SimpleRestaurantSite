@@ -5,11 +5,19 @@
 }
 @media (max-width: 600px) {
   .heading {
-    font-size: 32px;
+    font-size: 48px;
   }
 }
 @media (max-width: 400px) {
   .mainSection {
     padding: 20px;
+  }
+  .heading {
+    font-size: 32px;
+  }
+}
+@media (max-width: 260px) {
+  .heading {
+    word-break: break-all;
   }
 }

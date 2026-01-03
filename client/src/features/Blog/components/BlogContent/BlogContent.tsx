@@ -45,6 +45,7 @@ const BlogContent: React.FC<BlogContentProps> = ({ articles }) => {
 
   return (
     <div
+      className="w-full"
       ref={mergeRefs(staggeredHeaderContainerRef, staggeredArticleContainerRef)}
     >
       <HeadingDecorated

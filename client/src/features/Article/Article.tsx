@@ -15,6 +15,7 @@ import LoadingSpinner from "../../shared/components/LoadingSpinner/LoadingSpinne
 import { STORAGE_KEYS } from "../../shared/constants/storage.constants";
 import { usePersistentQuery } from "../../shared/hooks/usePersistentQuery.hook";
 import { formatDate } from "../../shared/utils/formatters/formateDate.utils";
+import styles from "./Article.module.css";
 
 const Article: React.FC = () => {
   const { id } = useParams();
@@ -77,21 +78,25 @@ const Article: React.FC = () => {
 
   return (
     <BasePageLayout
-      className="py-20 px-24 flex flex-col gap-20 items-center"
+      className={`py-20 px-24 flex flex-col gap-20 items-center ${styles.mainSection}`}
       mediaType="image"
       mediaSrc={article?.imageSrc}
       isScreenHeight={false}
     >
-      <div className="flex flex-col items-center text-center gap-4">
-        <HeadingDecorated className="font-satoshi text-text-default text-[12px] leading-[190%] tracking-[1px]">
+      <div className="flex flex-col items-center text-center gap-4 wrap-normal">
+        <HeadingDecorated
+          className={`font-satoshi text-text-default text-[12px] leading-[190%] tracking-[1px] wrap-anywhere`}
+        >
           {formatDate(article.publicationDate)}
         </HeadingDecorated>
-        <div className="uppercase font-forum text-text-default text-[64px] leading-[110%] tracking-[1px]">
+        <div
+          className={`uppercase font-forum text-text-default text-[64px] leading-[110%] tracking-[1px] ${styles.heading}`}
+        >
           {article.name}
         </div>
         <img src="/ArticlePageMaterials/decor.png" />
       </div>
-      <div className="w-full h-full flex flex-col gap-12">
+      <div className="w-full h-full flex flex-col gap-12 wrap-anywhere">
         {paragraphs
           ?.sort((a, b) => a.position - b.position)
           .map((item) => (

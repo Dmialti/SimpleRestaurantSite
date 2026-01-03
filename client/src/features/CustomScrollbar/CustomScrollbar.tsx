@@ -105,15 +105,15 @@ export const CustomScrollbar: React.FC = () => {
   return (
     <div
       className={`fixed top-0 right-0 w-[10px] h-full z-[100] pr-[2px] py-1 transition-opacity duration-300 ${
-        isVisible ? "opacity-100" : "opacity-0"
+        isVisible ? "opacity-100" : "opacity-0 cursor-none"
       }`}
       style={{ pointerEvents: isVisible ? "auto" : "none" }}
     >
       <div
         ref={thumbRef}
         onMouseDown={handleMouseDown}
-        className={`w-full rounded-full h-[100px] transition-colors duration-200 cursor-grab ${
-          isDragging ? "bg-white/60 cursor-grabbing" : "bg-white/30"
+        className={`w-full rounded-full h-[100px] transition-colors duration-200 hover:bg-white/45 ${
+          isDragging ? "bg-white/60 hover:bg-white/60" : "bg-white/30"
         }`}
         style={{
           willChange: "transform",

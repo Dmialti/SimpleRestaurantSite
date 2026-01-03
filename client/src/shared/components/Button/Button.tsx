@@ -27,7 +27,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     const baseStyles =
-      "border transition duration-500 box-border text-center rounded-lg";
+      "border transition-colors duration-500 box-border text-center rounded-lg";
 
     const activeStyles = `${variantClass} cursor-pointer`;
     const disabledStyles =

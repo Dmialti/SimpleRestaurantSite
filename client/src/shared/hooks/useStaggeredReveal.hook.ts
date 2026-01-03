@@ -53,13 +53,23 @@ export const useStaggeredReveal = ({
   const responsiveKey = JSON.stringify(responsive);
 
   const addToRefs = useCallback((el: HTMLElement | null) => {
-    if (el && !itemsRef.current.includes(el)) {
-      itemsRef.current.push(el);
+    if (el) {
+      if (!itemsRef.current.includes(el)) {
+        itemsRef.current.push(el);
+      }
+    } else {
+      itemsRef.current = itemsRef.current.filter((item) => item !== null);
     }
   }, []);
 
   useGSAP(
     () => {
+      const validItems = itemsRef.current.filter(
+        (el, index, self) =>
+          el && document.body.contains(el) && self.indexOf(el) === index
+      );
+      itemsRef.current = validItems;
+
       if (!enable || itemsRef.current.length === 0) return;
 
       const mm = gsap.matchMedia();
@@ -196,7 +206,11 @@ export const useStaggeredReveal = ({
         }
       });
 
-      return () => mm.revert();
+      return () => {
+        mm.revert();
+
+        itemsRef.current = [];
+      };
     },
     {
       dependencies: [

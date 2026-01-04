@@ -16,9 +16,11 @@ async function bootstrap() {
   }
 
   if (process.env.CLIENT_PREVIEWS_PATTERN) {
-    whitelist.push(
-      new RegExp(`^https://${process.env.CLIENT_PREVIEWS_PATTERN}`, 'i'),
-    );
+    try {
+      whitelist.push(new RegExp(process.env.CLIENT_PREVIEWS_PATTERN, 'i'));
+    } catch (e) {
+      console.error('Invalid CORS pattern:', e);
+    }
   }
 
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -40,10 +42,19 @@ async function bootstrap() {
       if (!origin) {
         return callback(null, true);
       }
-      if (whitelist.includes(origin)) {
-        return callback(null, true);
+
+      const isAllowed = whitelist.some((pattern) => {
+        if (pattern instanceof RegExp) {
+          return pattern.test(origin);
+        }
+        return pattern === origin;
+      });
+
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        callback(null, false);
       }
-      return callback(new Error('Not allowed by CORS'), false);
     },
     credentials: true,
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],

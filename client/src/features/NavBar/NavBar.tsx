@@ -154,6 +154,7 @@ const NavBar: React.FC = () => {
             onMouseEnter={hamburgerMouseEnter}
             onMouseLeave={hamburgerMouseLeave}
             onClick={navBarToggle}
+            aria-label="Toggle navigation bar"
             className="m-2 h-[41px] w-[41px] rounded-lg bg-background-muted border border-border-default relative flex flex-col justify-center items-center gap-[5px] hover:cursor-pointer"
           >
             <div ref={line1} className="bg-[#EFE7D2] h-px w-[20px]"></div>

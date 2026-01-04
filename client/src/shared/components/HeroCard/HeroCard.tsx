@@ -44,7 +44,13 @@ const HeroCard = React.forwardRef<HTMLDivElement, HeroCardProps>(
         <BottomGradient />
         <HeroHeading className="text-nowrap absolute bottom-0 left-0 self pb-14 pl-16.5">
           {heading?.map((item) => (
-            <div key={item} ref={addToRefs} className="invisible">
+            <div
+              role="heading"
+              aria-level={1}
+              key={item}
+              ref={addToRefs}
+              className="invisible"
+            >
               {item}
             </div>
           ))}

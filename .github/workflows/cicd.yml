@@ -171,25 +171,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+
       - name: Install Unlighthouse & Puppeteer
         run: |
           npm install -g @unlighthouse/cli puppeteer
           sudo apt-get update
           sudo apt-get install -y libgbm-dev
+
       - name: Run Unlighthouse Scan
         run: |
-          SITE_URL="${{ needs.deploy-frontend.outputs.deployment_url }}"
-          unlighthouse-ci --site "$SITE_URL" \
+          # Ми використовуємо --urls щоб гарантовано перевірити головну та меню
+          # Додаємо --enable-javascript для SPA
+          unlighthouse-ci --site "${{ needs.deploy-frontend.outputs.deployment_url }}" \
                           --extra-headers "x-vercel-protection-bypass:${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}" \
+                          --urls "/, /menu, /about, /reservation, /contact, /blog" \
+                          --enable-javascript \
+                          --discovery true \
                           --build-static
+
       - name: Upload Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: unlighthouse-report
           path: .unlighthouse
+          include-hidden-files: true
           retention-days: 7

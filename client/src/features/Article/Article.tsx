@@ -16,6 +16,7 @@ import { STORAGE_KEYS } from "../../shared/constants/storage.constants";
 import { usePersistentQuery } from "../../shared/hooks/usePersistentQuery.hook";
 import { formatDate } from "../../shared/utils/formatters/formateDate.utils";
 import styles from "./Article.module.css";
+import { SEO } from "../../shared/components/SEO/SEO";
 
 const Article: React.FC = () => {
   const { id } = useParams();
@@ -77,35 +78,42 @@ const Article: React.FC = () => {
   }
 
   return (
-    <BasePageLayout
-      className={`py-20 px-24 flex flex-col gap-20 items-center ${styles.mainSection}`}
-      mediaType="image"
-      mediaSrc={article?.imageSrc}
-      isScreenHeight={false}
-    >
-      <div className="flex flex-col items-center text-center gap-4 wrap-normal">
-        <HeadingDecorated
-          className={`font-satoshi text-text-default text-[12px] leading-[190%] tracking-[1px] wrap-anywhere`}
-        >
-          {formatDate(article.publicationDate)}
-        </HeadingDecorated>
-        <div
-          className={`uppercase font-forum text-text-default text-[64px] leading-[110%] tracking-[1px] ${styles.heading}`}
-        >
-          {article.name}
+    <>
+      <SEO
+        title={article.name}
+        description={article.description.substring(0, 150)}
+        image={article.imageSrc}
+      />
+      <BasePageLayout
+        className={`py-20 px-24 flex flex-col gap-20 items-center ${styles.mainSection}`}
+        mediaType="image"
+        mediaSrc={article?.imageSrc}
+        isScreenHeight={false}
+      >
+        <div className="flex flex-col items-center text-center gap-4 wrap-normal">
+          <HeadingDecorated
+            className={`font-satoshi text-text-default text-[12px] leading-[190%] tracking-[1px] wrap-anywhere`}
+          >
+            {formatDate(article.publicationDate)}
+          </HeadingDecorated>
+          <div
+            className={`uppercase font-forum text-text-default text-[64px] leading-[110%] tracking-[1px] ${styles.heading}`}
+          >
+            {article.name}
+          </div>
+          <img src="/ArticlePageMaterials/decor.png" />
         </div>
-        <img src="/ArticlePageMaterials/decor.png" />
-      </div>
-      <div className="w-full h-full flex flex-col gap-12 wrap-anywhere">
-        {paragraphs
-          ?.sort((a, b) => a.position - b.position)
-          .map((item) => (
-            <Paragraph key={item.id} header={item.name}>
-              {item.content}
-            </Paragraph>
-          ))}
-      </div>
-    </BasePageLayout>
+        <div className="w-full h-full flex flex-col gap-12 wrap-anywhere">
+          {paragraphs
+            ?.sort((a, b) => a.position - b.position)
+            .map((item) => (
+              <Paragraph key={item.id} header={item.name}>
+                {item.content}
+              </Paragraph>
+            ))}
+        </div>
+      </BasePageLayout>
+    </>
   );
 };
 

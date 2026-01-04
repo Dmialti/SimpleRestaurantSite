@@ -10,6 +10,7 @@ import CardContextProvider from "../../context/CardContext/CardContextProvider";
 import CardWithContextHover from "../../shared/components/Card/CardIsHoveredContext";
 import HeroCard from "../../shared/components/HeroCard/HeroCard";
 import { useStaggeredReveal } from "../../shared/hooks/useStaggeredReveal.hook";
+import { SEO } from "../../shared/components/SEO/SEO";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -43,117 +44,120 @@ const Home: React.FC = () => {
   });
 
   return (
-    <div
-      ref={staggeredLeftContainerRef}
-      className={`${styles.mainSection} font-forum w-full h-[100dvh] max-h-[100dvh] box-border bg-background-default p-6 flex flex-col lg:flex-row gap-4 overflow-hidden`}
-    >
+    <>
+      <SEO />
       <div
-        className={`flex-[2] h-full min-h-0 min-w-0 relative ${styles.heroSectionWrapper}`}
+        ref={staggeredLeftContainerRef}
+        className={`${styles.mainSection} font-forum w-full h-[100dvh] max-h-[100dvh] box-border bg-background-default p-6 flex flex-col lg:flex-row gap-4 overflow-hidden`}
       >
-        <HeroCard
-          ref={staggeredLeftAddToRefs}
-          className={`${styles.heroSection} w-full h-full flex relative rounded-2xl`}
-          heading={["SUSHI", "SENSATION"]}
-          enableHeadingAnimation={isHeroAnimationDone}
-          mediaType="video"
-          mediaSrc={heroVideo}
+        <div
+          className={`flex-[2] h-full min-h-0 min-w-0 relative ${styles.heroSectionWrapper}`}
         >
-          <CornerMenu
-            className={`${styles.heroCornerMenu} pr-4 pb-4 pt-6 pl-6 gap-2`}
+          <HeroCard
+            ref={staggeredLeftAddToRefs}
+            className={`${styles.heroSection} w-full h-full flex relative rounded-2xl`}
+            heading={["SUSHI", "SENSATION"]}
+            enableHeadingAnimation={isHeroAnimationDone}
+            mediaType="video"
+            mediaSrc={heroVideo}
           >
-            <LinkIcon
-              className="block p-2.5"
-              imageSrc="/shared/icons/instagramLogo.svg"
-            />
-            <LinkIcon
-              className="block p-2.5"
-              imageSrc="/shared/icons/facebookLogo.svg"
-            />
-            <LinkIcon
-              className="block p-2.5"
-              imageSrc="/shared/icons/xLogo.svg"
-            />
-          </CornerMenu>
-        </HeroCard>
+            <CornerMenu
+              className={`${styles.heroCornerMenu} pr-4 pb-4 pt-6 pl-6 gap-2`}
+            >
+              <LinkIcon
+                className="block p-2.5"
+                imageSrc="/shared/icons/instagramLogo.svg"
+              />
+              <LinkIcon
+                className="block p-2.5"
+                imageSrc="/shared/icons/facebookLogo.svg"
+              />
+              <LinkIcon
+                className="block p-2.5"
+                imageSrc="/shared/icons/xLogo.svg"
+              />
+            </CornerMenu>
+          </HeroCard>
+        </div>
+
+        <div
+          ref={staggeredRightContainerRef}
+          className={`flex-1 flex flex-col gap-4 h-full min-h-0 min-w-0 ${styles.cardsSection}`}
+        >
+          <div className="flex-1 min-h-0 relative w-full">
+            <CardContextProvider>
+              <CardWithContextHover
+                className={`${styles.cardContainer} w-full h-full cursor-pointer invisible rounded-2xl`}
+                mediaType="image"
+                mediaSrc="side-1.png"
+                formats={["avif", "webp", "png"]}
+                isAnimated={true}
+                onClick={() => navigate("/menu")}
+                ref={staggeredRightAddToRefs}
+              >
+                <CornerMenu
+                  className={`${styles.cornerMenu} pointer-events-none text-white pt-3 pl-6 gap-3`}
+                >
+                  <RollingAnimation>MENU</RollingAnimation>
+                  <LinkIconAnimated
+                    className={`${styles.linkIcon} block p-2.5`}
+                    imageSrc="/StartingPageMaterials/icons/arrowLogo.svg"
+                  />
+                </CornerMenu>
+              </CardWithContextHover>
+            </CardContextProvider>
+          </div>
+
+          <div className="flex-1 min-h-0 relative w-full">
+            <CardContextProvider>
+              <CardWithContextHover
+                className={`${styles.cardContainer} w-full h-full cursor-pointer invisible rounded-2xl`}
+                mediaType="image"
+                mediaSrc="side-2.png"
+                formats={["avif", "webp", "png"]}
+                isAnimated={true}
+                onClick={() => navigate("/reservation")}
+                ref={staggeredRightAddToRefs}
+              >
+                <CornerMenu
+                  className={`${styles.cornerMenu} pointer-events-none text-white pt-3 pl-6 gap-3`}
+                >
+                  <RollingAnimation>RESERVATION</RollingAnimation>
+                  <LinkIconAnimated
+                    className={`${styles.linkIcon} block p-2.5`}
+                    imageSrc="/StartingPageMaterials/icons/arrowLogo.svg"
+                  />
+                </CornerMenu>
+              </CardWithContextHover>
+            </CardContextProvider>
+          </div>
+
+          <div className="flex-1 min-h-0 relative w-full">
+            <CardContextProvider>
+              <CardWithContextHover
+                className={`${styles.cardContainer} w-full h-full cursor-pointer invisible rounded-2xl`}
+                mediaType="image"
+                mediaSrc="side-3.png"
+                formats={["avif", "webp", "png"]}
+                isAnimated={true}
+                onClick={() => navigate("/about")}
+                ref={staggeredRightAddToRefs}
+              >
+                <CornerMenu
+                  className={`${styles.cornerMenu} pointer-events-none text-white pt-3 pl-6 gap-3`}
+                >
+                  <RollingAnimation>OUR RESTAURANT</RollingAnimation>
+                  <LinkIconAnimated
+                    className={`${styles.linkIcon} block p-2.5`}
+                    imageSrc="/StartingPageMaterials/icons/arrowLogo.svg"
+                  />
+                </CornerMenu>
+              </CardWithContextHover>
+            </CardContextProvider>
+          </div>
+        </div>
       </div>
-
-      <div
-        ref={staggeredRightContainerRef}
-        className={`flex-1 flex flex-col gap-4 h-full min-h-0 min-w-0 ${styles.cardsSection}`}
-      >
-        <div className="flex-1 min-h-0 relative w-full">
-          <CardContextProvider>
-            <CardWithContextHover
-              className={`${styles.cardContainer} w-full h-full cursor-pointer invisible rounded-2xl`}
-              mediaType="image"
-              mediaSrc="side-1.png"
-              formats={["avif", "webp", "png"]}
-              isAnimated={true}
-              onClick={() => navigate("/menu")}
-              ref={staggeredRightAddToRefs}
-            >
-              <CornerMenu
-                className={`${styles.cornerMenu} pointer-events-none text-white pt-3 pl-6 gap-3`}
-              >
-                <RollingAnimation>MENU</RollingAnimation>
-                <LinkIconAnimated
-                  className={`${styles.linkIcon} block p-2.5`}
-                  imageSrc="/StartingPageMaterials/icons/arrowLogo.svg"
-                />
-              </CornerMenu>
-            </CardWithContextHover>
-          </CardContextProvider>
-        </div>
-
-        <div className="flex-1 min-h-0 relative w-full">
-          <CardContextProvider>
-            <CardWithContextHover
-              className={`${styles.cardContainer} w-full h-full cursor-pointer invisible rounded-2xl`}
-              mediaType="image"
-              mediaSrc="side-2.png"
-              formats={["avif", "webp", "png"]}
-              isAnimated={true}
-              onClick={() => navigate("/reservation")}
-              ref={staggeredRightAddToRefs}
-            >
-              <CornerMenu
-                className={`${styles.cornerMenu} pointer-events-none text-white pt-3 pl-6 gap-3`}
-              >
-                <RollingAnimation>RESERVATION</RollingAnimation>
-                <LinkIconAnimated
-                  className={`${styles.linkIcon} block p-2.5`}
-                  imageSrc="/StartingPageMaterials/icons/arrowLogo.svg"
-                />
-              </CornerMenu>
-            </CardWithContextHover>
-          </CardContextProvider>
-        </div>
-
-        <div className="flex-1 min-h-0 relative w-full">
-          <CardContextProvider>
-            <CardWithContextHover
-              className={`${styles.cardContainer} w-full h-full cursor-pointer invisible rounded-2xl`}
-              mediaType="image"
-              mediaSrc="side-3.png"
-              formats={["avif", "webp", "png"]}
-              isAnimated={true}
-              onClick={() => navigate("/about")}
-              ref={staggeredRightAddToRefs}
-            >
-              <CornerMenu
-                className={`${styles.cornerMenu} pointer-events-none text-white pt-3 pl-6 gap-3`}
-              >
-                <RollingAnimation>OUR RESTAURANT</RollingAnimation>
-                <LinkIconAnimated
-                  className={`${styles.linkIcon} block p-2.5`}
-                  imageSrc="/StartingPageMaterials/icons/arrowLogo.svg"
-                />
-              </CornerMenu>
-            </CardWithContextHover>
-          </CardContextProvider>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -1,20 +1,20 @@
-// components/SEO.tsx
 import { useEffect } from "react";
 import { useSEO } from "../../hooks/useSEO.hook";
+import { SEOState } from "../../../context/SEOContext/SEOContext";
 
-interface SEOProps {
-  title?: string;
-  description?: string;
-}
-
-export const SEO: React.FC<SEOProps> = ({ title, description }) => {
+export const SEO: React.FC<SEOState> = ({
+  title,
+  description,
+  image,
+  imageHeight,
+  imageWidth,
+}) => {
   const { setPageMetadata } = useSEO();
 
   useEffect(() => {
-    setPageMetadata({ title, description });
-
+    setPageMetadata({ title, description, image, imageWidth, imageHeight });
     return () => setPageMetadata({});
-  }, [title, description, setPageMetadata]);
+  }, [title, description, image, imageWidth, imageHeight, setPageMetadata]);
 
   return null;
 };

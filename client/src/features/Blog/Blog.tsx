@@ -9,6 +9,8 @@ import { STORAGE_KEYS } from "../../shared/constants/storage.constants";
 import { usePersistentQuery } from "../../shared/hooks/usePersistentQuery.hook";
 import styles from "./Blog.module.css";
 import BlogContent from "./components/BlogContent/BlogContent";
+import { SEO } from "../../shared/components/SEO/SEO";
+import seoImage from "././../../assets/BlogPageMaterials/blogHero.avif";
 
 const Blog: React.FC = () => {
   const {
@@ -28,39 +30,46 @@ const Blog: React.FC = () => {
   );
 
   return (
-    <BasePageLayout
-      className={`py-20 px-24 flex flex-col gap-20 items-center ${styles.mainSection}`}
-      heading={["BLOG"]}
-      mediaType="image"
-      mediaSrc="blogHero.png"
-      isScreenHeight={false}
-    >
-      {isFirstLoad ? (
-        <LoadingSpinner />
-      ) : error && (!articles || articles.length === 0) ? (
-        <div className="flex flex-col items-center justify-center gap-6 py-20 h-full text-center">
-          <HeadingDecorated
-            className={`text-red-500 font-forum text-2xl tracking-widest ${styles.heading}`}
-          >
-            OOPS! SOMETHING WENT WRONG
-          </HeadingDecorated>
+    <>
+      <SEO
+        title="Our Journal — Stories from the Kitchen"
+        description="Dive into the world of Japanese cuisine. Read about sushi traditions, our chef's secrets, and the latest news from Qitchen."
+        image={seoImage}
+      />
+      <BasePageLayout
+        className={`py-20 px-24 flex flex-col gap-20 items-center ${styles.mainSection}`}
+        heading={["BLOG"]}
+        mediaType="image"
+        mediaSrc="blogHero.png"
+        isScreenHeight={false}
+      >
+        {isFirstLoad ? (
+          <LoadingSpinner />
+        ) : error && (!articles || articles.length === 0) ? (
+          <div className="flex flex-col items-center justify-center gap-6 py-20 h-full text-center">
+            <HeadingDecorated
+              className={`text-red-500 font-forum text-2xl tracking-widest ${styles.heading}`}
+            >
+              OOPS! SOMETHING WENT WRONG
+            </HeadingDecorated>
 
-          <p className="text-text-muted font-satoshi text-lg max-w-md">
-            {error.message}
-          </p>
+            <p className="text-text-muted font-satoshi text-lg max-w-md">
+              {error.message}
+            </p>
 
-          <Button
-            variant="border"
-            className="px-6 py-2 uppercase tracking-widest text-sm text-text-default"
-            onClick={() => reexecuteQuery({ requestPolicy: "network-only" })}
-          >
-            Try Again
-          </Button>
-        </div>
-      ) : (
-        <BlogContent articles={articles} />
-      )}
-    </BasePageLayout>
+            <Button
+              variant="border"
+              className="px-6 py-2 uppercase tracking-widest text-sm text-text-default"
+              onClick={() => reexecuteQuery({ requestPolicy: "network-only" })}
+            >
+              Try Again
+            </Button>
+          </div>
+        ) : (
+          <BlogContent articles={articles} />
+        )}
+      </BasePageLayout>
+    </>
   );
 };
 

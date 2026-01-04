@@ -4,6 +4,8 @@ export interface SEOState {
   title?: string;
   description?: string;
   image?: string;
+  imageWidth?: string;
+  imageHeight?: string;
 }
 
 interface SEOContextType {

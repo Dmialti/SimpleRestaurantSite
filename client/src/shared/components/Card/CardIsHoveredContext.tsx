@@ -6,7 +6,7 @@ type DistributiveOmit<T, K extends keyof T | string> = T extends T
   ? Omit<T, K>
   : never;
 
-type CardWithContextHoverProps = DistributiveOmit<
+export type CardWithContextHoverProps = DistributiveOmit<
   CardBaseProps,
   "isHovered" | "setIsHovered"
 >;

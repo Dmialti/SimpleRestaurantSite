@@ -17,6 +17,7 @@ const HeaderLeftDecor: React.FC<HeaderLeftDecorProps> = ({
       <img
         className="shrink-[100] min-w-0 whitespace-nowrap h-auto w-auto object-contain"
         src="/BlogPageMaterials/date/decor.png"
+        alt="header left decor icon"
       />
       <div className="shrink-1">{children}</div>
     </div>

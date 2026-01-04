@@ -101,7 +101,10 @@ const Article: React.FC = () => {
           >
             {article.name}
           </div>
-          <img src="/ArticlePageMaterials/decor.png" />
+          <img
+            alt="underheading decor icon"
+            src="/ArticlePageMaterials/decor.png"
+          />
         </div>
         <div className="w-full h-full flex flex-col gap-12 wrap-anywhere">
           {paragraphs

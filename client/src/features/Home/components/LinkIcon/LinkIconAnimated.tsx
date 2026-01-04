@@ -26,6 +26,7 @@ const LinkIconAnimated: React.FC<LinkIconAnimatedProps> = ({
         <img
           src={imageSrc}
           style={{ height: `${imageHeight}rem`, width: `${imageWidth}rem` }}
+          alt="link icon"
         />
       </RollingAnimation>
     </a>

@@ -67,14 +67,20 @@ const Home: React.FC = () => {
               <LinkIcon
                 className="block p-2.5"
                 imageSrc="/shared/icons/instagramLogo.svg"
+                href="https://github.com/Dmialti"
+                alt="instagram link logo"
               />
               <LinkIcon
                 className="block p-2.5"
                 imageSrc="/shared/icons/facebookLogo.svg"
+                href="https://github.com/Dmialti"
+                alt="facebook link logo"
               />
               <LinkIcon
                 className="block p-2.5"
                 imageSrc="/shared/icons/xLogo.svg"
+                href="https://github.com/Dmialti"
+                alt="x link logo"
               />
             </CornerMenu>
           </HeroCard>
@@ -94,6 +100,7 @@ const Home: React.FC = () => {
                 isAnimated={true}
                 onClick={() => navigate("/menu")}
                 ref={staggeredRightAddToRefs}
+                alt="menu section image"
               >
                 <CornerMenu
                   className={`${styles.cornerMenu} pointer-events-none text-white pt-3 pl-6 gap-3`}
@@ -118,6 +125,7 @@ const Home: React.FC = () => {
                 isAnimated={true}
                 onClick={() => navigate("/reservation")}
                 ref={staggeredRightAddToRefs}
+                alt="reservation section image"
               >
                 <CornerMenu
                   className={`${styles.cornerMenu} pointer-events-none text-white pt-3 pl-6 gap-3`}
@@ -142,6 +150,7 @@ const Home: React.FC = () => {
                 isAnimated={true}
                 onClick={() => navigate("/about")}
                 ref={staggeredRightAddToRefs}
+                alt="about section image"
               >
                 <CornerMenu
                   className={`${styles.cornerMenu} pointer-events-none text-white pt-3 pl-6 gap-3`}

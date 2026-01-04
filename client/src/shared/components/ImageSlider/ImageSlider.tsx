@@ -78,6 +78,7 @@ const ImageSlider = forwardRef<HTMLDivElement, ImageSliderProps>(
               mediaSrc={item}
               className="w-full h-full object-cover flex-shrink-0"
               data-preload={index === 0 && "true"}
+              alt={`slider image ${index}`}
             />
           ))}
         </div>
@@ -91,6 +92,7 @@ const ImageSlider = forwardRef<HTMLDivElement, ImageSliderProps>(
           onMouseUp={() => onMouseUpUnshrink(leftArrowRef.current)}
           onMouseOut={() => onMouseUpUnshrink(leftArrowRef.current)}
           data-preload="true"
+          alt="left arrow slider button icon"
         />
         <img
           ref={rightArrowRef}
@@ -102,6 +104,7 @@ const ImageSlider = forwardRef<HTMLDivElement, ImageSliderProps>(
           onMouseUp={() => onMouseUpUnshrink(rightArrowRef.current)}
           onMouseOut={() => onMouseUpUnshrink(rightArrowRef.current)}
           data-preload="true"
+          alt="right arrow slider button icon"
         />
       </div>
     );

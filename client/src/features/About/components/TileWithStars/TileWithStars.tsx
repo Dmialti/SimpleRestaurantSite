@@ -18,6 +18,7 @@ const TileWithStars = forwardRef<HTMLDivElement, TileWithStarsProps>(
               key={key}
               className="h-4 w-4"
               src="/AboutPageMaterials/icons/starIcon.svg"
+              alt="star icon"
             />
           ))}
         </div>

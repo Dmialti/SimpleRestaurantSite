@@ -13,11 +13,17 @@ const HeadingDecorated = forwardRef<HTMLDivElement, HeadingDecoratedProps>(
         className={`flex flex-row justify-center items-center text-center gap-4 ${className}`}
       >
         <div>
-          <img src="/shared/HeadingDecoratedMaterials/leftSymbol.svg" />
+          <img
+            alt="heading decoration icon"
+            src="/shared/HeadingDecoratedMaterials/leftSymbol.svg"
+          />
         </div>
         <div>{children}</div>
         <div>
-          <img src="/shared/HeadingDecoratedMaterials/rightSymbol.svg" />
+          <img
+            alt="heading decoration icon"
+            src="/shared/HeadingDecoratedMaterials/rightSymbol.svg"
+          />
         </div>
       </div>
     );

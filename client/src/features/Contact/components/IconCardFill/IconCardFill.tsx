@@ -3,12 +3,9 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import useHovered from "../../../../shared/hooks/useHovered.hook";
 
-interface IconCardFillProps {
-  iconSrc: string;
-  className?: string;
-}
+type IconCardFillProps = React.ImgHTMLAttributes<HTMLImageElement>;
 
-const IconCardFill: React.FC<IconCardFillProps> = ({ iconSrc, className }) => {
+const IconCardFill: React.FC<IconCardFillProps> = ({ className, ...rest }) => {
   const { isHovered } = useHovered();
   const coverRef = useRef<HTMLDivElement>(null);
 
@@ -25,7 +22,7 @@ const IconCardFill: React.FC<IconCardFillProps> = ({ iconSrc, className }) => {
       ref={coverRef}
       className={`w-full h-full flex justify-center items-center absolute opacity-0 top-0 bg-background-default ${className}`}
     >
-      <img className="h-[30px] w-[30px]" src={iconSrc} />
+      <img className="h-[30px] w-[30px]" {...rest} />
     </div>
   );
 };

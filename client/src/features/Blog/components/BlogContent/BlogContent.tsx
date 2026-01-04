@@ -64,7 +64,10 @@ const BlogContent: React.FC<BlogContentProps> = ({ articles }) => {
               date={formatDate(item.publicationDate)}
               header={item.name}
               description={item.description}
-              imageSrc={item.imageSrc}
+              cardProps={{
+                mediaSrc: item.imageSrc,
+                alt: `article card ${item.id}`,
+              }}
               className="invisible"
             />
           </CardContextProvider>

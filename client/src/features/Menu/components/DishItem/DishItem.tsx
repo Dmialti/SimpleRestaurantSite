@@ -15,6 +15,7 @@ const DishItem = forwardRef<HTMLDivElement, DishItemProps>((props, ref) => {
         mediaType="image"
         mediaSrc={props.imageSrc}
         borderRadius="var(--card-radius)"
+        alt={`${props.name} image`}
       />
       <div className=" flex flex-col justify-center gap-1">
         <div

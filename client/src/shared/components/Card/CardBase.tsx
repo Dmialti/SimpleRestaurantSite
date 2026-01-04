@@ -13,6 +13,7 @@ type BaseCardProps = React.HTMLAttributes<HTMLDivElement> & {
   mediaSrc: string;
   adaptiveSrc?: AdaptiveMap;
   fetchPriority?: "high" | "low" | "auto";
+  alt?: string;
   borderRadius?: string;
   isAnimated?: boolean;
   isHoverContext?: boolean;
@@ -40,6 +41,7 @@ const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
       formats,
       adaptiveSrc,
       fetchPriority = "auto",
+      alt,
       borderRadius = "1rem",
       isAnimated,
       onHoverChange,
@@ -114,6 +116,7 @@ const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
               clipPath: `inset(0 round ${borderRadius})`,
             }}
             fetchPriority={fetchPriority}
+            alt={alt}
           />
         ) : (
           <AdaptiveVideo

@@ -5,13 +5,13 @@ import { useStaggeredReveal } from "../../hooks/useStaggeredReveal.hook";
 import { mergeRefs } from "../../utils/helpers/mergeRefs.helper";
 import { BasePageLayoutAnimationContext } from "../../../context/BasePageLayoutAnimationContext/BasePageLayoutAnimationContext";
 
-interface BasePageLayoutProps extends HeroCardProps {
+type BasePageLayoutProps = HeroCardProps & {
   isScreenHeight: boolean;
   enableHeroAnimation?: boolean;
   enableContentAnimation?: boolean;
   className?: string;
   children?: ReactNode;
-}
+};
 
 const BasePageLayout: React.FC<BasePageLayoutProps> = ({
   heading,

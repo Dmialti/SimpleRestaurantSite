@@ -174,8 +174,12 @@ const Contact: React.FC = () => {
                 mediaType={"image"}
                 mediaSrc="contactImage1.webp"
                 isAnimated={true}
+                alt="instagram link image 1"
               >
-                <IconCardFill iconSrc="shared/icons/instagramLogo.svg" />
+                <IconCardFill
+                  alt="instagram link icon"
+                  src="shared/icons/instagramLogo.svg"
+                />
               </CardWithContextHover>
             </CardContextProvider>
             <CardContextProvider>
@@ -184,8 +188,12 @@ const Contact: React.FC = () => {
                 mediaType={"image"}
                 mediaSrc="contactImage2.png"
                 isAnimated={true}
+                alt="instagram link image 2"
               >
-                <IconCardFill iconSrc="shared/icons/instagramLogo.svg" />
+                <IconCardFill
+                  alt="instagram link icon"
+                  src="shared/icons/instagramLogo.svg"
+                />
               </CardWithContextHover>
             </CardContextProvider>
             <CardContextProvider>
@@ -194,8 +202,12 @@ const Contact: React.FC = () => {
                 mediaType={"image"}
                 mediaSrc="contactImage3.png"
                 isAnimated={true}
+                alt="instagram link image 3"
               >
-                <IconCardFill iconSrc="shared/icons/instagramLogo.svg" />
+                <IconCardFill
+                  alt="instagram link icon"
+                  src="shared/icons/instagramLogo.svg"
+                />
               </CardWithContextHover>
             </CardContextProvider>
             <CardContextProvider>
@@ -204,8 +216,12 @@ const Contact: React.FC = () => {
                 mediaType={"image"}
                 mediaSrc="contactImage4.png"
                 isAnimated={true}
+                alt="instagram link image 4"
               >
-                <IconCardFill iconSrc="shared/icons/instagramLogo.svg" />
+                <IconCardFill
+                  alt="instagram link icon"
+                  src="shared/icons/instagramLogo.svg"
+                />
               </CardWithContextHover>
             </CardContextProvider>
           </div>
@@ -246,18 +262,36 @@ const Contact: React.FC = () => {
               <li className="flex flex-row gap-4 justify-between">
                 <div>FOLLOW</div>
                 <div className="flex flex-row flex-wrap justify-end gap-3">
-                  <img
-                    className="w-[18px] h-[18px]"
-                    src="/shared/icons/facebookLogo.svg"
-                  />
-                  <img
-                    className="w-[18px] h-[18px]"
-                    src="/shared/icons/instagramLogo.svg"
-                  />
-                  <img
-                    className="w-[18px] h-[18px]"
-                    src="/shared/icons/xLogo.svg"
-                  />
+                  <a
+                    className="flex items-center"
+                    href="https://github.com/Dmialti"
+                  >
+                    <img
+                      className="w-[18px] h-[18px]"
+                      src="/shared/icons/facebookLogo.svg"
+                      alt="facebook icon"
+                    />
+                  </a>
+                  <a
+                    className="flex items-center"
+                    href="https://github.com/Dmialti"
+                  >
+                    <img
+                      className="w-[18px] h-[18px]"
+                      src="/shared/icons/instagramLogo.svg"
+                      alt="instagram icon"
+                    />
+                  </a>
+                  <a
+                    className="flex items-center"
+                    href="https://github.com/Dmialti"
+                  >
+                    <img
+                      className="w-[18px] h-[18px]"
+                      src="/shared/icons/xLogo.svg"
+                      alt="x icon"
+                    />
+                  </a>
                 </div>
               </li>
             </ul>

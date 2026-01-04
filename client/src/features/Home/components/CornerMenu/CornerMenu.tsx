@@ -18,10 +18,12 @@ const CornerMenu: React.FC<CornerMenuProps> = ({
       <img
         src="/StartingPageMaterials/icons/roundedEdge.svg"
         className="absolute -left-6 bottom-0"
+        alt="rounded corner decor"
       />
       <img
         src="/StartingPageMaterials/icons/roundedEdge.svg"
         className="absolute right-0 -top-6"
+        alt="rounded corner decor"
       />
       {children}
     </div>

@@ -185,11 +185,10 @@ jobs:
 
       - name: Run Unlighthouse Scan
         run: |
-          # Ми використовуємо --urls щоб гарантовано перевірити головну та меню
-          # Додаємо --enable-javascript для SPA
           unlighthouse-ci --site "${{ needs.deploy-frontend.outputs.deployment_url }}" \
+                          --cookies "vx-vercel-protection-bypass=${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}" \
                           --extra-headers "x-vercel-protection-bypass:${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}" \
-                          --urls "/, /menu, /about, /reservation, /contact, /blog" \
+                          --urls "/,/menu,/about,/reservation,/contact,/blog" \
                           --enable-javascript \
                           --discovery true \
                           --build-static

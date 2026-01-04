@@ -9,10 +9,18 @@ import multipart from '@fastify/multipart';
 import cors from '@fastify/cors';
 
 async function bootstrap() {
-  const whitelist = [
-    'http://localhost:5000', // local dev
-    process.env.CLIENT_URL, // prod
-  ];
+  const whitelist: (string | RegExp)[] = ['http://localhost:5000'];
+
+  if (process.env.CLIENT_URL) {
+    whitelist.push(process.env.CLIENT_URL);
+  }
+
+  if (process.env.CLIENT_PREVIEWS_PATTERN) {
+    whitelist.push(
+      new RegExp(`^https://${process.env.CLIENT_PREVIEWS_PATTERN}`, 'i'),
+    );
+  }
+
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter({ trustProxy: true }),

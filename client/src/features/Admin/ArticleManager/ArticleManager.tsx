@@ -254,7 +254,7 @@ const ArticleManager: React.FC = () => {
                             fileInputRef.current?.click();
                           }}
                         >
-                          <IconCardFill iconSrc="../../../../public/shared/icons/changeFile.svg" />
+                          <IconCardFill src="../../../../public/shared/icons/changeFile.svg" />
                         </CardWithContextHover>
                       </CardContextProvider>
                     ) : (

@@ -317,7 +317,7 @@ const DishManager: React.FC = () => {
                           mediaSrc={currentImageSrc}
                           isAnimated={true}
                         >
-                          <IconCardFill iconSrc={changeFileIcon} />
+                          <IconCardFill src={changeFileIcon} />
                         </CardWithContextHover>
                       </CardContextProvider>
                     ) : (

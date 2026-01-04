@@ -26,6 +26,8 @@ jobs:
             frontend:
               - 'client/**'
   test:
+    needs: [changes]
+    if: needs.changes.outputs.server == 'true' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     defaults:
       run:

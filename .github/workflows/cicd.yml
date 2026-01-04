@@ -12,6 +12,7 @@ jobs:
     outputs:
       server: ${{ steps.filter.outputs.server }}
       nginx: ${{ steps.filter.outputs.nginx }}
+      frontend: ${{ steps.filter.outputs.frontend }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
@@ -22,7 +23,8 @@ jobs:
               - 'server/**'
             nginx:
               - 'nginx/**'
-
+            frontend:
+              - 'client/**'
   test:
     needs: changes
     if: needs.changes.outputs.server == 'true'
@@ -73,7 +75,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Build and push Server image
         if: needs.changes.outputs.server == 'true'
         uses: docker/build-push-action@v5
@@ -81,7 +82,6 @@ jobs:
           context: ./server
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/restaurant-server:latest
-
       - name: Build and push Nginx image
         if: needs.changes.outputs.nginx == 'true'
         uses: docker/build-push-action@v5
@@ -90,7 +90,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/restaurant-nginx:latest
 
-  deploy:
+  deploy-backend:
     needs: [changes, build-and-push]
     runs-on: ubuntu-latest
     if: always() && needs.build-and-push.result == 'success'
@@ -104,7 +104,6 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           source: "docker-compose.yml"
           target: "app"
-
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -114,14 +113,54 @@ jobs:
           script: |
             cd app
             docker compose pull
-
             if [ "${{ needs.changes.outputs.server }}" = "true" ]; then
               docker compose up -d api
               docker compose exec -T api npx prisma migrate deploy
             fi
-
             if [ "${{ needs.changes.outputs.nginx }}" = "true" ]; then
               docker compose up -d --force-recreate nginx
             fi
-
             docker image prune -f
+
+  deploy-frontend:
+    needs: [changes]
+    if: needs.changes.outputs.frontend == 'true' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    outputs:
+      deployment_url: ${{ steps.deploy.outputs.vercel_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        id: deploy
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
+          working-directory: ./client
+
+  unlighthouse-audit:
+    needs: [deploy-frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Unlighthouse & Puppeteer
+        run: |
+          npm install -g @unlighthouse/cli puppeteer
+          sudo apt-get update
+          sudo apt-get install -y libgbm-dev
+      - name: Run Unlighthouse Scan
+        run: |
+          unlighthouse-ci --site ${{ needs.deploy-frontend.outputs.deployment_url }} --build-static
+      - name: Upload Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unlighthouse-report
+          path: .unlighthouse
+          retention-days: 7

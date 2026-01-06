@@ -9,8 +9,6 @@ import { mergeRefs } from "../../utils/helpers/mergeRefs.helper";
 export type HeroCardProps = CardProps & {
   heading?: string[];
   enableHeadingAnimation?: boolean;
-  className?: string;
-  children?: React.ReactNode;
 };
 
 const HeroCard = React.forwardRef<HTMLDivElement, HeroCardProps>(
@@ -37,9 +35,7 @@ const HeroCard = React.forwardRef<HTMLDivElement, HeroCardProps>(
       <Card
         ref={mergeRefs(containerRef, ref)}
         className={`h-full w-full relative ${className}`}
-        fetchPriority="high"
-        alt="hero card"
-        {...(cardProps as CardProps)}
+        {...cardProps}
       >
         <BottomGradient />
         <HeroHeading className="text-nowrap absolute bottom-0 left-0 self pb-14 pl-16.5">

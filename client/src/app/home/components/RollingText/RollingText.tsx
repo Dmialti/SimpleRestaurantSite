@@ -1,3 +1,4 @@
+"use client";
 import { useGSAP } from "@gsap/react";
 import React, { useEffect, useRef, type ReactNode } from "react";
 import gsap from "gsap";

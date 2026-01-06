@@ -1,0 +1,94 @@
+.mainSection {
+  display: grid;
+  grid-template-columns: 1fr 0.3fr;
+  grid-template-areas: "hero cards";
+  box-sizing: border-box;
+}
+
+.heroSection {
+  grid-area: hero;
+  overflow: hidden;
+}
+
+.cardsSection {
+  grid-area: cards;
+  flex-direction: column;
+}
+
+.responsiveImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 1280px) {
+  .mainSection {
+    display: flex;
+    flex-direction: column;
+  }
+  .heroSectionWrapper {
+    height: 600px;
+    flex: none;
+  }
+
+  .cardsSection {
+    flex: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: min-content;
+  }
+  .heroCornerMenu {
+    display: none;
+  }
+  .responsiveImage {
+    position: static;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 810px) {
+  .mainSection {
+    display: flex;
+    flex-direction: column;
+    height: min-content;
+    overflow: visible;
+    max-height: none;
+    padding: 12px;
+    gap: 12px;
+  }
+  .heroSectionWrapper {
+    width: 100%;
+    height: min-content;
+    aspect-ratio: 1 / 1;
+  }
+  .cardsSection {
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: none;
+    flex: none;
+  }
+  .responsiveImage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .mainSection {
+    padding: 5vw;
+    gap: 5vw;
+  }
+  .cardsSection {
+    gap: 5vw;
+  }
+}
+@media (max-width: 260px) {
+  .cardsSection {
+    font-size: 5vw;
+  }
+}

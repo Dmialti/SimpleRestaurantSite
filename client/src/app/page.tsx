@@ -1,9 +1,13 @@
-export default function Home() {
-  return (
-    <div className="p-10">
-      <h1 className="text-3xl font-bold">
-        Running on Next.js 15 + React 19 🚀
-      </h1>
-    </div>
-  );
-}
+import { Metadata } from "next";
+import HomeClient from "./home/components/HomeContent/HomeContent";
+
+export const metadata: Metadata = {
+  title: "Sushi Sensation | Home",
+  description: "Best sushi in town",
+};
+
+const Home: React.FC = () => {
+  return <HomeClient />;
+};
+
+export default Home;

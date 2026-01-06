@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Image from "next/image";
 import "./globals.css";
+
+import backgroundImage from "@/assets/AppMaterials/background.jpg";
 
 const forum = localFont({
   src: [
@@ -39,11 +42,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${forum.variable} ${satoshi.variable} antialiased`}>
-        {children}
-        <h1 className="font-forum text-4xl text-primary-default">
-          Test Font Forum
-        </h1>
-        <p className="font-satoshi text-text-muted">Test Font Satoshi</p>
+        <div className="bg-background-default relative min-h-screen">
+          <div className="fixed inset-0 z-0">
+            <Image
+              className="w-full h-full object-cover opacity-6"
+              alt="background"
+              src={backgroundImage}
+              sizes="100vw"
+            />
+          </div>
+          <div className="h-auto relative z-10">{children}</div>
+        </div>
       </body>
     </html>
   );

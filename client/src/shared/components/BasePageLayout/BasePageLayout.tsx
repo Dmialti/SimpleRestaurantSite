@@ -27,13 +27,19 @@ export default function BasePageLayout({
   const [isHeroAnimationDone, setIsHeroAnimationDone] = useState(false);
   const [isContentAnimationDone, setIsContentAnimationDone] = useState(false);
 
-  const finalHeroProps =
+  const finalHeroProps: HeroCardProps =
     heroCardProps.mediaType === "image"
       ? {
           ...heroCardProps,
+          mediaType: "image",
           imageProps: {
             ...heroCardProps.imageProps,
+            src: heroCardProps.imageProps?.src || "",
+            alt: heroCardProps.imageProps?.alt || "Hero image",
             fill: true,
+            loading: "eager",
+            preload: true,
+            sizes: "(max-width: 1280px) 100vw, 100vh",
           },
         }
       : heroCardProps;

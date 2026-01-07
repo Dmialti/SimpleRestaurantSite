@@ -23,28 +23,28 @@ const makiList = [
     description:
       'A tantalizing blend of spicy tuna, cucumber, and avocado, harmoniously rolled in nori and seasoned rice.',
     price: 5,
-    imageSrc: '/MenuPageMaterials/sushi/spicyTunaMaki.png',
+    imageSrc: '/MenuPageMaterials/sushi/spicyTunaMaki.webp',
   },
   {
     name: 'Mango Maki',
     description:
       'Tempura-fried shrimp, cucumber, and cream cheese embrace a center of fresh avocado, delivering a satisfying contrast of textures.',
     price: 5,
-    imageSrc: '/MenuPageMaterials/sushi/mangoMaki.png',
+    imageSrc: '/MenuPageMaterials/sushi/mangoMaki.webp',
   },
   {
     name: 'Salmon Maki',
     description:
       'Shiitake mushrooms, avocado, and pickled daikon radish nestle within a roll of seasoned rice, coated with nutty sesame seeds.',
     price: 5,
-    imageSrc: '/MenuPageMaterials/sushi/salmonMaki.png',
+    imageSrc: '/MenuPageMaterials/sushi/salmonMaki.webp',
   },
   {
     name: 'Tuna Maki',
     description:
       'A vibrant assortment of julienned carrots, bell peppers, and cucumber, tightly encased in a nori-wrapped rice roll.',
     price: 5,
-    imageSrc: '/MenuPageMaterials/sushi/tunaMaki.png',
+    imageSrc: '/MenuPageMaterials/sushi/tunaMaki.webp',
   },
 ];
 
@@ -54,49 +54,49 @@ const uraMakiList = [
     description:
       'Creamy crab salad, avocado, and cucumber rolled inside, topped with spicy tuna and drizzled with fiery sriracha sauce.',
     price: 12,
-    imageSrc: '/MenuPageMaterials/sushi/volcanoDelight.png',
+    imageSrc: '/MenuPageMaterials/sushi/volcanoDelight.webp',
   },
   {
     name: 'Rainbow Fusion',
     description:
       'A colorful blend of fresh tuna, salmon, yellowtail, and avocado, enveloping a core of cucumber and crab stick.',
     price: 12,
-    imageSrc: '/MenuPageMaterials/sushi/rainbowFusion.png',
+    imageSrc: '/MenuPageMaterials/sushi/rainbowFusion.webp',
   },
   {
     name: 'Dragon Elegance',
     description:
       'Grilled eel and avocado nestled within the roll, draped with slices of ripe avocado resembling dragon scales.',
     price: 12,
-    imageSrc: '/MenuPageMaterials/sushi/dragonElegance.png',
+    imageSrc: '/MenuPageMaterials/sushi/dragonElegance.webp',
   },
   {
     name: 'Sunset Serenity',
     description:
       'Tempura shrimp, cucumber, and spicy mayo embraced by a roll of soy paper, crowned with slices of creamy mango.',
     price: 12,
-    imageSrc: '/MenuPageMaterials/sushi/sunsetSerenity.png',
+    imageSrc: '/MenuPageMaterials/sushi/sunsetSerenity.webp',
   },
   {
     name: 'Mystic Garden',
     description:
       'Shiitake mushrooms, asparagus, and cucumber intermingle with crispy tempura bits, blanketed by a layer of sesame seeds.',
     price: 12,
-    imageSrc: '/MenuPageMaterials/sushi/mysticGarden.png',
+    imageSrc: '/MenuPageMaterials/sushi/mysticGarden.webp',
   },
   {
     name: 'Ocean Breeze',
     description:
       'A medley of fresh shrimp, crab stick, and avocado, laced with a gentle touch of zesty yuzu-infused tobiko.',
     price: 12,
-    imageSrc: '/MenuPageMaterials/sushi/oceanBreeze.png',
+    imageSrc: '/MenuPageMaterials/sushi/oceanBreeze.webp',
   },
   {
     name: 'Tokyo Blossom',
     description:
       'Delicate pink soy paper envelopes a blend of tuna, crab stick, and cucumber, embellished with edible flower petals.',
     price: 12,
-    imageSrc: '/MenuPageMaterials/sushi/tokyoBlossom.png',
+    imageSrc: '/MenuPageMaterials/sushi/tokyoBlossom.webp',
   },
 ];
 
@@ -106,35 +106,35 @@ const specialRollsList = [
     description:
       'A delicate combination of fresh salmon, cream cheese, and asparagus, rolled in orange-hued tobiko for a burst of sunrise-inspired flavors.',
     price: 16,
-    imageSrc: '/MenuPageMaterials/sushi/sunriseBliss.png',
+    imageSrc: '/MenuPageMaterials/sushi/sunriseBliss.webp',
   },
   {
     name: 'Mango Tango Fusion',
     description:
       'Tempura shrimp, cucumber, and avocado dance alongside sweet mango slices, drizzled with a tangy mango sauce.',
     price: 16,
-    imageSrc: '/MenuPageMaterials/sushi/mangoTangoFusion.png',
+    imageSrc: '/MenuPageMaterials/sushi/mangoTangoFusion.webp',
   },
   {
     name: 'Truffle Indulgence',
     description:
       'Decadent slices of black truffle grace a roll of succulent wagyu beef, cucumber, and microgreens, culminating in an exquisite umami symphony.',
     price: 16,
-    imageSrc: '/MenuPageMaterials/sushi/truffleIndulgence.png',
+    imageSrc: '/MenuPageMaterials/sushi/truffleIndulgence.webp',
   },
   {
     name: 'Pacific Firecracker',
     description:
       'Spicy crab salad, tempura shrimp, and jalapeño peppers combine in a fiery ensemble, accented with a chili-infused aioli.',
     price: 16,
-    imageSrc: '/MenuPageMaterials/sushi/pacificFirecracker.png',
+    imageSrc: '/MenuPageMaterials/sushi/pacificFirecracker.webp',
   },
   {
     name: 'Eternal Eel Enchantment',
     description:
       'An enchanting blend of eel tempura, foie gras, and cucumber, elegantly layered with truffle oil and gold leaf for a touch of opulence.',
     price: 16,
-    imageSrc: '/MenuPageMaterials/sushi/eternalEelEnchantment.png',
+    imageSrc: '/MenuPageMaterials/sushi/eternalEelEnchantment.webp',
   },
 ];
 
@@ -144,35 +144,35 @@ const articlesData = [
     header: 'How Qitchen Redefines Flavor Harmony in Every Bite',
     description:
       "Experience an orchestra of tastes as Qitchen's sushi unveils a symphony of perfectly balanced flavors.",
-    imageSrc: '/BlogPageMaterials/articles/Image1.png',
+    imageSrc: '/BlogPageMaterials/articles/Image1.webp',
   },
   {
     date: new Date('2023-08-24'),
     header: 'Unveiling the Mastery Behind Our Culinary Craftsmanship',
     description:
       "Explore the meticulous artistry and dedication that create Qitchen's renowned sushi perfection.",
-    imageSrc: '/BlogPageMaterials/articles/Image2.png',
+    imageSrc: '/BlogPageMaterials/articles/Image2.webp',
   },
   {
     date: new Date('2023-08-24'),
     header: 'Journey through Freshness Exquisite Sushi Selection',
     description:
       "Embark on a seafood adventure, guided by Qitchen's fresh and exquisite sushi creations from the sea.",
-    imageSrc: '/BlogPageMaterials/articles/Image3.png',
+    imageSrc: '/BlogPageMaterials/articles/Image3.webp',
   },
   {
     date: new Date('2023-08-24'),
     header: "Palate with Qitchen's Unsurpassed Sushi Delicacies",
     description:
       "Discover the heights of gastronomic delight as Qitchen's sushi transports you to a new culinary realm.",
-    imageSrc: '/BlogPageMaterials/articles/Image4.png',
+    imageSrc: '/BlogPageMaterials/articles/Image4.webp',
   },
   {
     date: new Date('2023-08-24'),
     header: 'The Qitchen Experience Beyond Sushi',
     description:
       "Immerse in Qitchen's passion for culinary excellence, where sushi is more than a dish—it's an experience.",
-    imageSrc: '/BlogPageMaterials/articles/Image5.png',
+    imageSrc: '/BlogPageMaterials/articles/Image5.webp',
   },
 ];
 

@@ -2,7 +2,7 @@
 
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import styles from "./NavBar.module.css";
 import Button from "../../../shared/components/Button/Button";
@@ -11,7 +11,7 @@ import Link from "next/link";
 
 gsap.registerPlugin(SplitText);
 
-const NavBar: React.FC = () => {
+export default function NavBar() {
   const containerRef = useRef<HTMLElement>(null);
   const [navBarToggled, setNavBarToggled] = useState<boolean>(false);
   const line1 = useRef<HTMLDivElement>(null);
@@ -269,6 +269,4 @@ const NavBar: React.FC = () => {
       </nav>
     </header>
   );
-};
-
-export default NavBar;
+}

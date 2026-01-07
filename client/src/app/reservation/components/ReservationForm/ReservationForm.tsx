@@ -1,19 +1,20 @@
-import React from "react";
-import BaseFormLayout from "../../../shared/components/FormBaseLayout/FormBaseLayout";
-import Button from "../../../shared/components/Button/Button";
-import Input from "../../../shared/components/Input/Input";
-import styles from "./ReservationForm.module.css";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
+"use client";
+
 import {
   ReservationFormData,
   ReservationFormSchema,
-} from "../../../shared/utils/validation/ReservationFormSchema";
-import { useStaggeredReveal } from "../../../shared/hooks/useStaggeredReveal.hook";
-import { mergeRefs } from "../../../shared/utils/helpers/mergeRefs.helper";
-import { useBasePageLayoutAnimationContext } from "../../../shared/hooks/useBasePageLayoutAnimationContext";
+} from "@/shared/utils/validation/ReservationFormSchema";
+import styles from "./ReservationForm.module.css";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useStaggeredReveal } from "@/shared/hooks/useStaggeredReveal.hook";
+import { mergeRefs } from "@/shared/utils/helpers/mergeRefs.helper";
+import BaseFormLayout from "@/shared/components/FormBaseLayout/FormBaseLayout";
+import Button from "@/shared/components/Button/Button";
+import { useBasePageLayoutAnimationContext } from "@/shared/hooks/useBasePageLayoutAnimationContext";
+import Input from "@/shared/components/Input/Input";
 
-const ReservationForm: React.FC = () => {
+export default function ReservationForm() {
   const { isContentAnimationDone } = useBasePageLayoutAnimationContext();
 
   const onSubmit: SubmitHandler<ReservationFormData> = (data) => {
@@ -120,6 +121,4 @@ const ReservationForm: React.FC = () => {
       </Button>
     </BaseFormLayout>
   );
-};
-
-export default ReservationForm;
+}

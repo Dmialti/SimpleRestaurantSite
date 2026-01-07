@@ -6,7 +6,7 @@ import Contact from "./features/Contact/Contact";
 import Home from "./app/page";
 import Menu from "./app/menu/page";
 import NavBar from "./app/components/NavBar/NavBar";
-import Reservation from "./features/Reservation/Reservation";
+import Reservation from "./app/reservation/page";
 import { Provider as UrqlProvider } from "urql";
 import { client } from "./urql/urqlClient";
 import Article from "./features/Article/Article";

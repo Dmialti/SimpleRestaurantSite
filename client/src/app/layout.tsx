@@ -4,6 +4,7 @@ import Image from "next/image";
 import "./globals.css";
 
 import backgroundImage from "@/assets/AppMaterials/background.jpg";
+import NavBar from "./components/NavBar/NavBar";
 
 const forum = localFont({
   src: [
@@ -51,7 +52,10 @@ export default function RootLayout({
               sizes="100vw"
             />
           </div>
-          <div className="h-auto relative z-10">{children}</div>
+          <div className="h-auto relative z-10">
+            <NavBar />
+            {children}
+          </div>
         </div>
       </body>
     </html>

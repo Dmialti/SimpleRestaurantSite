@@ -5,7 +5,7 @@ import Blog from "./features/Blog/Blog";
 import Contact from "./features/Contact/Contact";
 import Home from "./app/page";
 import Menu from "./app/menu/page";
-import NavBar from "./features/NavBar/NavBar";
+import NavBar from "./app/components/NavBar/NavBar";
 import Reservation from "./features/Reservation/Reservation";
 import { Provider as UrqlProvider } from "urql";
 import { client } from "./urql/urqlClient";

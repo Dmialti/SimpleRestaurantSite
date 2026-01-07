@@ -1,10 +1,13 @@
+"use client";
+
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
 import React, { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import { Link, useNavigate } from "react-router-dom";
 import styles from "./NavBar.module.css";
-import Button from "../../shared/components/Button/Button";
+import Button from "../../../shared/components/Button/Button";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 gsap.registerPlugin(SplitText);
 
@@ -20,7 +23,7 @@ const NavBar: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const tl = useRef(gsap.timeline({ paused: true })).current;
 
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useGSAP(
     () => {
@@ -135,7 +138,7 @@ const NavBar: React.FC = () => {
   };
 
   const handleNavigation = (path: string) => {
-    navigate(path);
+    router.push(path);
     if (navBarToggled) {
       navBarToggle();
     }
@@ -155,15 +158,15 @@ const NavBar: React.FC = () => {
             onMouseLeave={hamburgerMouseLeave}
             onClick={navBarToggle}
             aria-label="Toggle navigation bar"
-            className="m-2 h-[41px] w-[41px] rounded-lg bg-background-muted border border-border-default relative flex flex-col justify-center items-center gap-[5px] hover:cursor-pointer"
+            className="m-2 h-10.25 w-10.25 rounded-lg bg-background-muted border border-border-default relative flex flex-col justify-center items-center gap-1.25 hover:cursor-pointer"
           >
-            <div ref={line1} className="bg-[#EFE7D2] h-px w-[20px]"></div>
-            <div ref={line2} className="bg-[#EFE7D2] h-px w-[20px]"></div>
-            <div ref={line3} className="bg-[#EFE7D2] h-px w-[20px]"></div>
+            <div ref={line1} className="bg-[#EFE7D2] h-px w-5"></div>
+            <div ref={line2} className="bg-[#EFE7D2] h-px w-5"></div>
+            <div ref={line3} className="bg-[#EFE7D2] h-px w-5"></div>
           </button>
           <div className="mx-1 my-3 text-center">
             <Link
-              to="/"
+              href="/"
               className="hover:text-white hover:drop-shadow-(--drop-shadow-glow) transition duration-150"
             >
               RESTAURANT
@@ -203,7 +206,7 @@ const NavBar: React.FC = () => {
             ref={(el) => {
               iconsRef.current[0] = el;
             }}
-            className="mx-auto my-[16px]"
+            className="mx-auto my-4"
             src="/NavBarMaterials/NavBarDetailsIcon.png"
             alt="decoration"
           />
@@ -258,7 +261,7 @@ const NavBar: React.FC = () => {
             ref={(el) => {
               iconsRef.current[1] = el;
             }}
-            className="mx-auto my-[16px]"
+            className="mx-auto my-4"
             src="/NavBarMaterials/NavBarDetailsIcon.png"
             alt="decoration"
           />

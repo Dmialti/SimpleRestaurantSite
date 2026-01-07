@@ -51,7 +51,7 @@ const DishSection: React.FC<DishSectionProps> = ({
       >
         {category.toUpperCase()}
       </HeadingDecorated>
-      <div className="flex flex-col gap-8 max-w-[740px]">
+      <div className="flex flex-col gap-8 max-w-185">
         {dishes.map((dish) => (
           <DishItem
             key={dish.id}

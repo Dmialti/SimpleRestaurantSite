@@ -4,7 +4,8 @@ import { TypedDocumentNode } from "@graphql-typed-document-node/core";
 export async function fetchGraphQL<TData = any, TVariables = any>(
   query: string | TypedDocumentNode<TData, TVariables>,
   variables?: TVariables,
-  tags: string[] = []
+  tags: string[] = [],
+  cachePolicy: RequestCache = "no-cache"
 ) {
   const queryString = typeof query === "string" ? query : print(query);
   const res = await fetch(process.env.NEXT_PUBLIC_GRAPHQL_API_URL!, {
@@ -16,7 +17,7 @@ export async function fetchGraphQL<TData = any, TVariables = any>(
       query: queryString,
       variables,
     }),
-
+    cache: cachePolicy,
     next: {
       tags: tags,
     },

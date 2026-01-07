@@ -17,6 +17,8 @@ const DishItem = forwardRef<HTMLDivElement, DishItemProps>((props, ref) => {
           src: props.imageSrc,
           alt: `${props.name} image}`,
           fill: true,
+          sizes: "(max-width: 810px) 100vw, 20vw",
+          quality: 75,
         }}
         borderRadius="var(--card-radius)"
       />

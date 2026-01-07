@@ -54,7 +54,7 @@ const MenuList: React.FC<MenuListProps> = ({ categories }) => {
   return (
     <div>
       <div
-        className={`flex justify-center font-satoshi z-[9999] sticky top-0 py-4 ${styles.fastTravel}`}
+        className={`flex justify-center font-satoshi z-9999 sticky top-0 py-4 ${styles.fastTravel}`}
       >
         <div
           className={`w-fit flex gap-1 flex-wrap justify-center px-4 py-2 ${styles.buttonWrapper}`}
@@ -79,7 +79,7 @@ const MenuList: React.FC<MenuListProps> = ({ categories }) => {
             ref={(el) => {
               sectionRefs.current[item.id] = el;
             }}
-            className="scroll-mt-[120px]"
+            className="scroll-mt-30"
           >
             <DishSection
               category={item.name}

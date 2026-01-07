@@ -8,9 +8,12 @@ export default async function Menu() {
   let error = null;
 
   try {
-    const data = await fetchGraphQL<GetMenuQuery>(GET_MENU_QUERY, {}, [
-      "menu-data",
-    ]);
+    const data = await fetchGraphQL<GetMenuQuery>(
+      GET_MENU_QUERY,
+      {},
+      ["menu-data"],
+      "force-cache"
+    );
     categories = data.getMenu || [];
   } catch (err: any) {
     error = err.message;

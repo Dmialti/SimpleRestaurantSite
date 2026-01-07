@@ -1,5 +1,4 @@
 import React from "react";
-import DishItem from "../DishItem/DishItem";
 import styles from "./DishSection.module.css";
 import {
   useFragment,
@@ -10,6 +9,7 @@ import HeadingDecorated from "../../../../shared/components/HeadingDecorated/Hea
 import { useStaggeredReveal } from "../../../../shared/hooks/useStaggeredReveal.hook";
 import gsap from "gsap";
 import { useBasePageLayoutAnimationContext } from "../../../../shared/hooks/useBasePageLayoutAnimationContext";
+import DishItem from "../DishItem/DishItem";
 
 interface DishSectionProps {
   category: string;

@@ -1,7 +1,9 @@
 .dishContainer {
   --card-radius: 1rem;
 }
-
+.card {
+  width: 150px;
+}
 @media (max-width: 810px) {
   .dishContainer {
     flex-direction: column;

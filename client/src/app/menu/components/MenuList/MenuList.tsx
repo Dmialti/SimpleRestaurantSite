@@ -1,12 +1,14 @@
+"use client";
+
 import React, { useRef } from "react";
 import Button from "../../../../shared/components/Button/Button";
-import DishSection from "../DishSection/DishSection";
 import { GetMenuQuery } from "../../../../graphql/codegen/generated/graphql";
 import { useStaggeredReveal } from "../../../../shared/hooks/useStaggeredReveal.hook";
 import { useBasePageLayoutAnimationContext } from "../../../../shared/hooks/useBasePageLayoutAnimationContext";
 import gsap from "gsap";
 import { useLenis } from "lenis/react";
 import styles from "./MenuList.module.css";
+import DishSection from "../DishSection/DishSection";
 
 interface MenuListProps {
   categories: GetMenuQuery["getMenu"];

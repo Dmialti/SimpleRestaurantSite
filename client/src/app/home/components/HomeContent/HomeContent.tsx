@@ -12,7 +12,7 @@ import sideImage1 from "@/assets/StartingPageMaterials/images/side-1.webp";
 import sideImage2 from "@/assets/StartingPageMaterials/images/side-2.webp";
 import sideImage3 from "@/assets/StartingPageMaterials/images/side-3.webp";
 
-export default function HomeClient() {
+export default function HomeContent() {
   const [isHeroAnimationDone, setIsHeroAnimationDone] = useState(false);
 
   const { containerRef: leftRef, addToRefs: addToLeftRefs } =
@@ -56,19 +56,19 @@ export default function HomeClient() {
           >
             <LinkIcon
               className="block p-2.5"
-              imageSrc="/shared/icons/instagramLogo.svg"
+              src="/shared/icons/instagramLogo.svg"
               href="https://github.com/Dmialti"
               alt="instagram link logo"
             />
             <LinkIcon
               className="block p-2.5"
-              imageSrc="/shared/icons/facebookLogo.svg"
+              src="/shared/icons/facebookLogo.svg"
               href="https://github.com/Dmialti"
               alt="facebook link logo"
             />
             <LinkIcon
               className="block p-2.5"
-              imageSrc="/shared/icons/xLogo.svg"
+              src="/shared/icons/xLogo.svg"
               href="https://github.com/Dmialti"
               alt="x link logo"
             />

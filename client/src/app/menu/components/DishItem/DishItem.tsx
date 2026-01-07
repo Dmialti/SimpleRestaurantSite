@@ -11,11 +11,14 @@ const DishItem = forwardRef<HTMLDivElement, DishItemProps>((props, ref) => {
   return (
     <div ref={ref} className={`${styles.dishContainer} ${props.className}`}>
       <Card
-        className={`${styles.card} w-[150px] h-[100px] flex-none`}
+        className={`${styles.card} aspect-3/2 flex-none`}
         mediaType="image"
-        mediaSrc={props.imageSrc}
+        imageProps={{
+          src: props.imageSrc,
+          alt: `${props.name} image}`,
+          fill: true,
+        }}
         borderRadius="var(--card-radius)"
-        alt={`${props.name} image`}
       />
       <div className=" flex flex-col justify-center gap-1">
         <div
@@ -27,7 +30,7 @@ const DishItem = forwardRef<HTMLDivElement, DishItemProps>((props, ref) => {
             {props.name}
           </div>
           <div
-            className={`${styles.border} w-full border-border-default border-dotted border-b-2 mb-[6px]`}
+            className={`${styles.border} w-full border-border-default border-dotted border-b-2 mb-1.5`}
           ></div>
           <div className="flex-none">${props.price}</div>
         </div>

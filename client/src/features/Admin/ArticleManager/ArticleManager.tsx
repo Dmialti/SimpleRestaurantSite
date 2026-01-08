@@ -30,7 +30,7 @@ import { PARAGRAPH_FRAGMENT } from "../../../graphql/article/fragments/paragraph
 import { useFragment } from "../../../graphql/codegen/generated/fragment-masking";
 import CardContextProvider from "../../../context/CardContext/CardContextProvider";
 import CardWithContextHover from "../../../shared/components/Card/CardIsHoveredContext";
-import IconCardFill from "../../Contact/components/IconCardFill/IconCardFill";
+import IconCardFill from "../../../app/contact/components/IconCardFill/IconCardFill";
 
 const ArticleManager: React.FC = () => {
   const { id } = useParams();

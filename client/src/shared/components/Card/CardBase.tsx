@@ -96,7 +96,7 @@ const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
         {mediaType === "image" ? (
           <Image
             ref={mediaRef as React.RefObject<HTMLImageElement>}
-            className="object-cover block will-change-transform backface-hidden"
+            className={`object-cover block will-change-transform backface-hidden ${props.imageProps.className}`}
             style={{
               willChange: "transform, filter",
               clipPath: `inset(0 round ${borderRadius})`,

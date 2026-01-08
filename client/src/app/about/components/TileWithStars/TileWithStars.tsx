@@ -10,7 +10,7 @@ const TileWithStars = forwardRef<HTMLDivElement, TileWithStarsProps>(
     return (
       <div
         ref={ref}
-        className="flex flex-col items-center text-center min-w-0 w-full h-full p-8 gap-[9px] border border-border-default rounded-2xl text-text-default "
+        className="flex flex-col items-center text-center min-w-0 w-full h-full p-8 gap-2.25 border border-border-default rounded-2xl text-text-default "
       >
         <div className="flex flex-row flex-wrap justify-center gap-1">
           {[...Array(5).keys()].map((key) => (

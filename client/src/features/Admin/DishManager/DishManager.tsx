@@ -11,7 +11,7 @@ import HeadingDecorated from "../../../shared/components/HeadingDecorated/Headin
 import LoadingSpinner from "../../../shared/components/LoadingSpinner/LoadingSpinner";
 import CardContextProvider from "../../../context/CardContext/CardContextProvider";
 import CardWithContextHover from "../../../shared/components/Card/CardIsHoveredContext";
-import IconCardFill from "../../Contact/components/IconCardFill/IconCardFill";
+import IconCardFill from "../../../app/contact/components/IconCardFill/IconCardFill";
 
 import changeFileIcon from "../../../../public/shared/icons/changeFile.svg";
 

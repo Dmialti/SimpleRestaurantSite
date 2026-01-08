@@ -1,11 +1,18 @@
-import { GetMenuQuery } from "@/graphql/codegen/generated/graphql";
+"use client";
+
+import {
+  GetMenuQuery,
+  GetMenuQueryVariables,
+} from "@/graphql/codegen/generated/graphql";
+import { GET_MENU_QUERY } from "@/graphql/menu/queries/getMenu.query";
 import BasePageLayout from "@/shared/components/BasePageLayout/BasePageLayout";
-import Button from "@/shared/components/Button/Button";
-import HeadingDecorated from "@/shared/components/HeadingDecorated/HeadingDecorated";
+import { useQueryReexecute } from "@/shared/hooks/useQueryReexecute";
 import MenuList from "../MenuList/MenuList";
 import styles from "./MenuContent.module.css";
 
 import menuHero from "@/assets/MenuPageMaterials/menuHero.webp";
+import { useRecalculateLayout } from "@/shared/hooks/useRecalculateLayout";
+import ErrorFallback from "@/shared/components/ErrorFallback/ErrorFallback";
 
 interface MenuContentProps {
   initialCategories: GetMenuQuery["getMenu"];
@@ -16,6 +23,22 @@ export default function MenuContent({
   initialCategories,
   initialError,
 }: MenuContentProps) {
+  const { data, error, isLoading, retry } = useQueryReexecute<
+    GetMenuQuery,
+    GetMenuQueryVariables
+  >({
+    initialData: { getMenu: initialCategories },
+    initialError,
+    query: GET_MENU_QUERY,
+    variables: {},
+  });
+
+  const categories = data?.getMenu;
+  const hasError = !!error;
+  const hasCategories = categories && categories.length > 0;
+
+  useRecalculateLayout(!isLoading && !!hasCategories);
+
   return (
     <BasePageLayout
       isScreenHeight={false}
@@ -27,31 +50,19 @@ export default function MenuContent({
           alt: "hero image",
         },
       }}
-      className={initialError ? styles.disableBorder : ""}
+      className={hasError ? styles.disableBorder : ""}
     >
-      {initialError &&
-      (!initialCategories || initialCategories.length === 0) ? (
-        <div className="flex flex-col items-center justify-center gap-6 py-20 h-full text-center">
-          <HeadingDecorated className="text-red-500 font-forum text-2xl tracking-widest">
-            OOPS! SOMETHING WENT WRONG
-          </HeadingDecorated>
-
-          <p className="text-text-muted font-satoshi text-lg max-w-md">
-            {initialError}
-          </p>
-
-          <Button
-            variant="border"
-            className="px-6 py-2 uppercase tracking-widest text-sm text-text-default"
-          >
-            Try Again
-          </Button>
-        </div>
+      {hasError && !hasCategories ? (
+        <ErrorFallback error={error} isLoading={isLoading} retry={retry} />
       ) : (
         <div
-          className={`${styles.listContainer} h-fit rounded-2xl pt-8 pb-20 px-24 text-text-default`}
+          className={`${
+            styles.listContainer
+          } h-fit rounded-2xl pt-8 pb-20 px-24 text-text-default transition-opacity duration-300 ${
+            isLoading ? "opacity-50 pointer-events-none" : ""
+          }`}
         >
-          <MenuList categories={initialCategories!} />
+          <MenuList categories={categories || []} />
         </div>
       )}
     </BasePageLayout>

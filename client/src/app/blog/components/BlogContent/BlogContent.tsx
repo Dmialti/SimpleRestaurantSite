@@ -1,23 +1,43 @@
 "use client";
 
-import { GetArticlesQuery } from "@/graphql/codegen/generated/graphql";
+import { GET_ARTICLES_QUERY } from "@/graphql/blog/queries/getArticles.query";
+import {
+  GetArticlesQuery,
+  GetArticlesQueryVariables,
+} from "@/graphql/codegen/generated/graphql";
 import BasePageLayout from "@/shared/components/BasePageLayout/BasePageLayout";
-import Button from "@/shared/components/Button/Button";
-import HeadingDecorated from "@/shared/components/HeadingDecorated/HeadingDecorated";
+import { useQueryReexecute } from "@/shared/hooks/useQueryReexecute";
+import blogHero from "@/assets/BlogPageMaterials/blogHero.webp";
 import ArticlesContent from "../ArticlesContent/ArticlesContent";
 import styles from "./BlogContent.module.css";
-
-import blogHero from "@/assets/BlogPageMaterials/blogHero.webp";
+import { useRecalculateLayout } from "@/shared/hooks/useRecalculateLayout";
+import ErrorFallback from "@/shared/components/ErrorFallback/ErrorFallback";
 
 interface BlogContentProps {
   initialArticles: GetArticlesQuery["articles"];
-  initialError: string;
+  initialError: string | null;
 }
 
 export default function BlogContent({
   initialArticles,
   initialError,
 }: BlogContentProps) {
+  const { data, error, isLoading, retry } = useQueryReexecute<
+    GetArticlesQuery,
+    GetArticlesQueryVariables
+  >({
+    initialData: { articles: initialArticles },
+    initialError,
+    query: GET_ARTICLES_QUERY,
+    variables: {},
+  });
+
+  const articles = data?.articles;
+  const hasError = !!error;
+  const hasArticles = articles && articles.length > 0;
+
+  useRecalculateLayout(!isLoading && !!hasArticles);
+
   return (
     <BasePageLayout
       className={`py-20 px-24 flex flex-col gap-20 items-center ${styles.mainSection}`}
@@ -28,27 +48,16 @@ export default function BlogContent({
       }}
       isScreenHeight={false}
     >
-      {initialError && (!initialArticles || initialArticles.length === 0) ? (
-        <div className="flex flex-col items-center justify-center gap-6 py-20 h-full text-center">
-          <HeadingDecorated
-            className={`text-red-500 font-forum text-2xl tracking-widest ${styles.heading}`}
-          >
-            OOPS! SOMETHING WENT WRONG
-          </HeadingDecorated>
-
-          <p className="text-text-muted font-satoshi text-lg max-w-md">
-            {initialError}
-          </p>
-
-          <Button
-            variant="border"
-            className="px-6 py-2 uppercase tracking-widest text-sm text-text-default"
-          >
-            Try Again
-          </Button>
-        </div>
+      {hasError && !hasArticles ? (
+        <ErrorFallback error={error} isLoading={isLoading} retry={retry} />
       ) : (
-        <ArticlesContent articles={initialArticles} />
+        <div
+          className={`w-full ${
+            isLoading ? "opacity-50 pointer-events-none" : ""
+          }`}
+        >
+          <ArticlesContent articles={articles} />
+        </div>
       )}
     </BasePageLayout>
   );

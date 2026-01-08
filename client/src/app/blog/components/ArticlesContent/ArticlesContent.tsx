@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import CardContextProvider from "../../../../context/CardContext/CardContextProvider";
 import HeadingDecorated from "../../../../shared/components/HeadingDecorated/HeadingDecorated";
@@ -7,14 +9,14 @@ import ArticleCard from "../ArticleCard/ArticleCard";
 import { GetArticlesQuery } from "../../../../graphql/codegen/generated/graphql";
 import { useBasePageLayoutAnimationContext } from "../../../../shared/hooks/useBasePageLayoutAnimationContext";
 import { useStaggeredReveal } from "../../../../shared/hooks/useStaggeredReveal.hook";
-import styles from "./BlogContent.module.css";
+import styles from "./ArticlesContent.module.css";
 import gsap from "gsap";
 
-interface BlogContentProps {
+interface ArticlesContentProps {
   articles: GetArticlesQuery["articles"];
 }
 
-const BlogContent: React.FC<BlogContentProps> = ({ articles }) => {
+const ArticlesContent: React.FC<ArticlesContentProps> = ({ articles }) => {
   const { isContentAnimationDone } = useBasePageLayoutAnimationContext();
 
   const {
@@ -65,8 +67,11 @@ const BlogContent: React.FC<BlogContentProps> = ({ articles }) => {
               header={item.name}
               description={item.description}
               cardProps={{
-                mediaSrc: item.imageSrc,
-                alt: `article card ${item.id}`,
+                imageProps: {
+                  src: item.imageSrc,
+                  alt: `article image ${item.id}`,
+                  fill: true,
+                },
               }}
               className="invisible"
             />
@@ -77,4 +82,4 @@ const BlogContent: React.FC<BlogContentProps> = ({ articles }) => {
   );
 };
 
-export default BlogContent;
+export default ArticlesContent;

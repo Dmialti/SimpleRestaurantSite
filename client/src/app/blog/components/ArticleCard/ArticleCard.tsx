@@ -1,11 +1,11 @@
 import { forwardRef } from "react";
 import HeaderLeftDecor from "../../../../shared/components/HeaderLeftDecor/HeaderLeftDecor";
 import styles from "./ArticleCard.module.css";
-import { Link } from "react-router-dom";
 import useHovered from "../../../../shared/hooks/useHovered.hook";
 import CardWithContextHover, {
   CardWithContextHoverProps,
 } from "../../../../shared/components/Card/CardIsHoveredContext";
+import Link from "next/link";
 
 type ImageCardProps = Extract<
   CardWithContextHoverProps,
@@ -31,10 +31,10 @@ const ArticleCard = forwardRef<HTMLAnchorElement, ArticleCardProps>(
         className={`flex flex-row gap-12 items-center select-none cursor-pointer min-w-0 ${styles.articleContainer} ${className}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        to={`/article/${id}`}
+        href={`/article/${id}`}
       >
         <CardWithContextHover
-          className={`aspect-[1.33333/1] shrink-0 w-[40%] min-w-[200px] ${styles.card}`}
+          className={`aspect-[1.33333/1] shrink-0 w-[40%] min-w-50 ${styles.card}`}
           mediaType="image"
           isAnimated={true}
           changeHover={false}

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Outlet } from "react-router-dom";
 import About from "./app/about/page";
-import Blog from "./features/Blog/Blog";
+import Blog from "./app/blog/page";
 import Contact from "./app/contact/page";
 import Home from "./app/page";
 import Menu from "./app/menu/page";

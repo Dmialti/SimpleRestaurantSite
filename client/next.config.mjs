@@ -15,6 +15,9 @@ const nextConfig = {
     ],
     qualities: [25, 50, 75, 100],
   },
+  experimental: {
+    viewTransition: true,
+  },
 };
 
 export default nextConfig;

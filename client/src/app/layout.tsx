@@ -7,6 +7,7 @@ import backgroundImage from "@/assets/AppMaterials/background.jpg";
 import NavBar from "./components/NavBar/NavBar";
 import SmoothScrolling from "./components/SmoothScrolling/SmoothScrolling";
 import CustomScrollbar from "@/features/CustomScrollbar/CustomScrollbar";
+import { TransitionProvider } from "@/features/TransitionProvider/TransitionProvider";
 
 const forum = localFont({
   src: [
@@ -56,9 +57,11 @@ export default function RootLayout({
           </div>
           <div className="h-auto relative z-10">
             <SmoothScrolling>
-              <CustomScrollbar />
-              <NavBar />
-              {children}
+              <TransitionProvider>
+                <CustomScrollbar />
+                <NavBar />
+                {children}
+              </TransitionProvider>
             </SmoothScrolling>
           </div>
         </div>

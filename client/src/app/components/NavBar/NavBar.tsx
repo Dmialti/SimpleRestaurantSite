@@ -6,8 +6,7 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import styles from "./NavBar.module.css";
 import Button from "../../../shared/components/Button/Button";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { Link, useTransitionRouter } from "next-transition-router";
 
 gsap.registerPlugin(SplitText);
 
@@ -23,7 +22,7 @@ export default function NavBar() {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const tl = useRef(gsap.timeline({ paused: true })).current;
 
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   useGSAP(
     () => {
@@ -138,10 +137,10 @@ export default function NavBar() {
   };
 
   const handleNavigation = (path: string) => {
-    router.push(path);
     if (navBarToggled) {
       navBarToggle();
     }
+    router.push(path);
   };
 
   return (

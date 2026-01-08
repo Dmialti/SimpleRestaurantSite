@@ -5,7 +5,7 @@ import useHovered from "../../../../shared/hooks/useHovered.hook";
 import CardWithContextHover, {
   CardWithContextHoverProps,
 } from "../../../../shared/components/Card/CardIsHoveredContext";
-import Link from "next/link";
+import { Link } from "next-transition-router";
 
 type ImageCardProps = Extract<
   CardWithContextHoverProps,

@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import styles from "./NavCard.module.css";
 import CardContextProvider from "@/context/CardContext/CardContextProvider";
 import CardWithContextHover, {
@@ -9,6 +8,7 @@ import CardWithContextHover, {
 import CornerMenu from "../CornerMenu/CornerMenu";
 import LinkIconAnimated from "../LinkIcon/LinkIconAnimated";
 import RollingAnimation from "../RollingText/RollingText";
+import { useTransitionRouter } from "next-transition-router";
 
 type NavCardProps = {
   cardWithContextHoverProps: CardWithContextHoverProps;
@@ -23,7 +23,7 @@ export const NavCard: React.FC<NavCardProps> = ({
   title,
   addRef,
 }) => {
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   return (
     <div className="flex-1 min-h-0 relative w-full">

@@ -23,7 +23,7 @@ import UserEditor from "./features/Admin/UserEditor/UserEditor";
 import GuestRoute from "./shared/components/GuestRoute/GuestRoute";
 import ReactLenis from "lenis/react";
 import { CustomScrollbar } from "./features/CustomScrollbar/CustomScrollbar";
-import AnimatedRoutes from "./features/AnimatedRoutes/AnimatedRoutes";
+import AnimatedRoutes from "./features/TransitionProvider/TransitionLayout";
 import { AdaptiveImage } from "./shared/components/Adaptive/AdaptiveImage/AdaptiveImage";
 import { SEOProvider } from "./context/SEOContext/SEOProvider";
 

@@ -8,13 +8,13 @@ import ReservationForm from "./components/ReservationForm/ReservationForm";
 export const metadata: Metadata = {
   title: "Book a Table",
   description:
-    "Secure your spot at Qitchen. Whether it's a romantic dinner or a friendly gathering, exceptional sushi and a remarkable dining experience await.",
+    "Secure your spot at SRS. Whether it's a romantic dinner or a friendly gathering, exceptional sushi and a remarkable dining experience await.",
   openGraph: {
     images: {
       url: seoImage.src,
       width: seoImage.width,
       height: seoImage.height,
-      alt: "Qitchen Reservation",
+      alt: "SRS Reservation",
     },
   },
 };

@@ -1,15 +1,18 @@
+"use client";
+
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Image, { ImageProps, StaticImageData } from "next/image";
 import { forwardRef, useEffect, useRef, useState } from "react";
-import { AdaptiveImage } from "../Adaptive/AdaptiveImage/AdaptiveImage";
 
 interface ImageSliderProps {
-  imagesSrc: string[];
+  imagesSrc: string[] | StaticImageData[];
+  imageProps?: Omit<ImageProps, "src" | "alt">;
   className?: string;
 }
 
 const ImageSlider = forwardRef<HTMLDivElement, ImageSliderProps>(
-  ({ imagesSrc, className }, ref) => {
+  ({ imagesSrc, imageProps, className }, ref) => {
     const [current, setCurrent] = useState<number>(0);
     const leftArrowRef = useRef<HTMLImageElement | null>(null);
     const rightArrowRef = useRef<HTMLImageElement | null>(null);
@@ -73,39 +76,54 @@ const ImageSlider = forwardRef<HTMLDivElement, ImageSliderProps>(
       >
         <div ref={scrollContainerRef} className="flex flex-row w-full h-full ">
           {imagesSrc.map((item, index) => (
-            <AdaptiveImage
-              key={index}
-              mediaSrc={item}
-              className="w-full h-full object-cover flex-shrink-0"
-              data-preload={index === 0 && "true"}
-              alt={`slider image ${index}`}
-            />
+            <div key={index} className="relative w-full h-full shrink-0">
+              <Image
+                src={item}
+                fill={true}
+                className={`object-cover ${imageProps?.className || ""}`}
+                data-preload={index === 0 && "true"}
+                alt={`slider image ${index}`}
+                {...imageProps}
+              />
+            </div>
           ))}
         </div>
-        <img
-          ref={leftArrowRef}
-          src="/shared/ImageSlider/arrowLeft.svg"
-          className="absolute opacity-0 pointer-events-none -translate-y-1/2 top-1/2 left-3 aspect-square bg-background-muted rounded-full h-9"
+        <div
+          className="absolute top-0 left-0 h-full w-1/4 z-10 flex items-center justify-start group"
           onClick={prevSlide}
-          draggable={false}
           onMouseDown={() => onMouseDownShrink(leftArrowRef.current)}
           onMouseUp={() => onMouseUpUnshrink(leftArrowRef.current)}
           onMouseOut={() => onMouseUpUnshrink(leftArrowRef.current)}
-          data-preload="true"
-          alt="left arrow slider button icon"
-        />
-        <img
-          ref={rightArrowRef}
-          src="/shared/ImageSlider/arrowRight.svg"
-          className="absolute -translate-y-1/2 top-1/2 right-3 aspect-square bg-background-muted rounded-full h-9"
+        >
+          <Image
+            ref={leftArrowRef}
+            src="/shared/ImageSlider/arrowLeft.svg"
+            width={35}
+            height={35}
+            className="absolute opacity-0 pointer-events-none -translate-y-1/2 top-1/2 left-5 aspect-square cursor-pointer bg-background-muted rounded-full h-9 w-auto"
+            draggable={false}
+            data-preload="true"
+            alt="left arrow slider button icon"
+          />
+        </div>
+        <div
+          className="absolute top-0 right-0 h-full w-1/4 z-10 flex items-center justify-start group"
           onClick={nextSlide}
-          draggable={false}
           onMouseDown={() => onMouseDownShrink(rightArrowRef.current)}
           onMouseUp={() => onMouseUpUnshrink(rightArrowRef.current)}
           onMouseOut={() => onMouseUpUnshrink(rightArrowRef.current)}
-          data-preload="true"
-          alt="right arrow slider button icon"
-        />
+        >
+          <Image
+            ref={rightArrowRef}
+            src="/shared/ImageSlider/arrowRight.svg"
+            width={35}
+            height={35}
+            className="absolute opacity-0 pointer-events-none -translate-y-1/2 top-1/2 right-5 aspect-square cursor-pointer bg-background-muted rounded-full h-9 w-auto"
+            draggable={false}
+            data-preload="true"
+            alt="right arrow slider button icon"
+          />
+        </div>
       </div>
     );
   }

@@ -1,15 +1,17 @@
-import React from "react";
-import TileWithStars from "./components/TileWithStars/TileWithStars";
-import styles from "./About.module.css";
-import BasePageLayout from "../../shared/components/BasePageLayout/BasePageLayout";
-import HeadingDecorated from "../../shared/components/HeadingDecorated/HeadingDecorated";
-import ImageSlider from "../../shared/components/ImageSlider/ImageSlider";
-import { useStaggeredReveal } from "../../shared/hooks/useStaggeredReveal.hook";
-import { mergeRefs } from "../../shared/utils/helpers/mergeRefs.helper";
-import { SEO } from "../../shared/components/SEO/SEO";
-import seoImage from "././../../assets/AboutPageMaterials/aboutHero.avif";
+"use client";
 
-const About: React.FC = () => {
+import BasePageLayout from "@/shared/components/BasePageLayout/BasePageLayout";
+import HeadingDecorated from "@/shared/components/HeadingDecorated/HeadingDecorated";
+import ImageSlider from "@/shared/components/ImageSlider/ImageSlider";
+import { useStaggeredReveal } from "@/shared/hooks/useStaggeredReveal.hook";
+import { mergeRefs } from "@/shared/utils/helpers/mergeRefs.helper";
+import TileWithStars from "../TileWithStars/TileWithStars";
+import styles from "./AboutContent.module.css";
+import { topSlider, bottomSlider } from "./static/imageSliderSrcs";
+
+import aboutHero from "@/assets/AboutPageMaterials/aboutHero.webp";
+
+export default function AboutContent() {
   const {
     containerRef: staggeredLeftContainerRef,
     addToRefs: staggeredLeftAddToRefs,
@@ -41,16 +43,16 @@ const About: React.FC = () => {
 
   return (
     <>
-      <SEO
-        title="Our Story & Location"
-        description="Learn about the philosophy behind our restaurant. Visit us for an authentic Japanese dining experience in the heart of the city. Open daily for sushi lovers."
-        image={seoImage}
-      />
       <BasePageLayout
         isScreenHeight={true}
-        heading={["ABOUT"]}
-        mediaType="image"
-        mediaSrc="aboutHero.png"
+        heroCardProps={{
+          heading: ["ABOUT"],
+          mediaType: "image",
+          imageProps: {
+            src: aboutHero,
+            alt: "about hero image",
+          },
+        }}
         className="border-none"
         enableContentAnimation={false}
       >
@@ -79,7 +81,11 @@ const About: React.FC = () => {
             <ImageSlider
               ref={staggeredRightAddToRefs}
               className="flex-1 aspect-square"
-              imagesSrc={["topImage1.webp", "topImage2.webp", "topImage3.webp"]}
+              imagesSrc={topSlider}
+              imageProps={{
+                sizes:
+                  "(max-width: 810px) 100vw, (max-width: 1280px) 50vw, 25vw",
+              }}
             />
           </div>
           <div
@@ -109,11 +115,11 @@ const About: React.FC = () => {
             <ImageSlider
               ref={staggeredLeftAddToRefs}
               className="flex-1 aspect-square"
-              imagesSrc={[
-                "bottomImage1.webp",
-                "bottomImage2.webp",
-                "bottomImage3.webp",
-              ]}
+              imagesSrc={bottomSlider}
+              imageProps={{
+                sizes:
+                  "(max-width: 810px) 100vw, (max-width: 1280px) 50vw, 25vw",
+              }}
             />
             <div
               ref={staggeredRightAddToRefs}
@@ -134,6 +140,4 @@ const About: React.FC = () => {
       </BasePageLayout>
     </>
   );
-};
-
-export default About;
+}

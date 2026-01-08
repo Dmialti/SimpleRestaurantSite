@@ -31,7 +31,7 @@ const ArticleCard = forwardRef<HTMLAnchorElement, ArticleCardProps>(
         className={`flex flex-row gap-12 items-center select-none cursor-pointer min-w-0 ${styles.articleContainer} ${className}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        href={`/article/${id}`}
+        href={`/blog/${id}`}
       >
         <CardWithContextHover
           className={`aspect-[1.33333/1] shrink-0 w-[40%] min-w-50 ${styles.card}`}

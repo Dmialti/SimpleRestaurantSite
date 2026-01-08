@@ -71,6 +71,8 @@ const ArticlesContent: React.FC<ArticlesContentProps> = ({ articles }) => {
                   src: item.imageSrc,
                   alt: `article image ${item.id}`,
                   fill: true,
+                  sizes:
+                    "(max-width: 810px) 95vw, (max-width: 1280px) 40vw, 20vw",
                 },
               }}
               className="invisible"

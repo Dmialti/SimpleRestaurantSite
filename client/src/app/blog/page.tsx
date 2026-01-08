@@ -8,13 +8,13 @@ import BlogContent from "./components/BlogContent/BlogContent";
 export const metadata: Metadata = {
   title: "Our Journal — Stories from the Kitchen",
   description:
-    "Dive into the world of Japanese cuisine. Read about sushi traditions, our chef's secrets, and the latest news from Qitchen.",
+    "Dive into the world of Japanese cuisine. Read about sushi traditions, our chef's secrets, and the latest news from SRS.",
   openGraph: {
     images: {
       url: seoImage.src,
       width: seoImage.width,
       height: seoImage.height,
-      alt: "SRS Reservation",
+      alt: "SRS Blog",
     },
   },
 };
@@ -27,7 +27,7 @@ export default async function Blog() {
     const data = await fetchGraphQL<GetArticlesQuery>(
       GET_ARTICLES_QUERY,
       {},
-      ["menu-data"],
+      ["blog-data"],
       "force-cache"
     );
     articles = data.articles || [];

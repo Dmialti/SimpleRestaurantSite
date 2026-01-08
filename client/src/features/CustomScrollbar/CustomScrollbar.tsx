@@ -1,3 +1,5 @@
+"use client";
+
 import {
   useRef,
   useState,
@@ -6,16 +8,16 @@ import {
   useCallback,
 } from "react";
 import { useLenis } from "lenis/react";
-import { useLocation } from "react-router-dom";
+import { usePathname } from "next/navigation";
 
-export const CustomScrollbar: React.FC = () => {
+export default function CustomScrollbar() {
   const thumbRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const scrollData = useRef({ startY: 0, startScroll: 0 });
 
   const lenis = useLenis();
-  const location = useLocation();
+  const location = usePathname();
 
   const thumbHeight = 100;
 
@@ -87,9 +89,9 @@ export const CustomScrollbar: React.FC = () => {
     return () => {
       window.removeEventListener("page-ready", handlePageReady);
     };
-  }, [checkVisibility, location.pathname]);
+  }, [checkVisibility, location]);
   useLenis((instance) => {
-    if (!thumbRef.current || isDragging) return;
+    if (!thumbRef.current) return;
 
     const canScroll = instance.limit > 1;
     if (canScroll !== isVisible) setIsVisible(canScroll);
@@ -98,13 +100,13 @@ export const CustomScrollbar: React.FC = () => {
       const scrollHeight = window.innerHeight;
       const progress = instance.scroll / instance.limit;
       const moveAmount = progress * (scrollHeight - thumbHeight);
-      thumbRef.current.style.transform = `translateY(${moveAmount}px)`;
+      thumbRef.current.style.transform = `translate3d(0, ${moveAmount}px, 0)`;
     }
   });
 
   return (
     <div
-      className={`fixed top-0 right-0 w-[10px] h-full z-[100] pr-[2px] py-1 transition-opacity duration-300 ${
+      className={`fixed top-0 right-0 w-2.5 h-full z-100 pr-0.5 py-1 transition-opacity duration-300 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       style={{ pointerEvents: isVisible ? "auto" : "none" }}
@@ -112,7 +114,7 @@ export const CustomScrollbar: React.FC = () => {
       <div
         ref={thumbRef}
         onMouseDown={handleMouseDown}
-        className={`w-full rounded-full h-[100px] transition-colors duration-200 hover:bg-white/45 ${
+        className={`w-full rounded-full h-25 transition-colors duration-200 hover:bg-white/45 ${
           isDragging ? "bg-white/60 hover:bg-white/60" : "bg-white/30"
         }`}
         style={{
@@ -122,4 +124,4 @@ export const CustomScrollbar: React.FC = () => {
       />
     </div>
   );
-};
+}

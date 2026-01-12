@@ -14,7 +14,7 @@ A modern, full-stack web application for a restaurant featuring a high-performan
 
 | Landing Page |
 |:---:|
-| ![Landing Page](https://github.com/user-attachments/assets/24010bb9-82cc-4324-a045-39a07f92d880)) |
+| ![Landing Page](https://github.com/user-attachments/assets/24010bb9-82cc-4324-a045-39a07f92d880) |
 
 ---
 

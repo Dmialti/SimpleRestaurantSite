@@ -112,9 +112,9 @@ One of the highlights of this project is the **Next.js Data Cache integration**:
 
 ---
 
-## 🤝 Contact
+### 🤝 Contact
 
-**Name:** Tyshchenko Dmytro
-**Role:** Full-Stack Developer
-**LinkedIn:** [https://www.linkedin.com/in/dmytro-tyshchenko-152947298/]
-**Email:** [Tishdima1@gmail.com]
+* **Name:** Tyshchenko Dmytro
+* **Role:** Full-Stack Developer
+* **LinkedIn:** [https://www.linkedin.com/in/dmytro-tyshchenko-152947298/]
+* **Email:** [Tishdima1@gmail.com]

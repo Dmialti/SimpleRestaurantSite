@@ -5,9 +5,9 @@ import type {
   UseFieldArrayRemove,
   UseFieldArrayMove,
 } from "react-hook-form";
-import Button from "../../../../../../shared/components/Button/Button";
-import Input from "../../../../../../shared/components/Input/Input";
-import type { ArticleFormData } from "../../../../../../shared/utils/validation/UpdateArticleFormSchema";
+import Button from "../../../../../shared/components/Button/Button";
+import Input from "../../../../../shared/components/Input/Input";
+import type { ArticleFormData } from "../../../../../shared/utils/validation/UpdateArticleFormSchema";
 
 interface ParagraphFieldProps {
   index: number;

@@ -7,7 +7,7 @@ import HeaderLeftDecor from "../../../shared/components/HeaderLeftDecor/HeaderLe
 import { useUserManager } from "@/shared/hooks/admin/useUserManager";
 import UserListItem from "./components/UserListItem/UserListItem";
 
-export default function UserManager() {
+export default function UsersManager() {
   const {
     users,
     isFirstLoad,

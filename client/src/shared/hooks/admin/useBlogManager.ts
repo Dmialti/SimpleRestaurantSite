@@ -7,6 +7,7 @@ import { usePersistentQuery } from "../../../shared/hooks/usePersistentQuery.hoo
 import { STORAGE_KEYS } from "../../../shared/constants/storage.constants";
 import type { GetArticlesQuery } from "../../../graphql/codegen/generated/graphql";
 import { useRouter } from "next/navigation";
+import { revalidateBlogAction } from "@/app/admin/blog/actions/revalidate-blog.action";
 
 export const useBlogManager = () => {
   const router = useRouter();
@@ -61,6 +62,7 @@ export const useBlogManager = () => {
     await deleteManyArticles({ ids: selectedIds });
     setSelectedIds([]);
     reexecuteQuery({ requestPolicy: "network-only" });
+    await revalidateBlogAction();
   };
 
   const handleDelete = async (id: number, name: string) => {
@@ -84,6 +86,7 @@ export const useBlogManager = () => {
       }
     }
     reexecuteQuery({ requestPolicy: "network-only" });
+    await revalidateBlogAction();
   };
 
   return {

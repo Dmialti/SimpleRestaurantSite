@@ -9,6 +9,7 @@ import { DELETE_DISH_MUTATION } from "../../../graphql/dish/mutations/deleteDish
 import { DELETE_DISHES_MUTATION } from "../../../graphql/dish/mutations/deleteDishes.mutation";
 import { GET_DISHES_QUERY } from "../../../graphql/dish/queries/getDishes.query";
 import type { GetDishesQuery } from "../../../graphql/codegen/generated/graphql";
+import { revalidateMenuAction } from "@/app/admin/menu/actions/revalidate-menu.action";
 
 export const useMenuManager = () => {
   const router = useRouter();
@@ -39,6 +40,7 @@ export const useMenuManager = () => {
         alert("Error deleting dish: " + result.error.message);
       } else {
         reexecuteQuery();
+        await revalidateMenuAction();
       }
     }
   };
@@ -69,6 +71,7 @@ export const useMenuManager = () => {
       } else {
         setSelectedIds([]);
         reexecuteQuery();
+        await revalidateMenuAction();
       }
     }
   };

@@ -19,6 +19,7 @@ import {
   DishFormSchema,
 } from "../../utils/validation/DishFormSchema";
 import { usePersistentQuery } from "../usePersistentQuery.hook";
+import { revalidateMenuAction } from "@/app/admin/menu/actions/revalidate-menu.action";
 
 export const useDishManager = () => {
   const { id } = useParams();
@@ -126,6 +127,8 @@ export const useDishManager = () => {
       }
 
       if (result.error) throw new Error(result.error.message);
+
+      await revalidateMenuAction();
 
       alert(isEditMode ? "Saved! ✅" : "Created! 🎉");
 

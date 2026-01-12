@@ -23,6 +23,7 @@ import { usePersistentQuery } from "../../../shared/hooks/usePersistentQuery.hoo
 import { STORAGE_KEYS } from "../../../shared/constants/storage.constants";
 import { uploadFile } from "../../../shared/api/uploadFile.api";
 import { useParams, useRouter } from "next/navigation";
+import { revalidateBlogAction } from "@/app/admin/blog/actions/revalidate-blog.action";
 
 export const useArticleManager = () => {
   const { id } = useParams();
@@ -154,6 +155,8 @@ export const useArticleManager = () => {
         alert(`Error: ${result.error.message}`);
         return;
       }
+
+      await revalidateBlogAction();
 
       alert(
         isEditMode

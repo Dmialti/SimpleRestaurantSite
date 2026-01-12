@@ -1,5 +1,9 @@
 import type { MetadataRoute } from "next";
 
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://simple-restaurant-site.vercel.app";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
@@ -7,6 +11,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin/"],
     },
-    sitemap: "https://acme.com/sitemap.xml",
+    sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }

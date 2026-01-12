@@ -1,19 +1,8 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import React, { useRef } from "react";
-import {
-  AdaptiveMap,
-  SupportedImageFormat,
-  SupportedVideoFormat,
-} from "../../hooks/useAdaptiveSources.hook";
-import { AdaptiveImage } from "../Adaptive/AdaptiveImage/AdaptiveImage";
-import { AdaptiveVideo } from "../Adaptive/AdaptiveVideo/AdaptiveVideo";
-
-type BaseCardProps = React.HTMLAttributes<HTMLDivElement> & {
-  mediaSrc: string;
-  adaptiveSrc?: AdaptiveMap;
-  fetchPriority?: "high" | "low" | "auto";
-  alt?: string;
+import Image, { ImageProps, StaticImageData } from "next/image";
+type CommonProps = React.HTMLAttributes<HTMLDivElement> & {
   borderRadius?: string;
   isAnimated?: boolean;
   isHoverContext?: boolean;
@@ -23,25 +12,24 @@ type BaseCardProps = React.HTMLAttributes<HTMLDivElement> & {
   changeHover?: boolean;
 };
 
-export type CardBaseProps =
-  | ({
-      mediaType: "image";
-      formats?: SupportedImageFormat[];
-    } & BaseCardProps)
-  | ({
-      mediaType: "video";
-      formats?: SupportedVideoFormat[];
-    } & BaseCardProps);
+type ImageCardProps = CommonProps & {
+  mediaType: "image";
+  imageProps: ImageProps;
+  mediaSrc?: never;
+};
+
+type VideoCardProps = CommonProps & {
+  mediaType: "video";
+  mediaSrc: string;
+  imageProps?: never;
+};
+
+export type CardBaseProps = ImageCardProps | VideoCardProps;
 
 const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
-  (
-    {
+  (props, ref) => {
+    const {
       mediaType,
-      mediaSrc,
-      formats,
-      adaptiveSrc,
-      fetchPriority = "auto",
-      alt,
       borderRadius = "1rem",
       isAnimated,
       onHoverChange,
@@ -52,15 +40,16 @@ const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
       children,
       style,
       onClick,
-      ...rest
-    },
-    ref
-  ) => {
+      imageProps: _ignoredImageProps,
+      mediaSrc: _ignoredMediaSrc,
+      ...divProps
+    } = props;
+
     const mediaRef = useRef<HTMLImageElement | HTMLVideoElement>(null);
     const tl = useRef(gsap.timeline({ paused: true })).current;
 
     useGSAP(() => {
-      if (isAnimated) {
+      if (props.isAnimated) {
         tl.fromTo(
           mediaRef.current,
           {
@@ -86,44 +75,38 @@ const CardBase = React.forwardRef<HTMLDivElement, CardBaseProps>(
 
     const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
       if (changeHover) setIsHovered(true);
-      rest.onMouseEnter?.(e);
+      props.onMouseEnter?.(e);
     };
 
     const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
       if (changeHover) setIsHovered(false);
-      rest.onMouseLeave?.(e);
+      props.onMouseLeave?.(e);
     };
 
     return (
       <div
         ref={ref}
-        className={`overflow-hidden ${className || ""}`}
+        className={`relative overflow-hidden ${className || ""}`}
         style={{ borderRadius: borderRadius, ...style }}
         onClick={onClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        {...rest}
+        {...divProps}
       >
         {mediaType === "image" ? (
-          <AdaptiveImage
+          <Image
             ref={mediaRef as React.RefObject<HTMLImageElement>}
-            formats={formats}
-            mediaSrc={mediaSrc}
-            adaptiveSrc={adaptiveSrc}
-            className="h-full w-full object-cover block"
+            className={`object-cover block will-change-transform backface-hidden ${props.imageProps.className}`}
             style={{
               willChange: "transform, filter",
               clipPath: `inset(0 round ${borderRadius})`,
             }}
-            fetchPriority={fetchPriority}
-            alt={alt}
+            {...props.imageProps}
           />
         ) : (
-          <AdaptiveVideo
+          <video
             ref={mediaRef as React.RefObject<HTMLVideoElement>}
-            formats={formats}
-            mediaSrc={mediaSrc}
-            adaptiveSrc={adaptiveSrc}
+            src={props.mediaSrc}
             className="h-full w-full object-cover block"
             style={{
               willChange: "transform, filter",

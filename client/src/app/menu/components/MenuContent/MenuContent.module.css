@@ -1,0 +1,19 @@
+.heroGradient {
+  background: linear-gradient(#0000 0%, #000 100%);
+  opacity: 0.8;
+}
+
+@media (max-width: 1280px) {
+  .disableBorder {
+    border: none;
+  }
+  .listContainer {
+    padding: 64px;
+  }
+}
+
+@media (max-width: 810px) {
+  .listContainer {
+    padding: 40px;
+  }
+}

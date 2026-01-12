@@ -20,9 +20,9 @@ type Documents = {
     "\n  mutation DeleteArticles($ids: [Int!]!) {\n    deleteArticles(ids: $ids) {\n      count\n    }\n  }\n": typeof types.DeleteArticlesDocument,
     "\n  mutation UpdateArticle($input: UpdateArticleInput!) {\n    updateArticle(updateArticleInput: $input) {\n      id\n    }\n  }\n": typeof types.UpdateArticleDocument,
     "\n  query GetArticle($id: Int!) {\n    article(id: $id) {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n": typeof types.GetArticleDocument,
-    "\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) { accessToken }\n  }\n": typeof types.LoginDocument,
+    "\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) {\n      accessToken\n      refreshToken\n    }\n  }\n": typeof types.LoginDocument,
     "mutation Logout { logOut }": typeof types.LogoutDocument,
-    "mutation Refresh { refresh { accessToken } }": typeof types.RefreshDocument,
+    "mutation Refresh { refresh }": typeof types.RefreshDocument,
     "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n": typeof types.GetArticlesDocument,
     "\n  query GetCategories {\n    categories {\n      id\n      name\n    }\n  }\n": typeof types.GetCategoriesDocument,
     "\n  mutation CreateDish($input: CreateDishInput!) {\n    createDish(createDishInput: $input) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n": typeof types.CreateDishDocument,
@@ -37,6 +37,7 @@ type Documents = {
     "\n  mutation DeleteUser($id: Int!) {\n    deleteUserById(id: $id) {\n      id\n      email\n    }\n  }\n": typeof types.DeleteUserDocument,
     "\n  mutation DeleteUsers($ids: [Int!]!) {\n    deleteUsers(ids: $ids) {\n      count\n    }\n  }\n": typeof types.DeleteUsersDocument,
     "\n  mutation UpdateUser($input: UpdateUserInput!) {\n    updateUser(updateUserInput: $input) {\n      id\n      email\n      role\n    }\n  }\n": typeof types.UpdateUserDocument,
+    "\n  query GetMe {\n    me {\n      id\n      email\n      role\n    }\n  }\n": typeof types.GetMeDocument,
     "\n  query GetUserById($id: Int!) {\n    user(id: $id) {\n      id\n      email\n      role\n    }\n  }\n": typeof types.GetUserByIdDocument,
     "\n  query GetUsers {\n    users {\n      id\n      email\n      role\n    }\n  }\n": typeof types.GetUsersDocument,
 };
@@ -47,9 +48,9 @@ const documents: Documents = {
     "\n  mutation DeleteArticles($ids: [Int!]!) {\n    deleteArticles(ids: $ids) {\n      count\n    }\n  }\n": types.DeleteArticlesDocument,
     "\n  mutation UpdateArticle($input: UpdateArticleInput!) {\n    updateArticle(updateArticleInput: $input) {\n      id\n    }\n  }\n": types.UpdateArticleDocument,
     "\n  query GetArticle($id: Int!) {\n    article(id: $id) {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n      paragraphs {\n        ...ParagraphItemFields\n      }\n    }\n  }\n": types.GetArticleDocument,
-    "\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) { accessToken }\n  }\n": types.LoginDocument,
+    "\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) {\n      accessToken\n      refreshToken\n    }\n  }\n": types.LoginDocument,
     "mutation Logout { logOut }": types.LogoutDocument,
-    "mutation Refresh { refresh { accessToken } }": types.RefreshDocument,
+    "mutation Refresh { refresh }": types.RefreshDocument,
     "\n  query GetArticles {\n    articles {\n      id\n      name\n      description\n      publicationDate\n      imageSrc\n    }\n  }\n": types.GetArticlesDocument,
     "\n  query GetCategories {\n    categories {\n      id\n      name\n    }\n  }\n": types.GetCategoriesDocument,
     "\n  mutation CreateDish($input: CreateDishInput!) {\n    createDish(createDishInput: $input) {\n      id\n      name\n      description\n      price\n      imageSrc\n      available\n      categoryId\n    }\n  }\n": types.CreateDishDocument,
@@ -64,6 +65,7 @@ const documents: Documents = {
     "\n  mutation DeleteUser($id: Int!) {\n    deleteUserById(id: $id) {\n      id\n      email\n    }\n  }\n": types.DeleteUserDocument,
     "\n  mutation DeleteUsers($ids: [Int!]!) {\n    deleteUsers(ids: $ids) {\n      count\n    }\n  }\n": types.DeleteUsersDocument,
     "\n  mutation UpdateUser($input: UpdateUserInput!) {\n    updateUser(updateUserInput: $input) {\n      id\n      email\n      role\n    }\n  }\n": types.UpdateUserDocument,
+    "\n  query GetMe {\n    me {\n      id\n      email\n      role\n    }\n  }\n": types.GetMeDocument,
     "\n  query GetUserById($id: Int!) {\n    user(id: $id) {\n      id\n      email\n      role\n    }\n  }\n": types.GetUserByIdDocument,
     "\n  query GetUsers {\n    users {\n      id\n      email\n      role\n    }\n  }\n": types.GetUsersDocument,
 };
@@ -109,7 +111,7 @@ export function gql(source: "\n  query GetArticle($id: Int!) {\n    article(id: 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) { accessToken }\n  }\n"): (typeof documents)["\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) { accessToken }\n  }\n"];
+export function gql(source: "\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) {\n      accessToken\n      refreshToken\n    }\n  }\n"): (typeof documents)["\n  mutation Login($input: AuthInput!) {\n    logIn(input: $input) {\n      accessToken\n      refreshToken\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -117,7 +119,7 @@ export function gql(source: "mutation Logout { logOut }"): (typeof documents)["m
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "mutation Refresh { refresh { accessToken } }"): (typeof documents)["mutation Refresh { refresh { accessToken } }"];
+export function gql(source: "mutation Refresh { refresh }"): (typeof documents)["mutation Refresh { refresh }"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -174,6 +176,10 @@ export function gql(source: "\n  mutation DeleteUsers($ids: [Int!]!) {\n    dele
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation UpdateUser($input: UpdateUserInput!) {\n    updateUser(updateUserInput: $input) {\n      id\n      email\n      role\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateUser($input: UpdateUserInput!) {\n    updateUser(updateUserInput: $input) {\n      id\n      email\n      role\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetMe {\n    me {\n      id\n      email\n      role\n    }\n  }\n"): (typeof documents)["\n  query GetMe {\n    me {\n      id\n      email\n      role\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

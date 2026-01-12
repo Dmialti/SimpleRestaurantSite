@@ -1,0 +1,31 @@
+.cardContainer {
+  flex: 1;
+}
+
+@media (max-width: 1280px) {
+  .cardContainer {
+    height: 100%;
+  }
+}
+
+@media (max-width: 810px) {
+  .cardContainer {
+    width: 100%;
+    height: min-content;
+    aspect-ratio: 1 / 1;
+    height: 100%;
+  }
+}
+
+@media (max-width: 260px) {
+  .linkIcon {
+    display: none;
+  }
+  .cornerMenu {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .cornerMenu img {
+    display: none;
+  }
+}

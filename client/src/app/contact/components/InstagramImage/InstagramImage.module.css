@@ -1,0 +1,5 @@
+@media (max-width: 810px) {
+  .igImage {
+    aspect-ratio: 1/1.3;
+  }
+}

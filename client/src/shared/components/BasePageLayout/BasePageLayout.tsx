@@ -1,30 +1,48 @@
-import React, { useState, type ReactNode } from "react";
+"use client";
+
+import { useState, type ReactNode } from "react";
 import styles from "./BasePageLayout.module.css";
 import HeroCard, { type HeroCardProps } from "../HeroCard/HeroCard";
 import { useStaggeredReveal } from "../../hooks/useStaggeredReveal.hook";
 import { mergeRefs } from "../../utils/helpers/mergeRefs.helper";
 import { BasePageLayoutAnimationContext } from "../../../context/BasePageLayoutAnimationContext/BasePageLayoutAnimationContext";
 
-type BasePageLayoutProps = HeroCardProps & {
+type BasePageLayoutProps = {
   isScreenHeight: boolean;
   enableHeroAnimation?: boolean;
   enableContentAnimation?: boolean;
+  heroCardProps: HeroCardProps;
   className?: string;
   children?: ReactNode;
 };
 
-const BasePageLayout: React.FC<BasePageLayoutProps> = ({
-  heading,
-  mediaType,
-  mediaSrc,
+export default function BasePageLayout({
   isScreenHeight,
   enableHeroAnimation = true,
   enableContentAnimation = true,
+  heroCardProps,
   children,
   className,
-}) => {
+}: BasePageLayoutProps) {
   const [isHeroAnimationDone, setIsHeroAnimationDone] = useState(false);
   const [isContentAnimationDone, setIsContentAnimationDone] = useState(false);
+
+  const finalHeroProps: HeroCardProps =
+    heroCardProps.mediaType === "image"
+      ? {
+          ...heroCardProps,
+          mediaType: "image",
+          imageProps: {
+            ...heroCardProps.imageProps,
+            src: heroCardProps.imageProps?.src || "",
+            alt: heroCardProps.imageProps?.alt || "Hero image",
+            fill: true,
+            loading: "eager",
+            preload: true,
+            sizes: "(max-width: 1280px) 100vw, 100vh",
+          },
+        }
+      : heroCardProps;
 
   const {
     containerRef: staggeredHeroContainerRef,
@@ -80,11 +98,9 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
           className={`${styles.heroSection} top-0 py-6 h-screen sticky invisible`}
         >
           <HeroCard
+            {...finalHeroProps}
             enableHeadingAnimation={isHeroAnimationDone}
-            heading={heading}
             className={`relative h-full`}
-            mediaType={mediaType}
-            mediaSrc={mediaSrc}
           />
         </div>
         <div
@@ -102,6 +118,4 @@ const BasePageLayout: React.FC<BasePageLayoutProps> = ({
       </div>
     </BasePageLayoutAnimationContext.Provider>
   );
-};
-
-export default BasePageLayout;
+}

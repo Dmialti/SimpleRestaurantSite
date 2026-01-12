@@ -12,8 +12,8 @@ A modern, full-stack web application for a restaurant featuring a high-performan
 
 ## 📸 Screenshots
 
-| Landing Page | Admin Dashboard |
-|:---:|:---:|
+| Landing Page |
+|:---:|
 | ![Landing Page](https://github.com/user-attachments/assets/24010bb9-82cc-4324-a045-39a07f92d880)) |
 
 ---
@@ -116,8 +116,5 @@ One of the highlights of this project is the **Next.js Data Cache integration**:
 
 **Name:** Tyshchenko Dmytro
 **Role:** Full-Stack Developer
-**LinkedIn:** [linkedin.com/in/dmytro-tyshchenko-152947298]
+**LinkedIn:** [https://www.linkedin.com/in/dmytro-tyshchenko-152947298/]
 **Email:** [Tishdima1@gmail.com]
-
----
-*This project was built for educational purposes to demonstrate full-cycle web application development using React ecosystem and Cloud Services.*

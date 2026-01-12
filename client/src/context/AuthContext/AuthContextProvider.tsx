@@ -1,82 +1,66 @@
-import React, { useEffect, useRef, useState, type ReactNode } from "react";
-import type { User } from "./interfaces/User.interface";
-import { useClient } from "urql";
-import { jwtDecode } from "jwt-decode";
-import type { JwtPayload } from "./interfaces/JWTPayload.interface";
-import { REFRESH_MUTATION } from "../../graphql/auth/mutations/refresh.mutation";
-import { LOGIN_MUTATION } from "../../graphql/auth/mutations/logIn.mutation";
+"use client";
+
+import React, { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import { GET_ME_QUERY } from "../../graphql/user/queries/getMe.query";
 import { LOGOUT_MUTATION } from "../../graphql/auth/mutations/logOut.mutation";
+import { client } from "@/urql/urqlClient";
 import { AuthContext } from "./AuthContext";
-import { setAccessToken } from "../../shared/utils/services/accessToken.service";
+import { User } from "./interfaces/User.interface";
 
-interface AuthContextProviderProps {
-  children?: ReactNode;
-}
-
-const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
+export default function AuthContextProvider({
   children,
-}) => {
-  const isInitialized = useRef(false);
+}: {
+  children: React.ReactNode;
+}) {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const client = useClient();
+  const [loading, setLoading] = useState(true);
 
-  const handleToken = (token: string) => {
-    setAccessToken(token);
-    const decoded = jwtDecode<JwtPayload>(token);
-    setUser({ id: decoded.sub, email: decoded.email, role: decoded.role });
-  };
+  const router = useRouter();
 
-  useEffect(() => {
-    if (isInitialized.current) return;
-    isInitialized.current = true;
+  const checkSession = useCallback(async () => {
+    try {
+      setLoading(true);
 
-    const initAuth = async () => {
-      try {
-        const result = await client.mutation(REFRESH_MUTATION, {}).toPromise();
-        if (result.data?.refresh?.accessToken) {
-          handleToken(result.data.refresh.accessToken);
-        }
-      } catch {
+      const result = await client
+        .query(GET_ME_QUERY, {}, { requestPolicy: "network-only" })
+        .toPromise();
+
+      if (result.data?.me) {
+        console.log("Session active:", result.data.me.email);
+        setUser(result.data.me);
+      } else {
         console.log("No active session");
-      } finally {
-        setIsLoading(false);
+        setUser(null);
       }
-    };
-    initAuth();
+    } catch (error) {
+      console.error("Auth check failed", error);
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
   }, [client]);
 
-  const logIn = async (email: string, password: string) => {
-    const result = await client
-      .mutation(LOGIN_MUTATION, { input: { email, password } })
-      .toPromise();
-
-    if (result.error) {
-      const graphQLError = result.error.graphQLErrors[0];
-
-      if (graphQLError) {
-        throw new Error(graphQLError.message);
-      }
-
-      throw new Error(result.error.message.replace("[GraphQL] ", ""));
-    }
-
-    if (result.data?.logIn?.accessToken) {
-      handleToken(result.data.logIn.accessToken);
-    }
-  };
+  useEffect(() => {
+    checkSession();
+  }, [checkSession]);
 
   const logOut = async () => {
-    await client.mutation(LOGOUT_MUTATION, {}).toPromise();
-    setAccessToken(null);
-    setUser(null);
+    try {
+      await client.mutation(LOGOUT_MUTATION, {}).toPromise();
+
+      setUser(null);
+
+      router.push("/admin/login");
+      router.refresh();
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, logIn, logOut }}>
+    <AuthContext.Provider value={{ user, loading, checkSession, logOut }}>
       {children}
     </AuthContext.Provider>
   );
-};
-
-export default AuthContextProvider;
+}

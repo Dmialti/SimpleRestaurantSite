@@ -18,9 +18,12 @@ export class AuthResolver {
   async logIn(@Args('input') input: AuthInput, @Context() context: GqlContext) {
     const tokens = await this.authService.logIn(input);
 
-    this.setCookie(context, tokens.refreshToken);
+    this.setCookies(context, tokens.accessToken, tokens.refreshToken);
 
-    return { accessToken: tokens.accessToken };
+    return {
+      refreshToken: tokens.refreshToken,
+      accessToken: tokens.accessToken,
+    };
   }
 
   @Mutation(() => Boolean)
@@ -34,19 +37,14 @@ export class AuthResolver {
 
     await this.authService.logOut(userId);
 
-    context.reply.clearCookie('refresh_token', {
-      path: '/',
-      httpOnly: true,
-      secure: true,
-      sameSite: 'lax',
-    });
+    this.clearCookies(context);
 
     return true;
   }
 
-  @Mutation(() => AuthResponse)
+  @Mutation(() => Boolean)
   async refresh(@Context() context: GqlContext) {
-    const refreshToken = context.req.cookies['refresh_token'];
+    const refreshToken = context.req.cookies['refreshToken'];
 
     if (!refreshToken) {
       throw new UnauthorizedException('Refresh token not found');
@@ -54,17 +52,45 @@ export class AuthResolver {
 
     const tokens = await this.authService.refreshTokens(refreshToken);
 
-    this.setCookie(context, tokens.refreshToken);
+    this.setCookies(context, tokens.accessToken, tokens.refreshToken);
 
-    return { accessToken: tokens.accessToken };
+    return true;
   }
 
-  private setCookie(context: GqlContext, refreshToken: string) {
-    context.reply.setCookie('refresh_token', refreshToken, {
+  private setCookies(
+    context: GqlContext,
+    accessToken: string,
+    refreshToken: string,
+  ) {
+    const isProd = process.env.NODE_ENV === 'production';
+
+    context.reply.setCookie('accessToken', accessToken, {
       httpOnly: true,
       path: '/',
-      secure: true,
-      sameSite: 'none',
+      secure: isProd,
+      sameSite: 'strict',
+      maxAge: 15 * 60,
     });
+
+    context.reply.setCookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      path: '/',
+      secure: isProd,
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60,
+    });
+  }
+
+  private clearCookies(context: GqlContext) {
+    const isProd = process.env.NODE_ENV === 'production';
+    const cookieOptions = {
+      path: '/',
+      httpOnly: true,
+      secure: isProd,
+      sameSite: 'strict' as const,
+    };
+
+    context.reply.clearCookie('accessToken', cookieOptions);
+    context.reply.clearCookie('refreshToken', cookieOptions);
   }
 }

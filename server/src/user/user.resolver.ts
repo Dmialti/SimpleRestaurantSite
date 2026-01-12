@@ -7,6 +7,7 @@ import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { UpdateUserInput } from './dto/updateUser.input';
 import { BatchPayload } from '../shared/models/batch-payload.model';
+import type { JwtPayload } from '../auth/types/jwtPayload.type';
 
 @Resolver(() => User)
 @UseGuards(AuthGuard)
@@ -21,6 +22,11 @@ export class UserResolver {
   @Query(() => User, { name: 'user' })
   getUserById(@Args('id', { type: () => Int }) id: number) {
     return this.userService.getUserById(id);
+  }
+
+  @Query(() => User)
+  async me(@CurrentUser() currentUser: JwtPayload) {
+    return this.userService.getUserById(currentUser.sub);
   }
 
   @Mutation(() => User)

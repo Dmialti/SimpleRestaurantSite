@@ -1,4 +1,5 @@
 import { getAccessToken } from "../utils/services/accessToken.service";
+import { authorizedFetch } from "./authorizedFetch";
 
 export const uploadFile = async (
   file: File,
@@ -7,21 +8,17 @@ export const uploadFile = async (
   const formData = new FormData();
   formData.append("file", file);
 
-  const token = getAccessToken();
-
-  const response = await fetch(
-    `${import.meta.env.VITE_API_URL}/upload?folder=${folder}`,
+  const response = await authorizedFetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/upload?folder=${folder}`,
     {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include",
       body: formData,
     }
   );
-
   if (!response.ok) {
-    throw new Error("Failed to upload image");
+    const errorText = await response.text();
+    throw new Error(`Upload failed: ${errorText}`);
   }
 
   const data = await response.json();

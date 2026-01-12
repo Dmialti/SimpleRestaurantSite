@@ -16,7 +16,7 @@
 
 @keyframes loading_492 {
   50% {
-    scale: 0;
+    transform: scale(0);
   }
 }
 

@@ -6,8 +6,8 @@ import "./globals.css";
 import backgroundImage from "@/assets/AppMaterials/background.jpg";
 import NavBar from "./components/NavBar/NavBar";
 import SmoothScrolling from "./components/SmoothScrolling/SmoothScrolling";
-import CustomScrollbar from "@/features/CustomScrollbar/CustomScrollbar";
-import { TransitionProvider } from "@/features/TransitionProvider/TransitionProvider";
+import CustomScrollbar from "./components/CustomScrollbar/CustomScrollbar";
+import TransitionProvider from "./components/TransitionProvider/TransitionProvider";
 
 const forum = localFont({
   src: [

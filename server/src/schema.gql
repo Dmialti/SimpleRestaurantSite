@@ -22,6 +22,7 @@ input AuthInput {
 
 type AuthResponse {
   accessToken: String!
+  refreshToken: String!
 }
 
 type BatchPayload {
@@ -103,7 +104,7 @@ type Mutation {
   deleteUsers(ids: [Int!]!): BatchPayload!
   logIn(input: AuthInput!): AuthResponse!
   logOut: Boolean!
-  refresh: AuthResponse!
+  refresh: Boolean!
   updateArticle(updateArticleInput: UpdateArticleInput!): Article!
   updateDish(updateDishInput: UpdateDishInput!): Dish!
   updateDishAvailability(available: Boolean!, dishId: Float!): Dish!
@@ -125,6 +126,7 @@ type Query {
   dish(id: Int!): Dish!
   dishes: [Dish!]!
   getMenu: [Category!]!
+  me: User!
   reservations: [Reservation!]!
   user(id: Int!): User!
   users: [User!]!

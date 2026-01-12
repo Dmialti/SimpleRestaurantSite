@@ -22,7 +22,7 @@ const DishItem = forwardRef<HTMLDivElement, DishItemProps>((props, ref) => {
         }}
         borderRadius="var(--card-radius)"
       />
-      <div className=" flex flex-col justify-center gap-1">
+      <div className="w-full flex flex-col justify-center gap-1">
         <div
           className={`${styles.mainInfo} flex flex-row gap-4 justify-between font-forum text-[22px] text-text-default tracking-[1px] leading-[120%]`}
         >

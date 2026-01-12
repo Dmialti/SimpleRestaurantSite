@@ -2,10 +2,26 @@ version: "3.8"
 
 services:
   api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      target: development
+
+    command: npm run start:dev
+
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+
     ports:
       - "3000:3000"
     environment:
       NODE_ENV: development
+      DATABASE_URL: "postgresql://postgres:${DB_PASSWORD}@db:5432/restaurant_db?schema=public"
+
+  db:
+    ports:
+      - "5432:5432"
 
   nginx:
     ports:

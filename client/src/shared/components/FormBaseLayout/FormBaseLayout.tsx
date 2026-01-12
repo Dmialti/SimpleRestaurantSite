@@ -7,13 +7,14 @@ import { useStaggeredReveal } from "../../hooks/useStaggeredReveal.hook";
 interface FormBaseLayoutProps {
   header?: string;
   description?: string;
-  onSubmit: React.FormEventHandler<HTMLFormElement>;
+  action?: (payload: FormData) => void;
+  onSubmit?: React.FormEventHandler<HTMLFormElement>;
   className?: string;
   children?: ReactNode;
 }
 
 const BaseFormLayout = forwardRef<HTMLDivElement, FormBaseLayoutProps>(
-  ({ header, description, onSubmit, className, children }, ref) => {
+  ({ header, description, action, onSubmit, className, children }, ref) => {
     const { isContentAnimationDone } = useBasePageLayoutAnimationContext();
 
     const {
@@ -53,7 +54,11 @@ const BaseFormLayout = forwardRef<HTMLDivElement, FormBaseLayoutProps>(
             </div>
           )}
         </div>
-        <form onSubmit={onSubmit} className={`flex flex-col gap-4 w-full`}>
+        <form
+          action={action}
+          onSubmit={onSubmit}
+          className={`flex flex-col gap-4 w-full`}
+        >
           {children}
         </form>
       </div>

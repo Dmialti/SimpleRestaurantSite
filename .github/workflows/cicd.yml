@@ -183,14 +183,26 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libgbm-dev
 
+      - name: Determine Scan URL
+        id: url
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "target_url=https://simple-restaurant-site.vercel.app" >> $GITHUB_OUTPUT
+          else
+            echo "target_url=${{ needs.deploy-frontend.outputs.deployment_url }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Run Unlighthouse Scan
         run: |
-          unlighthouse-ci --site "${{ needs.deploy-frontend.outputs.deployment_url }}" \
+          echo "Scanning URL: ${{ steps.url.outputs.target_url }}"
+
+          unlighthouse-ci --site "${{ steps.url.outputs.target_url }}" \
                           --extra-headers "x-vercel-protection-bypass:${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}" \
                           --mobile \
                           --output-path .unlighthouse/mobile \
                           --build-static
-          unlighthouse-ci --site "${{ needs.deploy-frontend.outputs.deployment_url }}" \
+
+          unlighthouse-ci --site "${{ steps.url.outputs.target_url }}" \
                           --extra-headers "x-vercel-protection-bypass:${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}" \
                           --desktop \
                           --output-path .unlighthouse/desktop \
